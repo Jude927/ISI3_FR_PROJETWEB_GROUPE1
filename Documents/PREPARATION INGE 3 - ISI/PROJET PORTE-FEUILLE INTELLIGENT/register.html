@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+      <form id="registerForm">
+  <input type="text" id="firstName" placeholder="Prénom" required />
+
+  <input type="text" id="username" placeholder="Nom d'utilisateur" required />
+
+  <select id="role" required>
+    <option value="">Choisir un rôle</option>
+    <option value="student">Élève</option>
+    <option value="teacher">Tuteur</option>
+  </select>
+
+  <input type="text" id="classField" placeholder="Classe (élève)" />
+
+  <input type="text" id="subjectsField" placeholder="Matières (tuteur)" />
+
+  <input type="email" id="email" placeholder="Email" required />
+  <input type="password" id="password" placeholder="Mot de passe" required />
+
+  <button type="submit">S'inscrire</button>
+</form>
+<div id="errorBox" style="display:none;color:red;"></div>
+<div id="loader">Chargement...</div>
+
+<script type="module" src="./js/auth.js"></script>
+<script type="module" src="./js/auth-redirect.js"></script>
+
+<script>
+  const roleSelect = document.getElementById("role");
+  const classField = document.getElementById("classField");
+  const subjectsField = document.getElementById("subjectsField");
+
+  roleSelect.addEventListener("change", () => {
+    if (roleSelect.value === "student") {
+      classField.style.display = "block";
+      subjectsField.style.display = "none";
+    } else if (roleSelect.value === "teacher") {
+      classField.style.display = "none";
+      subjectsField.style.display = "block";
+    }
+  });
+</script>
+
+</body>
+</html>
