@@ -15,9 +15,9 @@ onAuthStateChanged(auth, async (user) => {
       window.location.pathname.includes("register")) {
 
     if (role === "student") {
-      window.location.href = "/index.html";
+      window.location.href = "../index.html";
     } else {
-      window.location.href = "/index.html";
+      window.location.href = "../index.html";
     }
   }
 });

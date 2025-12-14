@@ -50,9 +50,9 @@ if (form) {
 
       // 4. Redirection
       if (role === "student") {
-        window.location.href = "student-dashboard.html";
+        window.location.href = "public/dashboard-student.html";
       } else {
-        window.location.href = "teacher-dashboard.html";
+        window.location.href = "public/dashboard-teacher.html";
       }
 
     } catch (error) {
