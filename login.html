@@ -1,26 +1,245 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0"
+    rel="stylesheet" />
+  <title>Page de Connexion Djangou</title>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#D59D80", // Burnt Orange from palette
+            secondary: "#104C64", // Muted Green/Blue from palette
+            accent: "#C6C6D0", // Beige from palette
+            "background-light": "#F7F5F2", // Off-white cream
+            "background-dark": "#1F1F1F", // Dark charcoal
+            "surface-light": "#FFFFFF",
+            "surface-dark": "#2D2D2D",
+            "text-main-light": "#333333",
+            "text-main-dark": "#E5E5E5",
+            "text-muted-light": "#666666",
+            "text-muted-dark": "#A0A0A0",
+            // Additional palette colors for decorative elements
+            "pastel-green": "#0D1D25",
+            "pastel-brown": "#C0754D",
+            "pastel-dark-brown": "#B6410F",
+          },
+          fontFamily: {
+            display: ["Comfortaa", "sans-serif"], // Updated to Comfortaa
+            body: ["Comfortaa", "sans-serif"], // Updated to Comfortaa
+          },
+          borderRadius: {
+            DEFAULT: "1rem", // Soft rounded look
+            'xl': '1.5rem',
+            '2xl': '2rem',
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    .custom-shape-divider-bottom-1678 {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+      transform: rotate(180deg);
+    }
+
+    .custom-shape-divider-bottom-1678 svg {
+      position: relative;
+      display: block;
+      width: calc(100% + 1.3px);
+      height: 150px;
+    }
+
+    .custom-shape-divider-bottom-1678 .shape-fill {
+      fill: #D59D80;
+    }
+
+    .dark .custom-shape-divider-bottom-1678 .shape-fill {
+      fill: #C0754D;
+    }
+
+    .toggle-checkbox:checked {
+      right: 0;
+      border-color: #D59D80;
+    }
+
+    .toggle-checkbox:checked+.toggle-label {
+      background-color: #D59D80;
+    }
+  </style>
 </head>
-<body>
-    <form id="loginForm">
-  <input type="email" id="email" placeholder="Email" required />
-  <input type="password" id="password" placeholder="Mot de passe" required />
-  <button type="submit">Se connecter</button>
-</form>
-<div id="errorBox" style="display:none;color:red;"></div>
-<div id="loader">Chargement...</div>
 
-<script type="module" src="./js/login.js"></script>
-<script type="module" src="./js/auth-redirect.js"></script>
+<body
+  class="bg-background-light dark:bg-background-dark font-body min-h-screen flex flex-col transition-colors duration-300 relative overflow-x-hidden">
+  <nav class="w-full px-6 py-4 flex justify-between items-center z-20 relative">
+    <div class="flex items-center gap-2">
+      <div class="bg-primary text-white p-2 rounded-xl">
+        <span class="material-symbols-rounded text-2xl">school</span>
+      </div>
+      <span class="text-2xl font-display font-semibold text-secondary dark:text-accent tracking-wide">DJANGOU</span>
+    </div>
+    <div class="flex items-center gap-2 sm:gap-3">
 
-<!-- <script type="module">
-  import { protectPage } from "./js/roles.js";
-  protectPage(["student"]);
-</script> -->
+      <a class="p-2.5 rounded-xl text-text-muted-light dark:text-text-muted-dark hover:bg-accent/20 dark:hover:bg-white/10 hover:text-primary transition-all duration-300 group"
+        href="../" title="Accueil">
+        <span class="material-symbols-rounded text-2xl group-hover:scale-110 transition-transform">home</span>
+      </a>
+<div class="w-px h-6 bg-gray-300 dark:bg-gray-700 mx-1 hidden sm:block"></div>
+      <button
+        class="p-2 rounded-full bg-accent/20 hover:bg-accent/40 dark:bg-surface-dark dark:hover:bg-gray-700 transition-colors text-secondary dark:text-white"
+        id="theme-toggle">
+        <span class="material-symbols-rounded block dark:hidden">dark_mode</span>
+        <span class="material-symbols-rounded hidden dark:block">light_mode</span>
+      </button>
+    </div>
+  </nav>
+  <div
+    class="absolute top-0 right-0 -z-10 w-2/3 h-full bg-gradient-to-bl from-accent/20 to-transparent dark:from-secondary/20 rounded-bl-full pointer-events-none">
+  </div>
+  <div
+    class="absolute bottom-0 left-0 -z-10 w-1/3 h-1/2 bg-gradient-to-tr from-primary/10 to-transparent rounded-tr-full pointer-events-none">
+  </div>
+  <main class="flex-grow flex items-center justify-center p-4 z-10">
+    <div class="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div class="hidden lg:flex flex-col items-start space-y-6">
+        <h1 class="text-5xl font-display font-bold text-secondary dark:text-accent leading-tight">
+          L'apprentissage <br />
+          <span class="text-primary">simple</span> et <span class="text-pastel-brown dark:text-primary">amusant</span>.
+        </h1>
+        <p class="text-lg text-text-muted-light dark:text-text-muted-dark max-w-md">
+          Rejoignez Djangou aujourd'hui pour découvrir une nouvelle façon d'apprendre avec des tuteurs passionnés.
+        </p>
+        <div class="relative w-full h-64 mt-8">
+          <div
+            class="absolute top-0 left-10 w-32 h-32 bg-secondary/20 dark:bg-secondary/40 rounded-full blur-2xl animate-pulse">
+          </div>
+          <div class="absolute bottom-0 right-20 w-40 h-40 bg-primary/20 dark:bg-primary/40 rounded-full blur-2xl">
+          </div>
+          <div class="relative z-10 w-full h-full flex items-center justify-center">
+            <img alt="Students learning together"
+              class="object-cover w-64 h-64 rounded-3xl shadow-2xl rotate-3 border-4 border-white dark:border-surface-dark opacity-90 hover:rotate-0 transition duration-500"
+              src="https://i.pinimg.com/1200x/88/96/07/889607b6dd0ad7b32fa56d3ad75b393a.jpg" />
+
+          </div>
+        </div>
+      </div>
+      <div class="w-full max-w-md mx-auto">
+        <div
+          class="bg-surface-light dark:bg-surface-dark rounded-3xl shadow-xl p-8 md:p-10 border border-gray-100 dark:border-gray-700 relative overflow-hidden">
+          <div class="text-center mb-8">
+            <h2 class="text-3xl font-display font-bold text-secondary dark:text-white mb-2">Bienvenue !</h2>
+            <p class="text-text-muted-light dark:text-text-muted-dark">Entrez vos coordonnées pour accéder à votre
+              espace.</p>
+          </div>
+          <div class="flex bg-background-light dark:bg-background-dark p-1 rounded-2xl mb-8 relative">
+            <div class="w-1/2 text-center z-10">
+              <input checked="" class="hidden peer" id="role-student" name="role" type="radio" />
+              <label
+                class="block py-2.5 cursor-pointer font-semibold text-sm rounded-xl transition-all duration-300 text-text-muted-light dark:text-text-muted-dark peer-checked:bg-white dark:peer-checked:bg-gray-600 peer-checked:text-primary peer-checked:shadow-sm"
+                for="role-student">
+                Étudiant
+              </label>
+            </div>
+            <div class="w-1/2 text-center z-10">
+              <input class="hidden peer" id="role-tutor" name="role" type="radio" />
+              <label
+                class="block py-2.5 cursor-pointer font-semibold text-sm rounded-xl transition-all duration-300 text-text-muted-light dark:text-text-muted-dark peer-checked:bg-white dark:peer-checked:bg-gray-600 peer-checked:text-primary peer-checked:shadow-sm"
+                for="role-tutor">
+                Tuteur
+              </label>
+            </div>
+          </div>
+          <form class="space-y-5" id="loginForm">
+            <div class="group">
+              <label class="block text-sm font-semibold text-text-main-light dark:text-text-main-dark mb-2 ml-1"
+                for="email">Email</label>
+              <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <span
+                    class="material-symbols-rounded text-gray-400 group-focus-within:text-primary transition-colors">mail</span>
+                </div>
+                <input
+                  class="w-full pl-11 pr-4 py-3.5 bg-background-light dark:bg-background-dark border-transparent focus:border-primary focus:ring-2 focus:ring-primary/20 rounded-2xl text-text-main-light dark:text-white placeholder-gray-400 dark:placeholder-gray-500 font-medium transition-all outline-none"
+                  id="email" placeholder="nom@exemple.com" type="email" />
+              </div>
+            </div>
+            <div class="group">
+              <div class="flex justify-between items-center mb-2 ml-1">
+                <label class="block text-sm font-semibold text-text-main-light dark:text-text-main-dark"
+                  for="password">Mot de passe</label>
+                <a class="text-xs font-semibold text-primary hover:text-pastel-dark-brown dark:hover:text-white transition-colors"
+                  href="#">Oublié ?</a>
+              </div>
+              <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <span
+                    class="material-symbols-rounded text-gray-400 group-focus-within:text-primary transition-colors">lock</span>
+                </div>
+                <input
+                  class="w-full pl-11 pr-4 py-3.5 bg-background-light dark:bg-background-dark border-transparent focus:border-primary focus:ring-2 focus:ring-primary/20 rounded-2xl text-text-main-light dark:text-white placeholder-gray-400 dark:placeholder-gray-500 font-medium transition-all outline-none"
+                  id="password" placeholder="••••••••" type="password" />
+              </div>
+            </div>
+            <button
+              class="w-full bg-primary hover:bg-opacity-90 text-white font-bold py-4 rounded-2xl shadow-lg shadow-primary/30 transition-all transform hover:scale-[1.02] active:scale-[0.98] mt-4 flex justify-center items-center gap-2"
+              type="submit">
+              Se connecter
+              <span class="material-symbols-rounded text-xl">arrow_forward</span>
+            </button>
+          </form>
+          <div class="relative flex py-6 items-center">
+            <div class="flex-grow border-t border-gray-200 dark:border-gray-600"></div>
+            <span class="flex-shrink-0 mx-4 text-gray-400 text-xs uppercase font-semibold">Ou continuer avec</span>
+            <div class="flex-grow border-t border-gray-200 dark:border-gray-600"></div>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <button
+              class="flex justify-center items-center gap-2 py-3 border border-gray-200 dark:border-gray-600 rounded-2xl hover:bg-background-light dark:hover:bg-gray-700 transition-colors">
+              <img alt="Google" class="w-5 h-5"
+                src="https://www.figma.com/community/resource/abed920a-e3d0-48eb-bfe1-bf263fc25bae/thumbnail" />
+              <span class="text-sm font-semibold text-text-main-light dark:text-white">Google</span>
+            </button>
+            <button
+              class="flex justify-center items-center gap-2 py-3 border border-gray-200 dark:border-gray-600 rounded-2xl hover:bg-background-light dark:hover:bg-gray-700 transition-colors">
+              <img alt="Facebook" class="w-5 h-5"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJHP2cp32orpB32ND3tbVpEMaXm_B0e5-NNv7v7jlu3L_-l__Wu0-Kmkz7jqwL953tbIwzDA9KVpHrXGt7dqpcJHAGhelHjHFp0-Hlwo9KwfEh9m4SVjKSTROUWEwm2oI0syeceZU7_wx_Oovrl5Fdu5f5ar14cxi4f3cd2CNEbMHyHdLrP8PfJk_trmOXFw4sffvcp5Wx70EkqGra6H3qXmTAe8l9pe5nOEdeOi-nON39TRCXCKLXFExLxouE9qIUzFD2qsQ-crU" />
+              <span class="text-sm font-semibold text-text-main-light dark:text-white">Facebook</span>
+            </button>
+          </div>
+          <div class="mt-8 text-center">
+            <p class="text-text-muted-light dark:text-text-muted-dark text-sm">
+              Pas encore de compte ?
+              <a class="text-primary font-bold hover:underline ml-1" href="#">S'inscrire</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="w-full text-center py-6 text-sm text-text-muted-light dark:text-text-muted-dark z-10">
+    © 2026 Djangou. Tous droits réservés.
+  </footer>
+  <script type="module" src="./js/dark-white.js"></script>
+
+  <script type="module" src="./js/login.js"></script>
+  <script type="module" src="./js/auth-redirect.js"></script>
 
 </body>
+
+</html>
+
+</body>
+
 </html>

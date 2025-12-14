@@ -22,7 +22,8 @@ if (form) {
     try {
       await signInWithEmailAndPassword(auth, email, password);
     } catch (err) {
-      alert("Erreur de connexion");
+      console.error(err);
+  alert(err.message);
     }
   });
 }
@@ -32,11 +33,17 @@ onAuthStateChanged(auth, async (user) => {
   if (!user) return;
 
   const snap = await getDoc(doc(db, "users", user.uid));
+
+  if (!snap.exists()) {
+  alert("Profil utilisateur introuvable");
+  return;
+}
+
   const role = snap.data().role;
 
   if (role === "student") {
-    window.location.href = "student-dashboard.html";
+    window.location.href = "../index.html";
   } else {
-    window.location.href = "teacher-dashboard.html";
+    window.location.href = "../index.html";
   }
 });
