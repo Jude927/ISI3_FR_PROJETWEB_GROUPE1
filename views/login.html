@@ -143,24 +143,7 @@
             <p class="text-text-muted-light dark:text-text-muted-dark">Entrez vos coordonnées pour accéder à votre
               espace.</p>
           </div>
-          <div class="flex bg-background-light dark:bg-background-dark p-1 rounded-2xl mb-8 relative">
-            <div class="w-1/2 text-center z-10">
-              <input checked="" class="hidden peer" id="role-student" name="role" type="radio" />
-              <label
-                class="block py-2.5 cursor-pointer font-semibold text-sm rounded-xl transition-all duration-300 text-text-muted-light dark:text-text-muted-dark peer-checked:bg-white dark:peer-checked:bg-gray-600 peer-checked:text-primary peer-checked:shadow-sm"
-                for="role-student">
-                Étudiant
-              </label>
-            </div>
-            <div class="w-1/2 text-center z-10">
-              <input class="hidden peer" id="role-tutor" name="role" type="radio" />
-              <label
-                class="block py-2.5 cursor-pointer font-semibold text-sm rounded-xl transition-all duration-300 text-text-muted-light dark:text-text-muted-dark peer-checked:bg-white dark:peer-checked:bg-gray-600 peer-checked:text-primary peer-checked:shadow-sm"
-                for="role-tutor">
-                Tuteur
-              </label>
-            </div>
-          </div>
+          
           <form class="space-y-5" id="loginForm">
             <div class="group">
               <label class="block text-sm font-semibold text-text-main-light dark:text-text-main-dark mb-2 ml-1"
@@ -180,7 +163,7 @@
                 <label class="block text-sm font-semibold text-text-main-light dark:text-text-main-dark"
                   for="password">Mot de passe</label>
                 <a class="text-xs font-semibold text-primary hover:text-pastel-dark-brown dark:hover:text-white transition-colors"
-                  href="#">Oublié ?</a>
+                  href="#">Mot de passe oublié ?</a>
               </div>
               <div class="relative">
                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -211,12 +194,7 @@
                 src="https://www.figma.com/community/resource/abed920a-e3d0-48eb-bfe1-bf263fc25bae/thumbnail" />
               <span class="text-sm font-semibold text-text-main-light dark:text-white">Google</span>
             </button>
-            <button
-              class="flex justify-center items-center gap-2 py-3 border border-gray-200 dark:border-gray-600 rounded-2xl hover:bg-background-light dark:hover:bg-gray-700 transition-colors">
-              <img alt="Facebook" class="w-5 h-5"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJHP2cp32orpB32ND3tbVpEMaXm_B0e5-NNv7v7jlu3L_-l__Wu0-Kmkz7jqwL953tbIwzDA9KVpHrXGt7dqpcJHAGhelHjHFp0-Hlwo9KwfEh9m4SVjKSTROUWEwm2oI0syeceZU7_wx_Oovrl5Fdu5f5ar14cxi4f3cd2CNEbMHyHdLrP8PfJk_trmOXFw4sffvcp5Wx70EkqGra6H3qXmTAe8l9pe5nOEdeOi-nON39TRCXCKLXFExLxouE9qIUzFD2qsQ-crU" />
-              <span class="text-sm font-semibold text-text-main-light dark:text-white">Facebook</span>
-            </button>
+           
           </div>
           <div class="mt-8 text-center">
             <p class="text-text-muted-light dark:text-text-muted-dark text-sm">
@@ -231,10 +209,10 @@
   <footer class="w-full text-center py-6 text-sm text-text-muted-light dark:text-text-muted-dark z-10">
     © 2026 Djangou. Tous droits réservés.
   </footer>
-  <script type="module" src="./js/dark-white.js"></script>
+  <script type="module" src="/scripts/dark-white.js"></script>
 
-  <script type="module" src="./js/login.js"></script>
-  <script type="module" src="./js/auth-redirect.js"></script>
+  <script type="module" src="../scripts/login.js"></script>
+  <script type="module" src="/scripts/auth-redirect.js"></script>
 
 </body>
 
