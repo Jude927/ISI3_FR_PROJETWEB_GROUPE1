@@ -6,7 +6,25 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <select id="category">
+  <option value="math">Math</option>
+  <option value="physics">Physique</option>
+  <option value="svt">SVT</option>
+  <option value="literature">Littérature Camerounaise</option>
+  <option value="it">Informatique</option>
+</select>
+
+<select id="language">
+  <option value="fr">Français</option>
+  <option value="en">English</option>
+</select>
+
+<textarea id="prompt"></textarea>
+<button id="sendBtn">Envoyer</button>
+
+<div id="responseBox">hrtht</div>
+
+  <script type="module" src="../js/ai/deepseek.js"></script>
     <script type="module">
   import { protectPage } from "../js/utils/guards.js";
   protectPage(["student", "teacher"]);

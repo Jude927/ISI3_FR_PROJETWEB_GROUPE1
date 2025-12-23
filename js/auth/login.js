@@ -42,7 +42,7 @@ onAuthStateChanged(auth, async (user) => {
   const role = snap.data().role;
 
   if (role === "student") {
-    window.location.href = "../index.html";
+    window.location.href = "../public/chat-ia.html";
   } else {
     window.location.href = "../index.html";
   }

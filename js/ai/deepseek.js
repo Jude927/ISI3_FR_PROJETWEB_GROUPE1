@@ -1,13 +1,18 @@
 /**
  * deepseek.js
- * ----------------------------------
- * Gère l’assistant pédagogique IA :
- * - Envoi de la question à DeepSeek
- * - Affichage de la réponse
- * - Sauvegarde de l’historique dans Firestore (ai_history)
+ * --------------------------------
+ * Chat IA DeepSeek avec :
+ * - catégories pédagogiques
+ * - support bilingue
+ * - historique Firestore + offline
  */
 
 import { auth, db } from "../auth/firebase-config.js";
+import { CATEGORIES } from "./categories.js";
+import {
+  saveToCache,
+  saveToFirestore
+} from "./history.js";
 
 // Firebase Auth
 import {
@@ -16,27 +21,23 @@ import {
 
 // Firestore
 import {
-  collection,
-  addDoc,
-  serverTimestamp,
   doc,
-  getDoc
+  getDoc,
+  serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 /* ===============================
-   1️⃣ ÉTAT UTILISATEUR CONNECTÉ
+   1️⃣ UTILISATEUR CONNECTÉ
    =============================== */
 
 let currentUser = null;
 let currentUserRole = null;
 
-// Récupération de l’utilisateur connecté + son rôle
 onAuthStateChanged(auth, async (user) => {
   if (!user) return;
 
   currentUser = user;
 
-  // Récupération du rôle depuis Firestore
   const snap = await getDoc(doc(db, "users", user.uid));
   if (snap.exists()) {
     currentUserRole = snap.data().role;
@@ -50,29 +51,32 @@ onAuthStateChanged(auth, async (user) => {
 const sendBtn = document.getElementById("sendBtn");
 const promptInput = document.getElementById("prompt");
 const categorySelect = document.getElementById("category");
+const languageSelect = document.getElementById("language");
 const responseBox = document.getElementById("responseBox");
 
 /* ===============================
-   3️⃣ ENVOI DE LA QUESTION À L’IA
+   3️⃣ ENVOI MESSAGE À L’IA
    =============================== */
 
 if (sendBtn) {
   sendBtn.addEventListener("click", async () => {
 
-    const userPrompt = promptInput.value.trim();
-    const category = categorySelect.value;
+    const question = promptInput.value.trim();
+    const categoryKey = categorySelect.value;
+    const language = languageSelect.value; // fr | en
 
-    if (!userPrompt || !category) {
-      alert("Veuillez entrer une question et choisir une catégorie.");
-      return;
-    }
-
-    if (!currentUser) {
-      alert("Vous devez être connecté.");
+    if (!question || !categoryKey || !language) {
+      alert("Veuillez remplir tous les champs.");
       return;
     }
 
     responseBox.innerText = "⏳ Réflexion en cours...";
+
+    // Prompt système bilingue
+    const systemPrompt =
+      language === "fr"
+        ? `Tu es un assistant pédagogique spécialisé en ${CATEGORIES[categoryKey].fr}. Réponds en français.`
+        : `You are an educational assistant specialized in ${CATEGORIES[categoryKey].en}. Answer in English.`;
 
     try {
 
@@ -80,59 +84,57 @@ if (sendBtn) {
          4️⃣ APPEL API DEEPSEEK
          =============================== */
 
-      const response = await fetch("https://api.deepseek.com/chat/completions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer sk-a213ed60cf6046fbab6f1266ac4f18e7"
-        },
-        body: JSON.stringify({
-          model: "deepseek-chat",
-          messages: [
-            {
-              role: "system",
-              content: `Tu es un assistant pédagogique spécialisé en ${category}.`
-            },
-            {
-              role: "user",
-              content: userPrompt
-            }
-          ]
-        })
-      });
+      const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Authorization": "Bearer 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",
+    // "HTTP-Referer": "<YOUR_SITE_URL>", // Optional. Site URL for rankings on openrouter.ai.
+    // "X-Title": "<YOUR_SITE_NAME>", // Optional. Site title for rankings on openrouter.ai.
+         "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+       "model": "deepseek/deepseek-r1-0528:free",
+        "messages": [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: question }
+    ]
+  })
+});
+      
+     
 
-      const data = await response.json();
+      const data = await res.json();
+      const answer = data.choices?.[0]?.message?.content || "Aucune réponse.";
 
-      const aiAnswer =
-        data.choices?.[0]?.message?.content ||
-        "Aucune réponse générée.";
+      responseBox.innerText = answer;
 
       /* ===============================
-         5️⃣ AFFICHAGE DE LA RÉPONSE
+         5️⃣ HISTORIQUE IA
          =============================== */
 
-      responseBox.innerText = aiAnswer;
-
-      /* ===============================
-         6️⃣ SAUVEGARDE DANS ai_history
-         =============================== */
-
-      await addDoc(collection(db, "ai_history"), {
+      const historyEntry = {
         uid: currentUser.uid,
         role: currentUserRole,
-        category: category,
-        question: userPrompt,
-        answer: aiAnswer,
+        category: categoryKey,
+        language,
+        question,
+        answer,
         createdAt: serverTimestamp()
-      });
+      };
 
-      // Nettoyage du champ
+      // Cache offline
+      saveToCache(historyEntry);
+
+      // Firestore si connexion
+      if (navigator.onLine) {
+        await saveToFirestore(historyEntry);
+      }
+
       promptInput.value = "";
 
-    } catch (error) {
-      console.error("Erreur IA :", error);
-      responseBox.innerText =
-        "❌ Erreur lors de la communication avec l’assistant IA.";
+    } catch (err) {
+      console.error(err);
+      responseBox.innerText = "❌ Erreur lors de la réponse IA.";
     }
   });
 }

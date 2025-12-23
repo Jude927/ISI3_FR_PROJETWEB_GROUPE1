@@ -1,79 +1,79 @@
-import { auth, db } from "./firebase-config.js";
-import {
-  createUserWithEmailAndPassword
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+// import { auth, db } from "./firebase-config.js";
+// import {
+//   createUserWithEmailAndPassword
+// } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-import {
-  doc,
-  setDoc,
-  serverTimestamp
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+// import {
+//   doc,
+//   setDoc,
+//   serverTimestamp
+// } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-const form = document.getElementById("registerForm");
+// const form = document.getElementById("registerForm");
 
-if (form) {
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+// if (form) {
+//   form.addEventListener("submit", async (e) => {
+//     e.preventDefault();
 
-    const firstName = document.getElementById("firstName").value;
-    const username = document.getElementById("username").value;
-    const role = document.getElementById("role").value;
-    const classField = document.getElementById("classField").value;
-    const subjectsField = document.getElementById("subjectsField").value;
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+//     const firstName = document.getElementById("firstName").value;
+//     const username = document.getElementById("username").value;
+//     const role = document.getElementById("role").value;
+//     const classField = document.getElementById("classField").value;
+//     const subjectsField = document.getElementById("subjectsField").value;
+//     const email = document.getElementById("email").value;
+//     const password = document.getElementById("password").value;
 
-    try {
-      // 1️⃣ Auth
-      const cred = await createUserWithEmailAndPassword(auth, email, password);
-      const uid = cred.user.uid;
+//     try {
+//       // 1️⃣ Auth
+//       const cred = await createUserWithEmailAndPassword(auth, email, password);
+//       const uid = cred.user.uid;
 
-      // 2️⃣ users
-      await setDoc(doc(db, "users", uid), {
-        firstName,
-        username,
-        role,
-        class: role === "student" ? classField : null,
-        createdAt: serverTimestamp()
-      });
+//       // 2️⃣ users
+//       await setDoc(doc(db, "users", uid), {
+//         firstName,
+//         username,
+//         role,
+//         class: role === "student" ? classField : null,
+//         createdAt: serverTimestamp()
+//       });
 
-      // 3️⃣ teachers (UNIQUEMENT TUTEUR)
-      if (role === "teacher") {
-        const subjects = subjectsField
-          .split(",")
-          .map(s => s.trim())
-          .filter(s => s);
+//       // 3️⃣ teachers (UNIQUEMENT TUTEUR)
+//       if (role === "teacher") {
+//         const subjects = subjectsField
+//           .split(",")
+//           .map(s => s.trim())
+//           .filter(s => s);
 
-        await setDoc(doc(db, "teachers", uid), {
-          subjects,
-          available: true,
-          createdAt: serverTimestamp()
-        });
-      }
+//         await setDoc(doc(db, "teachers", uid), {
+//           subjects,
+//           available: true,
+//           createdAt: serverTimestamp()
+//         });
+//       }
 
-      // 4️⃣ Redirection
-      window.location.href =
-        role === "student"
-          ? "../index.html"
-          : "../index.html";
+//       // 4️⃣ Redirection
+//       window.location.href =
+//         role === "student"
+//           ? "../index.html"
+//           : "../index.html";
 
-    } catch (error) {
-      const box = document.getElementById("errorBox");
-      box.style.display = "block";
+//     } catch (error) {
+//       const box = document.getElementById("errorBox");
+//       box.style.display = "block";
 
-      switch (error.code) {
-        case "auth/email-already-in-use":
-          box.innerText = "Cet email est déjà utilisé";
-          break;
-        case "auth/weak-password":
-          box.innerText = "Mot de passe trop faible";
-          break;
-        default:
-          box.innerText = "Erreur lors de l'inscription";
-      }
-    }
-  });
-}
+//       switch (error.code) {
+//         case "auth/email-already-in-use":
+//           box.innerText = "Cet email est déjà utilisé";
+//           break;
+//         case "auth/weak-password":
+//           box.innerText = "Mot de passe trop faible";
+//           break;
+//         default:
+//           box.innerText = "Erreur lors de l'inscription";
+//       }
+//     }
+//   });
+// }
 /**
  * register.js
  * -----------------------------
@@ -98,7 +98,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 // Récupération du formulaire d’inscription
-    form = document.getElementById("registerForm");
+  const  form = document.getElementById("registerForm");
 
 // On vérifie que le script est bien chargé sur la page register
 if (form) {
