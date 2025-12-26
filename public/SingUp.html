@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
+    <script src="../js/utils/dark-white.js"></script>
+    </body>
+
+</html>
+<title>Page d'Inscription Djangou</title>
+<script>
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                colors: {
+                    primary: "#D59D80",
+                    secondary: "#104C64",
+                    accent: "#C6C6D0",
+                    "background-light": "#F7F5F2",
+                    "background-dark": "#1F1F1F",
+                    "surface-light": "#FFFFFF",
+                    "surface-dark": "#2D2D2D",
+                    "text-main-light": "#333333",
+                    "text-main-dark": "#E5E5E5",
+                    "text-muted-light": "#666666",
+                    "text-muted-dark": "#A0A0A0",
+                    "pastel-green": "#0D1D25",
+                    "pastel-brown": "#C0754D",
+                    "pastel-dark-brown": "#B6410F",
+                },
+                fontFamily: {
+                    display: ["Comfortaa", "sans-serif"],
+                    body: ["Comfortaa", "sans-serif"],
+                },
+                borderRadius: {
+                    DEFAULT: "1rem",
+                    'xl': '1.5rem',
+                    '2xl': '2rem',
+                },
+            },
+        },
+    };
+</script>
+<style>
+    .custom-shape-divider-bottom-1678 {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        line-height: 0;
+        transform: rotate(180deg);
+    }
+
+    .custom-shape-divider-bottom-1678 svg {
+        position: relative;
+        display: block;
+        width: calc(100% + 1.3px);
+        height: 150px;
+    }
+
+    .custom-shape-divider-bottom-1678 .shape-fill {
+        fill: #D59D80;
+    }
+
+    .dark .custom-shape-divider-bottom-1678 .shape-fill {
+        fill: #C0754D;
+    }
+
+    .toggle-checkbox:checked {
+        right: 0;
+        border-color: #D59D80;
+    }
+
+    .toggle-checkbox:checked+.toggle-label {
+        background-color: #D59D80;
+    }
+
+    .form-switch-active {
+        background-color: #D59D80;
+        color: white;
+    }
+
+    .form-switch-inactive {
+        background-color: transparent;
+        color: #6B7280;
+    }
+
+    .dark .form-switch-inactive {
+        color: #9CA3AF;
+    }
+</style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-body min-h-screen flex flex-col transition-colors duration-300 relative overflow-x-hidden">
+    <nav class="w-full px-6 py-4 flex justify-between items-center z-20 relative">
+        <div class="flex items-center gap-2">
+            <div class="bg-primary text-white p-2 rounded-xl">
+                <span class="material-icons-round text-2xl">school</span>
+            </div>
+            <span
+                class="text-2xl font-display font-semibold text-secondary dark:text-accent tracking-wide">DJANGOU</span>
+        </div>
+        <div class="flex items-center gap-2 sm:gap-3">
+            <a class="p-2.5 rounded-xl text-text-muted-light dark:text-text-muted-dark hover:bg-accent/20 dark:hover:bg-white/10 hover:text-primary transition-all duration-300 group"
+                href="../" title="Accueil">
+                <span class="material-icons-round text-2xl group-hover:scale-110 transition-transform">home</span>
+            </a>
+            <div class="w-px h-6 bg-gray-300 dark:bg-gray-700 mx-1 hidden sm:block"></div>
+            <button
+                class="p-2 rounded-full bg-accent/20 hover:bg-accent/40 dark:bg-surface-dark dark:hover:bg-gray-700 transition-colors text-secondary dark:text-white"
+                id="theme-toggle">
+                <span class="material-icons-round block dark:hidden">dark_mode</span>
+                <span class="material-icons-round hidden dark:block">light_mode</span>
+            </button>
+            <a class="hidden md:block px-6 py-2 rounded-full border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all"
+                href="login.html">Se connecter</a>
+        </div>
+    </nav>
+    <div
+        class="absolute top-0 right-0 -z-10 w-2/3 h-full bg-gradient-to-bl from-accent/20 to-transparent dark:from-secondary/20 rounded-bl-full pointer-events-none">
+    </div>
+    <div
+        class="absolute bottom-0 left-0 -z-10 w-1/3 h-1/2 bg-gradient-to-tr from-primary/10 to-transparent rounded-tr-full pointer-events-none">
+    </div>
+    <main class="flex-grow flex items-center justify-center p-4 z-10">
+        <div class="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="hidden lg:flex flex-col items-start space-y-6">
+                <h1 class="text-5xl font-display font-bold text-secondary dark:text-accent leading-tight">
+                    L'apprentissage <br />
+                    <span class="text-primary">simple</span> et <span
+                        class="text-pastel-brown dark:text-primary">amusant</span>.
+                </h1>
+                <p class="text-lg text-text-muted-light dark:text-text-muted-dark max-w-md">
+                    Rejoignez Djangou aujourd'hui pour découvrir une nouvelle façon d'apprendre avec des tuteurs
+                    passionnés.
+                </p>
+                <div class="relative w-full h-64 mt-8">
+                    <div
+                        class="absolute top-0 left-10 w-32 h-32 bg-secondary/20 dark:bg-secondary/40 rounded-full blur-2xl animate-pulse">
+                    </div>
+                    <div
+                        class="absolute bottom-0 right-20 w-40 h-40 bg-primary/20 dark:bg-primary/40 rounded-full blur-2xl">
+                    </div>
+                    <div class="relative z-10 w-full h-full flex items-center justify-center">
+                        <img alt="Students learning together"
+                            class="object-cover w-64 h-64 rounded-3xl shadow-2xl rotate-3 border-4 border-white dark:border-surface-dark opacity-90 hover:rotate-0 transition duration-500"
+                            src="https://i.pinimg.com/1200x/88/96/07/889607b6dd0ad7b32fa56d3ad75b393a.jpg" />
+                    </div>
+                </div>
+            </div>
+            <div class="w-full max-w-md mx-auto">
+                <div
+                    class="bg-surface-light dark:bg-surface-dark rounded-3xl shadow-xl p-8 md:p-10 border border-gray-100 dark:border-gray-700 relative overflow-hidden">
+                    <div class="text-center mb-8">
+                        <h2 class="text-3xl font-display font-bold text-secondary dark:text-white mb-2">Bienvenue !</h2>
+                        <p class="text-text-muted-light dark:text-text-muted-dark">Rejoignez une communauté grandissante
+                            d'apprenants</p>
+                    </div>
+                    <div class="bg-gray-100 dark:bg-gray-800 p-1.5 rounded-xl flex mb-8 relative">
+                        <div class="w-1/2">
+                            <button
+                                class="w-full py-2.5 rounded-lg text-sm font-bold transition-all shadow-sm form-switch-active"
+                                id="btn-student" onclick="toggleForm('student')">
+                                Étudiant
+                            </button>
+                        </div>
+                        <div class="w-1/2">
+                            <button
+                                class="w-full py-2.5 rounded-lg text-sm font-bold transition-all form-switch-inactive hover:bg-white/50 dark:hover:bg-gray-700/50"
+                                id="btn-tutor" onclick="toggleForm('tutor')">
+                                Tuteur
+                            </button>
+                        </div>
+                    </div>
+
+                    <form class="space-y-5 block animate-fade-in" id="form-student">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label
+                                    class="block text-sm font-medium text-text-muted-light dark:text-text-muted-dark mb-1 ml-1">Prénom</label>
+                                <div class="relative">
+                                    <span
+                                        class="material-icons-round absolute left-3 top-3 text-gray-400 text-lg">person</span>
+                                    <input
+                                        class="w-full pl-10 pr-4 py-2.5 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary dark:text-white transition-all outline-none"
+                                        placeholder="John" type="text" />
+                                </div>
+                            </div>
+                            <div>
+                                <label
+                                    class="block text-sm font-medium text-text-muted-light dark:text-text-muted-dark mb-1 ml-1">Nom</label>
+                                <div class="relative">
+                                    <span
+                                        class="material-icons-round absolute left-3 top-3 text-gray-400 text-lg">person_outline</span>
+                                    <input
+                                        class="w-full pl-10 pr-4 py-2.5 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary dark:text-white transition-all outline-none"
+                                        placeholder="Doe" type="text" />
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <label
+                                class="block text-sm font-medium text-text-muted-light dark:text-text-muted-dark mb-1 ml-1">Email</label>
+                            <div class="relative">
+                                <span
+                                    class="material-icons-round absolute left-3 top-3 text-gray-400 text-lg">mail</span>
+                                <input
+                                    class="w-full pl-10 pr-4 py-2.5 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary dark:text-white transition-all outline-none"
+                                    placeholder="nom@exemple.com" type="email" />
+                            </div>
+                        </div>
+                        <div>
+                            <label
+                                class="block text-sm font-medium text-text-muted-light dark:text-text-muted-dark mb-1 ml-1">Niveau
+                                d'études</label>
+                            <div class="relative">
+                                <span
+                                    class="material-icons-round absolute left-3 top-3 text-gray-400 text-lg">school</span>
+                                <select
+                                    class="w-full pl-10 pr-4 py-2.5 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary dark:text-white transition-all outline-none appearance-none cursor-pointer">
+                                    <option disabled selected value="">Sélectionnez votre niveau</option>
+                                    <option>Lycée</option>
+                                    <option>Licence</option>
+                                    <option>Master</option>
+                                    <option>Doctorat</option>
+                                    <option>Autodidacte</option>
+                                </select>
+                                <span
+                                    class="material-icons-round absolute right-3 top-3 text-gray-400 text-lg pointer-events-none">expand_more</span>
+                            </div>
+                        </div>
+                        <div>
+                            <label
+                                class="block text-sm font-medium text-text-muted-light dark:text-text-muted-dark mb-1 ml-1">Mot
+                                de passe</label>
+                            <div class="relative">
+                                <span
+                                    class="material-icons-round absolute left-3 top-3 text-gray-400 text-lg">lock</span>
+                                <input
+                                    class="w-full pl-10 pr-4 py-2.5 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary dark:text-white transition-all outline-none"
+                                    placeholder="••••••••" type="password" />
+                            </div>
+                        </div>
+                        <div class="pt-2">
+                            <button
+                                class="w-full bg-primary hover:bg-opacity-90 text-white font-bold py-3 rounded-xl shadow-lg hover:shadow-primary/30 transition-all transform hover:-translate-y-0.5"
+                                type="button">
+                                S'inscrire
+                            </button>
+                        </div>
+                    </form>
+
+                    <form class="space-y-5 hidden animate-fade-in" id="form-tutor">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label
+                                    class="block text-sm font-medium text-text-muted-light dark:text-text-muted-dark mb-1 ml-1">Prénom</label>
+                                <div class="relative">
+                                    <span
+                                        class="material-icons-round absolute left-3 top-3 text-gray-400 text-lg">person</span>
+                                    <input
+                                        class="w-full pl-10 pr-4 py-2.5 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-secondary focus:border-secondary dark:text-white transition-all outline-none"
+                                        placeholder="Jane" type="text" />
+                                </div>
+                            </div>
+                            <div>
+                                <label
+                                    class="block text-sm font-medium text-text-muted-light dark:text-text-muted-dark mb-1 ml-1">Nom</label>
+                                <div class="relative">
+                                    <span
+                                        class="material-icons-round absolute left-3 top-3 text-gray-400 text-lg">person_outline</span>
+                                    <input
+                                        class="w-full pl-10 pr-4 py-2.5 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-secondary focus:border-secondary dark:text-white transition-all outline-none"
+                                        placeholder="Smith" type="text" />
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <label
+                                class="block text-sm font-medium text-text-muted-light dark:text-text-muted-dark mb-1 ml-1">Email
+                                Professionnel</label>
+                            <div class="relative">
+                                <span
+                                    class="material-icons-round absolute left-3 top-3 text-gray-400 text-lg">work_outline</span>
+                                <input
+                                    class="w-full pl-10 pr-4 py-2.5 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-secondary focus:border-secondary dark:text-white transition-all outline-none"
+                                    placeholder="jane@univ.edu" type="email" />
+                            </div>
+                        </div>
+                        <div>
+                            <label
+                                class="block text-sm font-medium text-text-muted-light dark:text-text-muted-dark mb-1 ml-1">Domaine
+                                d'expertise</label>
+                            <div class="relative">
+                                <span
+                                    class="material-icons-round absolute left-3 top-3 text-gray-400 text-lg">psychology</span>
+                                <select
+                                    class="w-full pl-10 pr-4 py-2.5 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-secondary focus:border-secondary dark:text-white transition-all outline-none appearance-none cursor-pointer">
+                                    <option disabled selected value="">Choisir une matière</option>
+                                    <option>Mathématiques</option>
+                                    <option>Physique / Chimie</option>
+                                    <option>Informatique</option>
+                                    <option>Langues</option>
+                                    <option>Histoire / Géo</option>
+                                </select>
+                                <span
+                                    class="material-icons-round absolute right-3 top-3 text-gray-400 text-lg pointer-events-none">expand_more</span>
+                            </div>
+                        </div>
+                        <div>
+                            <label
+                                class="block text-sm font-medium text-text-muted-light dark:text-text-muted-dark mb-1 ml-1">Années
+                                d'expérience</label>
+                            <div class="relative">
+                                <span
+                                    class="material-icons-round absolute left-3 top-3 text-gray-400 text-lg">history_edu</span>
+                                <input
+                                    class="w-full pl-10 pr-4 py-2.5 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-secondary focus:border-secondary dark:text-white transition-all outline-none"
+                                    min="0" placeholder="ex: 5" type="number" />
+                            </div>
+                        </div>
+                        <div>
+                            <label
+                                class="block text-sm font-medium text-text-muted-light dark:text-text-muted-dark mb-1 ml-1">Mot
+                                de passe</label>
+                            <div class="relative">
+                                <span
+                                    class="material-icons-round absolute left-3 top-3 text-gray-400 text-lg">lock</span>
+                                <input
+                                    class="w-full pl-10 pr-4 py-2.5 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-secondary focus:border-secondary dark:text-white transition-all outline-none"
+                                    placeholder="••••••••" type="password" />
+                            </div>
+                        </div>
+                        <div class="pt-2">
+                            <button
+                                class="w-full bg-secondary hover:bg-opacity-90 text-white font-bold py-3 rounded-xl shadow-lg hover:shadow-secondary/30 transition-all transform hover:-translate-y-0.5"
+                                type="button">
+                                Devenir Tuteur
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="mt-6 text-center">
+                        <p class="text-sm text-text-muted-light dark:text-text-muted-dark">
+                            Déjà membre ? <a class="text-primary font-bold hover:underline" href="login.html">Se
+                                connecter</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleForm(role) {
+            const studentForm = document.getElementById('form-student');
+            const tutorForm = document.getElementById('form-tutor');
+            const btnStudent = document.getElementById('btn-student');
+            const btnTutor = document.getElementById('btn-tutor');
+            if (role === 'student') {
+                studentForm.classList.remove('hidden');
+                tutorForm.classList.add('hidden');
+                btnStudent.classList.add('form-switch-active', 'shadow-sm');
+                btnStudent.classList.remove('form-switch-inactive', 'hover:bg-white/50', 'dark:hover:bg-gray-700/50');
+                btnTutor.classList.remove('form-switch-active', 'shadow-sm');
+                btnTutor.classList.add('form-switch-inactive', 'hover:bg-white/50', 'dark:hover:bg-gray-700/50');
+            } else {
+                studentForm.classList.add('hidden');
+                tutorForm.classList.remove('hidden');
+                btnTutor.classList.add('form-switch-active', 'shadow-sm');
+                btnTutor.classList.remove('form-switch-inactive', 'hover:bg-white/50', 'dark:hover:bg-gray-700/50');
+                btnStudent.classList.remove('form-switch-active', 'shadow-sm');
+                btnStudent.classList.add('form-switch-inactive', 'hover:bg-white/50', 'dark:hover:bg-gray-700/50');
+            }
+        }
+
+        
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+        });
+    </script>
+
+    <footer class="w-full text-center py-6 text-sm text-text-muted-light dark:text-text-muted-dark z-10">
+        © 2025 Djangou. Tous droits réservés.
+    </footer>
+</body>
+
+</html>
