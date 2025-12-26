@@ -5,427 +5,400 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Djangou - Apprenez simplement</title>
-        <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
-        <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&amp;display=swap"
-            rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
+
     <script type="module">
         import { auth } from "./js/auth/firebase-config.js";
         console.log("Firebase Auth OK", auth);
     </script>
-    
-        
-        
-        <script>
-            tailwind.config = {
-                darkMode: "class",
-                theme: {
-                    extend: {
-                        colors: {
-                            primary: "#D55E00", // Vibrant orange
-                            secondary: "#0D1D25", // Dark blue-gray
-                            "background-light": "#FDFCF5", // Zinc 50
-                            "background-dark": "#18181b", // Zinc 900
-                            "pastel-green": "#C6E6D8", // Mint Green
-                            "pastel-peach": "#FADCD2",  // Light Peach
-                            "pastel-yellow": "#FBF1D5", // Soft Yellow
-                            "pastel-blue": "#D8E2F3", // Light Blue
-                            "card-light": "#FFFFFF", // White
-                            "card-dark": "#27272a", // Zinc 800
-                        },
-                        fontFamily: {
-                            display: ["Comfortaa", "cursive"],
-                            body: ["Comfortaa", "cursive"],
-                            sans: ["Comfortaa", "cursive"],
-                        },
-                        borderRadius: {
-                            DEFAULT: "1rem",
-                            'xl': "1.5rem",
-                            '2xl': "2rem",
-                        },
+
+
+
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#D55E00", // Vibrant orange
+                        secondary: "#0D1D25", // Dark blue-gray
+                        "background-light": "#FDFCF5", // Zinc 50
+                        "background-dark": "#18181b", // Zinc 900
+                        "pastel-green": "#C6E6D8", // Mint Green
+                        "pastel-peach": "#FADCD2",  // Light Peach
+                        "pastel-yellow": "#FBF1D5", // Soft Yellow
+                        "pastel-blue": "#D8E2F3", // Light Blue
+                        "card-light": "#FFFFFF", // White
+                        "card-dark": "#27272a", // Zinc 800
+                    },
+                    fontFamily: {
+                        display: ["Comfortaa", "cursive"],
+                        body: ["Comfortaa", "cursive"],
+                        sans: ["Comfortaa", "cursive"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "1rem",
+                        'xl': "1.5rem",
+                        '2xl': "2rem",
                     },
                 },
-            };
-        </script>
-        <style>
-            .hero-curve {
-                position: absolute;
-                bottom: -1px;
-                left: 0;
-                width: 100%;
-                overflow: hidden;
-                line-height: 0;
-                transform: rotate(180deg);
-            }
+            },
+        };
+    </script>
+    <style>
+        .hero-curve {
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            transform: rotate(180deg);
+        }
 
-            .hero-curve svg {
-                position: relative;
-                display: block;
-                width: calc(100% + 1.3px);
-                height: 60px;
-            }
+        .hero-curve svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 60px;
+        }
 
-            .hero-curve .shape-fill {
-                fill: #FDFCF5;
-            }
+        .hero-curve .shape-fill {
+            fill: #FDFCF5;
+        }
 
-            .dark .hero-curve .shape-fill {
-                fill: #18181b;
-            }
-        </style>
-   
+        .dark .hero-curve .shape-fill {
+            fill: #18181b;
+        }
+    </style>
+
 
 </head>
 
 
 
-    
 
-    
-    <body
-        class="bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-100 font-body transition-colors duration-300">
-        <nav class="bg-primary text-white w-full z-50">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex items-center justify-between h-20">
-                    <div class="flex items-center">
-                        <a class="flex-shrink-0 font-display text-3xl font-bold tracking-wider" href="#">
-                            DJANGOU
-                        </a>
-                    </div>
-                    <div class="hidden md:block">
-                        <div class="ml-10 flex items-baseline space-x-8">
-                            <a class="px-3 py-2 rounded-md text-sm font-medium hover:bg-white/10 transition" href="#">À
-                                propos</a>
-                            <a class="px-3 py-2 rounded-md text-sm font-medium hover:bg-white/10 transition"
-                                href="#">Les createurs</a>
-                           
-                        </div>
-                    </div>
-                    <div class="hidden md:flex items-center space-x-4">
-                        <a class="px-4 py-2 rounded-full text-sm font-bold text-white hover:bg-white/10 transition border border-white/30"
-                            href="public/login.html">
-                            Connexion
-                        </a>
-                        <a class="bg-white text-primary px-5 py-2 rounded-full text-sm font-bold hover:bg-gray-100 transition shadow-lg"
-                            href="public/SingUp.html">
-                            Inscription
-                        </a>
-                    </div>
-                    <div class="-mr-2 flex md:hidden">
-                        <button aria-controls="mobile-menu" aria-expanded="false"
-                            class="bg-primary inline-flex items-center justify-center p-2 rounded-md text-white hover:text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-primary focus:ring-white"
-                            type="button">
-                            <span class="sr-only">Ouvrir le menu</span>
-                            <span class="material-icons-round">menu</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </nav>
-        <header class="relative bg-primary pt-16 pb-32 lg:pt-24 lg:pb-48 overflow-hidden">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col md:flex-row items-center">
-                <div class="w-full md:w-1/2 text-center md:text-left mb-12 md:mb-0">
-                    <h1 class="text-4xl md:text-6xl font-display font-bold text-white mb-6 leading-tight">
-                        L'application où apprendre est <span class="relative inline-block">
-                            <span class="relative z-10">simple et fun</span>
-                            <svg class="absolute bottom-1 left-0 w-full h-3 -z-0 opacity-40 text-yellow-300 fill-current"
-                                preserveAspectRatio="none" viewBox="0 0 100 10">
-                                <path d="M0 5 Q 50 10 100 5 L 100 10 L 0 10 Z"></path>
-                            </svg>
-                        </span>
-                    </h1>
-                    <p class="mt-4 max-w-lg mx-auto md:mx-0 text-xl text-white/90 font-light">
-                        Découvrez une nouvelle façon de maîtriser vos sujets préférés avec des tuteurs passionnés et une
-                        IA intelligente.
-                    </p>
-                    <div class="mt-8 flex justify-center md:justify-start gap-4">
-                        <a class="px-8 py-4 border border-transparent text-lg font-bold rounded-full text-primary bg-white hover:bg-gray-50 md:text-xl shadow-xl hover:shadow-2xl transition transform hover:-translate-y-1"
-                            href="#">
-                            Commencer à apprendre
-                        </a>
-                    </div>
-                </div>
-                <div class="w-full md:w-1/2 flex justify-center relative">
-                    <div class="relative w-80 h-80 md:w-96 md:h-96">
-                        <div class="absolute inset-0 bg-white/10 rounded-full blur-3xl transform -translate-y-4"></div>
-                        <div
-                            class="relative bg-white rounded-3xl p-6 shadow-2xl transform rotate-3 hover:rotate-0 transition duration-500">
-                            <div
-                                class="absolute -top-6 -right-6 w-20 h-20 bg-yellow-300 rounded-full flex items-center justify-center shadow-lg animate-bounce">
-                                <span class="material-icons-round text-4xl text-primary">auto_awesome</span>
-                            </div>
-                            <img alt="Group of students learning together"
-                                class="w-full h-full object-cover rounded-2xl border-4 border-white/50"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvG30xwVSjvmXHIJ_TLH7h88mkf61z0dlx2RycgfGLWwIfEv-ZOqnK2nhy2TOJhYPdb07O9-mPY1u4OT2WxwJcZ1uYSsmXv69Y77amfFPtJT6sgDP9Fa0ey9bFHwDMGsz0y6lSKNP5mTh1TqJ2KvwliGsz4J2_VDeZKU4TCNHfi7tHsJtIxzXK8gmxbJRbwMvoyZ-81JhgxdgzzXL4PwyU5CntwJRIA4VSq7yuvMubvcELUvSYX6GKJUnSLCvJv7rAadHJN9hIaPs" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="hero-curve">
-                <svg data-name="Layer 1" preserveAspectRatio="none" viewBox="0 0 1200 120"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path class="shape-fill"
-                        d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z">
-                    </path>
-                </svg>
-            </div>
-        </header>
-        <section class="py-20 px-4 sm:px-6 lg:px-8 bg-background-light dark:bg-background-dark">
-            <div class="max-w-7xl mx-auto">
-                <div class="text-center mb-16">
-                    <h2 class="text-base text-primary font-bold tracking-wide uppercase">Pourquoi Djangou ?</h2>
-                    <p
-                        class="mt-2 text-3xl leading-8 font-display font-extrabold text-gray-900 dark:text-white sm:text-4xl">
-                        Une expérience d'apprentissage complète
-                    </p>
-                    <p class="mt-4 max-w-2xl text-xl text-gray-500 dark:text-gray-400 mx-auto">
-                        Tout ce dont vous avez besoin pour réussir vos études, réuni en un seul endroit agréable.
-                    </p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <div
-                        class="bg-pastel-green/30 dark:bg-emerald-900/20 rounded-2xl p-8 hover:shadow-xl transition duration-300 border border-transparent dark:border-white/5">
-                        <div
-                            class="w-14 h-14 bg-pastel-green dark:bg-emerald-800 rounded-2xl flex items-center justify-center mb-6 text-emerald-800 dark:text-emerald-100">
-                            <span class="material-icons-round text-3xl">school</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 font-display">Cours
-                            Personnalisés</h3>
-                        <p class="text-gray-600 dark:text-gray-400">Des parcours adaptés à votre niveau et à votre
-                            rythme pour une progression optimale.</p>
-                    </div>
-                    <div
-                        class="bg-pastel-peach/30 dark:bg-orange-900/20 rounded-2xl p-8 hover:shadow-xl transition duration-300 border border-transparent dark:border-white/5">
-                        <div
-                            class="w-14 h-14 bg-pastel-peach dark:bg-orange-800 rounded-2xl flex items-center justify-center mb-6 text-orange-800 dark:text-orange-100">
-                            <span class="material-icons-round text-3xl">people_alt</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 font-display">Tuteurs Experts
-                        </h3>
-                        <p class="text-gray-600 dark:text-gray-400">Accédez à un réseau de mentors qualifiés prêts à
-                            vous aider à surmonter chaque obstacle.</p>
-                    </div>
-                    <div
-                        class="bg-pastel-blue/30 dark:bg-blue-900/20 rounded-2xl p-8 hover:shadow-xl transition duration-300 border border-transparent dark:border-white/5">
-                        <div
-                            class="w-14 h-14 bg-pastel-blue dark:bg-blue-800 rounded-2xl flex items-center justify-center mb-6 text-blue-800 dark:text-blue-100">
-                            <span class="material-icons-round text-3xl">chat_bubble</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 font-display">Chat en Temps Réel
-                        </h3>
-                        <p class="text-gray-600 dark:text-gray-400">Posez vos questions instantanément et collaborez
-                            avec d'autres étudiants.</p>
-                    </div>
-                    <div
-                        class="bg-pastel-yellow/50 dark:bg-yellow-900/20 rounded-2xl p-8 hover:shadow-xl transition duration-300 border border-transparent dark:border-white/5">
-                        <div
-                            class="w-14 h-14 bg-pastel-yellow dark:bg-yellow-700 rounded-2xl flex items-center justify-center mb-6 text-yellow-800 dark:text-yellow-100">
-                            <span class="material-icons-round text-3xl">smart_toy</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 font-display">Assistant IA</h3>
-                        <p class="text-gray-600 dark:text-gray-400">Notre IA vous suggère des exercices et vous aide à
-                            réviser 24h/24 et 7j/7.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="py-20 bg-white dark:bg-card-dark rounded-t-[3rem] shadow-inner relative z-10">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between items-end mb-12">
-                    <div>
-                        <h2 class="text-3xl font-display font-bold text-gray-900 dark:text-white">Cours Populaires</h2>
-                        <p class="mt-2 text-gray-500 dark:text-gray-400">Explorez ce que les autres étudiants apprennent
-                            en ce moment.</p>
-                    </div>
-                    <a class="hidden md:flex items-center text-primary font-bold hover:text-orange-700 dark:hover:text-orange-400 transition"
-                        href="#">
-                        Voir tout <span class="material-icons-round ml-1">arrow_forward</span>
+
+
+<body
+    class="bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-100 font-body transition-colors duration-300">
+    <nav class="bg-primary text-white w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center">
+                    <a class="flex-shrink-0 font-display text-3xl font-bold tracking-wider" href="#">
+                        DJANGOU
                     </a>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div
-                        class="group bg-background-light dark:bg-background-dark rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition border border-gray-100 dark:border-gray-700">
-                        <div
-                            class="h-48 bg-pastel-green/50 dark:bg-emerald-900/40 relative flex items-center justify-center overflow-hidden">
-                            <div
-                                class="absolute w-32 h-32 bg-emerald-400/20 rounded-full -top-10 -right-10 group-hover:scale-150 transition duration-700">
-                            </div>
-                            <span
-                                class="material-icons-round text-6xl text-emerald-600 dark:text-emerald-400 opacity-80 group-hover:scale-110 transition duration-300">science</span>
-                        </div>
-                        <div class="p-6">
-                            <div class="flex justify-between items-start mb-2">
-                                <span
-                                    class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900 text-emerald-700 dark:text-emerald-300 text-xs font-bold rounded-full uppercase tracking-wider">Sciences</span>
-                               
-                            </div>
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2 font-display">Introduction à
-                                la Biologie</h3>
-                            
-                            <button
-                                class="w-full py-2 rounded-xl border border-gray-200 dark:border-gray-600 font-bold text-gray-700 dark:text-gray-300 hover:bg-primary hover:text-white hover:border-primary transition">Détails</button>
-                        </div>
-                    </div>
-                    <div
-                        class="group bg-background-light dark:bg-background-dark rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition border border-gray-100 dark:border-gray-700">
-                        <div
-                            class="h-48 bg-pastel-peach/50 dark:bg-orange-900/40 relative flex items-center justify-center overflow-hidden">
-                            <div
-                                class="absolute w-40 h-40 bg-orange-400/20 rounded-full -bottom-10 -left-10 group-hover:scale-150 transition duration-700">
-                            </div>
-                            <span
-                                class="material-icons-round text-6xl text-orange-600 dark:text-orange-400 opacity-80 group-hover:scale-110 transition duration-300">square_foot</span>
-                        </div>
-                        <div class="p-6">
-                            <div class="flex justify-between items-start mb-2">
-                                <span
-                                    class="px-3 py-1 bg-orange-100 dark:bg-orange-900 text-orange-700 dark:text-orange-300 text-xs font-bold rounded-full uppercase tracking-wider">Maths</span>
-                                
-                            </div>
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2 font-display">Géométrie
-                                Avancée</h3>
-                           
-                            <button
-                                class="w-full py-2 rounded-xl border border-gray-200 dark:border-gray-600 font-bold text-gray-700 dark:text-gray-300 hover:bg-primary hover:text-white hover:border-primary transition">Détails</button>
-                        </div>
-                    </div>
-                    <div
-                        class="group bg-background-light dark:bg-background-dark rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition border border-gray-100 dark:border-gray-700">
-                        <div
-                            class="h-48 bg-pastel-blue/50 dark:bg-blue-900/40 relative flex items-center justify-center overflow-hidden">
-                            <div
-                                class="absolute w-20 h-20 bg-blue-400/20 rounded-full top-5 right-10 group-hover:scale-150 transition duration-700">
-                            </div>
-                            <div
-                                class="absolute w-10 h-10 bg-blue-400/20 rounded-full bottom-5 left-10 group-hover:scale-150 transition duration-700 delay-100">
-                            </div>
-                            <span
-                                class="material-icons-round text-6xl text-blue-600 dark:text-blue-400 opacity-80 group-hover:scale-110 transition duration-300">computer</span>
-                        </div>
-                        <div class="p-6">
-                            <div class="flex justify-between items-start mb-2">
-                                <span
-                                    class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 text-xs font-bold rounded-full uppercase tracking-wider">Informatique</span>
-                                
-                            </div>
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2 font-display">Bases de la
-                                Programmation</h3>
-                            
-                            <button
-                                class="w-full py-2 rounded-xl border border-gray-200 dark:border-gray-600 font-bold text-gray-700 dark:text-gray-300 hover:bg-primary hover:text-white hover:border-primary transition">Détails</button>
-                        </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a class="px-3 py-2 rounded-md text-sm font-medium hover:bg-white/10 transition" href="#">À
+                            propos</a>
+                        <a class="px-3 py-2 rounded-md text-sm font-medium hover:bg-white/10 transition" href="#">Les
+                            createurs</a>
+
                     </div>
                 </div>
-                <div class="mt-8 text-center md:hidden">
-                    <a class="inline-flex items-center text-primary font-bold hover:text-orange-700 dark:hover:text-orange-400 transition"
-                        href="#">
-                        Voir tous les cours <span class="material-icons-round ml-1">arrow_forward</span>
+                <div class="hidden md:flex items-center space-x-4">
+                    <a class="px-4 py-2 rounded-full text-sm font-bold text-white hover:bg-white/10 transition border border-white/30"
+                        href="public/login.html">
+                        Connexion
+                    </a>
+                    <a class="bg-white text-primary px-5 py-2 rounded-full text-sm font-bold hover:bg-gray-100 transition shadow-lg"
+                        href="public/SingUp.html">
+                        Inscription
                     </a>
                 </div>
+                <div class="-mr-2 flex md:hidden">
+                    <button aria-controls="mobile-menu" aria-expanded="false"
+                        class="bg-primary inline-flex items-center justify-center p-2 rounded-md text-white hover:text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-primary focus:ring-white"
+                        type="button">
+                        <span class="sr-only">Ouvrir le menu</span>
+                        <span class="material-icons-round">menu</span>
+                    </button>
+                </div>
             </div>
-        </section>
-        <section class="relative py-20 px-4 sm:px-6 lg:px-8">
-            <div class="absolute inset-0 bg-primary opacity-5"></div>
-            <div class="max-w-4xl mx-auto text-center relative z-10">
-                <h2 class="text-3xl sm:text-4xl font-display font-bold text-gray-900 dark:text-white mb-6">Prêt à
-                    transformer votre apprentissage ?</h2>
-                <p class="text-lg text-gray-600 dark:text-gray-300 mb-10 max-w-2xl mx-auto">
-                    Rejoignez des milliers d'étudiants sur Djangou et commencez à atteindre vos objectifs dès
-                    aujourd'hui. L'inscription est gratuite !
+        </div>
+    </nav>
+    <header class="relative bg-primary pt-16 pb-32 lg:pt-24 lg:pb-48 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col md:flex-row items-center">
+            <div class="w-full md:w-1/2 text-center md:text-left mb-12 md:mb-0">
+                <h1 class="text-4xl md:text-6xl font-display font-bold text-white mb-6 leading-tight">
+                    L'application où apprendre est <span class="relative inline-block">
+                        <span class="relative z-10">simple et fun</span>
+                        <svg class="absolute bottom-1 left-0 w-full h-3 -z-0 opacity-40 text-yellow-300 fill-current"
+                            preserveAspectRatio="none" viewBox="0 0 100 10">
+                            <path d="M0 5 Q 50 10 100 5 L 100 10 L 0 10 Z"></path>
+                        </svg>
+                    </span>
+                </h1>
+                <p class="mt-4 max-w-lg mx-auto md:mx-0 text-xl text-white/90 font-light">
+                    Découvrez une nouvelle façon de maîtriser vos sujets préférés avec des tuteurs passionnés et une
+                    IA intelligente.
                 </p>
-                <div class="flex flex-col sm:flex-row justify-center gap-4">
-                    <a class="px-8 py-4 bg-primary text-white rounded-full font-bold text-lg shadow-lg hover:bg-orange-700 transition transform hover:-translate-y-1"
-                        href="#">
-                        Créer un compte gratuit
-                    </a>
-                    <a class="px-8 py-4 bg-white dark:bg-card-dark text-gray-900 dark:text-white border border-gray-200 dark:border-gray-600 rounded-full font-bold text-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition"
-                        href="#">
-                        En savoir plus
+                <div class="mt-8 flex justify-center md:justify-start gap-4">
+                    <a class="px-8 py-4 border border-transparent text-lg font-bold rounded-full text-primary bg-white hover:bg-gray-50 md:text-xl shadow-xl hover:shadow-2xl transition transform hover:-translate-y-1"
+                        href="public/SingUp.html">
+                        Commencer à apprendre
                     </a>
                 </div>
             </div>
-        </section>
-        <footer class="bg-secondary text-white pt-16 pb-8">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-                    <div class="col-span-1 md:col-span-1">
-                        <a class="font-display text-3xl font-bold tracking-wider text-white mb-4 block" href="#">
-                            DJANGOU
-                        </a>
-                        <p class="text-gray-400 text-sm leading-relaxed">
-                            La plateforme éducative qui s'adapte à vous. Apprenez mieux, plus vite, et avec le sourire.
-                        </p>
+            <div class="w-full md:w-1/2 flex justify-center relative">
+                <div class="relative w-80 h-80 md:w-96 md:h-96">
+                    <div class="absolute inset-0 bg-white/10 rounded-full blur-3xl transform -translate-y-4"></div>
+                    <div
+                        class="relative bg-white rounded-3xl p-6 shadow-2xl transform rotate-3 hover:rotate-0 transition duration-500">
+                        <div
+                            class="absolute -top-6 -right-6 w-20 h-20 bg-yellow-300 rounded-full flex items-center justify-center shadow-lg animate-bounce">
+                            <span class="material-icons-round text-4xl text-primary">auto_awesome</span>
+                        </div>
+                        <img alt="Group of students learning together"
+                            class="w-full h-full object-cover rounded-2xl border-4 border-white/50"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvG30xwVSjvmXHIJ_TLH7h88mkf61z0dlx2RycgfGLWwIfEv-ZOqnK2nhy2TOJhYPdb07O9-mPY1u4OT2WxwJcZ1uYSsmXv69Y77amfFPtJT6sgDP9Fa0ey9bFHwDMGsz0y6lSKNP5mTh1TqJ2KvwliGsz4J2_VDeZKU4TCNHfi7tHsJtIxzXK8gmxbJRbwMvoyZ-81JhgxdgzzXL4PwyU5CntwJRIA4VSq7yuvMubvcELUvSYX6GKJUnSLCvJv7rAadHJN9hIaPs" />
                     </div>
-                    <div>
-                        <h4 class="text-lg font-bold mb-4 font-display">Plateforme</h4>
-                        <ul class="space-y-2 text-gray-400 text-sm">
-                            <li><a class="hover:text-white transition" href="#">Cours</a></li>
-                            <li><a class="hover:text-white transition" href="#">Tuteurs</a></li>
-                            <li><a class="hover:text-white transition" href="#">Tarifs</a></li>
-                            <li><a class="hover:text-white transition" href="#">Entreprises</a></li>
-                        </ul>
+                </div>
+            </div>
+        </div>
+        <div class="hero-curve">
+            <svg data-name="Layer 1" preserveAspectRatio="none" viewBox="0 0 1200 120"
+                xmlns="http://www.w3.org/2000/svg">
+                <path class="shape-fill"
+                    d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z">
+                </path>
+            </svg>
+        </div>
+    </header>
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-background-light dark:bg-background-dark">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-base text-primary font-bold tracking-wide uppercase">Pourquoi Djangou ?</h2>
+                <p
+                    class="mt-2 text-3xl leading-8 font-display font-extrabold text-gray-900 dark:text-white sm:text-4xl">
+                    Une expérience d'apprentissage complète
+                </p>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 dark:text-gray-400 mx-auto">
+                    Tout ce dont vous avez besoin pour réussir vos études, réuni en un seul endroit agréable.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div
+                    class="bg-pastel-green/30 dark:bg-emerald-900/20 rounded-2xl p-8 hover:shadow-xl transition duration-300 border border-transparent dark:border-white/5">
+                    <div
+                        class="w-14 h-14 bg-pastel-green dark:bg-emerald-800 rounded-2xl flex items-center justify-center mb-6 text-emerald-800 dark:text-emerald-100">
+                        <span class="material-icons-round text-3xl">school</span>
                     </div>
-                    <div>
-                        <h4 class="text-lg font-bold mb-4 font-display">Ressources</h4>
-                        <ul class="space-y-2 text-gray-400 text-sm">
-                            <li><a class="hover:text-white transition" href="#">Blog</a></li>
-                            <li><a class="hover:text-white transition" href="#">Carrières</a></li>
-                            <li><a class="hover:text-white transition" href="#">Aide &amp; Support</a></li>
-                            <li><a class="hover:text-white transition" href="#">Communauté</a></li>
-                        </ul>
-                    </div>
-                   
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 font-display">Cours
+                        Personnalisés</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Des parcours adaptés à votre niveau et à votre
+                        rythme pour une progression optimale.</p>
                 </div>
                 <div
-                    class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-gray-500 text-sm">
-                    <p>© 2023 Djangou. Tous droits réservés.</p>
-                    <div class="flex space-x-6 mt-4 md:mt-0">
-                        <a class="hover:text-white transition" href="#">Confidentialité</a>
-                        <a class="hover:text-white transition" href="#">Conditions</a>
-                        <a class="hover:text-white transition" href="#">Cookies</a>
+                    class="bg-pastel-peach/30 dark:bg-orange-900/20 rounded-2xl p-8 hover:shadow-xl transition duration-300 border border-transparent dark:border-white/5">
+                    <div
+                        class="w-14 h-14 bg-pastel-peach dark:bg-orange-800 rounded-2xl flex items-center justify-center mb-6 text-orange-800 dark:text-orange-100">
+                        <span class="material-icons-round text-3xl">people_alt</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 font-display">Tuteurs Experts
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-400">Accédez à un réseau de mentors qualifiés prêts à
+                        vous aider à surmonter chaque obstacle.</p>
+                </div>
+                <div
+                    class="bg-pastel-blue/30 dark:bg-blue-900/20 rounded-2xl p-8 hover:shadow-xl transition duration-300 border border-transparent dark:border-white/5">
+                    <div
+                        class="w-14 h-14 bg-pastel-blue dark:bg-blue-800 rounded-2xl flex items-center justify-center mb-6 text-blue-800 dark:text-blue-100">
+                        <span class="material-icons-round text-3xl">chat_bubble</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 font-display">Chat en Temps Réel
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-400">Posez vos questions instantanément et collaborez
+                        avec d'autres étudiants.</p>
+                </div>
+                <div
+                    class="bg-pastel-yellow/50 dark:bg-yellow-900/20 rounded-2xl p-8 hover:shadow-xl transition duration-300 border border-transparent dark:border-white/5">
+                    <div
+                        class="w-14 h-14 bg-pastel-yellow dark:bg-yellow-700 rounded-2xl flex items-center justify-center mb-6 text-yellow-800 dark:text-yellow-100">
+                        <span class="material-icons-round text-3xl">smart_toy</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 font-display">Assistant IA</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Notre IA vous suggère des exercices et vous aide à
+                        réviser 24h/24 et 7j/7.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-20 bg-white dark:bg-card-dark rounded-t-[3rem] shadow-inner relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <h2 class="text-3xl font-display font-bold text-gray-900 dark:text-white">Cours Populaires</h2>
+                    <p class="mt-2 text-gray-500 dark:text-gray-400">Explorez ce que les autres étudiants apprennent
+                        en ce moment.</p>
+                </div>
+                <a class="hidden md:flex items-center text-primary font-bold hover:text-orange-700 dark:hover:text-orange-400 transition"
+                    href="#">
+                    Voir tout <span class="material-icons-round ml-1">arrow_forward</span>
+                </a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div
+                    class="group bg-background-light dark:bg-background-dark rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition border border-gray-100 dark:border-gray-700">
+                    <div
+                        class="h-48 bg-pastel-green/50 dark:bg-emerald-900/40 relative flex items-center justify-center overflow-hidden">
+                        <div
+                            class="absolute w-32 h-32 bg-emerald-400/20 rounded-full -top-10 -right-10 group-hover:scale-150 transition duration-700">
+                        </div>
+                        <span
+                            class="material-icons-round text-6xl text-emerald-600 dark:text-emerald-400 opacity-80 group-hover:scale-110 transition duration-300">science</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <span
+                                class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900 text-emerald-700 dark:text-emerald-300 text-xs font-bold rounded-full uppercase tracking-wider">Sciences</span>
+
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2 font-display">Introduction à
+                            la Biologie</h3>
+
+                        <button
+                            class="w-full py-2 rounded-xl border border-gray-200 dark:border-gray-600 font-bold text-gray-700 dark:text-gray-300 hover:bg-primary hover:text-white hover:border-primary transition">Détails</button>
+                    </div>
+                </div>
+                <div
+                    class="group bg-background-light dark:bg-background-dark rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition border border-gray-100 dark:border-gray-700">
+                    <div
+                        class="h-48 bg-pastel-peach/50 dark:bg-orange-900/40 relative flex items-center justify-center overflow-hidden">
+                        <div
+                            class="absolute w-40 h-40 bg-orange-400/20 rounded-full -bottom-10 -left-10 group-hover:scale-150 transition duration-700">
+                        </div>
+                        <span
+                            class="material-icons-round text-6xl text-orange-600 dark:text-orange-400 opacity-80 group-hover:scale-110 transition duration-300">square_foot</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <span
+                                class="px-3 py-1 bg-orange-100 dark:bg-orange-900 text-orange-700 dark:text-orange-300 text-xs font-bold rounded-full uppercase tracking-wider">Maths</span>
+
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2 font-display">Géométrie
+                            Avancée</h3>
+
+                        <button
+                            class="w-full py-2 rounded-xl border border-gray-200 dark:border-gray-600 font-bold text-gray-700 dark:text-gray-300 hover:bg-primary hover:text-white hover:border-primary transition">Détails</button>
+                    </div>
+                </div>
+                <div
+                    class="group bg-background-light dark:bg-background-dark rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition border border-gray-100 dark:border-gray-700">
+                    <div
+                        class="h-48 bg-pastel-blue/50 dark:bg-blue-900/40 relative flex items-center justify-center overflow-hidden">
+                        <div
+                            class="absolute w-20 h-20 bg-blue-400/20 rounded-full top-5 right-10 group-hover:scale-150 transition duration-700">
+                        </div>
+                        <div
+                            class="absolute w-10 h-10 bg-blue-400/20 rounded-full bottom-5 left-10 group-hover:scale-150 transition duration-700 delay-100">
+                        </div>
+                        <span
+                            class="material-icons-round text-6xl text-blue-600 dark:text-blue-400 opacity-80 group-hover:scale-110 transition duration-300">computer</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <span
+                                class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 text-xs font-bold rounded-full uppercase tracking-wider">Informatique</span>
+
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2 font-display">Bases de la
+                            Programmation</h3>
+
+                        <button
+                            class="w-full py-2 rounded-xl border border-gray-200 dark:border-gray-600 font-bold text-gray-700 dark:text-gray-300 hover:bg-primary hover:text-white hover:border-primary transition">Détails</button>
                     </div>
                 </div>
             </div>
-        </footer>
-        <div class="fixed bottom-6 right-6 z-50">
-            <button
-                class="bg-white dark:bg-gray-800 p-3 rounded-full shadow-lg border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-yellow-300 focus:outline-none transition-transform transform hover:scale-110"
-                id="theme-toggle">
-                <span class="material-icons-round dark:hidden">dark_mode</span>
-                <span class="material-icons-round hidden dark:inline">light_mode</span>
-            </button>
+            <div class="mt-8 text-center md:hidden">
+                <a class="inline-flex items-center text-primary font-bold hover:text-orange-700 dark:hover:text-orange-400 transition"
+                    href="#">
+                    Voir tous les cours <span class="material-icons-round ml-1">arrow_forward</span>
+                </a>
+            </div>
         </div>
-        <script>
-            const themeToggleBtn = document.getElementById('theme-toggle');
-            // Check for saved user preference, if any, on load of the website
-            if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-            }
-            themeToggleBtn.addEventListener('click', function () {
-                // if set via local storage previously
-                if (localStorage.getItem('color-theme')) {
-                    if (localStorage.getItem('color-theme') === 'light') {
-                        document.documentElement.classList.add('dark');
-                        localStorage.setItem('color-theme', 'dark');
-                    } else {
-                        document.documentElement.classList.remove('dark');
-                        localStorage.setItem('color-theme', 'light');
-                    }
-                    // if NOT set via local storage previously
-                } else {
-                    if (document.documentElement.classList.contains('dark')) {
-                        document.documentElement.classList.remove('dark');
-                        localStorage.setItem('color-theme', 'light');
-                    } else {
-                        document.documentElement.classList.add('dark');
-                        localStorage.setItem('color-theme', 'dark');
-                    }
-                }
-            });
-        </script>
-        <script type="module" src="./js/auth/logout.js"></script>
-    </body>
+    </section>
+    <section class="relative py-20 px-4 sm:px-6 lg:px-8">
+        <div class="absolute inset-0 bg-primary opacity-5"></div>
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <h2 class="text-3xl sm:text-4xl font-display font-bold text-gray-900 dark:text-white mb-6">Prêt à
+                transformer votre apprentissage ?</h2>
+            <p class="text-lg text-gray-600 dark:text-gray-300 mb-10 max-w-2xl mx-auto">
+                Rejoignez des milliers d'étudiants sur Djangou et commencez à atteindre vos objectifs dès
+                aujourd'hui. L'inscription est gratuite !
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a class="px-8 py-4 bg-primary text-white rounded-full font-bold text-lg shadow-lg hover:bg-orange-700 transition transform hover:-translate-y-1"
+                    href="#">
+                    Créer un compte gratuit
+                </a>
+                <a class="px-8 py-4 bg-white dark:bg-card-dark text-gray-900 dark:text-white border border-gray-200 dark:border-gray-600 rounded-full font-bold text-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition"
+                    href="#">
+                    En savoir plus
+                </a>
+            </div>
+        </div>
+    </section>
+    <footer class="bg-secondary text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-1">
+                    <a class="font-display text-3xl font-bold tracking-wider text-white mb-4 block" href="#">
+                        DJANGOU
+                    </a>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        La plateforme éducative qui s'adapte à vous. Apprenez mieux, plus vite, et avec le sourire.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4 font-display">Plateforme</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a class="hover:text-white transition" href="#">Cours</a></li>
+                        <li><a class="hover:text-white transition" href="#">Tuteurs</a></li>
+                        <li><a class="hover:text-white transition" href="#">Tarifs</a></li>
+                        <li><a class="hover:text-white transition" href="#">Entreprises</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4 font-display">Ressources</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a class="hover:text-white transition" href="#">Blog</a></li>
+                        <li><a class="hover:text-white transition" href="#">Carrières</a></li>
+                        <li><a class="hover:text-white transition" href="#">Aide &amp; Support</a></li>
+                        <li><a class="hover:text-white transition" href="#">Communauté</a></li>
+                    </ul>
+                </div>
+
+            </div>
+            <div
+                class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-gray-500 text-sm">
+                <p>© 2023 Djangou. Tous droits réservés.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a class="hover:text-white transition" href="#">Confidentialité</a>
+                    <a class="hover:text-white transition" href="#">Conditions</a>
+                    <a class="hover:text-white transition" href="#">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div class="fixed bottom-6 right-6 z-50">
+        <button
+            class="bg-white dark:bg-gray-800 p-3 rounded-full shadow-lg border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-yellow-300 focus:outline-none transition-transform transform hover:scale-110"
+            id="theme-toggle">
+            <span class="material-icons-round dark:hidden">dark_mode</span>
+            <span class="material-icons-round hidden dark:inline">light_mode</span>
+        </button>
+    </div>
+    <script src="./js/utils/dark-white.js"></script>
+    <script type="module" src="./js/auth/logout.js"></script>
+
+</body>
 
 </html>
