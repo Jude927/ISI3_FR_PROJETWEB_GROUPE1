@@ -6,7 +6,11 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <button id="logoutBtn" 
+        class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg transition duration-200">
+    Déconnexion
+</button>
+<script type="module" src="../js/auth/logout.js"></script>
    <script type="module">
   import { protectPage } from "../js/utils/guards.js";
   protectPage(["student"]);
