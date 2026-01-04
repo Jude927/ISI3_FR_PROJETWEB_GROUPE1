@@ -8,13 +8,35 @@ import {
   doc,
   getDoc
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-// Connexion
+
+function showLoader(buttonId, show) {
+    const button = document.getElementById(buttonId);
+    if (!button) return;
+    
+    const text = document.getElementById(buttonId.replace('SubmitBtn', 'Text'));
+    const loader = document.getElementById(buttonId.replace('SubmitBtn', 'Loader'));
+    
+    if (show) {
+        button.disabled = true;
+        if (text) text.classList.add('hidden');
+        if (loader) loader.classList.remove('hidden');
+    } else {
+        button.disabled = false;
+        if (text) text.classList.remove('hidden');
+        if (loader) loader.classList.add('hidden');
+    }
+}
+
+
 const form = document.getElementById("loginForm");
 const errorBox = document.getElementById("errorBox");
 
 if (form) {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
+
+   
+    showLoader('loginSubmitBtn', true);
 
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
@@ -31,7 +53,7 @@ if (form) {
     } catch (err) {
       // Afficher l'erreur dans la boîte d'erreur
       errorBox.style.display = 'block';
-      
+      showLoader('loginSubmitBtn', false);
       switch (err.code) {
         case "auth/invalid-email":
           errorBox.innerText = "Adresse email invalide.";
@@ -52,7 +74,7 @@ if (form) {
           errorBox.innerText = "Erreur de connexion. Veuillez vérifier vos informations.";
       }
       
-      console.error("Erreur de connexion :", err);
+      
     }
   });
 }
@@ -79,6 +101,7 @@ onAuthStateChanged(auth, async (user) => {
     const selectedRole = document.getElementById('role')?.value;
     if (selectedRole && selectedRole !== role) {
       errorBox.style.display = 'block';
+       showLoader('loginSubmitBtn', false);
       if (role === 'student') {
         errorBox.innerText = "Veuillez vous connecter en tant qu'étudiant.";
       } else {
@@ -98,6 +121,7 @@ onAuthStateChanged(auth, async (user) => {
     }
   } catch (error) {
     console.error("Erreur lors de la récupération du profil :", error);
+     showLoader('loginSubmitBtn', false);
     errorBox.style.display = 'block';
     errorBox.innerText = "Erreur lors de la connexion. Veuillez réessayer.";
   }
