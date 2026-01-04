@@ -1,96 +1,7 @@
-// import { auth, db } from "./firebase-config.js";
-// import {
-//   createUserWithEmailAndPassword
-// } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
-// import {
-//   doc,
-//   setDoc,
-//   serverTimestamp
-// } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-// const form = document.getElementById("registerForm");
-
-// if (form) {
-//   form.addEventListener("submit", async (e) => {
-//     e.preventDefault();
-
-//     const firstName = document.getElementById("firstName").value;
-//     const username = document.getElementById("username").value;
-//     const role = document.getElementById("role").value;
-//     const classField = document.getElementById("classField").value;
-//     const subjectsField = document.getElementById("subjectsField").value;
-//     const email = document.getElementById("email").value;
-//     const password = document.getElementById("password").value;
-
-//     try {
-//       // 1️⃣ Auth
-//       const cred = await createUserWithEmailAndPassword(auth, email, password);
-//       const uid = cred.user.uid;
-
-//       // 2️⃣ users
-//       await setDoc(doc(db, "users", uid), {
-//         firstName,
-//         username,
-//         role,
-//         class: role === "student" ? classField : null,
-//         createdAt: serverTimestamp()
-//       });
-
-//       // 3️⃣ teachers (UNIQUEMENT TUTEUR)
-//       if (role === "teacher") {
-//         const subjects = subjectsField
-//           .split(",")
-//           .map(s => s.trim())
-//           .filter(s => s);
-
-//         await setDoc(doc(db, "teachers", uid), {
-//           subjects,
-//           available: true,
-//           createdAt: serverTimestamp()
-//         });
-//       }
-
-//       // 4️⃣ Redirection
-//       window.location.href =
-//         role === "student"
-//           ? "../index.html"
-//           : "../index.html";
-
-//     } catch (error) {
-//       const box = document.getElementById("errorBox");
-//       box.style.display = "block";
-
-//       switch (error.code) {
-//         case "auth/email-already-in-use":
-//           box.innerText = "Cet email est déjà utilisé";
-//           break;
-//         case "auth/weak-password":
-//           box.innerText = "Mot de passe trop faible";
-//           break;
-//         default:
-//           box.innerText = "Erreur lors de l'inscription";
-//       }
-//     }
-//   });
-// }
-/**
- * register.js
- * -----------------------------
- * Gère l’inscription des utilisateurs (élèves et tuteurs)
- * - Création du compte Firebase Authentication
- * - Enregistrement du profil dans la collection "users"
- * - Enregistrement des données pédagogiques dans "teachers" (tuteurs uniquement)
- */
-
 import { auth, db } from "./firebase-config.js";
-
-// Firebase Auth : création de compte
 import {
   createUserWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
-// Firestore : écriture de documents
 import {
   doc,
   setDoc,
@@ -115,49 +26,39 @@ function showLoader(buttonId, show) {
     }
 }
 
-// Récupération du formulaire d’inscription
-  const  form = document.getElementById("registerForm");
+document.addEventListener('DOMContentLoaded', () => {
+    const studentForm = document.getElementById('form-student');
+    const tutorForm = document.getElementById('form-tutor');
+    const errorBox = document.getElementById('errorBox');
 
-// On vérifie que le script est bien chargé sur la page register
-if (form) {
+    const handleRegistration = async (formType, e) => {
+        e.preventDefault();
 
-<<<<<<< Updated upstream
-  // Écoute de la soumission du formulaire
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault(); // Empêche le rechargement de la page
-
-    /* ===============================
-       1️⃣ RÉCUPÉRATION DES DONNÉES
-       =============================== */
-
-    const firstName = document.getElementById("firstName").value;
-    const username = document.getElementById("username").value;
-    const role = document.getElementById("role").value; // student | teacher
-    const classField = document.getElementById("classField").value;
-    const subjectsField = document.getElementById("subjectsField").value;
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-=======
         const buttonId = formType === 'student' ? 'studentSubmitBtn' : 'tutorSubmitBtn';
+        
+        // Afficher le loader
         showLoader(buttonId, true);
         
         // Cacher les erreurs précédentes
         if (errorBox) errorBox.style.display = 'none';
 
-        /* ===============================
-           1️⃣ RÉCUPÉRATION DES DONNÉES
-           =============================== */
-
+        // Déclarer toutes les variables
         let firstName, username, role, classField, subjectsField, email, password, experience;
 
         if (formType === 'student') {
+            // Récupérer les valeurs du formulaire étudiant
             firstName = document.getElementById('firstName-student').value;
             username = document.getElementById('username-student').value;
             role = document.getElementById('role-student').value;
             classField = document.getElementById('class-student').value;
             email = document.getElementById('email-student').value;
             password = document.getElementById('password-student').value;
+            
+            // Pour les étudiants, ces champs sont null
+            subjectsField = null;
+            experience = null;
         } else {
+            // Récupérer les valeurs du formulaire tuteur
             firstName = document.getElementById('firstName-tutor').value;
             username = document.getElementById('username-tutor').value;
             role = document.getElementById('role-tutor').value;
@@ -165,155 +66,102 @@ if (form) {
             experience = document.getElementById('experience-tutor').value;
             email = document.getElementById('email-tutor').value;
             password = document.getElementById('password-tutor').value;
+            
+            // Pour les tuteurs, ce champ est null
+            classField = null;
         }
->>>>>>> Stashed changes
 
-    try {
+        try {
+            // 1. Création du compte Firebase Authentication
+            const cred = await createUserWithEmailAndPassword(auth, email, password);
+            const uid = cred.user.uid;
 
-      /* ===============================
-         2️⃣ CRÉATION DU COMPTE AUTH
-         =============================== */
+            // 2. Préparation des données utilisateur
+            const userData = {
+                firstName,
+                username,
+                role,
+                email, // IMPORTANT: Ajouter l'email ici
+                createdAt: serverTimestamp()
+            };
 
-      // Création du compte Firebase Authentication
-      const cred = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-
-      // Identifiant unique de l’utilisateur
-      const uid = cred.user.uid;
-
-<<<<<<< Updated upstream
-      /* ===============================
-         3️⃣ ENREGISTREMENT DANS "users"
-         =============================== */
-=======
-            // Ajouter les données spécifiques
+            // 3. Ajouter les données spécifiques au rôle
             if (role === "student") {
                 userData.class = classField;
             } else {
-                // Convertir l'expérience en nombre, 0 par défaut
                 userData.experience = experience ? parseInt(experience) : 0;
             }
->>>>>>> Stashed changes
 
-      // Données communes à tous les utilisateurs
-      const userData = {
-        firstName,
-        username,
-        role,
-        createdAt: serverTimestamp()
-      };
+            // 4. Enregistrer dans la collection "users"
+            await setDoc(doc(db, "users", uid), userData);
 
-      // Donnée spécifique à l’élève
-      if (role === "student") {
-        userData.class = classField;
-      }
-
-<<<<<<< Updated upstream
-      // Écriture du profil utilisateur
-      await setDoc(doc(db, "users", uid), userData);
-
-      /* ===============================
-         4️⃣ ENREGISTREMENT DANS "teachers"
-         ===============================
-         ⚠️ Cette partie concerne UNIQUEMENT les tuteurs
-      */
-
-      if (role === "teacher") {
-
-        // Transformation de la chaîne en tableau de matières
-        const subjects = subjectsField
-          .split(",")
-          .map(subject => subject.trim())
-          .filter(subject => subject !== "");
-
-        // Création du document tuteur
-        await setDoc(doc(db, "teachers", uid), {
-          subjects,              // Matières enseignées
-          available: true,       // Disponibilité par défaut
-          createdAt: serverTimestamp()
-        });
-      }
-=======
+            // 5. Enregistrer dans "teachers" pour les tuteurs seulement
             if (role === "teacher") {
-                const subjects = [subjectsField];
+                const subjects = subjectsField ? [subjectsField] : [];
                 await setDoc(doc(db, "teachers", uid), {
                     subjects,
                     available: true,
                     experience: experience ? parseInt(experience) : 0,
+                    email: email,
+                    fullName: `${firstName} ${username}`,
                     createdAt: serverTimestamp()
                 });
             }
 
-            /* ===============================
-                5️⃣ REDIRECTION
-                =============================== */
-            if (role === "student") {
-                window.location.href = "../public/dashboard-student.html";
-            } else {
-                window.location.href = "../public/dashboard-teacher.html";
-            }
+            // 6. Redirection après succès
+            setTimeout(() => {
+                if (role === "student") {
+                    window.location.href = "../public/dashboard-student.html";
+                } else {
+                    window.location.href = "../public/dashboard-teacher.html";
+                }
+            }, 500);
 
         } catch (error) {
-            /* ===============================
-                6️⃣ GESTION DES ERREURS
-                =============================== */
-            
-            // Réactiver le bouton
+            // En cas d'erreur
             showLoader(buttonId, false);
             
+            // Afficher l'erreur
             if (errorBox) {
                 errorBox.style.display = "block";
-
+                
+                let errorMessage = "Erreur lors de l'inscription";
+                
                 switch (error.code) {
                     case "auth/email-already-in-use":
-                        errorBox.innerText = "Cet email est déjà utilisé.";
+                        errorMessage = "Cet email est déjà utilisé.";
                         break;
                     case "auth/weak-password":
-                        errorBox.innerText = "Mot de passe trop faible (6 caractères minimum).";
+                        errorMessage = "Mot de passe trop faible (6 caractères minimum).";
                         break;
                     case "auth/invalid-email":
-                        errorBox.innerText = "Adresse email invalide.";
+                        errorMessage = "Adresse email invalide.";
+                        break;
+                    case "auth/operation-not-allowed":
+                        errorMessage = "L'inscription par email/mot de passe n'est pas activée.";
                         break;
                     default:
-                        errorBox.innerText = "Erreur lors de l'inscription: " + error.message;
+                        errorMessage = "Erreur lors de l'inscription: " + error.message;
                 }
+                
+                errorBox.innerText = errorMessage;
+                
+                // Ajouter un log pour le débogage
+                console.error("Détails de l'erreur:", {
+                    code: error.code,
+                    message: error.message,
+                    formType: formType
+                });
             }
->>>>>>> Stashed changes
+        }
+    };
 
-      /* ===============================
-         5️⃣ REDIRECTION APRÈS INSCRIPTION
-         =============================== */
-
-      if (role === "student") {
-        window.location.href = "../index.html";
-      } else {
-        window.location.href = "../index.html";
-      }
-
-    } catch (error) {
-
-      /* ===============================
-         6️⃣ GESTION DES ERREURS
-         =============================== */
-
-      const errorBox = document.getElementById("errorBox");
-      errorBox.style.display = "block";
-
-      switch (error.code) {
-        case "auth/email-already-in-use":
-          errorBox.innerText = "Cet email est déjà utilisé.";
-          break;
-        case "auth/weak-password":
-          errorBox.innerText = "Mot de passe trop faible (6 caractères minimum).";
-          break;
-        default:
-          errorBox.innerText = "Erreur lors de l'inscription.";
-      }
-
-      console.error("Erreur inscription :", error);
+    // Ajouter les écouteurs d'événements
+    if (studentForm) {
+        studentForm.addEventListener('submit', (e) => handleRegistration('student', e));
     }
-  });
-}
+
+    if (tutorForm) {
+        tutorForm.addEventListener('submit', (e) => handleRegistration('tutor', e));
+    }
+});
