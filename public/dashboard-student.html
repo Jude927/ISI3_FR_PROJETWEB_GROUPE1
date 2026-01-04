@@ -6,7 +6,333 @@
     <title>Document</title>
 </head>
 <body>
+<<<<<<< Updated upstream
     
+=======
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h1>📚 AdriTutor</h1>
+                <p>Plateforme de Tutorat</p>
+            </div>
+
+            <nav>
+                <a href="#dashboard" class="menu-item active" data-page="dashboard">
+                    <span class="menu-icon">📊</span>
+                    <span>Tableau de bord</span>
+                </a>
+                <a href="#courses" class="menu-item" data-page="courses">
+                    <span class="menu-icon">📚</span>
+                    <span>Mes Cours</span>
+                </a>
+                <a href="#tutors" class="menu-item" data-page="tutors">
+                    <span class="menu-icon">👥</span>
+                    <span>Tuteurs</span>
+                </a>
+                <a href="#conversations" class="menu-item notification-badge" data-page="conversations">
+                    <span class="menu-icon">💬</span>
+                    <span>Conversations</span>
+                </a>
+                <a href="./chat-ia.html" class="menu-item" data-page="ai-tutor">
+                    <span class="menu-icon">🤖</span>
+                    <span>Tuteur IA</span>
+                </a>
+                <a href="#history" class="menu-item" data-page="history">
+                    <span class="menu-icon">🕒</span>
+                    <span>Historique</span>
+                </a>
+                <a href="#settings" class="menu-item" data-page="settings">
+                    <span class="menu-icon">⚙️</span>
+                    <span>Paramètres</span>
+                </a>
+                <a href="#logout" class="menu-item" id="logoutBtn" style="margin-top: 2rem; color: var(--color-accent3);">
+                    <span class="menu-icon">🚪</span>
+                    <span>Déconnexion</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header fade-in">
+                <div>
+                    <h2>Bienvenue, <span id="user-name">Étudiant</span>!</h2>
+                    <p>Voici un aperçu de vos activités</p>
+                </div>
+                <div class="user-info">
+                    <button class="btn btn-secondary" id="notifications-btn">🔔 Notifications</button>
+                    <div class="avatar" id="user-avatar">EA</div>
+                </div>
+            </header>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card fade-in" style="animation-delay: 0.1s;">
+                    <div class="stat-header">
+                        <div class="stat-icon stat-icon-1">📚</div>
+                    </div>
+                    <div class="stat-value" id="courses-count">0</div>
+                    <div class="stat-label">Cours suivis</div>
+                </div>
+
+                <div class="stat-card fade-in" style="animation-delay: 0.2s;">
+                    <div class="stat-header">
+                        <div class="stat-icon stat-icon-2">👥</div>
+                    </div>
+                    <div class="stat-value" id="tutors-count">0</div>
+                    <div class="stat-label">Tuteurs actifs</div>
+                </div>
+
+                <div class="stat-card fade-in" style="animation-delay: 0.3s;">
+                    <div class="stat-header">
+                        <div class="stat-icon stat-icon-3">💬</div>
+                    </div>
+                    <div class="stat-value" id="conversations-count">0</div>
+                    <div class="stat-label">Conversations</div>
+                </div>
+            </div>
+
+            <!-- Content Grid -->
+            <div class="content-grid">
+                <!-- Mes Cours -->
+                <div class="card fade-in" style="animation-delay: 0.4s;">
+                    <h3 class="card-title">Mes Cours</h3>
+                    
+                    <div id="courses-list">
+                        <!-- Les cours seront chargés ici dynamiquement -->
+                    </div>
+
+                    <button class="btn btn-secondary" id="add-course-btn" style="width: 100%; margin-top: 1rem;">
+                        ➕ Ajouter un cours
+                    </button>
+                </div>
+
+                <!-- Sidebar Right -->
+                <div>
+                    <!-- Quick Actions -->
+                    <div class="card fade-in" style="margin-bottom: 1.5rem; animation-delay: 0.5s;">
+                        <h3 class="card-title">Actions rapides</h3>
+                        <div class="quick-actions">
+                            <div class="action-btn" data-action="find-tutor">
+                                🔍 Trouver un tuteur
+                            </div>
+                            <div class="action-btn" data-action="chat-ai">
+                                🤖 Discuter avec l'IA
+                            </div>
+                            <div class="action-btn" data-action="browse-courses">
+                                📚 Parcourir les cours
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Conversations -->
+                    <div class="card fade-in" style="animation-delay: 0.6s;">
+                        <h3 class="card-title">Conversations récentes</h3>
+                        <div id="conversations-list">
+                            <!-- Les conversations seront chargées ici dynamiquement -->
+                        </div>
+                        <button class="btn btn-secondary" id="view-history-btn" style="width: 100%; margin-top: 1rem;">
+                            📜 Voir l'historique complet
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Configuration API
+        const API_BASE_URL = 'http://localhost:3000/api';
+
+        // Fonction utilitaire pour les appels API
+        async function apiCall(endpoint, options = {}) {
+            try {
+                const token = localStorage.getItem('token');
+                const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+                    ...options,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': token ? `Bearer ${token}` : '',
+                        ...options.headers
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                return await response.json();
+            } catch (error) {
+                console.error('API Error:', error);
+                return null;
+            }
+        }
+
+        // Chargement des données du dashboard
+        async function loadDashboardData() {
+            try {
+                // Charger le profil utilisateur
+                const userData = await apiCall('/user/profile');
+                if (userData) {
+                    document.getElementById('user-name').textContent = userData.name || 'Étudiant';
+                    document.getElementById('user-avatar').textContent = userData.avatar || 'EA';
+                }
+
+                // Charger les statistiques
+                const stats = await apiCall('/dashboard/stats');
+                if (stats) {
+                    document.getElementById('courses-count').textContent = stats.coursesCount || 0;
+                    document.getElementById('tutors-count').textContent = stats.tutorsCount || 0;
+                    document.getElementById('conversations-count').textContent = stats.conversationsCount || 0;
+                }
+
+                // Charger les cours
+                const courses = await apiCall('/courses/enrolled');
+                if (courses) {
+                    renderCourses(courses);
+                }
+
+                // Charger les conversations récentes
+                const conversations = await apiCall('/conversations/recent?limit=3');
+                if (conversations) {
+                    renderConversations(conversations);
+                }
+            } catch (error) {
+                console.error('Error loading dashboard data:', error);
+                // Charger les données de démonstration en cas d'erreur
+                loadMockData();
+            }
+        }
+
+        // Charger des données de démonstration
+        function loadMockData() {
+            document.getElementById('user-name').textContent = 'Étudiant Adriel';
+            document.getElementById('courses-count').textContent = '8';
+            document.getElementById('tutors-count').textContent = '5';
+            document.getElementById('conversations-count').textContent = '24';
+
+            renderCourses([
+                { id: 1, name: 'Algorithmique', tutorsCount: 3 },
+                { id: 2, name: 'Architecture Web', tutorsCount: 4 },
+                { id: 3, name: 'Bases de données', tutorsCount: 5 }
+            ]);
+
+            renderConversations([
+                { id: 1, tutorName: 'Prof. BILLONG IV', tutorAvatar: 'PB', lastMessage: 'Merci pour les explications...', time: 'Il y a 2h' },
+                { id: 2, tutorName: 'Tuteur IA', tutorAvatar: '🤖', lastMessage: 'Comment puis-je vous aider?', time: 'Il y a 5h' },
+                { id: 3, tutorName: 'Dr. PESSA', tutorAvatar: 'DP', lastMessage: 'Voici les ressources demandées', time: 'Hier' }
+            ]);
+        }
+
+        // Rendre les cours
+        function renderCourses(courses) {
+            const coursesList = document.getElementById('courses-list');
+            coursesList.innerHTML = courses.map(course => `
+                <div class="course-item">
+                    <div class="course-info">
+                        <h4>${course.name}</h4>
+                        <p>👤 ${course.tutorsCount} tuteurs disponibles</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="viewTutors(${course.id})">Voir tuteurs</button>
+                </div>
+            `).join('');
+        }
+
+        // Rendre les conversations
+        function renderConversations(conversations) {
+            const conversationsList = document.getElementById('conversations-list');
+            conversationsList.innerHTML = conversations.map(conv => `
+                <div class="conversation-item" onclick="openConversation(${conv.id})">
+                    <div class="conversation-avatar">${conv.tutorAvatar}</div>
+                    <div class="conversation-info">
+                        <h4>${conv.tutorName}</h4>
+                        <p>${conv.lastMessage}</p>
+                    </div>
+                    <div class="conversation-time">${conv.time}</div>
+                </div>
+            `).join('');
+        }
+
+        // Voir les tuteurs d'un cours
+        async function viewTutors(courseId) {
+            const tutors = await apiCall(`/courses/${courseId}/tutors`);
+            if (tutors) {
+                window.location.href = `/tutors.html?course=${courseId}`;
+            }
+        }
+
+        // Ouvrir une conversation
+        async function openConversation(conversationId) {
+            await apiCall(`/conversations/${conversationId}/read`, { method: 'POST' });
+            window.location.href = `/conversation.html?id=${conversationId}`;
+        }
+
+        // Gestion du menu
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const page = this.getAttribute('data-page');
+                
+                if (page) {
+                    document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Navigation vers la page
+                    if (page !== 'dashboard') {
+                        window.location.href = `/${page}.html`;
+                    }
+                }
+            });
+        });
+
+        // Gestion des actions rapides
+        document.querySelectorAll('.action-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const action = this.getAttribute('data-action');
+                const routes = {
+                    'find-tutor': '/tutors.html',
+                    'chat-ai': './chat-ia.html',
+                    'browse-courses': '/courses.html'
+                };
+                
+                if (routes[action]) {
+                    window.location.href = routes[action];
+                }
+            });
+        });
+
+        // Bouton notifications
+        document.getElementById('notifications-btn').addEventListener('click', function() {
+            window.location.href = '/notifications.html';
+        });
+
+        // Bouton ajouter un cours
+        document.getElementById('add-course-btn').addEventListener('click', function() {
+            window.location.href = '/courses.html';
+        });
+
+        // Bouton voir l'historique
+        document.getElementById('view-history-btn').addEventListener('click', function() {
+            window.location.href = '/history.html';
+        });
+
+        // Bouton déconnexion
+        document.getElementById('logout-btn').addEventListener('click', async function(e) {
+            e.preventDefault();
+            await apiCall('/auth/logout', { method: 'POST' });
+            localStorage.removeItem('token');
+            window.location.href = '/login.html';
+        });
+
+        // Charger les données au chargement de la page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadDashboardData();
+        });
+    </script>
+    <script type="module" src="../js/auth/logout.js"></script>
+>>>>>>> Stashed changes
    <script type="module">
   import { protectPage } from "../js/utils/guards.js";
   protectPage(["student"]);

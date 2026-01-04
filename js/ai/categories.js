@@ -1,9 +1,3 @@
-/**
- * categories.js
- * --------------------------------
- * Définit les catégories pédagogiques
- * avec support bilingue (FR / EN)
- */
 
 export const CATEGORIES = {
   math: {
