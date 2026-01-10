@@ -117,7 +117,7 @@ onAuthStateChanged(auth, async (user) => {
     if (role === "student") {
       window.location.href = "../public/dashboard-student.html";
     } else {
-      window.location.href = "../public/dashboard-tutor.html";
+      window.location.href = "../public/dashboard-teacher.html";
     }
   } catch (error) {
     console.error("Erreur lors de la récupération du profil :", error);
