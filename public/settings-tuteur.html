@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html class="light" lang="fr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Djangou - Paramètres Tuteur</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style type="text/tailwindcss">
+        :root {
+            --pastel-peach: #FFE5D9;
+            --pastel-lavender: #E2E2FF;
+            --pastel-mint: #D8F3DC;
+            --pastel-blue: #E0F2FE;
+            --pastel-cream: #FFFDF5;
+            --deep-blue: #2D3047;
+            --sidebar-bg: #FFFFFF;
+            --ai-blue: #0A1128;
+            --gold: #D4AF37;
+        }
+        @layer base {
+            body {
+                @apply font-['Comfortaa'] bg-[var(--pastel-cream)] text-slate-800 text-[13px] md:text-[14px];
+            }
+        }
+        .soft-shadow {
+            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.03);
+        }
+        .sidebar-shadow {
+            box-shadow: 4px 0 30px -5px rgba(0,0,0,0.02);
+        }
+        .premium-card {
+            @apply rounded-[2.5rem] border border-white/60 shadow-sm transition-all duration-300 bg-white;
+            box-shadow: 0 15px 35px -15px rgba(0,0,0,0.05);
+        }
+        .premium-card:hover {
+            @apply shadow-md -translate-y-1;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 5px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(0,0,0,0.05);
+            border-radius: 20px;
+        }
+        .nav-item {
+            @apply flex items-center gap-3 px-5 py-3 rounded-[1.5rem] transition-all duration-300 w-full;
+        }
+        .nav-item.active {
+            @apply bg-[var(--pastel-peach)] text-slate-900 font-bold;
+        }
+        .nav-item:not(.active) {
+            @apply text-slate-400 hover:bg-white hover:text-slate-900;
+        }
+        .nav-icon {
+            @apply text-[22px] font-light;
+        }
+        #mobile-menu-toggle:checked ~ aside {
+            @apply translate-x-0;
+        }
+        #mobile-menu-toggle:checked ~ .overlay {
+            @apply block;
+        }
+        .ai-fab {
+            @apply fixed bottom-24 lg:bottom-10 right-6 md:right-10 w-16 h-16 rounded-full bg-[var(--ai-blue)] border-2 border-[var(--gold)] flex items-center justify-center shadow-2xl z-50 transition-all hover:scale-110 active:scale-95;
+        }
+        .form-input {
+            @apply w-full bg-slate-50 border-none rounded-2xl px-5 py-3 text-sm focus:ring-2 focus:ring-pastel-peach transition-all;
+        }
+        .settings-section-title {
+            @apply text-lg font-bold text-slate-900 px-2 flex items-center gap-3 mb-6;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'pastel-peach': "#FFE5D9",
+                        'pastel-lavender': "#E2E2FF",
+                        'pastel-mint': "#D8F3DC",
+                        'pastel-blue': "#E0F2FE",
+                        'pastel-cream': "#FFFDF5",
+                        'deep-blue': "#2D3047",
+                        'ai-blue': "#0A1128",
+                        'gold': "#D4AF37",
+                    },
+                    borderRadius: {
+                        '4xl': '2rem',
+                        '5xl': '2.5rem',
+                        '6xl': '3rem',
+                    }
+                },
+            },
+        };
+    </script>
+</head>
+
+<body class="antialiased overflow-hidden h-screen bg-[var(--pastel-cream)]">
+    <input class="hidden peer" id="mobile-menu-toggle" type="checkbox" />
+    <label class="overlay fixed inset-0 bg-slate-900/20 backdrop-blur-sm z-[60] hidden"
+        for="mobile-menu-toggle"></label>
+    <div class="flex h-full w-full relative">
+        <aside
+            class="fixed inset-y-0 left-0 w-60 lg:w-60 flex flex-col py-8 px-5 bg-white/95 backdrop-blur-lg lg:m-4 rounded-none lg:rounded-[2.5rem] sidebar-shadow z-50 transition-transform duration-300 -translate-x-full lg:translate-x-0 h-full lg:h-[calc(100vh-2rem)]">
+            <div class="mb-10 flex items-center gap-4 px-2">
+                <img alt="Djangou Logo" class="w-10 h-10 rounded-2xl object-cover shadow-sm"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVbD8r7TQ1HR16-jw_LU5rKniTtg6gAx9c_PSjY8U4_O6a_NReR941y8yZJxohlB_aLrNZ-XfA_3LTBlWo2iqmLfihsijkGaY26VxpP3iXzS2m3r19DJZdJ4GnwJ80wIXFUId2f2ewRCl1D26AVwVQmVxEG_aMoFSaHvStZmYuJEOfbmJ3nwJtGHWutF7A8F6sSvSDnM_JU6kf3sClonjyqARh5sJVsGhX53jMGF8bO3y3-LLqmCOjMZTGtuCqFFpkdjRXu_rj9gxJ" />
+                <span class="text-xl font-bold text-slate-800 tracking-tight">Djangou</span>
+                <label class="lg:hidden ml-auto p-2 cursor-pointer" for="mobile-menu-toggle">
+                    <span class="material-symbols-outlined text-xl">close</span>
+                </label>
+            </div>
+            <nav class="flex flex-col gap-2 flex-1 overflow-y-auto custom-scrollbar">
+                <a class="nav-item" href="#">
+                    <span class="material-symbols-outlined nav-icon">grid_view</span>
+                    <span class="text-[12px] font-medium">Tableau de Bord</span>
+                </a>
+                <a class="nav-item" href="#">
+                    <span class="material-symbols-outlined nav-icon">auto_stories</span>
+                    <span class="text-[12px] font-medium">Ma Matière</span>
+                </a>
+                <a class="nav-item" href="messagerie-teacher.html">
+                    <div class="relative">
+                        <span class="material-symbols-outlined nav-icon">chat_bubble</span>
+                        <span
+                            class="absolute top-0 right-0 w-2 h-2 bg-orange-400 border-2 border-white rounded-full"></span>
+                    </div>
+                    <span class="text-[12px] font-medium">Messages</span>
+                </a>
+                <a class="nav-item" href="notifs-teacher.html">
+                    <span class="material-symbols-outlined nav-icon">notifications</span>
+                    <span class="text-[12px] font-medium">Notifications</span>
+                </a>
+                <a class="nav-item" href="profil-teacher.html">
+                    <span class="material-symbols-outlined nav-icon">person</span>
+                    <span class="text-[12px] font-medium">Mon Profil</span>
+                </a>
+            </nav>
+            <div class="mt-auto pt-6 border-t border-slate-100 space-y-2">
+                <button class="nav-item active">
+                    <span class="material-symbols-outlined nav-icon">settings</span>
+                    <span class="text-[12px] font-medium">Paramètres</span>
+                </button>
+                <button class="nav-item text-rose-400 hover:bg-rose-50 hover:text-rose-500" id="logoutBtn">
+                    <span class="material-symbols-outlined nav-icon">logout</span>
+                    <span class="text-[12px] font-bold">Déconnexion</span>
+                </button>
+                </button>
+            </div>
+        </aside>
+        <main
+            class="flex-1 flex flex-col min-w-0 h-full overflow-y-auto custom-scrollbar px-4 py-6 md:px-8 lg:pl-[17rem] lg:pr-10">
+            <header class="flex items-center justify-between gap-4 mb-8">
+                <div class="flex items-center gap-5">
+                    <label
+                        class="lg:hidden w-11 h-11 flex items-center justify-center bg-white rounded-2xl shadow-sm border border-slate-100 text-slate-600 cursor-pointer"
+                        for="mobile-menu-toggle">
+                        <span class="material-symbols-outlined text-2xl">menu</span>
+                    </label>
+                    <div>
+                        <h1 class="text-xl md:text-2xl font-bold text-slate-900 tracking-tight">Paramètres</h1>
+                        <p class="text-slate-400 mt-1 text-xs md:text-sm">Gérez votre compte et vos préférences</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="relative group hidden sm:block">
+                        <span class="absolute inset-y-0 left-4 flex items-center text-slate-400">
+                            <span class="material-symbols-outlined text-lg">search</span>
+                        </span>
+                        <input
+                            class="pl-12 pr-5 py-3 bg-white border-none rounded-2xl shadow-sm focus:ring-2 focus:ring-pastel-peach/50 w-48 md:w-64 transition-all placeholder:text-slate-400 text-xs"
+                            placeholder="Rechercher un réglage..." type="text" />
+                    </div>
+                    <div class="flex items-center gap-2 bg-white p-1.5 rounded-2xl shadow-sm border border-slate-50">
+                        <button
+                            class="w-10 h-10 rounded-xl flex items-center justify-center text-slate-400 hover:bg-slate-50 transition-colors">
+                            <span class="material-symbols-outlined text-xl">dark_mode</span>
+                        </button>
+                        <div class="w-px h-5 bg-slate-100 mx-1"></div>
+                        <div class="flex items-center gap-3 pl-1 pr-3 py-1">
+                            <img alt="Profile" class="w-8 h-8 rounded-xl object-cover ring-2 ring-pastel-peach/30"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCm_zdfySOaD2X9HKcw9u_JstuwVMUADvRG-5eRya4gZtJ9-t9DBn1Ul8cMo9DJpr3-Tn_Lq4S7k8XH2qVCIHvn9JRWQOZhz1a9dq1ArlcOSPGonVZQDKAXHW3usOf6ANLU_ql3IWHiVdwBXbAuzFSLulmH4s7EUS-Ee_PmpAJULKtyZB4bH20GhdpF0CUJ8hK7reqYGfuJOf_oW2pyRrsVjgeAqUbGm3E-ktYFKQGwbDYXAVlo-SUvirFo4u2EdWmxVpFbOMxcaFi5" />
+                            <span class="text-xs font-bold text-slate-700 hidden md:block">Tuteur Thomas</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <div class="max-w-5xl space-y-10 pb-24">
+                <section>
+                    <div class="settings-section-title">
+                        <span
+                            class="w-10 h-10 rounded-xl bg-pastel-peach flex items-center justify-center text-slate-700">
+                            <span class="material-symbols-outlined">account_circle</span>
+                        </span>
+                        Compte
+                    </div>
+                    <div class="premium-card p-8">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div class="space-y-4">
+                                <div>
+                                    <label
+                                        class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 ml-1">Adresse
+                                        Email</label>
+                                    <input class="form-input" type="email" value="thomas.tuteur@djangou.fr" />
+                                </div>
+                                <button
+                                    class="text-xs font-bold text-indigo-500 hover:text-indigo-600 px-1 transition-colors">Modifier
+                                    l'email</button>
+                            </div>
+                            <div class="space-y-4">
+                                <div>
+                                    <label
+                                        class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 ml-1">Mot
+                                        de Passe</label>
+                                    <input class="form-input" type="password" value="••••••••••••" />
+                                </div>
+                                <button
+                                    class="text-xs font-bold text-indigo-500 hover:text-indigo-600 px-1 transition-colors">Changer
+                                    le mot de passe</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="settings-section-title">
+                        <span
+                            class="w-10 h-10 rounded-xl bg-pastel-mint flex items-center justify-center text-emerald-700">
+                            <span class="material-symbols-outlined">event_available</span>
+                        </span>
+                        Préférences de cours
+                    </div>
+                    <div class="premium-card p-8">
+                        <div class="space-y-8">
+                            <div>
+                                <h4 class="text-sm font-bold text-slate-800 mb-4">Disponibilités hebdomadaires</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <button
+                                        class="px-5 py-2.5 rounded-xl bg-pastel-mint text-emerald-700 text-xs font-bold border border-emerald-100">Lundi</button>
+                                    <button
+                                        class="px-5 py-2.5 rounded-xl bg-pastel-mint text-emerald-700 text-xs font-bold border border-emerald-100">Mardi</button>
+                                    <button
+                                        class="px-5 py-2.5 rounded-xl bg-slate-50 text-slate-400 text-xs font-bold border border-slate-100">Mercredi</button>
+                                    <button
+                                        class="px-5 py-2.5 rounded-xl bg-pastel-mint text-emerald-700 text-xs font-bold border border-emerald-100">Jeudi</button>
+                                    <button
+                                        class="px-5 py-2.5 rounded-xl bg-pastel-mint text-emerald-700 text-xs font-bold border border-emerald-100">Vendredi</button>
+                                    <button
+                                        class="px-5 py-2.5 rounded-xl bg-slate-50 text-slate-400 text-xs font-bold border border-slate-100">Samedi</button>
+                                </div>
+                            </div>
+                            <div class="pt-8 border-t border-slate-50">
+                                <h4 class="text-sm font-bold text-slate-800 mb-4">Notifications par Email</h4>
+                                <div class="space-y-4">
+                                    <label class="flex items-center justify-between cursor-pointer group">
+                                        <span class="text-sm text-slate-600">Nouveaux messages d'étudiants</span>
+                                        <div class="relative inline-flex items-center">
+                                            <input checked="" class="sr-only peer" type="checkbox" />
+                                            <div
+                                                class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-400">
+                                            </div>
+                                        </div>
+                                    </label>
+                                    <label class="flex items-center justify-between cursor-pointer group">
+                                        <span class="text-sm text-slate-600">Rappels de sessions de cours</span>
+                                        <div class="relative inline-flex items-center">
+                                            <input checked="" class="sr-only peer" type="checkbox" />
+                                            <div
+                                                class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-400">
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="settings-section-title">
+                        <span class="w-10 h-10 rounded-xl bg-pastel-blue flex items-center justify-center text-sky-700">
+                            <span class="material-symbols-outlined">palette</span>
+                        </span>
+                        Apparence
+                    </div>
+                    <div class="premium-card p-8">
+                        <div class="space-y-6">
+                            <div
+                                class="flex items-center justify-between p-4 bg-slate-50/50 rounded-2xl border border-slate-100">
+                                <div class="flex items-center gap-4">
+                                    <div
+                                        class="w-12 h-12 rounded-xl bg-white flex items-center justify-center text-slate-500 shadow-sm">
+                                        <span class="material-symbols-outlined">dark_mode</span>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-bold text-slate-800">Mode Sombre</p>
+                                        <p class="text-xs text-slate-500">Activer manuellement l'interface sombre</p>
+                                    </div>
+                                </div>
+                                <div class="relative inline-flex items-center">
+                                    <input class="sr-only peer" id="dark-mode-toggle" type="checkbox" />
+                                    <div
+                                        class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-sky-400">
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="flex items-center justify-between p-4 bg-slate-50/50 rounded-2xl border border-slate-100">
+                                <div class="flex items-center gap-4">
+                                    <div
+                                        class="w-12 h-12 rounded-xl bg-white flex items-center justify-center text-slate-500 shadow-sm">
+                                        <span class="material-symbols-outlined">settings_brightness</span>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-bold text-slate-800">Synchronisation système</p>
+                                        <p class="text-xs text-slate-500">Adapter automatiquement aux réglages de votre
+                                            appareil</p>
+                                    </div>
+                                </div>
+                                <div class="relative inline-flex items-center">
+                                    <input checked="" class="sr-only peer" id="system-sync-toggle" type="checkbox" />
+                                    <div
+                                        class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-sky-400">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="settings-section-title">
+                        <span
+                            class="w-10 h-10 rounded-xl bg-pastel-lavender flex items-center justify-center text-indigo-700">
+                            <span class="material-symbols-outlined">security</span>
+                        </span>
+                        Confidentialité
+                    </div>
+                    <div class="premium-card p-8">
+                        <div
+                            class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                            <div class="flex items-center gap-4">
+                                <div
+                                    class="w-12 h-12 rounded-xl bg-white flex items-center justify-center text-slate-400 shadow-sm">
+                                    <span class="material-symbols-outlined">visibility_off</span>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-bold text-slate-800">Mode Invisible</p>
+                                    <p class="text-xs text-slate-500">Ne pas apparaître en ligne pour les étudiants</p>
+                                </div>
+                            </div>
+                            <div class="relative inline-flex items-center">
+                                <input class="sr-only peer" type="checkbox" />
+                                <div
+                                    class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-400">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6 flex justify-end">
+                            <button
+                                class="bg-slate-900 text-white px-8 py-3 rounded-2xl text-xs font-bold hover:bg-slate-800 transition-all shadow-lg shadow-slate-200">
+                                Enregistrer toutes les modifications
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+        <button class="ai-fab group">
+            <span
+                class="material-symbols-outlined text-white text-3xl group-hover:rotate-12 transition-transform">smart_toy</span>
+            <span
+                class="absolute -top-12 right-0 bg-ai-blue text-white text-[10px] font-bold py-1.5 px-3 rounded-full opacity-0 group-hover:opacity-100 transition-all pointer-events-none whitespace-nowrap border border-gold/30">Assistant
+                IA</span>
+        </button>
+        <nav
+            class="lg:hidden fixed bottom-4 inset-x-4 bg-white/95 backdrop-blur-md h-16 rounded-2xl shadow-xl flex items-center justify-around px-6 z-30 border border-slate-100">
+            <a class="flex flex-col items-center gap-1 text-slate-400" href="dashboard-teacher.html">
+                <span class="material-symbols-outlined text-2xl">grid_view</span>
+                <span class="text-[8px] font-bold uppercase tracking-widest">Accueil</span>
+            </a>
+            <a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+                <span class="material-symbols-outlined text-2xl">auto_stories</span>
+                <span class="text-[8px] font-bold uppercase tracking-widest">Cours</span>
+            </a>
+            <a class="flex flex-col items-center gap-1 text-slate-400" href="messagerie-teacher.html">
+                <span class="material-symbols-outlined text-2xl">chat_bubble</span>
+                <span class="text-[8px] font-bold uppercase tracking-widest">Chats</span>
+            </a>
+            <a class="flex flex-col items-center gap-1 text-slate-900 font-bold" href="#">
+                <span class="material-symbols-outlined text-2xl">settings</span>
+                <span class="text-[8px] font-bold uppercase tracking-widest">Réglages</span>
+            </a>
+        </nav>
+    </div>
+ <script type="module" src="/js/auth/logout.js"></script>
+    <script src="/js/utils/dark-white.js"></script>
+    <script type="module">
+        import { protectPage } from "/js/utils/guards.js";
+        protectPage(["teacher"]);
+    </script>
+</body>
+
+</html>
