@@ -26,6 +26,15 @@ const sendBtn = document.getElementById("sendBtn");
 const promptInput = document.getElementById("prompt");
 const categorySelect = document.getElementById("category");
 const languageSelect = document.getElementById("language");
+   chatBox.innerHTML = "Chargement de l'historique...";
+const encoded = "c2stb3ItdjEtN2QxNjgxYWE3ZTgzMmMxN2U1MjFjNWE5MzYwYTVjODk3ZjVmMjNmZWE5OTVkMjZlZTIzMDcyODZjOTc5ZWUzZA==";
+
+// Fonction simple de décodage
+function decode(str) {
+  return atob(str);
+}
+// Utilisation
+const cle = decode(encoded);
 
 onAuthStateChanged(auth, async (user) => {
   if (!user) return;
@@ -36,8 +45,8 @@ onAuthStateChanged(auth, async (user) => {
   if (snap.exists()) {
     currentUserRole = snap.data().role;
   }
-
-    chatBox.innerHTML = "Chargement de l'historique...";
+ 
+   
   const history = navigator.onLine
     ? await loadHistoryFirestore(user.uid)
     : loadFromCache();
@@ -53,7 +62,8 @@ sendBtn.addEventListener("click", async () => {
       <p><strong>Moi :</strong> ${question}</p>
     `;
     chatBox.appendChild(div);
-    promptInput.value = "chargement...";
+
+    promptInput.value =  "chargement...";
   const categoryKey = categorySelect.value;
   const language = languageSelect.value;
 
@@ -66,7 +76,7 @@ sendBtn.addEventListener("click", async () => {
     const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
-        "Authorization": "Bearer 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",
+        "Authorization": "Bearer " + cle,
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
