@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Djangou - Messagerie Tuteur avec Assistant IA</title>
+    <title>Djangou - Messagerie Tuteur</title>
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&amp;display=swap"
@@ -24,11 +24,19 @@
             --sidebar-bg: #FFFFFF;
             --ai-blue: #0A1128;
             --gold: #D4AF37;
+            --bg-main: #FFFDF5;
+  --text-main: #1f2937;
         }
+        .dark {
+  --bg-main: #0f172a;
+  --text-main: #e5e7eb;
+}
         @layer base {
             body {
-                @apply font-['Comfortaa'] bg-[var(--pastel-cream)] text-slate-800 text-[13px] md:text-[14px];
-            }
+    @apply font-['Comfortaa'] text-[13px] md:text-[14px];
+    background-color: var(--bg-main);
+    color: var(--text-main);
+  }
         }
         .soft-shadow {
             box-shadow: 0 10px 40px -10px rgba(0,0,0,0.03);
@@ -83,6 +91,7 @@
     </style>
     <script>
         tailwind.config = {
+            darkMode: "class",
             theme: {
                 extend: {
                     colors: {
@@ -112,7 +121,7 @@
         for="mobile-menu-toggle"></label>
     <div class="flex h-full w-full relative">
         <aside
-            class="fixed inset-y-0 left-0 w-60 lg:w-60 flex flex-col py-8 px-5 bg-white/95 backdrop-blur-lg lg:m-4 rounded-none lg:rounded-[2.5rem] sidebar-shadow z-50 transition-transform duration-300 -translate-x-full lg:translate-x-0 h-full lg:h-[calc(100vh-2rem)]">
+            class="fixed inset-y-0 left-0 w-60 lg:w-60 flex flex-col py-8 px-5 bg-white dark:bg-slate-900 backdrop-blur-lg lg:m-4 rounded-none lg:rounded-[2.5rem] sidebar-shadow z-50 transition-transform duration-300 -translate-x-full lg:translate-x-0 h-full lg:h-[calc(100vh-2rem)]">
             <div class="mb-10 flex items-center gap-4 px-2">
                 <img alt="Djangou Logo" class="w-10 h-10 rounded-2xl object-cover shadow-sm"
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVbD8r7TQ1HR16-jw_LU5rKniTtg6gAx9c_PSjY8U4_O6a_NReR941y8yZJxohlB_aLrNZ-XfA_3LTBlWo2iqmLfihsijkGaY26VxpP3iXzS2m3r19DJZdJ4GnwJ80wIXFUId2f2ewRCl1D26AVwVQmVxEG_aMoFSaHvStZmYuJEOfbmJ3nwJtGHWutF7A8F6sSvSDnM_JU6kf3sClonjyqARh5sJVsGhX53jMGF8bO3y3-LLqmCOjMZTGtuCqFFpkdjRXu_rj9gxJ" />
@@ -148,7 +157,7 @@
                 </a>
             </nav>
             <div class="mt-auto pt-6 border-t border-slate-100 space-y-2">
-                  <button class="nav-item" onclick="window.location.href='settings-tuteur.html'">
+                <button class="nav-item" onclick="window.location.href='settings-tuteur.html'">
                     <span class="material-symbols-outlined nav-icon">settings</span>
                     <span class="text-[12px] font-medium">Paramètres</span>
                 </button>
@@ -180,17 +189,19 @@
                             class="pl-12 pr-5 py-3 bg-white border-none rounded-2xl shadow-sm focus:ring-2 focus:ring-pastel-peach/50 w-48 md:w-64 transition-all placeholder:text-slate-400 text-xs"
                             placeholder="Rechercher une conversation..." type="text" />
                     </div>
-                    <div class="flex items-center gap-2 bg-white p-1.5 rounded-2xl shadow-sm border border-slate-50">
-                        <button
-                            class="w-10 h-10 rounded-xl flex items-center justify-center text-slate-400 hover:bg-slate-50 transition-colors">
-                            <span class="material-symbols-outlined text-xl">dark_mode</span>
-                        </button>
+
+                    <div class="flex items-center gap-2 sm:gap-3">
                         <div class="w-px h-5 bg-slate-100 mx-1"></div>
                         <div class="flex items-center gap-3 pl-1 pr-3 py-1">
                             <img alt="Profile" class="w-8 h-8 rounded-xl object-cover ring-2 ring-pastel-peach/30"
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuCm_zdfySOaD2X9HKcw9u_JstuwVMUADvRG-5eRya4gZtJ9-t9DBn1Ul8cMo9DJpr3-Tn_Lq4S7k8XH2qVCIHvn9JRWQOZhz1a9dq1ArlcOSPGonVZQDKAXHW3usOf6ANLU_ql3IWHiVdwBXbAuzFSLulmH4s7EUS-Ee_PmpAJULKtyZB4bH20GhdpF0CUJ8hK7reqYGfuJOf_oW2pyRrsVjgeAqUbGm3E-ktYFKQGwbDYXAVlo-SUvirFo4u2EdWmxVpFbOMxcaFi5" />
-                            <span class="text-xs font-bold text-slate-700 hidden md:block">Tuteur Thomas</span>
                         </div>
+                        <div class="w-px h-6 bg-gray-300 dark:bg-gray-700 mx-1 hidden sm:block"></div>
+                        <button id="theme-toggle"
+                            class="p-2 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors text-slate-600 dark:text-white">
+                            <span class="material-symbols-outlined block dark:hidden">dark_mode</span>
+                            <span class="material-symbols-outlined hidden dark:block">light_mode</span>
+                        </button>
                     </div>
                 </div>
             </header>
@@ -199,7 +210,6 @@
                     <div class="premium-card flex-1 flex flex-col p-4 overflow-hidden">
                         <div class="px-2 mb-4 flex items-center justify-between">
                             <h3 class="font-bold text-slate-800 text-sm">Discussions</h3>
-                            <span class="material-symbols-outlined text-slate-400 text-lg">push_pin</span>
                         </div>
                         <div class="flex-1 overflow-y-auto custom-scrollbar space-y-2">
                             <div class="conversation-item bg-blue-50/50 border border-blue-100">
@@ -343,13 +353,7 @@
                 </div>
             </div>
         </main>
-        <button class="ai-fab group">
-            <span
-                class="material-symbols-outlined text-white text-3xl group-hover:rotate-12 transition-transform">smart_toy</span>
-            <span
-                class="absolute -top-12 right-0 bg-ai-blue text-white text-[10px] font-bold py-1.5 px-3 rounded-full opacity-0 group-hover:opacity-100 transition-all pointer-events-none whitespace-nowrap border border-gold/30 shadow-xl">Assistant
-                IA DeepSeek</span>
-        </button>
+
         <nav
             class="lg:hidden fixed bottom-4 inset-x-4 bg-white/95 backdrop-blur-md h-16 rounded-2xl shadow-xl flex items-center justify-around px-6 z-30 border border-slate-100">
             <a class="flex flex-col items-center gap-1 text-slate-400" href="dashboard-teacher.html">
@@ -370,7 +374,7 @@
             </a>
         </nav>
     </div>
- <script type="module" src="/js/auth/logout.js"></script>
+    <script type="module" src="/js/auth/logout.js"></script>
     <script src="/js/utils/dark-white.js"></script>
     <script type="module">
         import { protectPage } from "/js/utils/guards.js";
