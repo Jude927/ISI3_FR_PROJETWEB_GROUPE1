@@ -66,6 +66,15 @@
 
 <body
     class="bg-background-light dark:bg-background-dark text-secondary dark:text-gray-100 transition-colors duration-300 font-body antialiased h-screen overflow-hidden flex">
+    
+     <div
+        class="fixed -top-64 -right-64 w-[800px] h-[800px] bg-gray-50/80 dark:bg-gray-800/40 rounded-full border-2 border-gray-200/70 dark:border-gray-700/50 pointer-events-none -z-10">
+    </div>
+
+    <div
+        class="fixed -bottom-64 -left-64 w-[800px] h-[800px] bg-gray-50/80 dark:bg-gray-800/40 rounded-full border-2 border-gray-200/70 dark:border-gray-700/50 pointer-events-none -z-10">
+    </div>
+    
     <aside
         class="hidden md:flex flex-col w-24 lg:w-64 h-full bg-card-light dark:bg-card-dark border-r border-gray-100 dark:border-gray-800 transition-all duration-300 p-4 relative">
         <div class="flex items-center justify-center lg:justify-start mb-10 px-2">
@@ -74,18 +83,18 @@
             <span class="hidden lg:block text-2xl font-bold text-primary tracking-wide">Djangou</span>
         </div>
         <nav class="flex-1 flex flex-col gap-2">
-            <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary transition-colors"
-                href="#">
+            <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
+                href="dashboard-student.html">
                 <span class="material-icons-round text-2xl">dashboard</span>
                 <span class="hidden lg:block ml-4 font-semibold">Accueil</span>
             </a>
-            <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
+            <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl bg-gray-100 text-primary dark:bg-primary/20 dark:text-primary transition-colors"
                 href="#">
                 <span class="material-icons-round text-2xl">school</span>
                 <span class="hidden lg:block ml-4 font-semibold">Matières</span>
             </a>
             <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
-                href="#">
+                href="chat-student.html">
                 <span class="material-icons-round text-2xl">chat_bubble</span>
                 <span class="hidden lg:block ml-4 font-semibold">Messages</span>
                 <span
@@ -120,31 +129,15 @@
                 </div>
             </div>
             <div
-                class="hidden md:flex items-center bg-white dark:bg-card-dark rounded-full px-4 py-2.5 shadow-sm border border-gray-100 dark:border-gray-700 w-96">
+                class="hidden md:flex items-center bg-white dark:bg-card-dark rounded-full px-4 py-2.5 shadow-sm border border-gray-100 dark:border-gray-700 w-96 w-full">
                 <span class="material-icons-round text-gray-400">search</span>
                 <input
                     class="bg-transparent border-none focus:ring-0 text-sm w-full text-gray-600 dark:text-gray-200 placeholder-gray-400"
                     placeholder="Rechercher un cours, un tuteur..." type="text" />
             </div>
-            <div class="flex items-center gap-4">
-                <button
-                    class="relative p-2 rounded-full bg-white dark:bg-card-dark hover:bg-gray-50 dark:hover:bg-gray-700 shadow-sm border border-gray-100 dark:border-gray-700 transition-colors">
-                    <span class="material-icons-round text-gray-500 dark:text-gray-300">notifications</span>
-                    <span
-                        class="absolute top-2 right-2.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-card-dark"></span>
-                </button>
-                <div class="flex items-center gap-3 pl-2 border-l border-gray-200 dark:border-gray-700">
-                    <div class="text-right hidden md:block">
-
-                        <img alt="Avatar Utilisateur"
-                            class="w-10 h-10 rounded-full object-cover border-2 border-primary shadow-sm"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-AbkTik24Q_rCpbwewky4ZNDDaZEgHurujCH9wklsbcw_6uItxbsjn7i2dkv_ZtfNMQRXqu_fAVPcAARqSCjNRvIg2a5rQgFMrEZVKZtRT5cUqAuYAXhx1AQI4xVSHOHQWJhurnwDHpju3BxI1Dp4asewISJXQri1p0VUBK8Z9wVjN5cXUzqmrZWgPwdGZACaZNl5uQic8_b3WrIsnA9wTsmSbxdJMsTUsrnvBgAfm-dGg5uO6SBhLEjQHHrZpTo18bxALyWoZn8" />
-                    </div>
-                </div>
+           
         </header>
-        <div class="mb-8">
-            <h1 class="text-3xl md:text-4xl font-extrabold text-secondary dark:text-white mb-2">Bonjour, Lisha! 👋</h1>
-        </div>
+
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 pb-24">
             <div class="lg:col-span-3 space-y-8">
                 <div class="flex justify-between items-end">
@@ -246,119 +239,199 @@
 
         </div>
 
-        
 
-        <div class="flex justify-between items-end">
-            <h3 class="text-xl font-bold text-secondary dark:text-white">Ajouter des Matières</h3>
-            <a class="text-sm font-semibold text-primary hover:underline" href="#">Voir tout</a>
-        </div>
-        <div
-            class="bg-pastel-red dark:bg-dark-brown p-8 rounded-2xl relative overflow-hidden group hover:shadow-md transition-shadow cursor-pointer min-h-[280px] flex flex-col justify-between">
-            <div
-                class="absolute right-0 bottom-0 opacity-20 transform translate-x-2 translate-y-2 group-hover:scale-110 transition-transform duration-500">
-                <span class="material-icons-round text-9xl text-purple-800 dark:text-purple-200">palette</span>
-            </div>
-            <div class="relative z-10 w-full h-full flex flex-col">
-                <div
-                    class="w-14 h-14 bg-white dark:bg-gray-700 rounded-xl flex items-center justify-center mb-6 shadow-sm text-purple-600 dark:text-purple-300">
-                    <span class="material-icons-round text-3xl">atome</span>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 pb-24">
+            <div class="lg:col-span-3 space-y-8">
+                <div class="flex justify-between items-end">
+                    <h3 class="text-xl font-bold text-secondary dark:text-white">Ajouter des Matières</h3>
+                    <a class="text-sm font-semibold text-primary hover:underline" href="#">Voir tout</a>
                 </div>
-                <div class="flex-1">
-                    <h4 class="text-2xl font-bold text-purple-900 dark:text-purple-100 mb-1">Physiques</h4>
-                </div>
-                <div class="mt-auto">
-                    <div class="w-full bg-white/50 dark:bg-black/20 rounded-full h-3">
-                        <div class="bg-purple-500 h-3 rounded-full" style="width: 20%"></div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+                    <div
+                        class="bg-pastel-red dark:bg-dark-brown p-8 rounded-2xl relative overflow-hidden group hover:shadow-md transition-shadow cursor-pointer min-h-[280px] flex flex-col justify-between">
+                        <div
+                            class="absolute right-0 bottom-0 opacity-20 transform translate-x-2 translate-y-2 group-hover:scale-110 transition-transform duration-500">
+                            <span
+                                class="material-icons-round text-9xl text-purple-800 dark:text-purple-200">balance</span>
+                        </div>
+                        <div class="relative z-10 w-full h-full flex flex-col">
+                            <div
+                                class="w-14 h-14 bg-white dark:bg-gray-700 rounded-xl flex items-center justify-center mb-6 shadow-sm text-purple-600 dark:text-purple-300">
+                                <span class="material-icons-round text-3xl">balance</span>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-2xl font-bold text-purple-900 dark:text-purple-100 mb-1">Droit</h4>
+                            </div>
+                            <div class="mt-auto">
+                                <div class="w-full bg-white/50 dark:bg-black/20 rounded-full h-3">
+                                    <div class="bg-purple-500 h-3 rounded-full" style="width: 20%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+
+
+                    <div
+                        class="bg-pastel-red dark:bg-dark-brown p-8 rounded-2xl relative overflow-hidden group hover:shadow-md transition-shadow cursor-pointer min-h-[280px] flex flex-col justify-between">
+                        <div
+                            class="absolute right-0 bottom-0 opacity-20 transform translate-x-2 translate-y-2 group-hover:scale-110 transition-transform duration-500">
+                            <span
+                                class="material-icons-round text-9xl text-purple-800 dark:text-purple-200"></span>
+                        </div>
+                        <div class="relative z-10 w-full h-full flex flex-col">
+                            <div
+                                class="w-14 h-14 bg-white dark:bg-gray-700 rounded-xl flex items-center justify-center mb-6 shadow-sm text-purple-600 dark:text-purple-300">
+                                <span class="material-icons-round text-3xl">atome</span>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-2xl font-bold text-purple-900 dark:text-purple-100 mb-1">Physiques</h4>
+                            </div>
+                            <div class="mt-auto">
+                                <div class="w-full bg-white/50 dark:bg-black/20 rounded-full h-3">
+                                    <div class="bg-purple-500 h-3 rounded-full" style="width: 20%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                     <div
+                        class="bg-blue-200 dark:bg-blue-800 p-8 rounded-2xl relative overflow-hidden group hover:shadow-md transition-shadow cursor-pointer min-h-[280px] flex flex-col justify-between">
+                        <div
+                            class="absolute right-0 bottom-0 opacity-20 transform translate-x-2 translate-y-2 group-hover:scale-110 transition-transform duration-500">
+                            <span
+                                class="material-icons-round text-9xl text-blue-800 dark:text-blue-200">web</span>
+                        </div>
+                        <div class="relative z-10 w-full h-full flex flex-col">
+                            <div
+                                class="w-14 h-14 bg-white dark:bg-gray-700 rounded-xl flex items-center justify-center mb-6 shadow-sm text-blue-600 dark:text-blue-300">
+                                <span class="material-icons-round text-3xl">web</span>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-2xl font-bold text-blue-900 dark:text-purple-100 mb-1">Architecture Web</h4>
+                            </div>
+                            <div class="mt-auto">
+                                <div class="w-full bg-white/50 dark:bg-black/20 rounded-full h-3">
+                                    <div class="bg-blue-500 h-3 rounded-full" style="width: 20%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+
+
+                    
+                     <div
+                        class="bg-gray-100 dark:bg-gray-600 p-8 rounded-2xl relative overflow-hidden group hover:shadow-md transition-shadow cursor-pointer min-h-[280px] flex flex-col justify-between">
+                        <div
+                            class="absolute right-0 bottom-0 opacity-20 transform translate-x-2 translate-y-2 group-hover:scale-110 transition-transform duration-500">
+                            <span
+                                class="material-icons-round text-9xl text-gray-800 dark:text-gray-200">cable</span>
+                        </div>
+                        <div class="relative z-10 w-full h-full flex flex-col">
+                            <div
+                                class="w-14 h-14 bg-white dark:bg-gray-700 rounded-xl flex items-center justify-center mb-6 shadow-sm text-gray-600 dark:text-gray-300">
+                                <span class="material-icons-round text-3xl">cable</span>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-1">Réseaux</h4>
+                            </div>
+                            <div class="mt-auto">
+                                <div class="w-full bg-white/50 dark:bg-black/20 rounded-full h-3">
+                                    <div class="bg-gray-400 h-3 rounded-full" style="width: 80%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+
+
+                    <div
+                        class="bg-emerald-100 dark:bg-emerald-400 p-8 rounded-2xl relative overflow-hidden group hover:shadow-md transition-shadow cursor-pointer min-h-[280px] flex flex-col justify-between">
+                        <div
+                            class="absolute right-0 bottom-0 opacity-20 transform translate-x-2 translate-y-2 group-hover:scale-110 transition-transform duration-500">
+                            <span
+                                class="material-icons-round text-9xl text-emerald-800 dark:text-emerald-200">123</span>
+                        </div>
+                        <div class="relative z-10 w-full h-full flex flex-col">
+                            <div
+                                class="w-14 h-14 bg-white dark:bg-gray-700 rounded-xl flex items-center justify-center mb-6 shadow-sm text-emerald-600 dark:text-emerald-300">
+                                <span class="material-icons-round text-3xl">123</span>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-2xl font-bold text-emerald-900 dark:text-emerald-100 mb-1">Comptabilité</h4>
+                            </div>
+                            <div class="mt-auto">
+                                <div class="w-full bg-white/50 dark:bg-black/20 rounded-full h-3">
+                                    <div class="bg-emerald-500 h-3 rounded-full" style="width: 35%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                     <div
+                        class="bg-yellow-100 dark:bg-yellow-900 p-8 rounded-2xl relative overflow-hidden group hover:shadow-md transition-shadow cursor-pointer min-h-[280px] flex flex-col justify-between">
+                        <div
+                            class="absolute right-0 bottom-0 opacity-20 transform translate-x-2 translate-y-2 group-hover:scale-110 transition-transform duration-500">
+                            <span
+                                class="material-icons-round text-9xl text-yellow-800 dark:text-yellow-200">abc</span>
+                        </div>
+                        <div class="relative z-10 w-full h-full flex flex-col">
+                            <div
+                                class="w-14 h-14 bg-white dark:bg-gray-700 rounded-xl flex items-center justify-center mb-6 shadow-sm text-yellow-600 dark:text-yellow-300">
+                                <span class="material-icons-round text-3xl">abc</span>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-2xl font-bold text-yellow-900 dark:text-yellow-100 mb-1">Anglais</h4>
+                            </div>
+                            <div class="mt-auto">
+                                <div class="w-full bg-white/50 dark:bg-black/20 rounded-full h-3">
+                                    <div class="bg-yellow-500 h-3 rounded-full" style="width: 50%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+
+
+                    <div
+                        class="bg-red-100 dark:bg-red-800 p-8 rounded-2xl relative overflow-hidden group hover:shadow-md transition-shadow cursor-pointer min-h-[280px] flex flex-col justify-between">
+                        <div
+                            class="absolute right-0 bottom-0 opacity-20 transform translate-x-2 translate-y-2 group-hover:scale-110 transition-transform duration-500">
+                            <span
+                                class="material-icons-round text-9xl text-red-800 dark:text-purple-200">book</span>
+                        </div>
+                        <div class="relative z-10 w-full h-full flex flex-col">
+                            <div
+                                class="w-14 h-14 bg-white dark:bg-red-100 rounded-xl flex items-center justify-center mb-6 shadow-sm text-red-300 dark:text-red-600">
+                                <span class="material-icons-round text-3xl">book</span>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-2xl font-bold text-red-500 dark:text-red-100 mb-1">Français</h4>
+                            </div>
+                            <div class="mt-auto">
+                                <div class="w-full bg-white/50 dark:bg-black/20 rounded-full h-3">
+                                    <div class="bg-red-500 h-3 rounded-full" style="width: 20%"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div
-            class="bg-pastel-red dark:bg-dark-brown p-8 rounded-2xl relative overflow-hidden group hover:shadow-md transition-shadow cursor-pointer min-h-[280px] flex flex-col justify-between">
-            <div
-                class="absolute right-0 bottom-0 opacity-20 transform translate-x-2 translate-y-2 group-hover:scale-110 transition-transform duration-500">
-                <span class="material-icons-round text-9xl text-purple-800 dark:text-purple-200">palette</span>
-            </div>
-            <div class="relative z-10 w-full h-full flex flex-col">
-                <div
-                    class="w-14 h-14 bg-white dark:bg-gray-700 rounded-xl flex items-center justify-center mb-6 shadow-sm text-purple-600 dark:text-purple-300">
-                    <span class="material-icons-round text-3xl">atome</span>
-                </div>
-                <div class="flex-1">
-                    <h4 class="text-2xl font-bold text-purple-900 dark:text-purple-100 mb-1">Physiques</h4>
-                </div>
-                <div class="mt-auto">
-                    <div class="w-full bg-white/50 dark:bg-black/20 rounded-full h-3">
-                        <div class="bg-purple-500 h-3 rounded-full" style="width: 20%"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
 
 
 
-
-
-
-
-
-        <div class="mt-8">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-bold text-secondary dark:text-white">Instructeurs</h3>
-                <button
-                    class="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-gray-500 hover:text-primary transition-colors">
-                    <span class="material-icons-round text-sm">add</span>
-                </button>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div
-                    class="bg-card-light dark:bg-card-dark rounded-2xl p-4 shadow-sm border border-gray-100 dark:border-gray-700 flex items-center gap-3">
-                    <img alt="Prof" class="w-10 h-10 rounded-full object-cover"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0sgpo5Wfbtvk9cgxBgkdDGsABxngmJ2ofgfQEhUQKKDwZKSlXryan1Rssh_SOlasEZ7sysFZFrn-M4l1rncJzfdGZ9430T7siHyuHqqT8leWOwI4XGclYXMJ_tMpmOKJZHOz5xZ1gU_JdSC5PabCAAybo5iX1qC6kA-hSdxZsgbG4TOukKQcS0S8lJ4Y8qHjWaeZ43vWGm6oA4C3EDQ6tMViS8XZs812zvDx98GG_8nGFrai-nTC9pepa19oGATnLHm4zQ9rq-vk" />
-                    <div class="flex-1">
-                        <h5 class="text-sm font-bold text-secondary dark:text-white">Sarah Connor</h5>
-                        <p class="text-xs text-gray-500">Sciences</p>
-                    </div>
-                    <button class="p-2 text-primary hover:bg-primary/10 rounded-full transition-colors">
-                        <span class="material-icons-round text-lg">chat_bubble_outline</span>
-                    </button>
-                </div>
-                <div
-                    class="bg-card-light dark:bg-card-dark rounded-2xl p-4 shadow-sm border border-gray-100 dark:border-gray-700 flex items-center gap-3">
-                    <img alt="Prof" class="w-10 h-10 rounded-full object-cover"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgGD9Uq15C_JNdwSvVzucgOYyoiaDZseuCCrVHHEUqUI4YJNEE9lHJbnIsYCG0G6xuUA7XSzuAA7v9UMgTtzNcCAu2np-U4n8mN9EWYycj_NXhizbKLTfZanC_O4RdlUdEXNJKTbdarq-hC52Vt8C8ynEaShwKbaC3_T2lZSOYrl_ZcwcKkF2WvyxD753hQMKPm2Fy4gCz_LgTrqjxfMsNQt4IFCfdHFghTdruTHptBDk_2U8qtzvys_7Effbd7Vlc-jJ_IxGTbgg" />
-                    <div class="flex-1">
-                        <h5 class="text-sm font-bold text-secondary dark:text-white">John Doe</h5>
-                        <p class="text-xs text-gray-500">Mathématiques</p>
-                    </div>
-                    <button class="p-2 text-primary hover:bg-primary/10 rounded-full transition-colors">
-                        <span class="material-icons-round text-lg">chat_bubble_outline</span>
-                    </button>
-                </div>
-            </div>
-        </div>
     </main>
-    <div
-        class="fixed bottom-10 right-10 z-50 hidden md:flex items-center gap-6 bg-gradient-to-br from-navy-blue-start to-navy-blue-end p-8 rounded-2xl shadow-2xl border-2 border-gold-border w-[480px] cursor-pointer hover:-translate-y-1 transition-transform duration-300">
-        <div
-            class="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 shadow-inner border border-gold-border">
-            <svg class="text-gold-border w-9 h-9" fill="none" stroke="currentColor" stroke-linecap="round"
-                stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path
-                    d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z">
-                </path>
-            </svg>
-        </div>
-        <div class="flex-1">
-            <h5 class="text-2xl font-bold text-white mb-1 tracking-wide">DeepSeek AI</h5>
-            <p class="text-base text-gray-300">Je suis là pour t'aider !</p>
-        </div>
-        <button
-            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-gray-300 hover:bg-white/20 transition-colors border border-white/10">
-            <span class="material-icons-round text-2xl">close</span>
-        </button>
-    </div>
+    
+       
+      
+   
     <div
         class="md:hidden fixed bottom-0 w-full bg-white dark:bg-card-dark border-t border-gray-100 dark:border-gray-800 flex justify-around p-3 z-50">
         <a class="flex flex-col items-center text-primary" href="#">
