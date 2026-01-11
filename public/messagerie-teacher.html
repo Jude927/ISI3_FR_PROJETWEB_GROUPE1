@@ -215,7 +215,7 @@
                             <h3 class="font-bold text-slate-800 text-sm">Discussions</h3>
                         </div>
                         <div class="flex-1 overflow-y-auto custom-scrollbar space-y-2">
-                            <div class="conversation-item bg-blue-50/50 border border-blue-100">
+                            <div class="conversation-item bg-blue-50/50 border border-blue-100" data-conversation-id="ia">
                                 <div class="relative">
                                     <div
                                         class="w-12 h-12 rounded-2xl bg-[var(--ai-blue)] flex items-center justify-center shadow-inner">
@@ -228,7 +228,7 @@
                                             class="relative inline-flex rounded-full h-3 w-3 bg-blue-500 border-2 border-white"></span>
                                     </span>
                                 </div>
-                                <div class="flex-1 min-w-0" data-conversation-id="ia">
+                                <div class="flex-1 min-w-0">
                                     <div class="flex justify-between items-center mb-0.5">
                                         <h4 class="font-bold text-slate-900 text-xs truncate flex items-center gap-1.5">
                                             Assistant IA
@@ -238,8 +238,7 @@
                                     <div class="flex items-center gap-1.5">
                                         <span
                                             class="text-[9px] px-1.5 py-0.5 bg-blue-100 text-blue-600 rounded-md font-bold uppercase tracking-tighter">Intelligent</span>
-                                        <p class="text-xs text-slate-500 truncate font-medium">Comment puis-je vous
-                                            aider ?</p>
+                                        <p class="conversation-preview text-xs text-slate-500 truncate font-medium"></p>
                                     </div>
                                 </div>
                             </div>
@@ -253,9 +252,9 @@
                                 <div class="flex-1 min-w-0">
                                     <div class="flex justify-between items-center mb-0.5">
                                         <h4 class="font-bold text-slate-900 text-xs truncate">Tuteur Thomas</h4>
-                                        <span class="text-[10px] text-slate-400">14:20</span>
+                                        <span class="conversation-time text-[10px] text-slate-400"></span>
                                     </div>
-                                    <p class="text-xs text-slate-500 truncate font-medium">Merci pour votre aide !</p>
+                                    <p class="conversation-preview text-xs text-slate-500 truncate font-medium"></p>
                                 </div>
                             </div>
                             <div class="conversation-item" data-conversation-id="sophie">
@@ -264,9 +263,9 @@
                                 <div class="flex-1 min-w-0">
                                     <div class="flex justify-between items-center mb-0.5">
                                         <h4 class="font-bold text-slate-900 text-xs truncate">Sophie L.</h4>
-                                        <span class="text-[10px] text-slate-400">Hier</span>
+                                        <span class="conversation-time text-[10px] text-slate-400"></span>
                                     </div>
-                                    <p class="text-xs text-slate-400 truncate">Je ne comprends pas l'exercice 3...</p>
+                                    <p class="conversation-preview text-xs text-slate-400 truncate"></p>
                                 </div>
                             </div>
                             <div class="conversation-item" data-conversation-id="marc">
@@ -275,9 +274,9 @@
                                 <div class="flex-1 min-w-0">
                                     <div class="flex justify-between items-center mb-0.5">
                                         <h4 class="font-bold text-slate-900 text-xs truncate">Marc-Antoine</h4>
-                                        <span class="text-[10px] text-slate-400">Lun.</span>
+                                        <span class="conversation-time text-[10px] text-slate-400"></span>
                                     </div>
-                                    <p class="text-xs text-slate-400 truncate">C'est possible de décaler le cours ?</p>
+                                    <p class="conversation-preview text-xs text-slate-400 truncate"></p>
                                 </div>
                             </div>
                         </div>
@@ -307,37 +306,8 @@
                             </div>
                         </div>
                         <div id="chat-messages" class="flex-1 overflow-y-auto custom-scrollbar p-6 flex flex-col gap-4">
-                            <div class="text-center my-4">
-                                <span
-                                    class="text-[10px] font-bold text-slate-400 bg-slate-50 px-3 py-1 rounded-full uppercase tracking-widest">Aujourd'hui</span>
-                            </div>
-                            <div class="chat-bubble-received">
-                                <p class="text-xs leading-relaxed">Bonjour Thomas ! J'ai une question concernant le
-                                    cours sur le développement web de ce matin.</p>
-                                <span class="text-[9px] text-slate-500 mt-2 block opacity-70">14:05</span>
-                            </div>
-                            <div class="chat-bubble-sent">
-                                <p class="text-xs leading-relaxed">Bonjour ! Bien sûr, n'hésite pas. De quoi s'agit-il
-                                    précisément ?</p>
-                                <span class="text-[9px] text-slate-500 mt-2 block opacity-70">14:12</span>
-                            </div>
-                            <div class="chat-bubble-received">
-                                <p class="text-xs leading-relaxed">Je ne comprends pas bien la différence entre padding
-                                    et margin dans les styles Tailwind CSS. Pourriez-vous me réexpliquer ?</p>
-                                <span class="text-[9px] text-slate-500 mt-2 block opacity-70">14:15</span>
-                            </div>
-                            <div class="chat-bubble-sent">
-                                <p class="text-xs leading-relaxed">C'est une excellente question ! Imagine que ta div
-                                    est un cadeau. Le padding, c'est le papier bulle à l'intérieur, et le margin, c'est
-                                    l'espace entre ton cadeau et les autres sous le sapin. 🎄</p>
-                                <span class="text-[9px] text-slate-500 mt-2 block opacity-70">14:18</span>
-                            </div>
-                            <div class="chat-bubble-received">
-                                <p class="text-xs leading-relaxed">Ah super clair ! Merci pour votre aide !</p>
-                                <span class="text-[9px] text-slate-500 mt-2 block opacity-70">14:20</span>
-                            </div>
                         </div>
-                       <div class="p-5 border-t border-slate-50 bg-white/50">
+                       <div class="p-5 border-t border-slate-50">
                             <div
                                 class="flex items-center gap-2 bg-slate-50 p-2 rounded-[2rem] border border-slate-100 shadow-inner">
                                 <div class="flex items-center gap-1 pl-2">
@@ -349,13 +319,18 @@
                                     </button>
                                 </div>
                                 <input
-                                    class="flex-1 bg-transparent border-none text-xs focus:ring-0 placeholder:text-slate-400 py-2"
+                                id="messageInput"
+                                    class="flex-1 bg-transparent border-none text-xs 
+                                                             text-black caret-black
+         focus:outline-none focus:ring-0
+         placeholder:text-slate-400 py-2"
                                     placeholder="Écrivez votre message..." type="text" />
                                 <div class="flex items-center gap-1 pr-1">
                                     <button class="input-icon-btn" title="Message vocal">
                                         <span class="material-symbols-outlined text-xl">mic</span>
                                     </button>
                                     <button
+                                    id="sendBtn"
                                         class="w-10 h-10 bg-slate-900 text-white rounded-full flex items-center justify-center hover:bg-slate-800 transition-all shadow-lg shadow-slate-200">
                                         <span class="material-symbols-outlined text-lg">send</span>
                                     </button>
@@ -393,81 +368,7 @@
         protectPage(["teacher"]);
     </script>
     <script type="module" src="/js/utils/avatar-sync.js"></script>
-    <script>const conversations = {
-  thomas: [
-    { from: "them", text: "Bonjour Thomas ! J'ai une question concernant le cours.", time: "14:05" },
-    { from: "me", text: "Bien sûr, de quoi s'agit-il ?", time: "14:12" },
-    { from: "them", text: "Quelle est la différence entre padding et margin ?", time: "14:15" }
-  ],
-  sophie: [
-    { from: "them", text: "Je ne comprends pas l'exercice 3.", time: "09:10" },
-    { from: "me", text: "Quel point exactement ?", time: "09:12" }
-  ],
-  marc: [
-    { from: "them", text: "C'est possible de décaler le cours ?", time: "Hier" }
-  ]
-};
-</script>
-<script>
-const chatContainer = document.getElementById("chat-messages");
-const iaContainer = document.getElementById("chatBox"); 
-
-function renderConversation(conversationId) {
-  chatContainer.innerHTML = "";
-
-  conversations[conversationId]?.forEach(msg => {
-    const bubble = document.createElement("div");
-    bubble.className =
-      msg.from === "me"
-        ? "chat-bubble-sent"
-        : "chat-bubble-received";
-
-    bubble.innerHTML = `
-      <p class="text-xs leading-relaxed">${msg.text}</p>
-      <span class="text-[9px] text-slate-500 mt-2 block opacity-70">${msg.time}</span>
-    `;
-
-    chatContainer.appendChild(bubble);
-  });
-
-  chatContainer.scrollTop = chatContainer.scrollHeight;
-}
-
-document.querySelectorAll(".conversation-item").forEach(item => {
-  item.addEventListener("click", () => {
-    
-    document.querySelectorAll(".conversation-item")
-      .forEach(i => i.classList.remove("active"));
-    item.classList.add("active");
-
-    const id = item.dataset.conversationId;
-
-    if (id === "ia") {
-     
-      chatContainer.classList.add("hidden");
-      iaContainer.classList.remove("hidden");
-    } else {
-    
-      iaContainer.classList.add("hidden");
-      chatContainer.classList.remove("hidden");
-      renderConversation(id);
-    }
-  });
-});
-</script>
-
-<script>document.querySelectorAll(".conversation-item").forEach(item => {
-  item.addEventListener("click", () => {
-    document.querySelectorAll(".conversation-item")
-      .forEach(i => i.classList.remove("active"));
-
-    item.classList.add("active");
-
-    const id = item.dataset.conversationId;
-    renderConversation(id);
-  });
-});
-</script>
+   <script type="module" src="/js/peer/test.js"></script>
 </body>
 
 </html>
