@@ -74,3 +74,70 @@ export async function getAllStudents() {
     ...doc.data()
   }));
 }
+
+export async function createConversation(studentId, teacherId) {
+  const ref = await addDoc(collection(db, "conversations"), {
+    studentId,
+    teacherId,
+    createdAt: serverTimestamp(),
+    lastMessage: ""
+  });
+
+  return ref.id; // conversationId
+
+}
+
+export async function sendMessage(conversationId, senderId, senderRole, text) {
+  // 1. Ajouter le message
+  await addDoc(collection(db, "messages"), {
+    conversationId,
+    senderId,
+    senderRole,
+    text,
+    createdAt: serverTimestamp()
+  });
+
+  // 2. Mettre à jour le dernier message
+  await updateDoc(doc(db, "conversations", conversationId), {
+    lastMessage: text
+  });
+}
+
+
+export async function loadMessages(conversationId) {
+  const q = query(
+    collection(db, "messages"),
+    where("conversationId", "==", conversationId)
+  );
+
+  const snap = await getDocs(q);
+
+  return snap.docs.map(doc => doc.data());
+}
+
+export async function loadStudentConversations(studentId) {
+  const q = query(
+    collection(db, "conversations"),
+    where("studentId", "==", studentId)
+  );
+
+  const snap = await getDocs(q);
+  return snap.docs.map(doc => ({
+    id: doc.id,
+    ...doc.data()
+  }));
+}
+
+
+export async function loadTeacherConversations(teacherId) {
+  const q = query(
+    collection(db, "conversations"),
+    where("teacherId", "==", teacherId)
+  );
+
+  const snap = await getDocs(q);
+  return snap.docs.map(doc => ({
+    id: doc.id,
+    ...doc.data()
+  }));
+}

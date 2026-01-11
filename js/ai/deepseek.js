@@ -59,7 +59,7 @@ sendBtn.addEventListener("click", async () => {
   if (!question) return;
     const div = document.createElement("div");
     div.innerHTML += `
-      <p><strong>Moi :</strong> ${question}</p>
+          <p><strong>Moi :</strong> ${question}</p>  
     `;
     chatBox.appendChild(div);
 
@@ -107,8 +107,8 @@ sendBtn.addEventListener("click", async () => {
       ? await loadHistoryFirestore(currentUser.uid)
       : loadFromCache();
     div.innerHTML += `
-      <p><strong>Ai :</strong> ${answer}</p>
-      <hr>
+          <p><strong>AI :</strong> ${answer}</p>
+          <hr>     
     `;
     chatBox.appendChild(div);
     promptInput.value = "";
