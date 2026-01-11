@@ -196,8 +196,9 @@
                     <div class="flex items-center gap-2 sm:gap-3">
                         <div class="w-px h-5 bg-slate-100 mx-1"></div>
                         <div class="flex items-center gap-3 pl-1 pr-3 py-1">
-                            <a href="profil-teacher.html"><img alt="Profile" class="profile-avatar w-8 h-8 rounded-xl object-cover ring-2 ring-pastel-peach/30"
-                                src="/assets/avatars/avatardef.png" /></a> 
+                            <a href="profil-teacher.html"><img alt="Profile"
+                                    class="profile-avatar w-8 h-8 rounded-xl object-cover ring-2 ring-pastel-peach/30"
+                                    src="/assets/avatars/avatardef.png" /></a>
                         </div>
                         <div class="w-px h-6 bg-gray-300 dark:bg-gray-700 mx-1 hidden sm:block"></div>
                         <button id="theme-toggle"
@@ -215,7 +216,8 @@
                             <h3 class="font-bold text-slate-800 text-sm">Discussions</h3>
                         </div>
                         <div class="flex-1 overflow-y-auto custom-scrollbar space-y-2">
-                            <div class="conversation-item bg-blue-50/50 border border-blue-100" data-conversation-id="ia">
+                            <div class="conversation-item bg-blue-50/50 border border-blue-100"
+                                data-conversation-id="ia">
                                 <div class="relative">
                                     <div
                                         class="w-12 h-12 rounded-2xl bg-[var(--ai-blue)] flex items-center justify-center shadow-inner">
@@ -296,6 +298,15 @@
                                     </p>
                                 </div>
                             </div>
+                            <div class="p-5 border-b border-slate-50 flex items-center justify-between">
+                                <button id="back-to-conversations"
+                                    class="md:hidden flex items-center gap-2 px-4 py-2 rounded-2xl   bg-white border border-slate-100 shadow-sm  text-slate-700 font-bold text-xs hover:bg-slate-50 active:scale-95 transition-all duration-200">
+                                    <span class="material-symbols-outlined text-lg">
+                                        arrow_back
+                                    </span>
+                                    Discussions
+                                </button>
+                            </div>
                             <div class="flex items-center gap-2">
                                 <button class="p-2 rounded-xl text-slate-400 hover:bg-slate-50 transition-colors">
                                     <span class="material-symbols-outlined text-xl">video_call</span>
@@ -307,7 +318,7 @@
                         </div>
                         <div id="chat-messages" class="flex-1 overflow-y-auto custom-scrollbar p-6 flex flex-col gap-4">
                         </div>
-                       <div class="p-5 border-t border-slate-50">
+                        <div class="p-5 border-t border-slate-50">
                             <div
                                 class="flex items-center gap-2 bg-slate-50 p-2 rounded-[2rem] border border-slate-100 shadow-inner">
                                 <div class="flex items-center gap-1 pl-2">
@@ -318,27 +329,22 @@
                                         <span class="material-symbols-outlined text-xl">table_chart</span>
                                     </button>
                                 </div>
-                                <input
-                                id="messageInput"
-                                    class="flex-1 bg-transparent border-none text-xs 
-                                                             text-black caret-black
-         focus:outline-none focus:ring-0
-         placeholder:text-slate-400 py-2"
+                                <input id="messageInput"
+                                    class="flex-1 bg-transparent border-none text-xs text-black caret-black focus:outline-none focus:ring-0 placeholder:text-slate-400 py-2"
                                     placeholder="Écrivez votre message..." type="text" />
                                 <div class="flex items-center gap-1 pr-1">
                                     <button class="input-icon-btn" title="Message vocal">
                                         <span class="material-symbols-outlined text-xl">mic</span>
                                     </button>
-                                    <button
-                                    id="sendBtn"
+                                    <button id="sendBtn"
                                         class="w-10 h-10 bg-slate-900 text-white rounded-full flex items-center justify-center hover:bg-slate-800 transition-all shadow-lg shadow-slate-200">
                                         <span class="material-symbols-outlined text-lg">send</span>
                                     </button>
                                 </div>
                             </div>
+                        </div>
                     </div>
                 </div>
-            </div>
         </main>
 
         <nav
@@ -368,7 +374,22 @@
         protectPage(["teacher"]);
     </script>
     <script type="module" src="/js/utils/avatar-sync.js"></script>
-   <script type="module" src="/js/peer/test.js"></script>
+    <script type="module" src="/js/peer/test.js"></script>
+    <script>const backBtn = document.getElementById("back-to-conversations");
+        const conversationsList = document.querySelector(".w-full.md\\:w-80");
+        const chatPanel = document.querySelector(".hidden.md\\:flex.flex-1");
+
+        if (backBtn) {
+            backBtn.addEventListener("click", () => {
+                // cacher le chat
+                chatPanel?.classList.add("hidden");
+                chatPanel?.classList.remove("flex");
+
+                // afficher la liste
+                conversationsList?.classList.remove("hidden");
+            });
+        }
+    </script>
 </body>
 
 </html>
