@@ -56,3 +56,21 @@ export function renderChat(history, container) {
     container.appendChild(div);
   });
 }
+
+export async function getAllTeachers() {
+  const snap = await getDocs(collection(db, "teachers"));
+
+  return snap.docs.map(doc => ({
+    uid: doc.id,
+    ...doc.data()
+  }));
+}
+
+export async function getAllStudents() {
+  const snap = await getDocs(collection(db, "students"));
+
+  return snap.docs.map(doc => ({
+    uid: doc.id,
+    ...doc.data()
+  }));
+}

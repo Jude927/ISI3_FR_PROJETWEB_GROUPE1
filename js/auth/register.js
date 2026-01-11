@@ -106,6 +106,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     fullName: `${firstName} ${username}`,
                     createdAt: serverTimestamp()
                 });
+            }else{
+                // Pour les étudiants, on peut aussi enregistrer dans une collection "students" si nécessaire
+                await setDoc(doc(db, "students", uid), {
+                    class: classField,
+                    email: email,
+                    fullName: `${firstName} ${username}`,
+                    createdAt: serverTimestamp()
+                });
             }
 
             // 6. Redirection après succès
