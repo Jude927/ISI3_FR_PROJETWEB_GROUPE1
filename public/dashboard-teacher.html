@@ -185,8 +185,8 @@
                     <div class="flex items-center gap-2 sm:gap-3">
                         <div class="w-px h-5 bg-slate-100 mx-1"></div>
                         <div class="flex items-center gap-3 pl-1 pr-3 py-1">
-                            <img alt="Profile" class="w-8 h-8 rounded-xl object-cover ring-2 ring-pastel-peach/30"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCm_zdfySOaD2X9HKcw9u_JstuwVMUADvRG-5eRya4gZtJ9-t9DBn1Ul8cMo9DJpr3-Tn_Lq4S7k8XH2qVCIHvn9JRWQOZhz1a9dq1ArlcOSPGonVZQDKAXHW3usOf6ANLU_ql3IWHiVdwBXbAuzFSLulmH4s7EUS-Ee_PmpAJULKtyZB4bH20GhdpF0CUJ8hK7reqYGfuJOf_oW2pyRrsVjgeAqUbGm3E-ktYFKQGwbDYXAVlo-SUvirFo4u2EdWmxVpFbOMxcaFi5" />
+                            <a href="profil-teacher.html"><img alt="Profile" class="profile-avatar w-8 h-8 rounded-xl object-cover ring-2 ring-pastel-peach/30"
+                                src="/assets/avatars/avatardef.png" /></a> 
                         </div>
                         <div class="w-px h-6 bg-gray-300 dark:bg-gray-700 mx-1 hidden sm:block"></div>
                         <button id="theme-toggle"
@@ -201,10 +201,7 @@
                 <section class="xl:col-span-8 space-y-6">
                     <div class="flex items-center justify-between px-2">
                         <h2 class="text-lg font-bold text-slate-900">Matière Enseignée</h2>
-                        <button
-                            class="text-xs font-bold text-slate-500 hover:text-slate-800 flex items-center gap-2 transition-colors">
-                            Modifier le programme <span class="material-symbols-outlined text-base">edit</span>
-                        </button>
+                       
                     </div>
                     <div
                         class="premium-card bg-pastel-peach p-8 md:p-12 relative overflow-hidden flex flex-col justify-between min-h-[420px]">
@@ -249,19 +246,7 @@
                                     <p class="text-sm font-bold text-slate-900">42 Étudiants</p>
                                 </div>
                             </div>
-                            <div
-                                class="bg-white/80 backdrop-blur-xl px-6 py-3 rounded-[1.5rem] shadow-sm flex items-center gap-3 border border-white/60">
-                                <div
-                                    class="w-9 h-9 rounded-xl bg-pastel-lavender flex items-center justify-center text-indigo-600">
-                                    <span class="material-symbols-outlined">schedule</span>
-                                </div>
-                                <div>
-                                    <p
-                                        class="text-[10px] text-slate-400 font-bold uppercase tracking-tighter leading-none mb-0.5">
-                                        Volume</p>
-                                    <p class="text-sm font-bold text-slate-900">124 Heures</p>
-                                </div>
-                            </div>
+                            
                         </div>
                         <span
                             class="material-symbols-outlined text-[15rem] md:text-[20rem] absolute -right-12 -bottom-16 text-slate-900/5 rotate-[15deg] pointer-events-none">calculate</span>
@@ -400,6 +385,7 @@
     </div>
     <script type="module" src="/js/auth/logout.js"></script>
     <script src="/js/utils/dark-white.js"></script>
+        <script type="module" src="/js/utils/avatar-sync.js"></script>
     <script type="module">
         import { protectPage } from "/js/utils/guards.js";
         protectPage(["teacher"]);

@@ -178,9 +178,9 @@
 
                     <div class="flex items-center gap-2 sm:gap-3">
                         <div class="w-px h-5 bg-slate-100 mx-1"></div>
-                        <div class="flex items-center gap-3 pl-1 pr-3 py-1">
-                            <img alt="Profile" class="w-8 h-8 rounded-xl object-cover ring-2 ring-pastel-peach/30"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCm_zdfySOaD2X9HKcw9u_JstuwVMUADvRG-5eRya4gZtJ9-t9DBn1Ul8cMo9DJpr3-Tn_Lq4S7k8XH2qVCIHvn9JRWQOZhz1a9dq1ArlcOSPGonVZQDKAXHW3usOf6ANLU_ql3IWHiVdwBXbAuzFSLulmH4s7EUS-Ee_PmpAJULKtyZB4bH20GhdpF0CUJ8hK7reqYGfuJOf_oW2pyRrsVjgeAqUbGm3E-ktYFKQGwbDYXAVlo-SUvirFo4u2EdWmxVpFbOMxcaFi5" />
+                         <div class="flex items-center gap-3 pl-1 pr-3 py-1">
+                            <a href="profil-teacher.html"><img alt="Profile" class="profile-avatar w-8 h-8 rounded-xl object-cover ring-2 ring-pastel-peach/30"
+                                src="/assets/avatars/avatardef.png" /></a> 
                         </div>
                         <div class="w-px h-6 bg-gray-300 dark:bg-gray-700 mx-1 hidden sm:block"></div>
                         <button id="theme-toggle"
@@ -277,13 +277,7 @@
                             cours depuis 2 semaines. Voulez-vous que je génère un résumé des nouveautés du secteur ?</p>
                     </div>
                 </div>
-                <div class="flex justify-center pt-8">
-                    <button
-                        class="text-xs font-bold text-slate-400 hover:text-slate-600 transition-colors flex items-center gap-2">
-                        <span class="material-symbols-outlined text-lg">history</span>
-                        Voir les notifications plus anciennes
-                    </button>
-                </div>
+               
             </div>
         </main>
         <button class="ai-fab group">
@@ -315,6 +309,7 @@
     </div>
     <script type="module" src="/js/auth/logout.js"></script>
     <script src="/js/utils/dark-white.js"></script>
+        <script type="module" src="/js/utils/avatar-sync.js"></script>
     <script type="module">
         import { protectPage } from "/js/utils/guards.js";
         protectPage(["teacher"]);

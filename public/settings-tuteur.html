@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="light" lang="fr">
+<html lang="fr">
 
 <head>
     <meta charset="utf-8" />
@@ -120,7 +120,7 @@
                 </label>
             </div>
             <nav class="flex flex-col gap-2 flex-1 overflow-y-auto custom-scrollbar">
-                <a class="nav-item" href="#">
+                <a class="nav-item" href="dashboard-teacher.html">
                     <span class="material-symbols-outlined nav-icon">grid_view</span>
                     <span class="text-[12px] font-medium">Tableau de Bord</span>
                 </a>
@@ -184,15 +184,9 @@
                     <div class="flex items-center gap-2 sm:gap-3">
                         <div class="w-px h-5 bg-slate-100 mx-1"></div>
                         <div class="flex items-center gap-3 pl-1 pr-3 py-1">
-                            <img alt="Profile" class="w-8 h-8 rounded-xl object-cover ring-2 ring-pastel-peach/30"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCm_zdfySOaD2X9HKcw9u_JstuwVMUADvRG-5eRya4gZtJ9-t9DBn1Ul8cMo9DJpr3-Tn_Lq4S7k8XH2qVCIHvn9JRWQOZhz1a9dq1ArlcOSPGonVZQDKAXHW3usOf6ANLU_ql3IWHiVdwBXbAuzFSLulmH4s7EUS-Ee_PmpAJULKtyZB4bH20GhdpF0CUJ8hK7reqYGfuJOf_oW2pyRrsVjgeAqUbGm3E-ktYFKQGwbDYXAVlo-SUvirFo4u2EdWmxVpFbOMxcaFi5" />
+                            <a href="profil-teacher.html"><img alt="Profile" class="profile-avatar w-8 h-8 rounded-xl object-cover ring-2 ring-pastel-peach/30"
+                                src="/assets/avatars/avatardef.png" /></a> 
                         </div>
-                        <div class="w-px h-6 bg-gray-300 dark:bg-gray-700 mx-1 hidden sm:block"></div>
-                        <button id="theme-toggle"
-                            class="p-2 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors text-slate-600 dark:text-white">
-                            <span class="material-symbols-outlined block dark:hidden">dark_mode</span>
-                            <span class="material-symbols-outlined hidden dark:block">light_mode</span>
-                        </button>
                     </div>
                 </div>
             </header>
@@ -232,59 +226,7 @@
                         </div>
                     </div>
                 </section>
-                <section>
-                    <div class="settings-section-title">
-                        <span
-                            class="w-10 h-10 rounded-xl bg-pastel-mint flex items-center justify-center text-emerald-700">
-                            <span class="material-symbols-outlined">event_available</span>
-                        </span>
-                        Préférences de cours
-                    </div>
-                    <div class="premium-card p-8">
-                        <div class="space-y-8">
-                            <div>
-                                <h4 class="text-sm font-bold text-slate-800 mb-4">Disponibilités hebdomadaires</h4>
-                                <div class="flex flex-wrap gap-2">
-                                    <button
-                                        class="px-5 py-2.5 rounded-xl bg-pastel-mint text-emerald-700 text-xs font-bold border border-emerald-100">Lundi</button>
-                                    <button
-                                        class="px-5 py-2.5 rounded-xl bg-pastel-mint text-emerald-700 text-xs font-bold border border-emerald-100">Mardi</button>
-                                    <button
-                                        class="px-5 py-2.5 rounded-xl bg-slate-50 text-slate-400 text-xs font-bold border border-slate-100">Mercredi</button>
-                                    <button
-                                        class="px-5 py-2.5 rounded-xl bg-pastel-mint text-emerald-700 text-xs font-bold border border-emerald-100">Jeudi</button>
-                                    <button
-                                        class="px-5 py-2.5 rounded-xl bg-pastel-mint text-emerald-700 text-xs font-bold border border-emerald-100">Vendredi</button>
-                                    <button
-                                        class="px-5 py-2.5 rounded-xl bg-slate-50 text-slate-400 text-xs font-bold border border-slate-100">Samedi</button>
-                                </div>
-                            </div>
-                            <div class="pt-8 border-t border-slate-50">
-                                <h4 class="text-sm font-bold text-slate-800 mb-4">Notifications par Email</h4>
-                                <div class="space-y-4">
-                                    <label class="flex items-center justify-between cursor-pointer group">
-                                        <span class="text-sm text-slate-600">Nouveaux messages d'étudiants</span>
-                                        <div class="relative inline-flex items-center">
-                                            <input checked="" class="sr-only peer" type="checkbox" />
-                                            <div
-                                                class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-400">
-                                            </div>
-                                        </div>
-                                    </label>
-                                    <label class="flex items-center justify-between cursor-pointer group">
-                                        <span class="text-sm text-slate-600">Rappels de sessions de cours</span>
-                                        <div class="relative inline-flex items-center">
-                                            <input checked="" class="sr-only peer" type="checkbox" />
-                                            <div
-                                                class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-400">
-                                            </div>
-                                        </div>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+              
                 <section>
                     <div class="settings-section-title">
                         <span class="w-10 h-10 rounded-xl bg-pastel-blue flex items-center justify-center text-sky-700">
@@ -307,71 +249,17 @@
                                     </div>
                                 </div>
                                 <div class="relative inline-flex items-center">
-                                    <input class="sr-only peer" id="dark-mode-toggle" type="checkbox" />
+                                    <input class="sr-only peer" id="#theme-toggle" type="checkbox" />
                                     <div
                                         class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-sky-400">
                                     </div>
                                 </div>
                             </div>
-                            <div
-                                class="flex items-center justify-between p-4 bg-slate-50/50 rounded-2xl border border-slate-100">
-                                <div class="flex items-center gap-4">
-                                    <div
-                                        class="w-12 h-12 rounded-xl bg-white flex items-center justify-center text-slate-500 shadow-sm">
-                                        <span class="material-symbols-outlined">settings_brightness</span>
-                                    </div>
-                                    <div>
-                                        <p class="text-sm font-bold text-slate-800">Synchronisation système</p>
-                                        <p class="text-xs text-slate-500">Adapter automatiquement aux réglages de votre
-                                            appareil</p>
-                                    </div>
-                                </div>
-                                <div class="relative inline-flex items-center">
-                                    <input checked="" class="sr-only peer" id="system-sync-toggle" type="checkbox" />
-                                    <div
-                                        class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-sky-400">
-                                    </div>
-                                </div>
-                            </div>
+         
                         </div>
                     </div>
                 </section>
-                <section>
-                    <div class="settings-section-title">
-                        <span
-                            class="w-10 h-10 rounded-xl bg-pastel-lavender flex items-center justify-center text-indigo-700">
-                            <span class="material-symbols-outlined">security</span>
-                        </span>
-                        Confidentialité
-                    </div>
-                    <div class="premium-card p-8">
-                        <div
-                            class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100">
-                            <div class="flex items-center gap-4">
-                                <div
-                                    class="w-12 h-12 rounded-xl bg-white flex items-center justify-center text-slate-400 shadow-sm">
-                                    <span class="material-symbols-outlined">visibility_off</span>
-                                </div>
-                                <div>
-                                    <p class="text-sm font-bold text-slate-800">Mode Invisible</p>
-                                    <p class="text-xs text-slate-500">Ne pas apparaître en ligne pour les étudiants</p>
-                                </div>
-                            </div>
-                            <div class="relative inline-flex items-center">
-                                <input class="sr-only peer" type="checkbox" />
-                                <div
-                                    class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-400">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-6 flex justify-end">
-                            <button
-                                class="bg-slate-900 text-white px-8 py-3 rounded-2xl text-xs font-bold hover:bg-slate-800 transition-all shadow-lg shadow-slate-200">
-                                Enregistrer toutes les modifications
-                            </button>
-                        </div>
-                    </div>
-                </section>
+              
             </div>
         </main>
         <button class="ai-fab group">
@@ -403,6 +291,7 @@
     </div>
     <script type="module" src="/js/auth/logout.js"></script>
     <script src="/js/utils/dark-white.js"></script>
+        <script type="module" src="/js/utils/avatar-sync.js"></script>
     <script type="module">
         import { protectPage } from "/js/utils/guards.js";
         protectPage(["teacher"]);
