@@ -1,16 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Available Tutors</title>
+
+  <!-- Shared styles (same base as login / signup) -->
+  <link rel="stylesheet" href="../css/auth.css" />
+
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      padding: 2rem;
+    }
+
+    .page-title {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .tutor-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .tutor-card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .tutor-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .tutor-name {
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .tutor-subject {
+      font-size: 0.95rem;
+      opacity: 0.85;
+    }
+
+    .tutor-status {
+      font-size: 0.85rem;
+      color: #4ade80;
+      font-weight: 500;
+    }
+
+    .tutor-actions {
+      margin-top: auto;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .btn {
+      padding: 0.6rem 1.2rem;
+      border-radius: 10px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+    }
+
+    .empty-state {
+      text-align: center;
+      opacity: 0.7;
+      margin-top: 3rem;
+    }
+  </style>
 </head>
 <body>
-  
+
+  <div class="container">
+    <div class="page-title">Available Tutors</div>
+    <div id="tutorGrid" class="tutor-grid"></div>
+    <div id="emptyState" class="empty-state" hidden>
+      No tutors available right now.
+    </div>
+  </div>
+
   <script type="module">
-  import { protectPage } from "../js/utils/guards.js";
-  protectPage(["student"]);
-</script>
- 
+    import { protectPage } from "../js/utils/guards.js";
+    import { db } from "../js/firebase.js";
+    import {
+      collection,
+      query,
+      where,
+      getDocs
+    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    protectPage(["student"]);
+
+    const tutorGrid = document.getElementById("tutorGrid");
+    const emptyState = document.getElementById("emptyState");
+
+    async function loadTutors() {
+      tutorGrid.innerHTML = "";
+
+      const q = query(
+        collection(db, "tutors"),
+        where("available", "==", true)
+      );
+
+      const snapshot = await getDocs(q);
+
+      if (snapshot.empty) {
+        emptyState.hidden = false;
+        return;
+      }
+
+      snapshot.forEach(doc => {
+        const tutor = doc.data();
+
+        const card = document.createElement("div");
+        card.className = "tutor-card";
+
+        card.innerHTML = `
+          <div class="tutor-name">${tutor.name || "Unnamed Tutor"}</div>
+          <div class="tutor-subject">${tutor.subject || "General"}</div>
+          <div class="tutor-status">● Available</div>
+          <div class="tutor-actions">
+            <button class="btn btn-primary">Start session</button>
+          </div>
+        `;
+
+        tutorGrid.appendChild(card);
+      });
+    }
+
+    loadTutors();
+  </script>
 </body>
 </html>
