@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tableau Interactif Djangou</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        :root {
+            --primary: #D59D80;
+            --primary-soft: #F5E6DA;
+            --accent-peach: #FFE5D9;
+            --accent-cream: #FFF9F5;
+            --bg-canvas: #FDFCFB;
+            --sidebar-bg: #FFFFFF;
+            --text-dark: #4A3F35;
+        }
+        body {
+            font-family: 'Comfortaa', cursive;
+            background-color: var(--bg-canvas);
+            color: var(--text-dark);
+        }
+        .canvas-dot-pattern {
+            background-image: radial-gradient(#E2E2E2 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-tool {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 12px rgba(213, 157, 128, 0.4);
+        }
+    </style>
+</head>
+<body class="h-screen overflow-hidden flex">
+<aside class="w-20 bg-[var(--sidebar-bg)] border-r border-orange-100 flex flex-col items-center py-6 gap-8 z-30">
+<div class="w-12 h-12 bg-[var(--primary)] rounded-2xl flex items-center justify-center text-white font-bold text-2xl shadow-lg shadow-orange-200/50">
+            D
+        </div>
+<nav class="flex flex-col gap-4">
+<a class="w-12 h-12 rounded-2xl flex items-center justify-center text-gray-400 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)] transition-all" href="#">
+<span class="material-symbols-outlined">home</span>
+</a>
+<a class="w-12 h-12 rounded-2xl flex items-center justify-center text-gray-400 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)] transition-all" href="#">
+<span class="material-symbols-outlined">auto_stories</span>
+</a>
+<a class="w-12 h-12 rounded-2xl flex items-center justify-center bg-[var(--primary-soft)] text-[var(--primary)] shadow-sm" href="#">
+<span class="material-symbols-outlined">edit_square</span>
+</a>
+<a class="w-12 h-12 rounded-2xl flex items-center justify-center text-gray-400 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)] transition-all" href="#">
+<span class="material-symbols-outlined">chat_bubble</span>
+</a>
+</nav>
+<div class="mt-auto flex flex-col gap-4">
+<a class="w-12 h-12 rounded-full overflow-hidden border-2 border-[var(--primary-soft)]" href="#">
+<img alt="Profil" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpsGOIRySOv9VTidG7PaDTfqWRSp6wekLV7V691X5Eix6i51w6zX1FKSvA3zY-m17kjlKOfMV4MgehJ06cwtT4AA36nNeCqRKchvwHy0LX9rGC1oeXSrLtfpVYDkia_6GqPDi6Qq4135yjPpynjh42-WTamJr3wQlzncAFfeFuoG-EMj75_CJwx4mJxFJnrAq-jWVp2jIsU1No73b1yntsawb9VZFl81Toh_yUaP0P3TM2GcWa5dL5z6HUvqjmojPOXAkBOp1h4xg"/>
+</a>
+</div>
+</aside>
+<main class="flex-1 relative flex flex-col overflow-hidden">
+<header class="h-16 px-6 flex items-center justify-between bg-white/50 backdrop-blur-md border-b border-orange-50 z-20">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[var(--primary)]">menu_book</span>
+<h1 class="font-bold text-lg text-[var(--text-dark)]">Mathématiques : Fonctions Affines</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="px-4 py-2 bg-white border border-orange-100 rounded-full text-sm font-medium hover:shadow-sm transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">cloud_upload</span>
+                    Exporter
+                </button>
+<button class="px-4 py-2 bg-[var(--primary)] text-white rounded-full text-sm font-bold shadow-md shadow-orange-200 hover:scale-105 transition-all">
+                    Terminer la session
+                </button>
+</div>
+</header>
+<div class="flex-1 relative bg-[var(--bg-canvas)] canvas-dot-pattern">
+<div class="absolute left-6 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur-md p-3 rounded-3xl shadow-xl border border-orange-50 flex flex-col gap-3 z-20">
+<button class="w-12 h-12 rounded-2xl active-tool flex items-center justify-center transition-all">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="w-12 h-12 rounded-2xl text-gray-500 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)] flex items-center justify-center transition-all">
+<span class="material-symbols-outlined">ink_eraser</span>
+</button>
+<button class="w-12 h-12 rounded-2xl text-gray-500 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)] flex items-center justify-center transition-all">
+<span class="material-symbols-outlined">text_fields</span>
+</button>
+<button class="w-12 h-12 rounded-2xl text-gray-500 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)] flex items-center justify-center transition-all">
+<span class="material-symbols-outlined">shapes</span>
+</button>
+<button class="w-12 h-12 rounded-2xl text-gray-500 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)] flex items-center justify-center transition-all">
+<span class="material-symbols-outlined">image</span>
+</button>
+<div class="h-px bg-orange-100 mx-2"></div>
+<button class="w-12 h-12 rounded-2xl text-gray-400 hover:text-gray-600 flex items-center justify-center">
+<div class="w-6 h-6 rounded-full bg-red-400"></div>
+</button>
+<button class="w-12 h-12 rounded-2xl text-gray-400 hover:text-gray-600 flex items-center justify-center">
+<div class="w-6 h-6 rounded-full bg-blue-400"></div>
+</button>
+</div>
+<div class="absolute right-6 top-6 flex flex-col gap-4 z-20">
+<div class="bg-white/80 backdrop-blur-md p-2 rounded-full shadow-lg border border-orange-50 flex flex-col gap-2">
+<div class="relative group">
+<img alt="Tuteur" class="w-12 h-12 rounded-full object-cover border-2 border-green-400" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArBTR7IsDoZ_SwhD7DXfNWSQmE8Y9nk8COwcdW5_lo41YkVx4_n_D-GVe5rYi8Lldz1J88lHtCxIxMwNMLoDhFyLS1RMQ60xct8QIEQB6k7rlyUoGpTSJS9Zmgjp0_ppRAphfv_y76K4G_V5YcrTN9ZHcfJqsVjh3BJ75btm1gyIFito656iWQyGKjPcAF4Ws742TpomlhIxlcqVNIFlnFAKr0WRqgaAQ3QZ8hWDVUfkR__GxK8eaJf7QGpSqgQJ1qclJKkElm5gU"/>
+<span class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-white rounded-full"></span>
+<div class="absolute right-full mr-3 top-1/2 -translate-y-1/2 bg-white px-3 py-1 rounded-lg text-xs font-bold shadow-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                            Sarah (Tuteur)
+                        </div>
+</div>
+<div class="relative group">
+<img alt="Étudiant" class="w-12 h-12 rounded-full object-cover border-2 border-green-400" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpsGOIRySOv9VTidG7PaDTfqWRSp6wekLV7V691X5Eix6i51w6zX1FKSvA3zY-m17kjlKOfMV4MgehJ06cwtT4AA36nNeCqRKchvwHy0LX9rGC1oeXSrLtfpVYDkia_6GqPDi6Qq4135yjPpynjh42-WTamJr3wQlzncAFfeFuoG-EMj75_CJwx4mJxFJnrAq-jWVp2jIsU1No73b1yntsawb9VZFl81Toh_yUaP0P3TM2GcWa5dL5z6HUvqjmojPOXAkBOp1h4xg"/>
+<span class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-white rounded-full"></span>
+<div class="absolute right-full mr-3 top-1/2 -translate-y-1/2 bg-white px-3 py-1 rounded-lg text-xs font-bold shadow-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                            Lisha (Moi)
+                        </div>
+</div>
+</div>
+</div>
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<div class="w-[800px] h-[500px] border-2 border-dashed border-orange-100/50 rounded-3xl flex flex-col items-center justify-center p-12">
+<div class="w-full h-full relative border-l-2 border-b-2 border-gray-300">
+<div class="absolute w-[120%] h-1 bg-[var(--primary)] top-1/2 left-0 -rotate-12 rounded-full shadow-sm"></div>
+<div class="absolute top-1/3 left-1/4 bg-white/90 px-3 py-1 rounded-lg border border-orange-100 text-sm font-medium">
+                            f(x) = 2x + 1
+                        </div>
+<div class="absolute bottom-10 right-10 flex flex-col gap-1">
+<span class="text-xs text-gray-400">Tracé par Sarah</span>
+<div class="w-20 h-1 bg-green-200 rounded-full animate-pulse"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="absolute bottom-6 right-6 bg-white/90 backdrop-blur-md px-4 py-2 rounded-2xl shadow-lg border border-orange-50 flex items-center gap-4 z-20">
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 rounded-lg hover:bg-orange-50 text-gray-500 flex items-center justify-center">
+<span class="material-symbols-outlined text-xl">undo</span>
+</button>
+<button class="w-8 h-8 rounded-lg hover:bg-orange-50 text-gray-500 flex items-center justify-center">
+<span class="material-symbols-outlined text-xl">redo</span>
+</button>
+</div>
+<div class="w-px h-6 bg-orange-100"></div>
+<div class="flex items-center gap-2">
+<button class="w-8 h-8 rounded-lg hover:bg-orange-50 text-gray-500 flex items-center justify-center">
+<span class="material-symbols-outlined text-xl">remove</span>
+</button>
+<span class="text-sm font-bold min-w-[40px] text-center">100%</span>
+<button class="w-8 h-8 rounded-lg hover:bg-orange-50 text-gray-500 flex items-center justify-center">
+<span class="material-symbols-outlined text-xl">add</span>
+</button>
+</div>
+</div>
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20">
+<div class="bg-[var(--accent-peach)]/40 backdrop-blur-md px-6 py-3 rounded-full border border-white flex items-center gap-4 shadow-xl">
+<div class="w-8 h-8 bg-white rounded-full flex items-center justify-center text-[var(--primary)] shadow-sm">
+<span class="material-symbols-outlined text-lg">auto_awesome</span>
+</div>
+<p class="text-sm font-medium text-[var(--text-dark)]">
+                        Besoin d'aide sur cette fonction ? <span class="text-[var(--primary)] cursor-pointer hover:underline font-bold">Demander à Djangou AI</span>
+</p>
+</div>
+</div>
+</div>
+</main>
+
+</body></html>
