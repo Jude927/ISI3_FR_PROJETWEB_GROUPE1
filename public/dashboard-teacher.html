@@ -105,7 +105,8 @@
     </script>
 </head>
 
-<body class="antialiased overflow-hidden h-screen bg-[var(--pastel-cream)]">
+<body class="antialiased overflow-hidden h-screen bg-[var(--bg-main)] text-[var(--text-main)]">
+
     <input class="hidden peer" id="mobile-menu-toggle" type="checkbox" />
     <label class="overlay fixed inset-0 bg-slate-900/20 backdrop-blur-sm z-[60] hidden"
         for="mobile-menu-toggle"></label>
@@ -185,8 +186,9 @@
                     <div class="flex items-center gap-2 sm:gap-3">
                         <div class="w-px h-5 bg-slate-100 mx-1"></div>
                         <div class="flex items-center gap-3 pl-1 pr-3 py-1">
-                            <a href="profil-teacher.html"><img alt="Profile" class="profile-avatar w-8 h-8 rounded-xl object-cover ring-2 ring-pastel-peach/30"
-                                src="/assets/avatars/avatardef.png" /></a> 
+                            <a href="profil-teacher.html"><img alt="Profile"
+                                    class="profile-avatar w-8 h-8 rounded-xl object-cover ring-2 ring-pastel-peach/30"
+                                    src="/assets/avatars/avatardef.png" /></a>
                         </div>
                         <div class="w-px h-6 bg-gray-300 dark:bg-gray-700 mx-1 hidden sm:block"></div>
                         <button id="theme-toggle"
@@ -201,7 +203,7 @@
                 <section class="xl:col-span-8 space-y-6">
                     <div class="flex items-center justify-between px-2">
                         <h2 class="text-lg font-bold text-slate-900">Matière Enseignée</h2>
-                       
+
                     </div>
                     <div
                         class="premium-card bg-pastel-peach p-8 md:p-12 relative overflow-hidden flex flex-col justify-between min-h-[420px]">
@@ -210,7 +212,8 @@
                                 class="inline-flex items-center gap-2 px-4 py-1.5 bg-white/40 backdrop-blur-md rounded-full text-[10px] font-bold text-slate-800 mb-6 uppercase tracking-widest border border-white/20">
                                 <span class="w-1.5 h-1.5 rounded-full bg-slate-800 animate-pulse"></span> Session Active
                             </div>
-                            <h3 class="text-3xl md:text-5xl font-bold text-slate-900 leading-tight">Mathématiques</h3>
+                            <h3 id="subject-text" class="text-3xl md:text-5xl font-bold text-slate-900 leading-tight">
+                            </h3>
                             <p class="text-slate-700/70 mt-4 text-sm md:text-base font-medium leading-relaxed">
                                 Spécialisation en Algèbre linéaire, Analyse complexe et Trigonométrie avancée pour les
                                 cycles supérieurs.
@@ -246,7 +249,7 @@
                                     <p class="text-sm font-bold text-slate-900">42 Étudiants</p>
                                 </div>
                             </div>
-                            
+
                         </div>
                         <span
                             class="material-symbols-outlined text-[15rem] md:text-[20rem] absolute -right-12 -bottom-16 text-slate-900/5 rotate-[15deg] pointer-events-none">calculate</span>
@@ -356,7 +359,7 @@
                 </section>
             </div>
         </main>
-        <button class="ai-fab group">
+        <button id="ai-fab" class="ai-fab group">
             <span
                 class="material-symbols-outlined text-white text-3xl group-hover:rotate-12 transition-transform">smart_toy</span>
             <span
@@ -385,11 +388,14 @@
     </div>
     <script type="module" src="/js/auth/logout.js"></script>
     <script src="/js/utils/dark-white.js"></script>
-        <script type="module" src="/js/utils/avatar-sync.js"></script>
+    <script type="module" src="/js/utils/avatar-sync.js"></script>
     <script type="module">
         import { protectPage } from "/js/utils/guards.js";
         protectPage(["teacher"]);
     </script>
+    <script type="module" src="/js/utils/IconeIA.js"></script>
+    <script src="/js/peer/test.js" defer></script>
+    <script type="module" src="/js/utils/subject.js"></script>
 </body>
 
 </html>

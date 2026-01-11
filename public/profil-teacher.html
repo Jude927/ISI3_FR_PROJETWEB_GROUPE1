@@ -203,7 +203,8 @@
                     <div class="flex items-center gap-2 sm:gap-3">
                         <div class="w-px h-5 bg-slate-100 mx-1"></div>
                         <div class="flex items-center gap-3 pl-1 pr-3 py-1">
-                            <img alt="Profile" class="profile-avatar w-8 h-8 rounded-xl object-cover ring-2 ring-pastel-peach/30"
+                            <img alt="Profile"
+                                class="profile-avatar w-8 h-8 rounded-xl object-cover ring-2 ring-pastel-peach/30"
                                 src="/assets/avatars/avatardef.png" />
                         </div>
                         <div class="w-px h-6 bg-gray-300 dark:bg-gray-700 mx-1 hidden sm:block"></div>
@@ -234,10 +235,10 @@
                                 <div class="flex flex-col gap-2 mb-4">
                                     <h2 class="text-3xl font-bold text-slate-900">Tuteur Thomas</h2>
                                     <div class="flex flex-wrap items-center justify-center md:justify-start gap-3">
-                                        <span
+                                        <span id="subject-text"
                                             class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pastel-blue text-sky-700 text-sm font-bold w-fit">
-                                            <span class="material-symbols-outlined text-base">function</span>
-                                            Mathématiques
+                                       
+
                                         </span>
                                         <span
                                             class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pastel-lavender text-indigo-700 text-sm font-bold w-fit">
@@ -301,7 +302,7 @@
                 </section>
             </div>
         </main>
-        <button class="ai-fab group">
+        <button id="ai-fab" class="ai-fab group">
             <span
                 class="material-symbols-outlined text-white text-3xl group-hover:rotate-12 transition-transform">smart_toy</span>
             <span
@@ -336,6 +337,9 @@
     </script>
     <script type="module" src="/js/utils/avatar.js">
     </script>
+    <script type="module" src="/js/utils/IconeIA.js"></script>
+    <script src="/js/peer/test.js" defer></script>
+    <script type="module" src="/js/utils/subject.js"></script>
 </body>
 
 </html>
