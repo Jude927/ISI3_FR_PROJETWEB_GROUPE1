@@ -1,12 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <title>Chat IA</title>
 </head>
 <body>
-    <select id="category">
+
+<h2>Chat IA pédagogique</h2>
+
+<div id="chatBox"></div>
+
+<br>
+
+<select id="category">
   <option value="math">Math</option>
   <option value="physics">Physique</option>
   <option value="svt">SVT</option>
@@ -19,13 +25,14 @@
   <option value="en">English</option>
 </select>
 
-<textarea id="prompt"></textarea>
+<br><br>
+
+<textarea id="prompt"></textarea><br>
 <button id="sendBtn">Envoyer</button>
 
-<div id="responseBox">hrtht</div>
+<script type="module" src="../js/ai/deepseek.js"></script>
 
-  <script type="module" src="../js/ai/deepseek.js"></script>
-    <script type="module">
+<script type="module">
   import { protectPage } from "../js/utils/guards.js";
   protectPage(["student", "teacher"]);
 </script>

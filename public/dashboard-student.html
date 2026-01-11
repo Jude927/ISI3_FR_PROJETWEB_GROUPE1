@@ -1,800 +1,367 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Plateforme de Tutorat</title>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Tableau de Bord Accueil Djangou</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#D59D80", // Orange/Terracotta from palette
+                        secondary: "#2d2d2d", // Dark Teal
+                        accent: "#104C64", // Medium Teal
+                        cream: "#C6C6D0", // Beige/Cream
+                        "dark-brown": "#C0754D", // Brownish
+                        "darker-brown": "#B6410F", // Deep Brown
+                        "background-light": "#FFFFFF", // Very light warm white
+                        "background-dark": "#1F1F1F", // Dark grey
+                        "card-light": "#F9F9F9",
+                        "card-dark": "#2d2d2d",
+                        "pastel-green": "#e0f2f1",
+                        "pastel-orange": "#fbe9e7",
+                        "pastel-purple": "#ede7f6",
+                        "pastel-blue": "#e3f2fd",
+                        "pastel-yellow": "#fffde7",
+                        "pastel-red": "#ffebee",
+                    },
+                    fontFamily: {
+                        display: ["Nunito", "sans-serif"],
+                        body: ["Nunito", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "1rem",
+                        'xl': '1.5rem',
+                        '2xl': '2rem',
+                    },
+                },
+            },
+        };
+    </script>
     <style>
-        :root {
-            --color-primary: #0D1D25;
-            --color-secondary: #104C64;
-            --color-light: #C6C6D0;
-            --color-accent1: #D59D80;
-            --color-accent2: #C0754D;
-            --color-accent3: #B6410F;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 100%);
-            min-height: 100vh;
+            font-family: 'Nunito', sans-serif;
         }
 
-        .dashboard-container {
-            display: flex;
-            min-height: 100vh;
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
         }
 
-        /* Sidebar */
-        .sidebar {
-            width: 280px;
-            background: white;
-            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
-            padding: 2rem 0;
-            position: fixed;
-            height: 100vh;
-            overflow-y: auto;
-        }
-
-        .logo {
-            padding: 0 2rem;
-            margin-bottom: 2rem;
-            border-bottom: 2px solid var(--color-light);
-            padding-bottom: 1.5rem;
-        }
-
-        .logo h1 {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--color-primary);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .logo p {
-            color: var(--color-secondary);
-            font-size: 0.875rem;
-            margin-top: 0.5rem;
-        }
-
-        .menu-item {
-            padding: 1rem 2rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            color: var(--color-primary);
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .menu-item:hover {
-            background: rgba(198, 198, 208, 0.2);
-            color: var(--color-accent3);
-        }
-
-        .menu-item.active {
-            background: linear-gradient(90deg, rgba(182, 65, 15, 0.1) 0%, transparent 100%);
-            color: var(--color-accent3);
-            border-left: 4px solid var(--color-accent3);
-        }
-
-        .menu-icon {
-            width: 24px;
-            height: 24px;
-            font-size: 1.3rem;
-        }
-
-        /* Main Content */
-        .main-content {
-            margin-left: 280px;
-            flex: 1;
-            padding: 2rem;
-        }
-
-        .header {
-            background: white;
-            padding: 1.5rem 2rem;
-            border-radius: 16px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.08);
-            margin-bottom: 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 4px solid var(--color-accent3);
-        }
-
-        .header h2 {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--color-primary);
-        }
-
-        .header p {
-            color: var(--color-secondary);
-            margin-top: 0.25rem;
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--color-accent2) 0%, var(--color-accent3) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
-            box-shadow: 0 4px 10px rgba(182, 65, 15, 0.3);
-        }
-
-        /* Stats Cards */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 16px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-left: 4px solid var(--color-accent3);
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.12);
-        }
-
-        .stat-card:nth-child(1) {
-            border-left-color: var(--color-secondary);
-        }
-
-        .stat-card:nth-child(2) {
-            border-left-color: var(--color-accent2);
-        }
-
-        .stat-card:nth-child(3) {
-            border-left-color: var(--color-accent1);
-        }
-
-        .stat-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .stat-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-        }
-
-        .stat-icon-1 {
-            background: rgba(16, 76, 100, 0.15);
-            color: var(--color-secondary);
-        }
-
-        .stat-icon-2 {
-            background: rgba(192, 117, 77, 0.15);
-            color: var(--color-accent2);
-        }
-
-        .stat-icon-3 {
-            background: rgba(213, 157, 128, 0.15);
-            color: var(--color-accent1);
-        }
-
-        .stat-value {
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--color-primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            color: var(--color-secondary);
-            font-size: 0.9rem;
-        }
-
-        /* Content Grid */
-        .content-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 16px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.08);
-        }
-
-        .card-title {
-            font-size: 1.25rem;
-            font-weight: bold;
-            color: var(--color-primary);
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 2px solid var(--color-light);
-        }
-
-        /* Course List */
-        .course-item {
-            padding: 1rem;
-            border-radius: 12px;
-            background: rgba(198, 198, 208, 0.15);
-            margin-bottom: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s;
-            border-left: 3px solid var(--color-accent2);
-        }
-
-        .course-item:hover {
-            background: rgba(198, 198, 208, 0.25);
-            transform: translateX(5px);
-        }
-
-        .course-info h4 {
-            font-weight: 600;
-            color: var(--color-primary);
-            margin-bottom: 0.25rem;
-        }
-
-        .course-info p {
-            font-size: 0.875rem;
-            color: var(--color-secondary);
-        }
-
-        /* Conversation List */
-        .conversation-item {
-            padding: 1rem;
-            border-radius: 12px;
-            background: rgba(198, 198, 208, 0.15);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            transition: all 0.3s;
-            cursor: pointer;
-            border-left: 3px solid var(--color-secondary);
-        }
-
-        .conversation-item:hover {
-            background: rgba(198, 198, 208, 0.25);
-            transform: translateX(5px);
-        }
-
-        .conversation-avatar {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--color-accent2) 0%, var(--color-accent3) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1rem;
-            flex-shrink: 0;
-        }
-
-        .conversation-info {
-            flex: 1;
-        }
-
-        .conversation-info h4 {
-            font-weight: 600;
-            color: var(--color-primary);
-            margin-bottom: 0.25rem;
-            font-size: 0.95rem;
-        }
-
-        .conversation-info p {
-            font-size: 0.8rem;
-            color: var(--color-secondary);
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .conversation-time {
-            font-size: 0.75rem;
-            color: var(--color-secondary);
-            flex-shrink: 0;
-        }
-
-        /* Buttons */
-        .btn {
-            padding: 0.75rem 1.5rem;
-            border-radius: 10px;
-            border: none;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            justify-content: center;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--color-accent2) 0%, var(--color-accent3) 100%);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 15px rgba(182, 65, 15, 0.3);
-        }
-
-        .btn-secondary {
-            background: rgba(198, 198, 208, 0.3);
-            color: var(--color-primary);
-            border: 2px solid var(--color-light);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(198, 198, 208, 0.5);
-        }
-
-        /* Quick Actions */
-        .quick-actions {
-            display: grid;
-            gap: 1rem;
-        }
-
-        .action-btn {
-            padding: 1.25rem;
-            border-radius: 12px;
-            background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 100%);
-            color: white;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 600;
-        }
-
-        .action-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(13, 29, 37, 0.4);
-        }
-
-        .action-btn:nth-child(2) {
-            background: linear-gradient(135deg, var(--color-accent2) 0%, var(--color-accent3) 100%);
-        }
-
-        .action-btn:nth-child(3) {
-            background: linear-gradient(135deg, var(--color-accent1) 0%, var(--color-accent2) 100%);
-        }
-
-        /* Notification Badge */
-        .notification-badge {
-            position: relative;
-        }
-
-        .notification-badge::after {
-            content: '3';
-            position: absolute;
-            top: -5px;
-            right: 5px;
-            background: var(--color-accent3);
-            color: white;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-            font-weight: bold;
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .content-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .sidebar {
-                transform: translateX(-100%);
-                transition: transform 0.3s;
-            }
-
-            .sidebar.active {
-                transform: translateX(0);
-                z-index: 1000;
-            }
-
-            .main-content {
-                margin-left: 0;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .header {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
-            }
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .fade-in {
-            animation: fadeInUp 0.5s ease;
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
     </style>
 </head>
-<body>
-    <div class="dashboard-container">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="logo">
-                <h1>📚 AdriTutor</h1>
-                <p>Plateforme de Tutorat</p>
-            </div>
 
-            <nav>
-                <a href="#dashboard" class="menu-item active" data-page="dashboard">
-                    <span class="menu-icon">📊</span>
-                    <span>Tableau de bord</span>
-                </a>
-                <a href="#courses" class="menu-item" data-page="courses">
-                    <span class="menu-icon">📚</span>
-                    <span>Mes Cours</span>
-                </a>
-                <a href="#tutors" class="menu-item" data-page="tutors">
-                    <span class="menu-icon">👥</span>
-                    <span>Tuteurs</span>
-                </a>
-                <a href="#conversations" class="menu-item notification-badge" data-page="conversations">
-                    <span class="menu-icon">💬</span>
-                    <span>Conversations</span>
-                </a>
-                <a href="#ai-tutor" class="menu-item" data-page="ai-tutor">
-                    <span class="menu-icon">🤖</span>
-                    <span>Tuteur IA</span>
-                </a>
-                <a href="#history" class="menu-item" data-page="history">
-                    <span class="menu-icon">🕒</span>
-                    <span>Historique</span>
-                </a>
-                <a href="#settings" class="menu-item" data-page="settings">
-                    <span class="menu-icon">⚙️</span>
-                    <span>Paramètres</span>
-                </a>
-                <a href="#logout" class="menu-item" id="logout-btn" style="margin-top: 2rem; color: var(--color-accent3);">
-                    <span class="menu-icon">🚪</span>
-                    <span>Déconnexion</span>
-                </a>
-            </nav>
-        </aside>
+<body
+    class="bg-background-light dark:bg-background-dark text-secondary dark:text-gray-100 transition-colors duration-300 font-body antialiased h-screen overflow-hidden flex">
+    <div id="sidebarOverlay" class="hidden md:hidden fixed inset-0 bg-black/50 z-40"></div>
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Header -->
-            <header class="header fade-in">
-                <div>
-                    <h2>Bienvenue, <span id="user-name">Étudiant</span>!</h2>
-                    <p>Voici un aperçu de vos activités</p>
-                </div>
-                <div class="user-info">
-                    <button class="btn btn-secondary" id="notifications-btn">🔔 Notifications</button>
-                    <div class="avatar" id="user-avatar">EA</div>
-                </div>
-            </header>
-
-            <!-- Stats Cards -->
-            <div class="stats-grid">
-                <div class="stat-card fade-in" style="animation-delay: 0.1s;">
-                    <div class="stat-header">
-                        <div class="stat-icon stat-icon-1">📚</div>
-                    </div>
-                    <div class="stat-value" id="courses-count">0</div>
-                    <div class="stat-label">Cours suivis</div>
-                </div>
-
-                <div class="stat-card fade-in" style="animation-delay: 0.2s;">
-                    <div class="stat-header">
-                        <div class="stat-icon stat-icon-2">👥</div>
-                    </div>
-                    <div class="stat-value" id="tutors-count">0</div>
-                    <div class="stat-label">Tuteurs actifs</div>
-                </div>
-
-                <div class="stat-card fade-in" style="animation-delay: 0.3s;">
-                    <div class="stat-header">
-                        <div class="stat-icon stat-icon-3">💬</div>
-                    </div>
-                    <div class="stat-value" id="conversations-count">0</div>
-                    <div class="stat-label">Conversations</div>
-                </div>
-            </div>
-
-            <!-- Content Grid -->
-            <div class="content-grid">
-                <!-- Mes Cours -->
-                <div class="card fade-in" style="animation-delay: 0.4s;">
-                    <h3 class="card-title">Mes Cours</h3>
-                    
-                    <div id="courses-list">
-                        <!-- Les cours seront chargés ici dynamiquement -->
-                    </div>
-
-                    <button class="btn btn-secondary" id="add-course-btn" style="width: 100%; margin-top: 1rem;">
-                        ➕ Ajouter un cours
-                    </button>
-                </div>
-
-                <!-- Sidebar Right -->
-                <div>
-                    <!-- Quick Actions -->
-                    <div class="card fade-in" style="margin-bottom: 1.5rem; animation-delay: 0.5s;">
-                        <h3 class="card-title">Actions rapides</h3>
-                        <div class="quick-actions">
-                            <div class="action-btn" data-action="find-tutor">
-                                🔍 Trouver un tuteur
-                            </div>
-                            <div class="action-btn" data-action="chat-ai">
-                                🤖 Discuter avec l'IA
-                            </div>
-                            <div class="action-btn" data-action="browse-courses">
-                                📚 Parcourir les cours
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Recent Conversations -->
-                    <div class="card fade-in" style="animation-delay: 0.6s;">
-                        <h3 class="card-title">Conversations récentes</h3>
-                        <div id="conversations-list">
-                            <!-- Les conversations seront chargées ici dynamiquement -->
-                        </div>
-                        <button class="btn btn-secondary" id="view-history-btn" style="width: 100%; margin-top: 1rem;">
-                            📜 Voir l'historique complet
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </main>
+    <div
+        class="fixed -top-64 -right-64 w-[800px] h-[800px] bg-gray-50/80 dark:bg-gray-800/40 rounded-full border-2 border-gray-200/70 dark:border-gray-700/50 pointer-events-none -z-10">
     </div>
 
-    <script>
-        // Configuration API
-        const API_BASE_URL = 'http://localhost:3000/api';
+    <div
+        class="fixed -bottom-64 -left-64 w-[800px] h-[800px] bg-gray-50/80 dark:bg-gray-800/40 rounded-full border-2 border-gray-200/70 dark:border-gray-700/50 pointer-events-none -z-10">
+    </div>
 
-        // Fonction utilitaire pour les appels API
-        async function apiCall(endpoint, options = {}) {
-            try {
-                const token = localStorage.getItem('token');
-                const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-                    ...options,
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': token ? `Bearer ${token}` : '',
-                        ...options.headers
-                    }
-                });
+    <aside id = "sidebar"
+        class="hidden md:flex flex-col w-24 lg:w-64 h-full bg-card-light dark:bg-card-dark border-r border-gray-100 dark:border-gray-800 transition-all duration-300 p-4 ">
+        <div class="flex items-center justify-center lg:justify-start mb-10 px-2">
+            <button id="logoToggle"
+                class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xl shadow-md">
+                D
+            </button>
+            <span class="hidden lg:block ml-3 text-2xl font-bold text-primary tracking-wide">Djangou</span>
+        </div>
+        <nav class="flex-1 flex flex-col gap-2">
+            <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary transition-colors"
+                href="#">
+                <span class="material-icons-round text-2xl">dashboard</span>
+                <span class="hidden lg:block ml-4 font-semibold">Accueil</span>
+            </a>
+            <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
+                href="#">
+                <span class="material-icons-round text-2xl">school</span>
+                <span class="hidden lg:block ml-4 font-semibold">Matières</span>
+            </a>
+            <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
+                href="#">
+                <span class="material-icons-round text-2xl">chat_bubble</span>
+                <span class="hidden lg:block ml-4 font-semibold">Messages</span>
+                <span
+                    class="hidden lg:flex ml-auto bg-red-400 text-white text-xs font-bold px-2 py-0.5 rounded-full">3</span>
+            </a>
 
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
+            <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
+                href="#">
+                <span class="material-icons-round text-2xl">person</span>
+                <span class="hidden lg:block ml-4 font-semibold">Profil</span>
+            </a>
+        </nav>
 
-                return await response.json();
-            } catch (error) {
-                console.error('API Error:', error);
-                return null;
-            }
-        }
-
-        // Chargement des données du dashboard
-        async function loadDashboardData() {
-            try {
-                // Charger le profil utilisateur
-                const userData = await apiCall('/user/profile');
-                if (userData) {
-                    document.getElementById('user-name').textContent = userData.name || 'Étudiant';
-                    document.getElementById('user-avatar').textContent = userData.avatar || 'EA';
-                }
-
-                // Charger les statistiques
-                const stats = await apiCall('/dashboard/stats');
-                if (stats) {
-                    document.getElementById('courses-count').textContent = stats.coursesCount || 0;
-                    document.getElementById('tutors-count').textContent = stats.tutorsCount || 0;
-                    document.getElementById('conversations-count').textContent = stats.conversationsCount || 0;
-                }
-
-                // Charger les cours
-                const courses = await apiCall('/courses/enrolled');
-                if (courses) {
-                    renderCourses(courses);
-                }
-
-                // Charger les conversations récentes
-                const conversations = await apiCall('/conversations/recent?limit=3');
-                if (conversations) {
-                    renderConversations(conversations);
-                }
-            } catch (error) {
-                console.error('Error loading dashboard data:', error);
-                // Charger les données de démonstration en cas d'erreur
-                loadMockData();
-            }
-        }
-
-        // Charger des données de démonstration
-        function loadMockData() {
-            document.getElementById('user-name').textContent = 'Étudiant Adriel';
-            document.getElementById('courses-count').textContent = '8';
-            document.getElementById('tutors-count').textContent = '5';
-            document.getElementById('conversations-count').textContent = '24';
-
-            renderCourses([
-                { id: 1, name: 'Algorithmique', tutorsCount: 3 },
-                { id: 2, name: 'Architecture Web', tutorsCount: 4 },
-                { id: 3, name: 'Bases de données', tutorsCount: 5 }
-            ]);
-
-            renderConversations([
-                { id: 1, tutorName: 'Prof. BILLONG IV', tutorAvatar: 'PB', lastMessage: 'Merci pour les explications...', time: 'Il y a 2h' },
-                { id: 2, tutorName: 'Tuteur IA', tutorAvatar: '🤖', lastMessage: 'Comment puis-je vous aider?', time: 'Il y a 5h' },
-                { id: 3, tutorName: 'Dr. PESSA', tutorAvatar: 'DP', lastMessage: 'Voici les ressources demandées', time: 'Hier' }
-            ]);
-        }
-
-        // Rendre les cours
-        function renderCourses(courses) {
-            const coursesList = document.getElementById('courses-list');
-            coursesList.innerHTML = courses.map(course => `
-                <div class="course-item">
-                    <div class="course-info">
-                        <h4>${course.name}</h4>
-                        <p>👤 ${course.tutorsCount} tuteurs disponibles</p>
+        <div class="mt-auto flex flex-col gap-2">
+            <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
+                href="#">
+                <span class="material-icons-round text-2xl">settings</span>
+                <span class="hidden lg:block ml-4 font-semibold">Paramètres</span>
+            </a>
+    </aside>
+    <main class="flex-1 h-full overflow-y-auto overflow-x-hidden p-4 md:p-8 relative">
+        <header class="flex justify-between items-center mb-8">
+            <div class="md:hidden flex items-center gap-3">
+                <button class="text-gray-600 dark:text-gray-300">
+                    <span class="material-icons-round text-3xl">menu</span>
+                </button>
+                <span class="text-xl font-bold text-primary">Djangou</span>
+            </div>
+            <div
+                class="hidden md:flex items-center bg-white dark:bg-card-dark rounded-full px-4 py-2.5 shadow-sm border border-gray-100 dark:border-gray-700 w-96">
+                <span class="material-icons-round text-gray-400">search</span>
+                <input
+                    class="bg-transparent border-none focus:ring-0 text-sm w-full text-gray-600 dark:text-gray-200 placeholder-gray-400"
+                    placeholder="Rechercher un cours, un tuteur..." type="text" />
+            </div>
+            <div class="flex items-center gap-4">
+                <button
+                    class="relative p-2 rounded-full bg-white dark:bg-card-dark hover:bg-gray-50 dark:hover:bg-gray-700 shadow-sm border border-gray-100 dark:border-gray-700 transition-colors">
+                    <span class="material-icons-round text-gray-500 dark:text-gray-300">notifications</span>
+                    <span
+                        class="absolute top-2 right-2.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-card-dark"></span>
+                </button>
+                <div class="flex items-center gap-3 pl-2 border-l border-gray-200 dark:border-gray-700">
+                    <div class="text-right hidden md:block">
+                        <p class="text-sm font-bold text-secondary dark:text-white">Lisha Nana</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">Étudiante</p>
                     </div>
-                    <button class="btn btn-primary" onclick="viewTutors(${course.id})">Voir tuteurs</button>
+                    <img alt="Avatar Utilisateur"
+                        class="w-10 h-10 rounded-full object-cover border-2 border-primary shadow-sm"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-AbkTik24Q_rCpbwewky4ZNDDaZEgHurujCH9wklsbcw_6uItxbsjn7i2dkv_ZtfNMQRXqu_fAVPcAARqSCjNRvIg2a5rQgFMrEZVKZtRT5cUqAuYAXhx1AQI4xVSHOHQWJhurnwDHpju3BxI1Dp4asewISJXQri1p0VUBK8Z9wVjN5cXUzqmrZWgPwdGZACaZNl5uQic8_b3WrIsnA9wTsmSbxdJMsTUsrnvBgAfm-dGg5uO6SBhLEjQHHrZpTo18bxALyWoZn8" />
                 </div>
-            `).join('');
-        }
-
-        // Rendre les conversations
-        function renderConversations(conversations) {
-            const conversationsList = document.getElementById('conversations-list');
-            conversationsList.innerHTML = conversations.map(conv => `
-                <div class="conversation-item" onclick="openConversation(${conv.id})">
-                    <div class="conversation-avatar">${conv.tutorAvatar}</div>
-                    <div class="conversation-info">
-                        <h4>${conv.tutorName}</h4>
-                        <p>${conv.lastMessage}</p>
+            </div>
+        </header>
+        <div class="mb-8">
+            <h1 class="text-3xl md:text-4xl font-extrabold text-secondary dark:text-white mb-2">Bonjour, Lisha! 👋</h1>
+            <p class="text-gray-500 dark:text-gray-400">Prête à apprendre quelque chose de nouveau aujourd'hui?</p>
+        </div>
+        <div
+            class="bg-secondary dark:bg-gray-800 rounded-2xl p-6 mb-8 text-white relative overflow-hidden shadow-lg flex items-center justify-between">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-3xl -mr-16 -mt-16"></div>
+            <div class="relative z-10 max-w-lg">
+                <div class="flex items-center gap-2 mb-2">
+                    <span
+                        class="bg-white/20 px-2 py-0.5 rounded text-xs font-semibold uppercase tracking-wider backdrop-blur-sm">Nouveau</span>
+                    <span class="text-primary font-bold text-sm">DeepSeek AI</span>
+                </div>
+                <h2 class="text-xl md:text-2xl font-bold mb-2">Besoin d'aide sur un devoir ?</h2>
+                <p class="text-gray-300 text-sm mb-4">Notre assistant IA est disponible 24/7 pour répondre à tes
+                    questions et t'aider à progresser.</p>
+                <button
+                    class="bg-primary hover:bg-dark-brown text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-colors shadow-lg flex items-center gap-2">
+                    <span class="material-icons-round text-lg">smart_toy</span>
+                    Discuter maintenant
+                </button>
+            </div>
+            <div class="hidden md:block relative z-10 mr-8">
+                <svg fill="none" height="100" viewBox="0 0 120 100" width="120" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="60" cy="50" fill="#D59D80" fill-opacity="0.2" r="40"></circle>
+                    <path
+                        d="M40 50C40 38.9543 48.9543 30 60 30C71.0457 30 80 38.9543 80 50C80 61.0457 71.0457 70 60 70C48.9543 70 40 61.0457 40 50Z"
+                        stroke="white" stroke-width="2"></path>
+                    <path d="M30 50C30 40 45 30 60 30" stroke="#D59D80" stroke-linecap="round" stroke-width="3"></path>
+                    <path d="M90 50C90 60 75 70 60 70" stroke="#D59D80" stroke-linecap="round" stroke-width="3"></path>
+                    <circle cx="95" cy="25" fill="#C6C6D0" r="5"></circle>
+                    <circle cx="20" cy="80" fill="#104C64" r="8"></circle>
+                </svg>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-2 space-y-8">
+                <div class="flex justify-between items-end">
+                    <h3 class="text-xl font-bold text-secondary dark:text-white">Mes Matières en cours</h3>
+                    <a class="text-sm font-semibold text-primary hover:underline" href="#">Voir tout</a>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div
+                        class="bg-pastel-green dark:bg-gray-800 p-5 rounded-2xl relative overflow-hidden group hover:shadow-md transition-shadow cursor-pointer">
+                        <div
+                            class="absolute right-0 bottom-0 opacity-20 transform translate-x-2 translate-y-2 group-hover:scale-110 transition-transform duration-500">
+                            <span class="material-icons-round text-8xl text-teal-800 dark:text-teal-200">science</span>
+                        </div>
+                        <div class="relative z-10">
+                            <div
+                                class="w-10 h-10 bg-white dark:bg-gray-700 rounded-lg flex items-center justify-center mb-3 shadow-sm text-teal-600 dark:text-teal-300">
+                                <span class="material-icons-round">science</span>
+                            </div>
+                            <h4 class="text-lg font-bold text-teal-900 dark:text-teal-100">Sciences</h4>
+                            
+                        </div>
                     </div>
-                    <div class="conversation-time">${conv.time}</div>
+                    <div
+                        class="bg-pastel-orange dark:bg-gray-800 p-5 rounded-2xl relative overflow-hidden group hover:shadow-md transition-shadow cursor-pointer">
+                        <div
+                            class="absolute right-0 bottom-0 opacity-20 transform translate-x-2 translate-y-2 group-hover:scale-110 transition-transform duration-500">
+                            <span
+                                class="material-icons-round text-8xl text-orange-800 dark:text-orange-200">calculate</span>
+                        </div>
+                        <div class="relative z-10">
+                            <div
+                                class="w-10 h-10 bg-white dark:bg-gray-700 rounded-lg flex items-center justify-center mb-3 shadow-sm text-orange-600 dark:text-orange-300">
+                                <span class="material-icons-round">functions</span>
+                            </div>
+                            <h4 class="text-lg font-bold text-orange-900 dark:text-orange-100">Mathématiques</h4>
+                            
+                        </div>
+                    </div>
+                    <div
+                        class="bg-pastel-blue dark:bg-gray-800 p-5 rounded-2xl relative overflow-hidden group hover:shadow-md transition-shadow cursor-pointer">
+                        <div
+                            class="absolute right-0 bottom-0 opacity-20 transform translate-x-2 translate-y-2 group-hover:scale-110 transition-transform duration-500">
+                            <span class="material-icons-round text-8xl text-blue-800 dark:text-blue-200">computer</span>
+                        </div>
+                        <div class="relative z-10">
+                            <div
+                                class="w-10 h-10 bg-white dark:bg-gray-700 rounded-lg flex items-center justify-center mb-3 shadow-sm text-blue-600 dark:text-blue-300">
+                                <span class="material-icons-round">computer</span>
+                            </div>
+                            <h4 class="text-lg font-bold text-blue-900 dark:text-blue-100">Informatique</h4>
+                            
+                        </div>
+                    </div>
+                    <div
+                        class="bg-pastel-purple dark:bg-gray-800 p-5 rounded-2xl relative overflow-hidden group hover:shadow-md transition-shadow cursor-pointer">
+                        <div
+                            class="absolute right-0 bottom-0 opacity-20 transform translate-x-2 translate-y-2 group-hover:scale-110 transition-transform duration-500">
+                            <span
+                                class="material-icons-round text-8xl text-purple-800 dark:text-purple-200">palette</span>
+                        </div>
+                        <div class="relative z-10">
+                            <div
+                                class="w-10 h-10 bg-white dark:bg-gray-700 rounded-lg flex items-center justify-center mb-3 shadow-sm text-purple-600 dark:text-purple-300">
+                                <span class="material-icons-round">brush</span>
+                            </div>
+                            <h4 class="text-lg font-bold text-purple-900 dark:text-purple-100">Dessin</h4>
+                           
+                        </div>
+                    </div>
                 </div>
-            `).join('');
-        }
+                <div class="mt-8">
+                    <h3 class="text-xl font-bold text-secondary dark:text-white mb-4">Favoris</h3>
+                    <div
+                        class="bg-white dark:bg-card-dark rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+                        
+                        <div
+                            class="flex items-center gap-4 p-4 border border-gray-100 dark:border-gray-700 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors cursor-pointer group">
+                            <div
+                                class="w-14 h-14 bg-pastel-green rounded-xl flex items-center justify-center flex-shrink-0">
+                                <span class="material-icons-round text-teal-600 text-2xl">design_services</span>
+                            </div>
+                            <div class="flex-1">
+                                <h4
+                                    class="font-bold text-secondary dark:text-white group-hover:text-primary transition-colors">
+                                    Mathématiques</h4>
+                                <div class="flex gap-3 text-xs text-gray-500 dark:text-gray-400 mt-1">
+                                    <span class="flex items-center gap-1"><span
+                                            class="material-icons-round text-sm">person</span>Onana Onana</span>
+                                    <span class="flex items-center gap-1"><span
+                                            class="material-icons-round text-sm">star</span> 4.8</span>
+                                    <span class="bg-green-100 dark:bg-green-700 px-2 py-0.5 rounded">Online</span>
+                                </div>
+                            </div>
+                            <button class="text-gray-400 hover:text-primary">
+                                <span class="material-icons-round">bookmark_border</span>
+                            </button>
+                        </div>
 
-        // Voir les tuteurs d'un cours
-        async function viewTutors(courseId) {
-            const tutors = await apiCall(`/courses/${courseId}/tutors`);
-            if (tutors) {
-                window.location.href = `/tutors.html?course=${courseId}`;
-            }
-        }
-
-        // Ouvrir une conversation
-        async function openConversation(conversationId) {
-            await apiCall(`/conversations/${conversationId}/read`, { method: 'POST' });
-            window.location.href = `/conversation.html?id=${conversationId}`;
-        }
-
-        // Gestion du menu
-        document.querySelectorAll('.menu-item').forEach(item => {
-            item.addEventListener('click', function(e) {
-                e.preventDefault();
-                const page = this.getAttribute('data-page');
+                         <div
+                            class="flex items-center gap-4 p-4 border border-gray-100 dark:border-gray-700 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors cursor-pointer group">
+                            <div
+                                class="w-14 h-14 bg-pastel-green rounded-xl flex items-center justify-center flex-shrink-0">
+                                <span class="material-icons-round text-teal-600 text-2xl">design_services</span>
+                            </div>
+                            <div class="flex-1">
+                                <h4
+                                    class="font-bold text-secondary dark:text-white group-hover:text-primary transition-colors">
+                                    Physiques</h4>
+                                <div class="flex gap-3 text-xs text-gray-500 dark:text-gray-400 mt-1">
+                                    <span class="flex items-center gap-1"><span
+                                            class="material-icons-round text-sm">person</span>Ondoua</span>
+                                    <span class="flex items-center gap-1"><span
+                                            class="material-icons-round text-sm">star</span> 4.2</span>
+                                    <span class="bg-red-100 dark:bg-red-700 px-2 py-0.5 rounded">Offline</span>
+                                </div>
+                            </div>
+                            <button class="text-gray-400 hover:text-primary">
+                                <span class="material-icons-round">bookmark_border</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="space-y-8">
                 
-                if (page) {
-                    document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    // Navigation vers la page
-                    if (page !== 'dashboard') {
-                        window.location.href = `/${page}.html`;
-                    }
-                }
-            });
-        });
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold text-secondary dark:text-white">Instructeurs</h3>
+                        <button
+                            class="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-gray-500 hover:text-primary transition-colors">
+                            <span class="material-icons-round text-sm">add</span>
+                        </button>
+                    </div>
+                    <div
+                        class="bg-card-light dark:bg-card-dark rounded-2xl p-4 shadow-sm border border-gray-100 dark:border-gray-700 flex flex-col gap-4">
+                        <div class="flex items-center gap-3">
+                            <span class="material-icons-round text-lg">person</span>
+                            <div class="flex-1">
+                                <h5 class="text-sm font-bold text-secondary dark:text-white">Sarah Ebang</h5>
+                                <p class="text-xs text-gray-500">Sciences</p>
+                            </div>
+                            <button class="p-2 text-primary hover:bg-primary/10 rounded-full transition-colors">
+                                <span class="material-icons-round text-lg">chat_bubble_outline</span>
+                            </button>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="material-icons-round text-lg">person</span>
+                            <div class="flex-1">
+                                <h5 class="text-sm font-bold text-secondary dark:text-white">John Ndongo</h5>
+                                <p class="text-xs text-gray-500">Mathématiques</p>
+                            </div>
+                            <button class="p-2 text-primary hover:bg-primary/10 rounded-full transition-colors">
+                                <span class="material-icons-round text-lg">chat_bubble_outline</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div
+        class="md:hidden fixed bottom-0 w-full bg-white dark:bg-card-dark border-t border-gray-100 dark:border-gray-800 flex justify-around p-3 z-50">
+        <a class="flex flex-col items-center text-primary" href="#">
+            <span class="material-icons-round">dashboard</span>
+            <span class="text-[10px] font-bold mt-1">Accueil</span>
+        </a>
+        <a class="flex flex-col items-center text-gray-400 dark:text-gray-500" href="#">
+            <span class="material-icons-round">school</span>
+            <span class="text-[10px] font-medium mt-1">Cours</span>
+        </a>
+        <a class="flex flex-col items-center text-gray-400 dark:text-gray-500 relative" href="#">
+            <span class="material-icons-round">chat_bubble</span>
+            <span class="absolute top-0 right-3 w-2 h-2 bg-red-500 rounded-full"></span>
+            <span class="text-[10px] font-medium mt-1">Chat</span>
+        </a>
+        <a class="flex flex-col items-center text-gray-400 dark:text-gray-500" href="#">
+            <span class="material-icons-round">person</span>
+            <span class="text-[10px] font-medium mt-1">Profil</span>
+        </a>
+    </div>
 
-        // Gestion des actions rapides
-        document.querySelectorAll('.action-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const action = this.getAttribute('data-action');
-                const routes = {
-                    'find-tutor': '/tutors.html',
-                    'chat-ai': '/ai-tutor.html',
-                    'browse-courses': '/courses.html'
-                };
-                
-                if (routes[action]) {
-                    window.location.href = routes[action];
-                }
-            });
-        });
-
-        // Bouton notifications
-        document.getElementById('notifications-btn').addEventListener('click', function() {
-            window.location.href = '/notifications.html';
-        });
-
-        // Bouton ajouter un cours
-        document.getElementById('add-course-btn').addEventListener('click', function() {
-            window.location.href = '/courses.html';
-        });
-
-        // Bouton voir l'historique
-        document.getElementById('view-history-btn').addEventListener('click', function() {
-            window.location.href = '/history.html';
-        });
-
-        // Bouton déconnexion
-        document.getElementById('logout-btn').addEventListener('click', async function(e) {
-            e.preventDefault();
-            await apiCall('/auth/logout', { method: 'POST' });
-            localStorage.removeItem('token');
-            window.location.href = '/login.html';
-        });
-
-        // Charger les données au chargement de la page
-        document.addEventListener('DOMContentLoaded', function() {
-            loadDashboardData();
-        });
-    </script>
-    <script type="module" src="../js/auth/logout.js"></script>
-   <script type="module">
-  import { protectPage } from "../js/utils/guards.js";
-  protectPage(["student"]);
-</script>
 </body>
 </html>
