@@ -33,6 +33,37 @@
             color: white;
             box-shadow: 0 4px 12px rgba(213, 157, 128, 0.4);
         }
+        .tooltip {
+            position: absolute;
+            background: white;
+            padding: 6px 12px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-dark);
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 100;
+            border: 1px solid rgba(213, 157, 128, 0.2);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .tooltip.show {
+            opacity: 1;
+        }
+        .tooltip::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-bottom: 6px solid white;
+        }
     </style>
 </head>
 <body class="h-screen overflow-hidden flex">
@@ -41,21 +72,21 @@
             D
         </div>
 <nav class="flex flex-col gap-4">
-<a class="w-12 h-12 rounded-2xl flex items-center justify-center text-gray-400 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)] transition-all" href="#">
+<a class="w-12 h-12 rounded-2xl flex items-center justify-center text-gray-400 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)] transition-all" href="#" data-tooltip="Accueil">
 <span class="material-symbols-outlined">home</span>
 </a>
-<a class="w-12 h-12 rounded-2xl flex items-center justify-center text-gray-400 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)] transition-all" href="#">
+<a class="w-12 h-12 rounded-2xl flex items-center justify-center text-gray-400 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)] transition-all" href="#" data-tooltip="Cours">
 <span class="material-symbols-outlined">auto_stories</span>
 </a>
-<a class="w-12 h-12 rounded-2xl flex items-center justify-center bg-[var(--primary-soft)] text-[var(--primary)] shadow-sm" href="#">
+<a class="w-12 h-12 rounded-2xl flex items-center justify-center bg-[var(--primary-soft)] text-[var(--primary)] shadow-sm" href="#" data-tooltip="Tableau blanc">
 <span class="material-symbols-outlined">edit_square</span>
 </a>
-<a class="w-12 h-12 rounded-2xl flex items-center justify-center text-gray-400 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)] transition-all" href="#">
+<a class="w-12 h-12 rounded-2xl flex items-center justify-center text-gray-400 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)] transition-all" href="#" data-tooltip="Messages">
 <span class="material-symbols-outlined">chat_bubble</span>
 </a>
 </nav>
 <div class="mt-auto flex flex-col gap-4">
-<a class="w-12 h-12 rounded-full overflow-hidden border-2 border-[var(--primary-soft)]" href="#">
+<a class="w-12 h-12 rounded-full overflow-hidden border-2 border-[var(--primary-soft)]" href="#" data-tooltip="Profil">
 <img alt="Profil" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpsGOIRySOv9VTidG7PaDTfqWRSp6wekLV7V691X5Eix6i51w6zX1FKSvA3zY-m17kjlKOfMV4MgehJ06cwtT4AA36nNeCqRKchvwHy0LX9rGC1oeXSrLtfpVYDkia_6GqPDi6Qq4135yjPpynjh42-WTamJr3wQlzncAFfeFuoG-EMj75_CJwx4mJxFJnrAq-jWVp2jIsU1No73b1yntsawb9VZFl81Toh_yUaP0P3TM2GcWa5dL5z6HUvqjmojPOXAkBOp1h4xg"/>
 </a>
 </div>
@@ -67,37 +98,37 @@
 <h1 class="font-bold text-lg text-[var(--text-dark)]">Mathématiques : Fonctions Affines</h1>
 </div>
 <div class="flex items-center gap-4">
-<button class="px-4 py-2 bg-white border border-orange-100 rounded-full text-sm font-medium hover:shadow-sm transition-all flex items-center gap-2">
+<button class="px-4 py-2 bg-white border border-orange-100 rounded-full text-sm font-medium hover:shadow-sm transition-all flex items-center gap-2" data-tooltip="Exporter le tableau">
 <span class="material-symbols-outlined text-sm">cloud_upload</span>
                     Exporter
                 </button>
-<button class="px-4 py-2 bg-[var(--primary)] text-white rounded-full text-sm font-bold shadow-md shadow-orange-200 hover:scale-105 transition-all">
+<button class="px-4 py-2 bg-[var(--primary)] text-white rounded-full text-sm font-bold shadow-md shadow-orange-200 hover:scale-105 transition-all" data-tooltip="Terminer la session">
                     Terminer la session
                 </button>
 </div>
 </header>
 <div class="flex-1 relative bg-[var(--bg-canvas)] canvas-dot-pattern">
 <div class="absolute left-6 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur-md p-3 rounded-3xl shadow-xl border border-orange-50 flex flex-col gap-3 z-20">
-<button class="w-12 h-12 rounded-2xl active-tool flex items-center justify-center transition-all">
+<button class="w-12 h-12 rounded-2xl active-tool flex items-center justify-center transition-all" data-tooltip="Crayon">
 <span class="material-symbols-outlined">edit</span>
 </button>
-<button class="w-12 h-12 rounded-2xl text-gray-500 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)] flex items-center justify-center transition-all">
+<button class="w-12 h-12 rounded-2xl text-gray-500 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)] flex items-center justify-center transition-all" data-tooltip="Gomme">
 <span class="material-symbols-outlined">ink_eraser</span>
 </button>
-<button class="w-12 h-12 rounded-2xl text-gray-500 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)] flex items-center justify-center transition-all">
+<button class="w-12 h-12 rounded-2xl text-gray-500 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)] flex items-center justify-center transition-all" data-tooltip="Texte">
 <span class="material-symbols-outlined">text_fields</span>
 </button>
-<button class="w-12 h-12 rounded-2xl text-gray-500 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)] flex items-center justify-center transition-all">
+<button class="w-12 h-12 rounded-2xl text-gray-500 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)] flex items-center justify-center transition-all" data-tooltip="Formes">
 <span class="material-symbols-outlined">shapes</span>
 </button>
-<button class="w-12 h-12 rounded-2xl text-gray-500 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)] flex items-center justify-center transition-all">
+<button class="w-12 h-12 rounded-2xl text-gray-500 hover:bg-[var(--primary-soft)] hover:text-[var(--primary)] flex items-center justify-center transition-all" data-tooltip="Image">
 <span class="material-symbols-outlined">image</span>
 </button>
 <div class="h-px bg-orange-100 mx-2"></div>
-<button class="w-12 h-12 rounded-2xl text-gray-400 hover:text-gray-600 flex items-center justify-center">
+<button class="w-12 h-12 rounded-2xl text-gray-400 hover:text-gray-600 flex items-center justify-center" data-tooltip="Couleur rouge">
 <div class="w-6 h-6 rounded-full bg-red-400"></div>
 </button>
-<button class="w-12 h-12 rounded-2xl text-gray-400 hover:text-gray-600 flex items-center justify-center">
+<button class="w-12 h-12 rounded-2xl text-gray-400 hover:text-gray-600 flex items-center justify-center" data-tooltip="Couleur bleue">
 <div class="w-6 h-6 rounded-full bg-blue-400"></div>
 </button>
 </div>
@@ -135,20 +166,20 @@
 </div>
 <div class="absolute bottom-6 right-6 bg-white/90 backdrop-blur-md px-4 py-2 rounded-2xl shadow-lg border border-orange-50 flex items-center gap-4 z-20">
 <div class="flex items-center gap-1">
-<button class="w-8 h-8 rounded-lg hover:bg-orange-50 text-gray-500 flex items-center justify-center">
+<button class="w-8 h-8 rounded-lg hover:bg-orange-50 text-gray-500 flex items-center justify-center" data-tooltip="Annuler">
 <span class="material-symbols-outlined text-xl">undo</span>
 </button>
-<button class="w-8 h-8 rounded-lg hover:bg-orange-50 text-gray-500 flex items-center justify-center">
+<button class="w-8 h-8 rounded-lg hover:bg-orange-50 text-gray-500 flex items-center justify-center" data-tooltip="Rétablir">
 <span class="material-symbols-outlined text-xl">redo</span>
 </button>
 </div>
 <div class="w-px h-6 bg-orange-100"></div>
 <div class="flex items-center gap-2">
-<button class="w-8 h-8 rounded-lg hover:bg-orange-50 text-gray-500 flex items-center justify-center">
+<button class="w-8 h-8 rounded-lg hover:bg-orange-50 text-gray-500 flex items-center justify-center" data-tooltip="Dézoomer">
 <span class="material-symbols-outlined text-xl">remove</span>
 </button>
 <span class="text-sm font-bold min-w-[40px] text-center">100%</span>
-<button class="w-8 h-8 rounded-lg hover:bg-orange-50 text-gray-500 flex items-center justify-center">
+<button class="w-8 h-8 rounded-lg hover:bg-orange-50 text-gray-500 flex items-center justify-center" data-tooltip="Zoomer">
 <span class="material-symbols-outlined text-xl">add</span>
 </button>
 </div>
@@ -165,5 +196,35 @@
 </div>
 </div>
 </main>
+
+<!-- Tooltip element -->
+<div id="tooltip" class="tooltip"></div>
+
+<script>
+    const tooltip = document.getElementById('tooltip');
+    const elements = document.querySelectorAll('[data-tooltip]');
+    
+    elements.forEach(element => {
+        element.addEventListener('mouseenter', function(e) {
+            const text = this.getAttribute('data-tooltip');
+            const rect = this.getBoundingClientRect();
+            
+            tooltip.textContent = text;
+            tooltip.classList.add('show');
+            
+            // Position le tooltip en dessous de l'élément
+            const tooltipRect = tooltip.getBoundingClientRect();
+            const left = rect.left + (rect.width / 2) - (tooltipRect.width / 2);
+            const top = rect.bottom + 8; // 8px en dessous de l'élément
+            
+            tooltip.style.left = left + 'px';
+            tooltip.style.top = top + 'px';
+        });
+        
+        element.addEventListener('mouseleave', function() {
+            tooltip.classList.remove('show');
+        });
+    });
+</script>
 
 </body></html>
