@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
     <style type="text/tailwindcss">
         :root {
             /* Palette pql.jpg */
@@ -88,11 +89,11 @@
                 </label>
             </div>
             <nav class="flex flex-col gap-2 flex-1 overflow-y-auto custom-scrollbar">
-                <a class="nav-item active" href="#"><span class="material-symbols-outlined">grid_view</span><span
-                        class="text-[12px]">Tableau de Bord</span></a>
-                <a class="nav-item" href="matiere-tuteur.html"><span
-                        class="material-symbols-outlined">auto_stories</span><span class="text-[12px]">Ma
-                        Matière</span></a>
+                <a class="nav-item" href="dashboard-teacher.html"><span
+                        class="material-symbols-outlined">grid_view</span><span class="text-[12px]">Tableau de
+                        Bord</span></a>
+                <a class="nav-item active" href="#"><span class="material-symbols-outlined">auto_stories</span><span
+                        class="text-[12px]">Ma Matière</span></a>
                 <a class="nav-item" href="messagerie-teacher.html"><span
                         class="material-symbols-outlined">chat_bubble</span><span
                         class="text-[12px]">Messages</span></a>
@@ -118,9 +119,8 @@
                         class="lg:hidden w-11 h-11 flex items-center justify-center rounded-2xl border border-[var(--border-ui)] text-rose-500 bg-white dark:bg-slate-800"><span
                             class="material-symbols-outlined">logout</span></button>
                     <div>
-                        <h1 class="text-xl md:text-2xl font-bold">Tableau de Bord</h1>
-                        <p class="text-slate-400 mt-1 text-xs">Ravi de vous revoir, <span id="teacher-name"
-                                class="text-[var(--p-deep-brown)] font-bold italic">—</span> ✨</p>
+                        <h1 class="text-xl md:text-2xl font-bold">Matière</h1>
+                        <p class="text-slate-400 mt-1 text-xs">Description</p>
                     </div>
                 </div>
 
@@ -148,40 +148,18 @@
                     <div class="rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden flex flex-col justify-between min-h-[420px] border border-[var(--border-ui)] shadow-sm"
                         style="background-color: var(--card-maths);">
                         <div class="z-10">
-                            <div
-                                class="inline-flex items-center gap-2 px-4 py-1.5 bg-emerald-500/10 rounded-full text-[10px] font-bold text-emerald-600 mb-6 uppercase tracking-widest border border-emerald-500/20">
-                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> SESSION
-                                ACTIVE
-                            </div>
+
                             <h3 id="subject-text"
                                 class="text-3xl md:text-5xl font-bold leading-tight text-slate-900 dark:text-white">
                             </h3>
                             <div class="w-20 h-1.5 bg-[var(--p-accent-orange)] rounded-full my-6"></div>
-                            <p class="text-slate-600 dark:text-slate-400 max-w-md text-sm font-medium">Spécialisation en
-                                Algèbre linéaire et Analyse complexe.</p>
-                        </div>
-                        <div class="z-10 mt-12">
-                            <div
-                                class="bg-white/90 dark:bg-white/5 backdrop-blur-xl px-6 py-3 rounded-[2rem] inline-flex items-center gap-3 border border-[var(--border-ui)]">
-                                <span class="material-symbols-outlined text-emerald-600">groups</span>
-                                <p class="text-sm font-bold text-slate-900 dark:text-white"><span
-                                        id="students-count-inscrits">0</span> Étudiants inscrits</p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                            <p id="subject-description"
+                                class="text-slate-600 dark:text-slate-400 max-w-md text-sm font-medium">
+                                Chargement de la description…
+                            </p>
 
-                <section class="xl:col-span-4 space-y-6">
-                    <h2 class="text-lg font-bold">Étudiants Connectés</h2>
-                    <div class="rounded-[2.5rem] p-7 border border-[var(--border-ui)] flex flex-col h-full min-h-[480px] shadow-sm transition-colors duration-300"
-                        style="background-color: var(--card-students);">
-                        <div id="online-students-list" class="space-y-3 overflow-y-auto custom-scrollbar flex-1 pr-1">
                         </div>
-                        <button
-                            class="w-full mt-6 py-4 bg-[var(--p-dark-teal)] text-white rounded-[1.5rem] font-bold text-[11px] uppercase tracking-wider shadow-lg"
-                            onclick="window.location.href='messagerie-teacher.html'">
-                            Ouvrir la classe virtuelle
-                        </button>
+
                     </div>
                 </section>
             </div>
@@ -197,11 +175,11 @@
 
         <nav
             class="lg:hidden fixed bottom-4 inset-x-4 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md h-16 rounded-2xl shadow-2xl flex items-center justify-around px-6 z-[40] border border-[var(--border-ui)]">
-            <a class="flex flex-col items-center gap-1 text-[var(--p-accent-orange)]" href="#">
+            <a class="flex flex-col items-center gap-1 text-slate-400" href="dashboard-teacher.html">
                 <span class="material-symbols-outlined">grid_view</span>
                 <span class="text-[8px] font-bold uppercase tracking-widest">Accueil</span>
             </a>
-            <a class="flex flex-col items-center gap-1 text-slate-400" href="matiere-tuteur.html">
+            <a class="flex flex-col items-center gap-1 text-[var(--p-accent-orange)]" href="#">
                 <span class="material-symbols-outlined">auto_stories</span>
                 <span class="text-[8px] font-bold uppercase tracking-widest">Cours</span>
             </a>
@@ -245,22 +223,36 @@
             }
         });
     </script>
-
     <script type="module">
-        import { auth, db } from "/js/auth/firebase-config.js";
-        import { doc, getDoc } from
-            "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { SUBJECT_DESCRIPTIONS } from "/js/utils/sujetdes.js";
 
-        auth.onAuthStateChanged(async (user) => {
-            if (!user) return;
+        const subjectEl = document.getElementById("subject-text");
+        const descEl = document.getElementById("subject-description");
 
-            const snap = await getDoc(doc(db, "teachers", user.uid));
-            if (!snap.exists()) return;
+        if (!subjectEl || !descEl) {
+            console.error("subject-text ou subject-description introuvable");
+        } else {
+            const observer = new MutationObserver(() => {
+                const subject = subjectEl.textContent.trim();
+                if (!subject) return;
 
-            document.querySelectorAll("#teacher-name")
-                .forEach(el => el.textContent = snap.data().fullName);
-        });
+                console.log("Matière détectée :", subject);
+
+                descEl.textContent =
+                    SUBJECT_DESCRIPTIONS[subject] ||
+                    "Description non disponible pour cette matière.";
+
+                observer.disconnect();
+            });
+
+            observer.observe(subjectEl, {
+                childList: true,
+                characterData: true,
+                subtree: true
+            });
+        }
     </script>
+
     <script type="module" src="/js/auth/logout.js"></script>
 </body>
 

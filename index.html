@@ -113,16 +113,32 @@
                     </a>
                 </div>
                 <div class="-mr-2 flex md:hidden">
-                    <button aria-controls="mobile-menu" aria-expanded="false"
-                        class="bg-primary inline-flex items-center justify-center p-2 rounded-md text-white hover:text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-primary focus:ring-white"
+                    <button id="burger-btn" aria-controls="mobile-menu" aria-expanded="false"
+                        class="bg-primary inline-flex items-center justify-center p-2 rounded-md text-white hover:bg-white/10"
                         type="button">
                         <span class="sr-only">Ouvrir le menu</span>
                         <span class="material-icons-round">menu</span>
                     </button>
+
                 </div>
             </div>
         </div>
     </nav>
+    </nav>
+
+    <div id="mobile-menu" class="hidden md:hidden bg-primary text-white px-6 py-6 space-y-6">
+        <a href="#" class="block text-sm font-medium">À propos</a>
+        <a href="#" class="block text-sm font-medium">Les créateurs</a>
+
+        <a href="public/login.html" class="block text-center border border-white/30 rounded-full py-2">
+            Connexion
+        </a>
+
+        <a href="public/SingUp.html" class="block text-center bg-white text-primary rounded-full py-2 font-bold">
+            Inscription
+        </a>
+    </div>
+
     <header class="relative bg-primary pt-16 pb-32 lg:pt-24 lg:pb-48 overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col md:flex-row items-center">
             <div class="w-full md:w-1/2 text-center md:text-left mb-12 md:mb-0">
@@ -238,10 +254,7 @@
                     <p class="mt-2 text-gray-500 dark:text-gray-400">Explorez ce que les autres étudiants apprennent
                         en ce moment.</p>
                 </div>
-                <a class="hidden md:flex items-center text-primary font-bold hover:text-orange-700 dark:hover:text-orange-400 transition"
-                    href="#">
-                    Voir tout <span class="material-icons-round ml-1">arrow_forward</span>
-                </a>
+
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div
@@ -263,8 +276,7 @@
                         <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2 font-display">Introduction à
                             la Biologie</h3>
 
-                        <button
-                            class="w-full py-2 rounded-xl border border-gray-200 dark:border-gray-600 font-bold text-gray-700 dark:text-gray-300 hover:bg-primary hover:text-white hover:border-primary transition">Détails</button>
+
                     </div>
                 </div>
                 <div
@@ -286,8 +298,7 @@
                         <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2 font-display">Géométrie
                             Avancée</h3>
 
-                        <button
-                            class="w-full py-2 rounded-xl border border-gray-200 dark:border-gray-600 font-bold text-gray-700 dark:text-gray-300 hover:bg-primary hover:text-white hover:border-primary transition">Détails</button>
+
                     </div>
                 </div>
                 <div
@@ -312,18 +323,11 @@
                         <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2 font-display">Bases de la
                             Programmation</h3>
 
-                        <button
-                            class="w-full py-2 rounded-xl border border-gray-200 dark:border-gray-600 font-bold text-gray-700 dark:text-gray-300 hover:bg-primary hover:text-white hover:border-primary transition">Détails</button>
+
                     </div>
                 </div>
+
             </div>
-            <div class="mt-8 text-center md:hidden">
-                <a class="inline-flex items-center text-primary font-bold hover:text-orange-700 dark:hover:text-orange-400 transition"
-                    href="#">
-                    Voir tous les cours <span class="material-icons-round ml-1">arrow_forward</span>
-                </a>
-            </div>
-        </div>
     </section>
     <section class="relative py-20 px-4 sm:px-6 lg:px-8">
         <div class="absolute inset-0 bg-primary opacity-5"></div>
@@ -336,13 +340,10 @@
             </p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
                 <a class="px-8 py-4 bg-primary text-white rounded-full font-bold text-lg shadow-lg hover:bg-orange-700 transition transform hover:-translate-y-1"
-                    href="#">
+                    href="public/SingUp.html">
                     Créer un compte gratuit
                 </a>
-                <a class="px-8 py-4 bg-white dark:bg-card-dark text-gray-900 dark:text-white border border-gray-200 dark:border-gray-600 rounded-full font-bold text-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition"
-                    href="#">
-                    En savoir plus
-                </a>
+
             </div>
         </div>
     </section>
@@ -360,31 +361,27 @@
                 <div>
                     <h4 class="text-lg font-bold mb-4 font-display">Plateforme</h4>
                     <ul class="space-y-2 text-gray-400 text-sm">
-                        <li><a class="hover:text-white transition" href="#">Cours</a></li>
-                        <li><a class="hover:text-white transition" href="#">Tuteurs</a></li>
-                        <li><a class="hover:text-white transition" href="#">Tarifs</a></li>
-                        <li><a class="hover:text-white transition" href="#">Entreprises</a></li>
+                        <li>Cours</li>
+                        <li>Tuteurs</li>
+                        <li>Tarifs</li>
+                        <li>Entreprises</li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="text-lg font-bold mb-4 font-display">Ressources</h4>
                     <ul class="space-y-2 text-gray-400 text-sm">
-                        <li><a class="hover:text-white transition" href="#">Blog</a></li>
-                        <li><a class="hover:text-white transition" href="#">Carrières</a></li>
-                        <li><a class="hover:text-white transition" href="#">Aide &amp; Support</a></li>
-                        <li><a class="hover:text-white transition" href="#">Communauté</a></li>
+                        <li>Blog</li>
+                        <li>Carrières</li>
+                        <li>Aide &amp; Support</li>
+                        <li>Communauté</li>
                     </ul>
                 </div>
 
             </div>
             <div
                 class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-gray-500 text-sm">
-                <p>© 2023 Djangou. Tous droits réservés.</p>
-                <div class="flex space-x-6 mt-4 md:mt-0">
-                    <a class="hover:text-white transition" href="#">Confidentialité</a>
-                    <a class="hover:text-white transition" href="#">Conditions</a>
-                    <a class="hover:text-white transition" href="#">Cookies</a>
-                </div>
+                <p>© 2026 Djangou. Tous droits réservés.</p>
+
             </div>
         </div>
     </footer>
@@ -398,6 +395,15 @@
     </div>
     <script src="./js/utils/dark-white.js"></script>
     <script type="module" src="./js/auth/logout.js"></script>
+    <script>
+        const burgerBtn = document.getElementById("burger-btn");
+        const mobileMenu = document.getElementById("mobile-menu");
+
+        burgerBtn.addEventListener("click", () => {
+            mobileMenu.classList.toggle("hidden");
+        });
+    </script>
+
 
 </body>
 
