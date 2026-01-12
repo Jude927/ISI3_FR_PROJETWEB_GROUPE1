@@ -104,7 +104,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     experience: experience ? parseInt(experience) : 0,
                     email: email,
                     fullName: `${firstName} ${username}`,
-                    createdAt: serverTimestamp()
+                    createdAt: serverTimestamp(),
+                    peerId: null,
+                    isOnline: false,
+                    isAvailable: false,
+                    lastSeen: serverTimestamp(),
+                    rating: data.rating || 4.5,
+                    totalSessions: data.totalSessions || 0
                 });
             }else{
                 // Pour les étudiants, on peut aussi enregistrer dans une collection "students" si nécessaire
@@ -112,7 +118,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     class: classField,
                     email: email,
                     fullName: `${firstName} ${username}`,
-                    createdAt: serverTimestamp()
+                    createdAt: serverTimestamp(),
+                    peerId: null,
+                    isOnline: false,
+                    lastSeen: serverTimestamp()
+
                 });
             }
 
