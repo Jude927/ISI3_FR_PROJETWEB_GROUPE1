@@ -126,3 +126,22 @@
   background-color: #D59D80 !important;
   color: white !important;
 }
+
+
+
+.lang-btn {
+  transition: all 0.3s ease;
+}
+
+.lang-btn:hover {
+  border-color: var(--primary);
+  color: var(--text-main);
+}
+
+/* Style pour le bouton actif */
+.lang-btn[data-lang-btn].active {
+  border-width: 2px !important;
+  border-color: var(--primary) !important;
+  background-color: rgba(213, 157, 128, 0.1) !important;
+  color: var(--text-main) !important;
+}
