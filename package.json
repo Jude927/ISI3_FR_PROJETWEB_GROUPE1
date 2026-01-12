@@ -13,6 +13,17 @@
     "peerjs": "^1.5.5"
   },
   "devDependencies": {
+    "autoprefixer": "^10.4.23",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.18",
     "vite": "^7.3.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jude927/ISI3_FR_PROJETWEB_GROUPE1.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Jude927/ISI3_FR_PROJETWEB_GROUPE1/issues"
+  },
+  "homepage": "https://github.com/Jude927/ISI3_FR_PROJETWEB_GROUPE1#readme"
 }

@@ -7,97 +7,55 @@
     <title>Djangou - Mon Profil Tuteur</title>
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&amp;display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap"
         rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <style type="text/tailwindcss">
         :root {
-            --pastel-peach: #FFE5D9;
-            --pastel-lavender: #E2E2FF;
-            --pastel-mint: #D8F3DC;
-            --pastel-blue: #E0F2FE;
-            --pastel-cream: #FFFDF5;
-            --deep-blue: #2D3047;
-            --sidebar-bg: #FFFFFF;
-            --ai-blue: #0A1128;
-            --gold: #D4AF37;
+            /* Palette pql.jpg */
+            --p-accent-orange: #D59D80;
+            --bg-body: #FFFDF5;
+            --bg-sidebar: #FFFFFF;
+            --text-main: #0D1D25; 
+            --border-ui: #E2E8F0;
+            /* Couleurs des blocs en mode clair (plus de bleu fade) */
+            --card-profil: #FFE5D9; 
+            --card-stats: #F9F9FB; 
         }
-        @layer base {
-            body {
-                @apply font-['Comfortaa'] bg-[var(--pastel-cream)] text-slate-800 text-[13px] md:text-[14px];
-            }
+
+        .dark {
+            --bg-body: #050A18;
+            --bg-sidebar: #0B1224; 
+            --text-main: #F1F5F9;
+            --border-ui: rgba(255,255,255,0.08);
+            --card-profil: #0D1528;
+            --card-stats: #0F172A;
         }
-        .soft-shadow {
-            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.03);
-        }
-        .sidebar-shadow {
-            box-shadow: 4px 0 30px -5px rgba(0,0,0,0.02);
-        }
-        .premium-card {
-            @apply rounded-[2.5rem] border border-white/60 shadow-sm transition-all duration-300 bg-white;
-            box-shadow: 0 15px 35px -15px rgba(0,0,0,0.05);
-        }
-        .premium-card:hover {
-            @apply shadow-md -translate-y-1;
-        }
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 5px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: rgba(0,0,0,0.05);
-            border-radius: 20px;
-        }
+* {
+  box-sizing: border-box;
+}
+
+      @layer base {
+  html, body { overflow-x: hidden; }
+
+  body {
+    @apply font-['Comfortaa'] transition-colors duration-300;
+    background-color: var(--bg-body);
+    color: var(--text-main);
+  }
+}
+
+
         .nav-item {
-            @apply flex items-center gap-3 px-5 py-3 rounded-[1.5rem] transition-all duration-300 w-full;
+            @apply flex items-center gap-3 px-5 py-3 rounded-[1.5rem] transition-all duration-300 w-full text-slate-500;
         }
         .nav-item.active {
-            @apply bg-[var(--pastel-peach)] text-slate-900 font-bold;
-        }
-        .nav-item:not(.active) {
-            @apply text-slate-400 hover:bg-white hover:text-slate-900;
-        }
-        .nav-icon {
-            @apply text-[22px] font-light;
-        }
-        #mobile-menu-toggle:checked ~ aside {
-            @apply translate-x-0;
-        }
-        #mobile-menu-toggle:checked ~ .overlay {
-            @apply block;
-        }
-        .ai-fab {
-            @apply fixed bottom-24 lg:bottom-10 right-6 md:right-10 w-16 h-16 rounded-full bg-[var(--ai-blue)] border-2 border-[var(--gold)] flex items-center justify-center shadow-2xl z-50 transition-all hover:scale-110 active:scale-95;
+            @apply bg-[var(--p-accent-orange)] text-white font-bold shadow-lg shadow-orange-900/10;
         }
     </style>
-    <script>
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        'pastel-peach': "#FFE5D9",
-                        'pastel-lavender': "#E2E2FF",
-                        'pastel-mint': "#D8F3DC",
-                        'pastel-blue': "#E0F2FE",
-                        'pastel-cream': "#FFFDF5",
-                        'deep-blue': "#2D3047",
-                        'ai-blue': "#0A1128",
-                        'gold': "#D4AF37",
-                    },
-                    borderRadius: {
-                        '4xl': '2rem',
-                        '5xl': '2.5rem',
-                        '6xl': '3rem',
-                    }
-                },
-            },
-        };
-    </script>
 </head>
-
 <div id="avatarModal"
     class="fixed inset-0 bg-black/40 backdrop-blur-sm hidden z-[100] flex items-center justify-center">
     <div class="bg-white rounded-[2rem] p-8 max-w-xl w-full mx-4 shadow-2xl">
@@ -122,100 +80,79 @@
     </div>
 </div>
 
-
-<body class="antialiased overflow-hidden h-screen bg-[var(--pastel-cream)]">
+<body class="antialiased min-h-screen overflow-x-hidden">
     <input class="hidden peer" id="mobile-menu-toggle" type="checkbox" />
-    <label class="overlay fixed inset-0 bg-slate-900/20 backdrop-blur-sm z-[60] hidden"
+    <label class="overlay fixed inset-0 bg-slate-900/20 dark:bg-slate-950/80 backdrop-blur-sm z-[60] hidden"
         for="mobile-menu-toggle"></label>
-    <div class="flex h-full w-full relative">
+
+    <div class="flex min-h-screen max-w-full relative overflow-x-hidden">
         <aside
-            class="fixed inset-y-0 left-0 w-60 lg:w-60 flex flex-col py-8 px-5 bg-white dark:bg-slate-900 backdrop-blur-lg lg:m-4 rounded-none lg:rounded-[2.5rem] sidebar-shadow z-50 transition-transform duration-300 -translate-x-full lg:translate-x-0 h-full lg:h-[calc(100vh-2rem)]">
+            class="hidden lg:flex fixed inset-y-0 left-0 w-64 flex-col py-8 px-5 bg-[var(--bg-sidebar)] lg:m-4 rounded-none lg:rounded-[2.5rem] z-50 h-full lg:h-[calc(100vh-2rem)] border-r border-[var(--border-ui)] lg:border">
+
             <div class="mb-10 flex items-center gap-4 px-2">
-                <img alt="Djangou Logo" class="w-10 h-10 rounded-2xl object-cover shadow-sm"
+                <img alt="Logo" class="w-10 h-10 rounded-2xl object-cover"
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVbD8r7TQ1HR16-jw_LU5rKniTtg6gAx9c_PSjY8U4_O6a_NReR941y8yZJxohlB_aLrNZ-XfA_3LTBlWo2iqmLfihsijkGaY26VxpP3iXzS2m3r19DJZdJ4GnwJ80wIXFUId2f2ewRCl1D26AVwVQmVxEG_aMoFSaHvStZmYuJEOfbmJ3nwJtGHWutF7A8F6sSvSDnM_JU6kf3sClonjyqARh5sJVsGhX53jMGF8bO3y3-LLqmCOjMZTGtuCqFFpkdjRXu_rj9gxJ" />
-                <span class="text-xl font-bold text-slate-800 tracking-tight">Djangou</span>
+                <span class="text-xl font-bold tracking-tight">Djangou</span>
                 <label class="lg:hidden ml-auto p-2 cursor-pointer" for="mobile-menu-toggle">
-                    <span class="material-symbols-outlined text-xl">close</span>
+                    <span class="material-symbols-outlined">close</span>
                 </label>
             </div>
-            <nav class="flex flex-col gap-2 flex-1 overflow-y-auto custom-scrollbar">
-                <a class="nav-item" href="dashboard-teacher.html">
-                    <span class="material-symbols-outlined nav-icon">grid_view</span>
-                    <span class="text-[12px] font-medium">Tableau de Bord</span>
-                </a>
-                <a class="nav-item" href="#">
-                    <span class="material-symbols-outlined nav-icon">auto_stories</span>
-                    <span class="text-[12px] font-medium">Ma Matière</span>
-                </a>
-                <a class="nav-item" href="messagerie-teacher.html">
-                    <div class="relative">
-                        <span class="material-symbols-outlined nav-icon">chat_bubble</span>
-                        <span
-                            class="absolute top-0 right-0 w-2 h-2 bg-orange-400 border-2 border-white rounded-full"></span>
-                    </div>
-                    <span class="text-[12px] font-medium">Messages</span>
-                </a>
-                <a class="nav-item" href="notifs-teacher.html">
-                    <span class="material-symbols-outlined nav-icon">notifications</span>
-                    <span class="text-[12px] font-medium">Notifications</span>
-                </a>
-                <a class="nav-item active" href="#">
-                    <span class="material-symbols-outlined nav-icon">person</span>
-                    <span class="text-[12px] font-medium">Mon Profil</span>
-                </a>
+            <nav class="flex flex-col gap-2 flex-1 overflow-y-auto">
+                <a class="nav-item" href="dashboard-teacher.html"><span
+                        class="material-symbols-outlined">grid_view</span><span class="text-[12px]">Tableau de
+                        Bord</span></a>
+                <a class="nav-item" href="matiere-tuteur.html"><span
+                        class="material-symbols-outlined">auto_stories</span><span class="text-[12px]">Ma
+                        Matière</span></a>
+                <a class="nav-item" href="messagerie-teacher.html"><span
+                        class="material-symbols-outlined">chat_bubble</span><span
+                        class="text-[12px]">Messages</span></a>
+                <a class="nav-item active" href="profil-teacher.html"><span
+                        class="material-symbols-outlined">person</span><span class="text-[12px]">Mon Profil</span></a>
             </nav>
-            <div class="mt-auto pt-6 border-t border-slate-100 space-y-2">
-                <button class="nav-item" onclick="window.location.href='settings-tuteur.html'">
-                    <span class="material-symbols-outlined nav-icon">settings</span>
-                    <span class="text-[12px] font-medium">Paramètres</span>
-                </button>
-                <button class="nav-item text-rose-400 hover:bg-rose-50 hover:text-rose-500" id="logoutBtn">
-                    <span class="material-symbols-outlined nav-icon">logout</span>
-                    <span class="text-[12px] font-bold">Déconnexion</span>
-                </button>
+            <div class="mt-auto pt-6 border-t border-[var(--border-ui)] space-y-2">
+                <button class="nav-item" onclick="window.location.href='settings-tuteur.html'"><span
+                        class="material-symbols-outlined">settings</span><span
+                        class="text-[12px]">Paramètres</span></button>
+                <button id="logoutBtn" class="nav-item text-rose-500 font-bold"><span
+                        class="material-symbols-outlined">logout</span><span
+                        class="text-[12px]">Déconnexion</span></button>
             </div>
         </aside>
         <main
-            class="flex-1 flex flex-col min-w-0 h-full overflow-y-auto custom-scrollbar px-4 py-6 md:px-8 lg:pl-[17rem] lg:pr-10">
+            class="flex-1 flex flex-col min-w-0 h-full overflow-y-auto overflow-x-hidden px-4 py-6 md:px-8 lg:pl-[18rem] lg:pr-10">
+
             <header class="flex items-center justify-between gap-4 mb-8">
+
                 <div class="flex items-center gap-5">
-                    <label
-                        class="lg:hidden w-11 h-11 flex items-center justify-center bg-white rounded-2xl shadow-sm border border-slate-100 text-slate-600 cursor-pointer"
-                        for="mobile-menu-toggle">
-                        <span class="material-symbols-outlined text-2xl">menu</span>
-                    </label>
+                    <button id="logoutBtnMobile"
+                        class="lg:hidden w-11 h-11 flex items-center justify-center rounded-2xl border border-[var(--border-ui)] text-rose-500 bg-[var(--bg-sidebar)]"><span
+                            class="material-symbols-outlined">logout</span></button>
                     <div>
-                        <h1 class="text-xl md:text-2xl font-bold text-slate-900 tracking-tight">Mon Profil</h1>
-                        <p class="text-slate-400 mt-1 text-xs md:text-sm">Consultez et modifiez vos informations
+                        <h1 class="text-xl md:text-2xl font-bold">Mon profil</h1>
+                        <p class="text-slate-400 mt-1 text-xs">Consultez vos informations
                             publiques</p>
                     </div>
                 </div>
-                <div class="flex items-center gap-4">
-                    <div class="relative group hidden sm:block">
-                        <span class="absolute inset-y-0 left-4 flex items-center text-slate-400">
-                            <span class="material-symbols-outlined text-lg">search</span>
-                        </span>
-                        <input
-                            class="pl-12 pr-5 py-3 bg-white border-none rounded-2xl shadow-sm focus:ring-2 focus:ring-pastel-peach/50 w-48 md:w-64 transition-all placeholder:text-slate-400 text-xs"
-                            placeholder="Rechercher une conversation..." type="text" />
-                    </div>
 
-                    <div class="flex items-center gap-2 sm:gap-3">
-                        <div class="w-px h-5 bg-slate-100 mx-1"></div>
-                        <div class="flex items-center gap-3 pl-1 pr-3 py-1">
-                            <img alt="Profile"
-                                class="profile-avatar w-8 h-8 rounded-xl object-cover ring-2 ring-pastel-peach/30"
-                                src="/assets/avatars/avatardef.png" />
-                        </div>
-                        <div class="w-px h-6 bg-gray-300 dark:bg-gray-700 mx-1 hidden sm:block"></div>
-                        <button id="theme-toggle"
-                            class="p-2 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors text-slate-600 dark:text-white">
-                            <span class="material-symbols-outlined block dark:hidden">dark_mode</span>
-                            <span class="material-symbols-outlined hidden dark:block">light_mode</span>
-                        </button>
-                    </div>
+                <div class="flex items-center gap-4">
+                    <button id="lang-toggle" class="w-11 h-11 flex items-center justify-center
+         rounded-xl border border-[var(--border-ui)]
+         bg-[var(--bg-sidebar)]
+         text-lg">
+                        🇫🇷
+                    </button>
+                    <button id="theme-toggle"
+                        class="p-2.5 rounded-xl border border-[var(--border-ui)] bg-[var(--bg-sidebar)] text-slate-600 dark:text-slate-300">
+                        <span class="material-symbols-outlined dark:hidden">dark_mode</span>
+                        <span class="material-symbols-outlined hidden dark:block">light_mode</span>
+                    </button>
+                    <a href="profil-teacher.html"><img alt="Profile"
+                            class="profile-avatar w-10 h-10 rounded-xl object-cover cursor-pointer"
+                            src="/assets/avatars/avatardef.png" /></a>
                 </div>
             </header>
+
             <div class="max-w-5xl space-y-10 pb-24">
                 <section>
                     <div class="premium-card p-8 md:p-12 relative overflow-hidden">
@@ -233,102 +170,89 @@
                             </div>
                             <div class="flex-1 text-center md:text-left">
                                 <div class="flex flex-col gap-2 mb-4">
-                                    <h2 class="text-3xl font-bold text-slate-900">Tuteur Thomas</h2>
-                                    <div class="flex flex-wrap items-center justify-center md:justify-start gap-3">
-                                        <span id="subject-text"
-                                            class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pastel-blue text-sky-700 text-sm font-bold w-fit">
-                                       
+                                    <h2 class="text-3xl font-bold tracking-tight">
+                                        <span class="text-[#D59D80]">Tuteur</span>
+                                        <span id="teacher-name" class="text-[#0D1D25]">
+                                            —
+                                        </span>
+                                    </h2>
 
+
+
+                                    <div class="flex flex-wrap items-center justify-center md:justify-start gap-3">
+                                        <span id="subject-text" class="inline-flex items-center
+         px-4 py-1.5
+         rounded-full
+         text-sm font-semibold
+         bg-[#C6C6D0]/60
+         text-[#104C64]
+         border border-[#104C64]/20
+         dark:bg-[#0D1D25]
+         dark:text-[#D59D80]
+         dark:border-white/10">
                                         </span>
-                                        <span
-                                            class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pastel-lavender text-indigo-700 text-sm font-bold w-fit">
-                                            <span class="material-symbols-outlined text-base">group</span>
-                                            24 étudiants suivis
-                                        </span>
+
+
+
+                                        <span class="material-symbols-outlined text-base">group</span>
+                                        <span id="students-count">0</span> étudiants suivis
+
                                     </div>
                                 </div>
                                 <p class="text-slate-500 leading-relaxed max-w-2xl text-sm md:text-base">
-                                    Passionné par les chiffres et la pédagogie, j'accompagne les élèves du collège au
-                                    lycée pour surmonter leurs difficultés en mathématiques. Ma méthode repose sur la
+                                    Passionné par mon domaine et la pédagogie, j'accompagne les élèves du collège à
+                                    l'université pour surmonter leurs difficultés. Ma méthode repose sur la
                                     bienveillance et la simplification des concepts complexes pour redonner confiance
-                                    aux étudiants.
+                                    aux apprentis.
                                 </p>
                                 <div class="mt-8 flex flex-wrap gap-6 justify-center md:justify-start">
                                     <div class="flex items-center gap-2 text-slate-400">
-                                        <span class="material-symbols-outlined text-lg">location_on</span>
-                                        <span class="text-xs font-medium">Paris, France</span>
-                                    </div>
-                                    <div class="flex items-center gap-2 text-slate-400">
-                                        <span class="material-symbols-outlined text-lg">language</span>
-                                        <span class="text-xs font-medium">Français, Anglais</span>
-                                    </div>
-                                    <div class="flex items-center gap-2 text-slate-400">
                                         <span class="material-symbols-outlined text-lg">calendar_today</span>
-                                        <span class="text-xs font-medium">Inscrit en Sept. 2023</span>
+                                        <span id="teacher-created-at" class="text-xs font-medium">
+                                            Chargement…
+                                        </span>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
                 </section>
-                <section>
-                    <div class="flex items-center gap-3 mb-6 px-2">
-                        <span
-                            class="w-10 h-10 rounded-xl bg-pastel-mint flex items-center justify-center text-emerald-700">
-                            <span class="material-symbols-outlined">psychology</span>
-                        </span>
-                        <h3 class="text-lg font-bold text-slate-900">Spécialités</h3>
-                    </div>
-                    <div class="premium-card p-8">
-                        <div class="flex flex-wrap gap-3">
-                            <span
-                                class="px-5 py-2.5 rounded-2xl bg-slate-50 text-slate-700 text-xs font-bold border border-slate-100">Algèbre
-                                linéaire</span>
-                            <span
-                                class="px-5 py-2.5 rounded-2xl bg-slate-50 text-slate-700 text-xs font-bold border border-slate-100">Géométrie
-                                analytique</span>
-                            <span
-                                class="px-5 py-2.5 rounded-2xl bg-slate-50 text-slate-700 text-xs font-bold border border-slate-100">Calcul
-                                différentiel</span>
-                            <span
-                                class="px-5 py-2.5 rounded-2xl bg-slate-50 text-slate-700 text-xs font-bold border border-slate-100">Probabilités</span>
-                            <span
-                                class="px-5 py-2.5 rounded-2xl bg-slate-50 text-slate-700 text-xs font-bold border border-slate-100">Statistiques</span>
-                            <span
-                                class="px-5 py-2.5 rounded-2xl bg-slate-50 text-slate-700 text-xs font-bold border border-slate-100">Préparation
-                                au Bac</span>
-                        </div>
-                    </div>
-                </section>
+
             </div>
         </main>
-        <button id="ai-fab" class="ai-fab group">
-            <span
-                class="material-symbols-outlined text-white text-3xl group-hover:rotate-12 transition-transform">smart_toy</span>
-            <span
-                class="absolute -top-12 right-0 bg-ai-blue text-white text-[10px] font-bold py-1.5 px-3 rounded-full opacity-0 group-hover:opacity-100 transition-all pointer-events-none whitespace-nowrap border border-gold/30">Assistant
-                IA</span>
+
+        <button id="ai-fab" class="fixed bottom-24 lg:bottom-10 right-4 max-w-[calc(100vw-1rem)]
+ w-16 h-16 rounded-full bg-[#0A1128] border-2 border-[#D4AF37] flex items-center justify-center shadow-2xl z-50">
+            <span class="material-symbols-outlined text-white text-3xl">smart_toy</span>
         </button>
+
         <nav
-            class="lg:hidden fixed bottom-4 inset-x-4 bg-white/95 backdrop-blur-md h-16 rounded-2xl shadow-xl flex items-center justify-around px-6 z-30 border border-slate-100">
+            class="lg:hidden fixed bottom-4 left-4 right-4
+ bg-[var(--bg-sidebar)]/95 backdrop-blur-md h-16 rounded-2xl shadow-2xl flex items-center justify-around px-6 z-[40] border border-[var(--border-ui)]">
             <a class="flex flex-col items-center gap-1 text-slate-400" href="dashboard-teacher.html">
-                <span class="material-symbols-outlined text-2xl">grid_view</span>
+                <span class="material-symbols-outlined">grid_view</span>
                 <span class="text-[8px] font-bold uppercase tracking-widest">Accueil</span>
             </a>
-            <a class="flex flex-col items-center gap-1 text-slate-400" href="#">
-                <span class="material-symbols-outlined text-2xl">auto_stories</span>
+            <a class="flex flex-col items-center gap-1 text-slate-400" href="matiere-tuteur.html">
+                <span class="material-symbols-outlined">auto_stories</span>
                 <span class="text-[8px] font-bold uppercase tracking-widest">Cours</span>
             </a>
-            <a class="flex flex-col items-center gap-1 text-slate-900 font-bold" href="#">
-                <span class="material-symbols-outlined text-2xl">person</span>
+            <a class="flex flex-col items-center gap-1 text-slate-400" href="messagerie-teacher.html">
+                <span class="material-symbols-outlined">chat_bubble</span>
+                <span class="text-[8px] font-bold uppercase tracking-widest">Chats</span>
+            </a>
+            <a class="flex flex-col items-center gap-1 text-[var(--p-accent-orange)]" href="#">
+                <span class="material-symbols-outlined">person</span>
                 <span class="text-[8px] font-bold uppercase tracking-widest">Profil</span>
             </a>
             <a class="flex flex-col items-center gap-1 text-slate-400" href="settings-tuteur.html">
-                <span class="material-symbols-outlined text-2xl">settings</span>
+                <span class="material-symbols-outlined">settings</span>
                 <span class="text-[8px] font-bold uppercase tracking-widest">Réglages</span>
             </a>
         </nav>
     </div>
+
     <script type="module" src="/js/auth/logout.js"></script>
     <script src="/js/utils/dark-white.js"></script>
     <script type="module">
@@ -340,6 +264,64 @@
     <script type="module" src="/js/utils/IconeIA.js"></script>
     <script src="/js/peer/test.js" defer></script>
     <script type="module" src="/js/utils/subject.js"></script>
+    <script type="module">
+        import { auth } from "/js/auth/firebase-config.js";
+        import { loadTeacherConversations } from "/js/ai/history.js";
+
+        auth.onAuthStateChanged(async (user) => {
+            if (!user) return;
+
+            const conversations = await loadTeacherConversations(user.uid);
+            const count = conversations.length;
+
+            const followed = document.getElementById("students-count");
+            if (followed) followed.textContent = count;
+
+            const inscrits = document.getElementById("students-count-inscrits");
+            if (inscrits) inscrits.textContent = count;
+        });
+    </script>
+    <script type="module">
+        import { auth, db } from "/js/auth/firebase-config.js";
+        import { doc, getDoc } from
+            "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        auth.onAuthStateChanged(async (user) => {
+            if (!user) return;
+
+            const snap = await getDoc(doc(db, "teachers", user.uid));
+            if (!snap.exists()) return;
+
+            document.querySelectorAll("#teacher-name")
+                .forEach(el => el.textContent = snap.data().fullName);
+        });
+    </script>
+    <script type="module">import { auth, db } from "/js/auth/firebase-config.js";
+        import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        auth.onAuthStateChanged(async (user) => {
+            if (!user) return;
+
+            const snap = await getDoc(doc(db, "teachers", user.uid));
+            if (!snap.exists()) return;
+
+            const data = snap.data();
+
+            if (data.createdAt) {
+                const date = data.createdAt.toDate();
+
+                const formatted = date.toLocaleDateString("fr-FR", {
+                    month: "long",
+                    year: "numeric"
+                });
+
+                const el = document.getElementById("teacher-created-at");
+                if (el) {
+                    el.textContent = `Inscrit en ${formatted}`;
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>
