@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&amp;display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
-    <script src=""></script>
+   
     <script>
         tailwind.config = {
             darkMode: "class",
@@ -114,6 +114,12 @@
                 <span class="material-icons-round text-2xl">settings</span>
                 <span class="hidden lg:block ml-4 font-semibold">Paramètres</span>
             </a>
+            <a id="logoutBtn" class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
+                href="#">
+                <span class="material-icons-round text-2xl">logout</span>
+                <span class="hidden lg:block ml-5 font-semibold">Se déconnecter</span>
+            </a>
+        </div>
     </aside>
     <main class="flex-1 h-full overflow-y-auto overflow-x-hidden p-4 md:p-8 relative">
         <header class="flex justify-between items-center mb-8">
@@ -156,7 +162,7 @@
             class="bg-secondary dark:bg-gray-800 rounded-2xl p-6 mb-8 text-white relative overflow-hidden shadow-lg flex items-center justify-between">
             <div class="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-3xl -mr-16 -mt-16"></div>
             <div class="relative z-10 max-w-lg">
-                <div class="flex items-center gap-2 mb-2">
+                <div  class="flex items-center gap-2 mb-2">
                     <span
                         class="bg-white/20 px-2 py-0.5 rounded text-xs font-semibold uppercase tracking-wider backdrop-blur-sm">Nouveau</span>
                     <span class="text-primary font-bold text-sm">DeepSeek AI</span>
@@ -164,7 +170,7 @@
                 <h2 class="text-xl md:text-2xl font-bold mb-2">Besoin d'aide sur un devoir ?</h2>
                 <p class="text-gray-300 text-sm mb-4">Notre assistant IA est disponible 24/7 pour répondre à tes
                     questions et t'aider à progresser.</p>
-                <button
+                <button onclick=""
                     class="bg-primary hover:bg-dark-brown text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-colors shadow-lg flex items-center gap-2">
                     <span class="material-icons-round text-lg">smart_toy</span>
                     Discuter maintenant
@@ -363,6 +369,6 @@
             <span class="text-[10px] font-medium mt-1">Profil</span>
         </a>
     </div>
-
+<script type="module" src="../js/auth/logout.js"></script>
 </body>
 </html>
