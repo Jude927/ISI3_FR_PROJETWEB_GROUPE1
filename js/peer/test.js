@@ -283,7 +283,6 @@ function handleMobileChatOpen() {
       openHuman(id);
     }
 
-    // ✅ IMPORTANT : commun IA + humain
     handleMobileChatOpen();
   });
 });
