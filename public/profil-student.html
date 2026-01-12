@@ -4,202 +4,523 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Profil Étudiant Djangou Hybride</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&amp;display=swap"
-        rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
-    <style type="text/tailwindcss">
-        @layer base {
-            body {
-                font-family: 'Comfortaa', cursive;
+    <title>Djangou - Mon Profil student</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+        
+        .transition-smooth {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .ai-fab {
+            position: fixed;
+            bottom: 5rem;
+            right: 1.5rem;
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #D59D80 0%, #C0754D 100%);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(213, 157, 128, 0.3);
+            z-index: 50;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .ai-fab:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 35px rgba(213, 157, 128, 0.4);
+        }
+
+        .ai-fab:active {
+            transform: scale(0.95);
+        }
+
+        .ai-fab span {
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .ai-tooltip {
+            position: absolute;
+            bottom: calc(100% + 10px);
+            right: 0;
+            background: var(--background-dark, #2d2d2d);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            border: 1px solid rgba(213, 157, 128, 0.3);
+        }
+
+        .ai-fab:hover .ai-tooltip {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (min-width: 768px) {
+            .ai-fab {
+                bottom: 2rem;
+                right: 2rem;
             }
         }
-        :root {
-            --primary: #D59D80;
+
+        .loading-pulse {
+            animation: pulse 1.5s ease-in-out infinite;
         }
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .active-icon {
-            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
     </style>
     <script>
         tailwind.config = {
-            darkMode: 'class',
+            darkMode: "class",
             theme: {
                 extend: {
                     colors: {
                         primary: "#D59D80",
+                        secondary: "#2d2d2d",
+                        accent: "#104C64",
+                        cream: "#C6C6D0",
+                        "dark-brown": "#C0754D",
+                        "darker-brown": "#B6410F",
+                        "background-light": "#FFFFFF",
+                        "background-dark": "#0b0c0c",
+                        "card-light": "#F9F9F9",
+                        "card-dark": "#2d2d2d",
+                        "pastel-green": "#e0f2f1",
+                        "pastel-orange": "#fbe9e7",
+                        "pastel-purple": "#ede7f6",
+                        "pastel-blue": "#e3f2fd",
+                        "pastel-yellow": "#fffde7",
+                        "pastel-red": "#ffebee",
+                    },
+                    fontFamily: {
+                        display: ["Nunito", "sans-serif"],
+                        body: ["Nunito", "sans-serif"],
                     },
                     borderRadius: {
-                        DEFAULT: "1.25rem",
-                        'xl': '1.75rem',
-                        '2xl': '2.5rem',
-                        '3xl': '3.5rem',
+                        DEFAULT: "1rem",
+                        'xl': '1.5rem',
+                        '2xl': '2rem',
                     },
+                    screens: {
+                        'xs': '475px',
+                        '3xl': '1920px',
+                    }
                 },
             },
         };
     </script>
 </head>
 
-<body
-    class="antialiased h-screen overflow-hidden flex bg-[#FDFBF7] dark:bg-slate-900 text-slate-800 dark:text-slate-100 transition-colors duration-300">
-    <aside
-        class="flex flex-col w-20 h-full bg-white dark:bg-slate-800 border-r border-slate-200 dark:border-slate-700 p-4 items-center shrink-0 transition-colors">
-        <div class="mb-10 mt-2">
-            <div
-                class="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-primary/20">
+<body class="bg-background-light dark:bg-background-dark text-secondary dark:text-gray-100 transition-colors duration-300 font-body antialiased h-screen overflow-hidden flex flex-col md:flex-row">
+    <!-- Overlay pour menu mobile -->
+    <div id="sidebarOverlay" class="hidden fixed inset-0 bg-black/50 z-40 md:hidden"></div>
+
+    <!-- Sidebar pour desktop et tablette -->
+    <aside id="sidebar" class="hidden md:flex flex-col w-24 lg:w-64 h-full bg-card-light dark:bg-card-dark border-r border-gray-100 font-bold dark:border-gray-800 transition-all duration-300 p-4 fixed md:relative z-50 md:z-auto">
+        <div class="flex items-center justify-center lg:justify-start mb-10 px-2">
+            <button id="logoToggle" class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xl shadow-md hover:scale-105 transition-transform">
                 D
-            </div>
+            </button>
+            <span class="hidden lg:block ml-3 text-2xl font-bold text-primary tracking-wide">Djangou</span>
         </div>
-        <nav class="flex-1 flex flex-col gap-6">
-            <a class="p-3 rounded-2xl text-slate-400 dark:text-slate-500 hover:bg-primary/10 hover:text-primary transition-all"
+        <nav class="flex-1 flex flex-col gap-2">
+            <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
                 href="dashboard-student.html">
-                <span class="material-symbols-outlined text-2xl">home</span>
+                <span class="material-icons-round text-2xl">home</span>
+                <span class="hidden lg:block ml-4 font-semibold">Accueil</span>
             </a>
-            <a class="p-3 rounded-2xl text-slate-400 dark:text-slate-500 hover:bg-primary/10 hover:text-primary transition-all"
+            <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
+                href="matiere-student.html">
+                <span class="material-icons-round text-2xl">school</span>
+                <span class="hidden lg:block ml-4 font-semibold">Matières</span>
+            </a>
+            <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
+                href="chat-student.html">
+                <span class="material-icons-round text-2xl">chat_bubble</span>
+                <span class="hidden lg:block ml-4 font-semibold">Messages</span>
+            </a>
+           
+            <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary transition-colors hover:bg-primary/20"
                 href="#">
-                <span class="material-symbols-outlined text-2xl">school</span>
-            </a>
-            <a class="p-3 rounded-2xl text-slate-400 dark:text-slate-500 hover:bg-primary/10 hover:text-primary transition-all"
-                href="#">
-                <span class="material-symbols-outlined text-2xl relative">
-                    chat_bubble
-
-                </span>
-            </a>
-
-            <a class="p-3 rounded-2xl bg-primary/10 text-primary transition-all shadow-sm" href="#">
-                <span class="material-symbols-outlined text-2xl active-icon">person</span>
+                <span class="material-icons-round text-2xl">person</span>
+                <span class="hidden lg:block ml-4 font-semibold">Profil</span>
             </a>
         </nav>
-        <div class="mt-auto flex flex-col gap-6 mb-4">
-            <a class="p-3 rounded-2xl text-slate-400 dark:text-slate-500 hover:text-red-400 transition-all" href="#">
-                <span class="material-symbols-outlined text-2xl">logout</span>
+
+        <div class="mt-auto flex flex-col gap-2">
+            <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
+                href="settings-student.html">
+                <span class="material-icons-round text-2xl">settings</span>
+                <span class="hidden lg:block ml-4 font-semibold">Paramètres</span>
             </a>
+            <button id="logoutBtn" class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors">
+                <span class="material-icons-round text-2xl">logout</span>
+                <span class="hidden lg:block ml-4 font-semibold">Se déconnecter</span>
+            </button>
         </div>
     </aside>
-    <main class="flex-1 h-full overflow-y-auto p-4 md:p-8 lg:p-12">
-        <div class="max-w-5xl mx-auto space-y-8">
-            <div
-                class="bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-[2.5rem] p-6 md:p-10 flex flex-col md:flex-row items-center gap-8 shadow-xl shadow-black/5 relative overflow-hidden transition-colors">
-                <div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full -mr-32 -mt-32"></div>
-                <div class="relative">
-                    <img alt="Avatar"
-                        class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-white dark:border-slate-700 shadow-2xl ring-4 ring-primary/20"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-AbkTik24Q_rCpbwewky4ZNDDaZEgHurujCH9wklsbcw_6uItxbsjn7i2dkv_ZtfNMQRXqu_fAVPcAARqSCjNRvIg2a5rQgFMrEZVKZtRT5cUqAuYAXhx1AQI4xVSHOHQWJhurnwDHpju3BxI1Dp4asewISJXQri1p0VUBK8Z9wVjN5cXUzqmrZWgPwdGZACaZNl5uQic8_b3WrIsnA9wTsmSbxdJMsTUsrnvBgAfm-dGg5uO6SBhLEjQHHrZpTo18bxALyWoZn8" />
-                    <button
-                        class="absolute bottom-1 right-1 bg-primary text-white p-2 rounded-full shadow-lg hover:scale-110 transition-transform">
-                        <span class="material-symbols-outlined text-sm">edit</span>
-                    </button>
+
+    <!-- Sidebar mobile -->
+    <aside id="mobileSidebar" class="md:hidden fixed top-0 left-0 h-full w-64 bg-card-light dark:bg-card-dark border-r border-gray-100 dark:border-gray-800 z-50 transform -translate-x-full transition-transform duration-300">
+        <div class="p-6 border-b border-gray-100 dark:border-gray-800">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xl">
+                    D
                 </div>
-                <div class="text-center md:text-left space-y-2 relative z-10">
-                    <div
-                        class="inline-flex items-center px-3 py-1 rounded-full bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400 text-xs font-bold mb-2">
-                        ÉTUDIANTE ACTIVE
-                    </div>
-                    <h1 class="text-3xl md:text-4xl font-bold text-slate-800 dark:text-slate-100">Lisha Lokwani</h1>
-                    <p
-                        class="text-slate-500 dark:text-slate-400 flex items-center justify-center md:justify-start gap-2">
-                        <span class="material-symbols-outlined text-sm">mail</span>
-                        lisha.lokwani@univ-djangou.fr
-                    </p>
-                    <div class="flex flex-wrap items-center justify-center md:justify-start gap-4 mt-4">
-                        <div class="flex items-center gap-2 px-4 py-2 bg-orange-50 dark:bg-orange-900/20 rounded-xl">
-                            <span class="material-symbols-outlined text-orange-500">workspace_premium</span>
-                            <span class="text-sm font-semibold text-slate-700 dark:text-slate-200">Master 2 IA</span>
-                        </div>
-                        <div class="flex items-center gap-2 px-4 py-2 bg-purple-50 dark:bg-purple-900/20 rounded-xl">
-                            <span class="material-symbols-outlined text-purple-500">military_tech</span>
-                            <span class="text-sm font-semibold text-slate-700 dark:text-slate-200">Score: 2450
-                                pts</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="md:ml-auto flex gap-3 relative z-10">
-                    <button
-                        class="p-3 rounded-2xl bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 hover:bg-primary/5 text-slate-500 dark:text-slate-300">
-                        <span class="material-symbols-outlined">settings</span>
-                    </button>
-                    <button
-                        class="px-6 py-3 rounded-2xl bg-primary text-white font-bold shadow-lg shadow-primary/20 hover:scale-105 transition-all">
-                        Modifier le profil
-                    </button>
-                </div>
-            </div>
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div class="lg:col-span-1 space-y-8">
-                    <div
-                        class="bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 p-6 rounded-3xl shadow-sm transition-colors">
-                        <h3 class="font-bold text-lg mb-6 flex items-center gap-2 text-slate-800 dark:text-slate-100">
-                            <span class="material-symbols-outlined text-primary">info</span>
-                            Informations
-                        </h3>
-                        <div class="space-y-4">
-                            <div>
-                                <label
-                                    class="text-xs text-slate-400 dark:text-slate-500 uppercase tracking-wider font-bold">Localisation</label>
-                                <p class="text-slate-800 dark:text-slate-200 font-medium mt-1">Paris, France</p>
-                            </div>
-                            <div>
-                                <label
-                                    class="text-xs text-slate-400 dark:text-slate-500 uppercase tracking-wider font-bold">Inscrite
-                                    depuis</label>
-                                <p class="text-slate-800 dark:text-slate-200 font-medium mt-1">Septembre 2023</p>
-                            </div>
-                            <div>
-                                <label
-                                    class="text-xs text-slate-400 dark:text-slate-500 uppercase tracking-wider font-bold">Bio</label>
-                                <p class="text-slate-800 dark:text-slate-200 text-sm mt-1 leading-relaxed">Passionnée
-                                    par le machine learning et le tutorat collaboratif. Toujours prête à aider !</p>
-                            </div>
-                        </div>
-                        
-                    </div>
-                    <div
-                        class="bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 p-6 rounded-3xl shadow-sm transition-colors">
-                        <h3 class="font-bold text-lg mb-4 flex items-center gap-2 text-slate-800 dark:text-slate-100">
-                            <span class="material-symbols-outlined text-primary">translate</span>
-                            Langue
-                        </h3>
-                        <div
-                            class="flex items-center gap-4 p-4 bg-primary/5 dark:bg-primary/10 rounded-2xl border border-primary/20 transition-colors">
-                            <span class="text-3xl">🇫🇷</span>
-                            <div class="flex-1">
-                                <p class="font-bold text-slate-800 dark:text-slate-100">Français</p>
-                                <p class="text-xs text-slate-400 dark:text-slate-500">Langue par défaut</p>
-                            </div>
-                            <span class="material-symbols-outlined text-primary">check_circle</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="lg:col-span-2">
-                    
-                </div>
+                <span class="text-2xl font-bold text-primary">Djangou</span>
             </div>
         </div>
+        <nav class="p-4 flex flex-col gap-2">
+            <a class="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400"
+                href="dashboard-student.html">
+                <span class="material-icons-round">home</span>
+                <span class="font-semibold">Accueil</span>
+            </a>
+            <a class="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400"
+                href="matiere-student.html">
+                <span class="material-icons-round">school</span>
+                <span class="font-semibold">Matières</span>
+            </a>
+                
+            <a class="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400"
+                href="chat-student.html">
+                <span class="material-icons-round">chat_bubble</span>
+                <span class="font-semibold">Messages</span>
+            </a>
+           
+            <a class="flex items-center gap-4 p-3 rounded-xl bg-primary/10 text-primary dark:bg-primary/20"
+                href="#">
+                <span class="material-icons-round">person</span>
+                <span class="font-semibold">Profil</span>
+            </a>
+            <a class="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400"
+                href="settings-student.html">
+                <span class="material-icons-round">settings</span>
+                <span class="font-semibold">Paramètres</span>
+            </a>
+            <a class="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 mt-4">
+                <span class="material-icons-round">logout</span>
+                <span class="font-semibold">Se déconnecter</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Contenu principal -->
+    <main class="flex-1 h-full overflow-y-auto overflow-x-hidden p-4 md:p-6 lg:p-8 relative w-full">
+        <header class="flex justify-between items-center mb-6 md:mb-8">
+            <div class="md:hidden flex items-center gap-3">
+                <button id="mobileMenuBtn" class="text-gray-600 dark:text-gray-300 p-1">
+                    <span class="material-icons-round text-3xl">menu</span>
+                </button>
+                <span class="text-xl font-bold text-primary">Djangou</span>
+            </div>
+            <div class="hidden md:block">
+                <h1 class="text-2xl font-bold text-secondary dark:text-white">Mon Profil student</h1>
+                <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Consultez et modifiez vos informations publiques</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="relative hidden md:block">
+                    <span class="absolute inset-y-0 left-4 flex items-center text-gray-400">
+                        <span class="material-icons-round text-lg">search</span>
+                    </span>
+                    <input class="pl-12 pr-5 py-3 bg-white dark:bg-gray-800 border-none rounded-xl shadow-sm focus:ring-2 focus:ring-primary/50 w-48 lg:w-64 transition-all placeholder:text-gray-400 text-sm"
+                           placeholder="Rechercher..." type="text" />
+                </div>
+                <div class="flex items-center gap-3 pl-2 md:pl-4 border-l border-gray-200 dark:border-gray-700">
+                    <div class="text-right hidden sm:block">
+                        <p id="userName" class="text-sm font-bold text-secondary dark:text-white loading-pulse">Chargement...</p>
+                        <p id="userRole" class="text-xs text-gray-500 dark:text-gray-400 loading-pulse">Chargement...</p>
+                    </div>
+                    <img id="userAvatar" alt="Avatar student"
+                         class="w-10 h-10 rounded-full object-cover border-2 border-primary shadow-sm loading-pulse"
+                         src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f3f4f6'/%3E%3C/svg%3E" />
+                </div>
+            </div>
+        </header>
+
+        <!-- Section Profil Principal -->
+        <div class="max-w-4xl mx-auto space-y-6 md:space-y-8">
+            <!-- Carte de profil -->
+            <section id="profileCard" class="bg-white dark:bg-card-dark rounded-2xl p-6 md:p-8 shadow-lg border border-gray-100 dark:border-gray-800 loading-pulse">
+                <div class="flex flex-col md:flex-row items-center md:items-start gap-8">
+                    <div class="relative">
+                        <img id="profileAvatar" alt="student"
+                             class="w-32 h-32 md:w-44 md:h-44 rounded-2xl object-cover shadow-lg ring-4 ring-primary/20"
+                             src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f3f4f6'/%3E%3C/svg%3E" />
+                        <div id="onlineStatus" class="absolute -bottom-2 -right-2 w-10 h-10 bg-emerald-500 border-4 border-white dark:border-card-dark rounded-full flex items-center justify-center hidden">
+                            <span class="material-icons-round text-white text-lg">check</span>
+                        </div>
+                    </div>
+                    <div class="flex-1 text-center md:text-left">
+                        <div class="flex flex-col gap-3 mb-4">
+                            <h2 id="profileName" class="text-3xl font-bold text-secondary dark:text-white">Chargement...</h2>
+                            <div class="flex flex-wrap items-center justify-center md:justify-start gap-3">
+                                <span id="subjectBadge" class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pastel-blue dark:bg-blue-900/30 text-accent dark:text-blue-300 text-sm font-bold loading-pulse">
+                                    <span class="material-icons-round text-base">calculate</span>
+                                    <span id="subjectText">Chargement...</span>
+                                </span>
+                                <span id="studentsBadge" class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pastel-purple dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 text-sm font-bold loading-pulse">
+                                    <span class="material-icons-round text-base">group</span>
+                                    <span id="studentsCount">Chargement...</span>
+                                </span>
+                            </div>
+                        </div>
+                        <p id="profileBio" class="text-gray-600 dark:text-gray-300 leading-relaxed max-w-2xl text-sm md:text-base mb-6 loading-pulse">
+                            Chargement de la biographie...
+                        </p>
+                        <div id="profileDetails" class="flex flex-wrap gap-4 md:gap-6 justify-center md:justify-start text-sm loading-pulse">
+                            <div class="flex items-center gap-2 text-gray-500 dark:text-gray-400">
+                                <span class="material-icons-round text-lg">location_on</span>
+                                <span id="locationText" class="font-medium">Chargement...</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-gray-500 dark:text-gray-400">
+                                <span class="material-icons-round text-lg">language</span>
+                                <span id="languagesText" class="font-medium">Chargement...</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-gray-500 dark:text-gray-400">
+                                <span class="material-icons-round text-lg">calendar_today</span>
+                                <span id="joinDate" class="font-medium">Chargement...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Espace pour la navbar mobile -->
+        <div class="h-16 md:hidden"></div>
     </main>
-    <div
-        class="md:hidden fixed bottom-0 w-full bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 flex justify-around p-3 z-50 transition-colors">
-        <a class="flex flex-col items-center text-slate-400 dark:text-slate-500" href="#">
-            <span class="material-symbols-outlined">dashboard</span>
-            <span class="text-[10px] font-bold mt-1">Accueil</span>
-        </a>
-        <a class="flex flex-col items-center text-slate-400 dark:text-slate-500" href="#">
-            <span class="material-symbols-outlined">school</span>
-            <span class="text-[10px] font-medium mt-1">Cours</span>
-        </a>
-        <a class="flex flex-col items-center text-primary" href="#">
-            <span class="material-symbols-outlined active-icon">person</span>
-            <span class="text-[10px] font-medium mt-1">Profil</span>
-        </a>
-    </div>
 
+    <!-- Barre de navigation mobile -->
+    <nav class="md:hidden fixed bottom-0 w-full bg-white dark:bg-card-dark border-t border-gray-100 dark:border-gray-800 flex justify-around p-3 z-40">
+        <a class="flex flex-col items-center text-gray-400 dark:text-gray-500 p-2 rounded-lg transition-colors hover:text-primary" href="dashboard-teacher.html">
+            <span class="material-icons-round text-xl">home</span>
+            <span class="text-xs font-medium mt-1">Accueil</span>
+        </a>
+        <a class="flex flex-col items-center text-gray-400 dark:text-gray-500 p-2 rounded-lg transition-colors hover:text-primary" href="#">
+            <span class="material-icons-round text-xl">school</span>
+            <span class="text-xs font-medium mt-1">Cours</span>
+        </a>
+        <a class="flex flex-col items-center text-primary p-2 rounded-lg transition-colors" href="#">
+            <span class="material-icons-round text-xl">person</span>
+            <span class="text-xs font-bold mt-1">Profil</span>
+        </a>
+        <a class="flex flex-col items-center text-gray-400 dark:text-gray-500 p-2 rounded-lg transition-colors hover:text-primary" href="settings-student.html">
+            <span class="material-icons-round text-xl">settings</span>
+            <span class="text-xs font-medium mt-1">Réglages</span>
+        </a>
+    </nav>
+
+    <!-- Bouton IA flottant -->
+    <button id="aiFab" class="ai-fab hidden md:block">
+        <span class="material-icons-round">smart_toy</span>
+        <div class="ai-tooltip">Assistant IA</div>
+    </button>
+
+    <!-- Scripts -->
+    <script type="module">
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileSidebar = document.getElementById('mobileSidebar');
+            const sidebarOverlay = document.getElementById('sidebarOverlay');
+            const logoutBtn = document.getElementById('logoutBtn');
+            const aiFab = document.getElementById('aiFab');
+            
+            function openMobileMenu() {
+                mobileSidebar.classList.remove('-translate-x-full');
+                sidebarOverlay.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            function closeMobileMenu() {
+                mobileSidebar.classList.add('-translate-x-full');
+                sidebarOverlay.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+            
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', openMobileMenu);
+            }
+            
+            if (sidebarOverlay) {
+                sidebarOverlay.addEventListener('click', closeMobileMenu);
+            }
+            
+            // Fermer le menu en cliquant sur un lien
+            mobileSidebar.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', closeMobileMenu);
+            });
+            
+            // Gestion du bouton IA
+            if (aiFab) {
+                aiFab.addEventListener('click', function() {
+                    localStorage.setItem("openIA", "true");
+                    window.location.href = "messagerie-teacher.html";
+                });
+            }
+            
+            // Gestion de la déconnexion
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function() {
+                    if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
+                        localStorage.removeItem('userToken');
+                        window.location.href = 'index.html';
+                    }
+                });
+            }
+            
+            // Gestion du redimensionnement
+            window.addEventListener('resize', function() {
+                if (window.innerWidth >= 768) {
+                    closeMobileMenu();
+                }
+            });
+        });
+    </script>
+    
+    <!-- Import des autres scripts -->
+    <script type="module" src="/js/auth/logout.js"></script>
+    <script type="module" src="/js/utils/dark-white.js"></script>
+    <script type="module">
+        import { protectPage } from "/js/utils/guards.js";
+        protectPage("student");
+    </script>
+    <script type="module" src="/js/utils/IconeIA.js"></script>
+    
+    <!-- Nouveau script pour charger les données du profil student -->
+    <script type="module">
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { db } from "/js/auth/firebase-config.js";
+        import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const auth = getAuth();
+
+        onAuthStateChanged(auth, async (user) => {
+            if (!user) {
+                window.location.href = "login.html";
+                return;
+            }
+
+            const userId = user.uid;
+            localStorage.setItem("userId", userId);
+
+            await chargerInfosstudent(userId);
+            await chargerSpecialites(userId);
+            await chargerStatistiques(userId);
+        });
+
+        async function chargerInfosstudent(userId) {
+            try {
+                const userRef = doc(db, "users", userId);
+                const userSnap = await getDoc(userRef);
+
+                if (!userSnap.exists()) {
+                    console.log("student introuvable");
+                    return;
+                }
+
+                const data = userSnap.data();
+
+                // Mettre à jour les éléments du header
+                const userNameEl = document.getElementById("userName");
+                const userRoleEl = document.getElementById("userRole");
+                const userAvatarEl = document.getElementById("userAvatar");
+                
+                if (userNameEl) {
+                    userNameEl.textContent = data.firstName || data.username || "Etudiant";
+                    userNameEl.classList.remove("loading-pulse");
+                }
+                
+                if (userRoleEl) {
+                    userRoleEl.textContent = "Professeur" + (data.class ? ` • ${data.class}` : "");
+                    userRoleEl.classList.remove("loading-pulse");
+                }
+                
+                if (userAvatarEl && data.avatar) {
+                    userAvatarEl.src = data.avatar;
+                    userAvatarEl.classList.remove("loading-pulse");
+                }
+
+                // Mettre à jour la carte de profil
+                const profileName = document.getElementById("profileName");
+                const profileAvatar = document.getElementById("profileAvatar");
+                const subjectText = document.getElementById("subjectText");
+                const studentsCount = document.getElementById("studentsCount");
+                const profileBio = document.getElementById("profileBio");
+                const locationText = document.getElementById("locationText");
+                const languagesText = document.getElementById("languagesText");
+                const joinDate = document.getElementById("joinDate");
+                const onlineStatus = document.getElementById("onlineStatus");
+                const profileCard = document.getElementById("profileCard");
+
+                if (profileName) profileName.textContent = data.firstName || data.username || "student";
+                if (profileAvatar && data.avatar) profileAvatar.src = data.avatar;
+                if (subjectText) subjectText.textContent = data.class || "Non spécifié";
+                if (profileBio) profileBio.textContent = data.bio || "Aucune biographie disponible.";
+                if (languagesText) languagesText.textContent = data.languages || "Français";
+                if (joinDate) {
+                    const joinDateText = data.creadAt ? `Inscrit en ${data.creadAt}` : "Date d'inscription non disponible";
+                    joinDate.textContent = joinDateText;
+                }
+                
+                if (onlineStatus && data.isOnline) {
+                    onlineStatus.classList.remove("hidden");
+                }
+
+                // Retirer l'animation de chargement
+                const profileDetails = document.getElementById("profileDetails");
+                const subjectBadge = document.getElementById("subjectBadge");
+                const studentsBadge = document.getElementById("studentsBadge");
+                
+                if (profileCard) profileCard.classList.remove("loading-pulse");
+                if (profileDetails) profileDetails.classList.remove("loading-pulse");
+                if (subjectBadge) subjectBadge.classList.remove("loading-pulse");
+                if (studentsBadge) studentsBadge.classList.remove("loading-pulse");
+                if (profileBio) profileBio.classList.remove("loading-pulse");
+
+            } catch (erreur) {
+                console.log("Erreur chargement student :", erreur);
+            }
+        }
+
+        a
+
+        
+    </script>
 </body>
-
 </html>
