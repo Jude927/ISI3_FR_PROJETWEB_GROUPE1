@@ -105,6 +105,41 @@
       bottom: -50px;
       left: -50px;
     }
+
+    .lang-switcher {
+      display: flex;
+      gap: 0.5rem;
+      background: white;
+      padding: 0.5rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(213, 157, 128, 0.1);
+      border: 2px solid var(--accent-peach);
+    }
+
+    .lang-btn {
+      padding: 0.5rem 1rem;
+      border-radius: 12px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      color: var(--text-dark);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .lang-btn:hover {
+      background: var(--accent-cream);
+    }
+
+    .lang-btn.active {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 2px 8px rgba(213, 157, 128, 0.3);
+    }
   </style>
 </head>
 <body>
@@ -113,13 +148,27 @@
 <div class="decorative-circle circle-2"></div>
 
 <div class="max-w-4xl mx-auto">
+  
+  <!-- Bouton de changement de langue -->
+  <div class="flex justify-end mb-6">
+    <div class="lang-switcher">
+      <button class="lang-btn active" id="btnFr" onclick="changeLanguage('fr')">
+        <span></span>
+        <span data-lang-label="fr">Français</span>
+      </button>
+      <button class="lang-btn" id="btnEn" onclick="changeLanguage('en')">
+        <span></span>
+        <span data-lang-label="en">English</span>
+      </button>
+    </div>
+  </div>
  
   <div class="text-center mb-8">
     <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[var(--primary)] to-[var(--primary-soft)] rounded-3xl shadow-lg mb-4">
       <span class="material-symbols-outlined text-white text-3xl">psychology</span>
     </div>
-    <h2 class="text-3xl font-bold text-[var(--text-dark)] mb-2">Chat IA pédagogique</h2>
-    <p class="text-sm text-[var(--primary)]">Votre assistant d'apprentissage personnalisé</p>
+    <h2 class="text-3xl font-bold text-[var(--text-dark)] mb-2" data-translate="title">Chat IA pédagogique</h2>
+    <p class="text-sm text-[var(--primary)]" data-translate="subtitle">Votre assistant d'apprentissage personnalisé</p>
   </div>
 
  
@@ -127,7 +176,7 @@
     <div class="flex items-center justify-center h-full text-gray-500">
       <div class="text-center">
         <span class="material-symbols-outlined text-6xl mb-3 text-[var(--primary-soft)]">chat</span>
-        <p class="text-sm">Commencez une conversation dans le cadre ci-joint...</p>
+        <p class="text-sm" data-translate="welcomeMsg">Commencez une conversation dans le cadre ci-joint...</p>
       </div>
     </div>
   </div>
@@ -139,14 +188,14 @@
       <div class="flex-1">
         <label class="block text-sm font-semibold text-[var(--text-dark)] mb-2 flex items-center gap-2">
           <span class="material-symbols-outlined text-[var(--primary)] text-lg">category</span>
-          Catégorie :
+          <span data-translate="categoryLabel">Catégorie :</span>
         </label>
         <select id="category" class="w-full px-4 py-3 bg-[var(--accent-cream)] border-2 border-[var(--primary-soft)] rounded-2xl text-[var(--text-dark)] font-medium cursor-pointer">
-          <option value="math"> Mathématiques</option>
-          <option value="physics"> Physique</option>
-          <option value="svt"> SVT</option>
-          <option value="literature"> Littérature Camerounaise</option>
-          <option value="it"> Informatique</option>
+          <option value="math"><span data-translate="math"> Mathématiques</span></option>
+          <option value="physics"><span data-translate="physics"> Physique</span></option>
+          <option value="svt"><span data-translate="svt"> SVT</span></option>
+          <option value="literature"><span data-translate="literature"> Littérature Camerounaise</span></option>
+          <option value="it"><span data-translate="it"> Informatique</span></option>
         </select>
       </div>
 
@@ -154,11 +203,11 @@
       <div class="flex-1">
         <label class="block text-sm font-semibold text-[var(--text-dark)] mb-2 flex items-center gap-2">
           <span class="material-symbols-outlined text-[var(--primary)] text-lg">language</span>
-          Langue :
+          <span data-translate="languageLabel">Langue :</span>
         </label>
         <select id="language" class="w-full px-4 py-3 bg-[var(--accent-cream)] border-2 border-[var(--primary-soft)] rounded-2xl text-[var(--text-dark)] font-medium cursor-pointer">
-          <option value="fr"> Français</option>
-          <option value="en"> English</option>
+          <option value="fr"><span data-translate="french">Français</span></option>
+          <option value="en"><span data-translate="english">English</span></option>
         </select>
       </div>
     </div>
@@ -167,10 +216,11 @@
     <div class="mb-4">
       <label class="block text-sm font-semibold text-[var(--text-dark)] mb-2 flex items-center gap-2">
         <span class="material-symbols-outlined text-[var(--primary)] text-lg">edit_note</span>
-        Votre question :
+        <span data-translate="questionLabel">Votre question :</span>
       </label>
       <textarea 
         id="prompt" 
+        data-translate-placeholder="questionPlaceholder"
         placeholder="Posez votre question ici..."
         class="w-full px-4 py-3 bg-[var(--accent-cream)] border-2 border-[var(--primary-soft)] rounded-2xl text-[var(--text-dark)] resize-none h-28 placeholder-gray-400"
       ></textarea>
@@ -182,7 +232,7 @@
       class="w-full bg-gradient-to-r from-[var(--primary)] to-[#C88A6E] text-white font-bold py-4 rounded-2xl shadow-lg flex items-center justify-center gap-2 hover:shadow-xl"
     >
       <span class="material-symbols-outlined">send</span>
-      Envoyer
+      <span data-translate="sendBtn">Envoyer</span>
     </button>
   </div>
 
@@ -190,10 +240,100 @@
   <div class="mt-6 text-center">
     <p class="text-xs text-gray-400 flex items-center justify-center gap-2">
       <span class="material-symbols-outlined text-sm">info</span>
-      Votre compagnon DeepSeek AI pour vous aider dans vos études.
+      <span data-translate="footer">Votre compagnon DeepSeek AI pour vous aider dans vos études.</span>
     </p>
   </div>
 </div>
+
+<script>
+  // Dictionnaire de traductions
+  const translations = {
+    fr: {
+      title: "Chat IA pédagogique",
+      subtitle: "Votre assistant d'apprentissage personnalisé",
+      welcomeMsg: "Commencez une conversation dans le cadre ci-joint...",
+      categoryLabel: "Catégorie :",
+      languageLabel: "Langue :",
+      math: " Mathématiques",
+      physics: " Physique",
+      svt: " SVT",
+      literature: " Littérature Camerounaise",
+      it: " Informatique",
+      french: "Français",
+      english: "English",
+      questionLabel: "Votre question :",
+      questionPlaceholder: "Posez votre question ici...",
+      sendBtn: "Envoyer",
+      footer: "Votre compagnon DeepSeek IA pour vous aider dans vos études."
+    },
+    en: {
+      title: "Educational AI Chat",
+      subtitle: "Your personalized learning assistant",
+      welcomeMsg: "Start a conversation in the frame below...",
+      categoryLabel: "Category:",
+      languageLabel: "Language:",
+      math: " Mathematics",
+      physics: " Physics",
+      svt: " Life Sciences",
+      literature: " Cameroonian Literature",
+      it: " Computer Science",
+      french: "French",
+      english: "English",
+      questionLabel: "Your question:",
+      questionPlaceholder: "Ask your question here...",
+      sendBtn: "Send",
+      footer: "Your DeepSeek AI companion to help you with your studies."
+    }
+  };
+
+  // Fonction pour changer la langue
+  function changeLanguage(lang) {
+    // Mettre à jour les boutons actifs
+    document.getElementById('btnFr').classList.toggle('active', lang === 'fr');
+    document.getElementById('btnEn').classList.toggle('active', lang === 'en');
+    
+    // Mettre à jour tous les textes avec data-translate
+    document.querySelectorAll('[data-translate]').forEach(element => {
+      const key = element.getAttribute('data-translate');
+      if (translations[lang][key]) {
+        element.textContent = translations[lang][key];
+      }
+    });
+
+    // Mettre à jour les options du select
+    const categorySelect = document.getElementById('category');
+    categorySelect.options[0].text = translations[lang].math;
+    categorySelect.options[1].text = translations[lang].physics;
+    categorySelect.options[2].text = translations[lang].svt;
+    categorySelect.options[3].text = translations[lang].literature;
+    categorySelect.options[4].text = translations[lang].it;
+
+    const languageSelect = document.getElementById('language');
+    languageSelect.options[0].text = translations[lang].french;
+    languageSelect.options[1].text = translations[lang].english;
+    
+    // Mettre à jour le placeholder
+    const promptInput = document.getElementById('prompt');
+    const placeholderKey = promptInput.getAttribute('data-translate-placeholder');
+    if (placeholderKey && translations[lang][placeholderKey]) {
+      promptInput.placeholder = translations[lang][placeholderKey];
+    }
+    
+    // Mettre à jour l'attribut lang du HTML
+    document.documentElement.lang = lang;
+    
+    // Sauvegarder la préférence
+    localStorage.setItem('preferredLanguage', lang);
+  }
+
+  // Charger la langue préférée au démarrage
+  window.addEventListener('DOMContentLoaded', () => {
+    const savedLang = localStorage.getItem('preferredLanguage');
+    if (savedLang && (savedLang === 'fr' || savedLang === 'en')) {
+      changeLanguage(savedLang);
+    }
+  });
+</script>
 
 <script type="module" src="../js/ai/deepseek.js"></script>
 

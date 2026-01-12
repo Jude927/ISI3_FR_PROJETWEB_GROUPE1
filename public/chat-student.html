@@ -17,11 +17,12 @@
                         accent: "#C6C6D0", // Beige
                         darktext: "#0D1D25", // Very dark teal/black
                         "background-light": "#F8F9FA", // Soft white/gray
-                        "background-dark": "#0D1D25", // Darkest color
+                        "background-dark": "#0b0c0c", // Darkest color
                         "surface-light": "#FFFFFF",
-                        "surface-dark": "#1A2E38", // Slightly lighter than bg-dark
+                        "surface-dark": "#2d2d2d", // Slightly lighter than bg-dark
                         "chat-bubble-me-light": "#D59D80",
                         "chat-bubble-me-dark": "#D59D80",
+                        
                         "chat-bubble-other-light": "#F0F0F0",
                         "chat-bubble-other-dark": "#2C3E4C",
                     },
@@ -96,6 +97,50 @@
         .dark .tooltip::before {
             border-bottom-color: #1A2E38;
         }
+
+        .lang-switcher {
+            display: flex;
+            gap: 0.5rem;
+            background: white;
+            padding: 0.5rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(213, 157, 128, 0.1);
+            border: 2px solid rgba(213, 157, 128, 0.2);
+        }
+
+        .dark .lang-switcher {
+            background: #2d2d2d;
+            border-color: rgba(213, 157, 128, 0.3);
+        }
+
+        .lang-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 12px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            color: #0D1D25;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .dark .lang-btn {
+            color: #F8F9FA;
+        }
+
+        .lang-btn:hover {
+            background: rgba(213, 157, 128, 0.1);
+        }
+
+        .lang-btn.active {
+            background: #D59D80;
+            color: white;
+            box-shadow: 0 2px 8px rgba(213, 157, 128, 0.3);
+        }
     </style>
 </head>
 <body class="bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-200 h-screen overflow-hidden flex transition-colors duration-300">
@@ -108,45 +153,81 @@
         class="fixed -bottom-64 -left-64 w-[800px] h-[800px] bg-yellow-50/80 dark:bg-gray-800/40 rounded-full border-2 border-gray-200/70 dark:border-gray-700/50 pointer-events-none -z-10">
     </div>
 
-    <aside class="w-20 flex-shrink-0 bg-surface-light dark:bg-surface-dark border-r border-gray-200 dark:border-gray-700 flex flex-col justify-between p-4 transition-all duration-300">
-<div>
-<div class="h-16 flex items-center justify-center mb-8">
-<div class="w-12 h-12 bg-primary rounded-2xl flex items-center justify-center text-white font-bold text-2xl shadow-lg shadow-primary/30">
-                    D
-                </div>
-</div>
-<nav class="space-y-4">
-<a class="flex items-center justify-center p-3 rounded-2xl text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-primary dark:hover:text-primary transition-colors group" href="dashboard-student.html" data-tooltip="Accueil">
-<span class="material-icons-outlined text-3xl group-hover:scale-110 transition-transform">home</span>
-</a>
-<a class="flex items-center justify-center p-3 rounded-2xl text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-primary dark:hover:text-primary transition-colors group" href="#" data-tooltip="Matières">
-<span class="material-icons-outlined text-3xl group-hover:scale-110 transition-transform">school</span>
-</a>
-<a class="flex items-center justify-center p-3 rounded-2xl bg-primary/10 text-primary dark:bg-primary/20 transition-colors shadow-sm" href="#" data-tooltip="Messages">
-<span class="material-icons-outlined text-3xl">chat_bubble_outline</span>
-</a>
-</nav>
-</div>
-<div>
-<div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 flex items-center justify-center cursor-pointer" data-tooltip="Profil">
-<img alt="Profile" class="w-12 h-12 rounded-full object-cover border-2 border-white dark:border-gray-600 shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpsGOIRySOv9VTidG7PaDTfqWRSp6wekLV7V691X5Eix6i51w6zX1FKSvA3zY-m17kjlKOfMV4MgehJ06cwtT4AA36nNeCqRKchvwHy0LX9rGC1oeXSrLtfpVYDkia_6GqPDi6Qq4135yjPpynjh42-WTamJr3wQlzncAFfeFuoG-EMj75_CJwx4mJxFJnrAq-jWVp2jIsU1No73b1yntsawb9VZFl81Toh_yUaP0P3TM2GcWa5dL5z6HUvqjmojPOXAkBOp1h4xg"/>
-</div>
-</div>
-</aside>
+    <aside id = "sidebar"
+        class="hidden md:flex flex-col w-24 lg:w-64 h-full bg-card-light dark:bg-surface-dark border-r border-gray-100 dark:border-gray-800 transition-all duration-300 p-4 ">
+        <div class="flex items-center justify-center lg:justify-start mb-10 px-2">
+            <button id="logoToggle"
+                class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xl shadow-md">
+                D
+            </button>
+            <span class="hidden lg:block ml-3 text-2xl font-bold text-primary tracking-wide">Djangou</span>
+        </div>
+        <nav class="flex-1 flex flex-col gap-2">
+            <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
+                href="dashboard-student.html">
+                <span class="material-icons-outlined text-2xl">home</span>
+                <span class="hidden lg:block ml-4 font-semibold" data-translate="nav-home">Accueil</span>
+            </a>
+            <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
+                href="matiere-student.html">
+                <span class="material-icons-outlined text-2xl">school</span>
+                <span class="hidden lg:block ml-4 font-semibold" data-translate="nav-subjects">Matières</span>
+            </a>
+            <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl  bg-primary/10 text-primary dark:bg-primary/20 transition-colors"
+                href="chat-student.html">
+                <span class="material-icons-outlined text-2xl">chat_bubble</span>
+                <span class="hidden lg:block ml-4 font-semibold" data-translate="nav-messages">Messages</span>
+            </a>
+
+            <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
+                href="#">
+                <span class="material-icons-outlined text-2xl">person</span>
+                <span class="hidden lg:block ml-4 font-semibold" data-translate="nav-profile">Profil</span>
+            </a>
+        </nav>
+
+        <div class="mt-auto flex flex-col gap-2">
+            <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
+                href="settings-student.html">
+                <span class="material-icons-outlined text-2xl">settings</span>
+                <span class="hidden lg:block ml-4 font-semibold" data-translate="nav-settings">Paramètres</span>
+            </a>
+            <a id="logoutBtn" class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
+                href="#">
+                <span class="material-icons-outlined text-2xl">logout</span>
+                <span class="hidden lg:block ml-5 font-semibold" data-translate="nav-logout">Se déconnecter</span>
+            </a>
+        </div>
+    </aside>
 <main class="flex-1 flex flex-col h-full relative overflow-hidden">
 <header class="h-20 flex items-center justify-between px-6 bg-surface-light dark:bg-surface-dark border-b border-gray-200 dark:border-gray-700 md:hidden z-20">
-<div class="font-bold text-xl text-darktext dark:text-white">Messages</div>
+<div class="font-bold text-xl text-darktext dark:text-white" data-translate="header-messages">Messages</div>
 <button class="text-gray-500 hover:text-primary" data-tooltip="Menu">
 <span class="material-icons-outlined text-2xl">menu</span>
 </button>
 </header>
+
+<!-- Bouton de changement de langue -->
+<div class="absolute top-6 right-6 z-30">
+    <div class="lang-switcher">
+        <button class="lang-btn active" id="btnFr" onclick="changeLanguage('fr')">
+            <span>🇫🇷</span>
+            <span data-lang-label="fr">Français</span>
+        </button>
+        <button class="lang-btn" id="btnEn" onclick="changeLanguage('en')">
+            <span>🇬🇧</span>
+            <span data-lang-label="en">English</span>
+        </button>
+    </div>
+</div>
+
 <div class="flex-1 flex overflow-hidden">
 <section class="w-full md:w-80 lg:w-96 bg-surface-light dark:bg-surface-dark border-r border-gray-200 dark:border-gray-700 flex flex-col z-10 absolute md:relative h-full transform transition-transform duration-300 md:translate-x-0" id="chatListPanel">
 <div class="p-6 pb-2">
-<h1 class="text-3xl font-bold text-darktext dark:text-white mb-6 hidden md:block">Messages</h1>
+<h1 class="text-3xl font-bold text-darktext dark:text-white mb-6 hidden md:block" data-translate="title-messages">Messages</h1>
 <div class="relative">
 <span class="material-icons-outlined absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-2xl">search</span>
-<input class="w-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200 pl-12 pr-4 py-4 rounded-3xl border-none focus:ring-2 focus:ring-primary focus:bg-white dark:focus:bg-gray-700 transition-all placeholder-gray-400 text-lg" placeholder="Rechercher..." type="text"/>
+<input class="w-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200 pl-12 pr-4 py-4 rounded-3xl border-none focus:ring-2 focus:ring-primary focus:bg-white dark:focus:bg-gray-700 transition-all placeholder-gray-400 text-lg" data-translate-placeholder="search-placeholder" placeholder="Rechercher..." type="text"/>
 </div>
 </div>
 <div class="h-4"></div>
@@ -162,9 +243,9 @@
 <div class="ml-4 flex-1 overflow-hidden">
 <div class="flex justify-between items-baseline">
 <h3 class="font-bold text-darktext dark:text-white text-lg">DeepSeek</h3>
-<span class="text-base text-primary font-medium">Maintenant</span>
+<span class="text-base text-primary font-medium" data-translate="time-now">Maintenant</span>
 </div>
-<p class="text-base text-gray-500 dark:text-gray-400 mt-1 truncate group-hover:text-gray-700 dark:group-hover:text-gray-300 font-medium">Je peux t'aider à réviser le chapitre de Math...</p>
+<p class="text-base text-gray-500 dark:text-gray-400 mt-1 truncate group-hover:text-gray-700 dark:group-hover:text-gray-300 font-medium" data-translate="chat-preview">Je peux t'aider à réviser le chapitre de Math...</p>
 </div>
 </div>
 </div>
@@ -176,10 +257,10 @@
 </div>
 <div class="ml-4 flex-1 overflow-hidden">
 <div class="flex justify-between items-baseline">
-<h3 class="font-semibold text-gray-900 dark:text-gray-100 text-lg">Tuteur Max</h3>
+<h3 class="font-semibold text-gray-900 dark:text-gray-100 text-lg" data-translate="tutor-name">Tuteur Max</h3>
 <span class="text-base text-gray-400">10:42</span>
 </div>
-<p class="text-base text-gray-600 dark:text-gray-400 mt-1 truncate font-medium">Merci!</p>
+<p class="text-base text-gray-600 dark:text-gray-400 mt-1 truncate font-medium" data-translate="thanks-msg">Merci!</p>
 <span class="absolute right-4 bottom-4 w-6 h-6 bg-primary text-white text-xs flex items-center justify-center rounded-full font-bold">2</span>
 </div>
 </div>
@@ -191,10 +272,10 @@
 </div>
 <div class="ml-4 flex-1 overflow-hidden">
 <div class="flex justify-between items-baseline">
-<h3 class="font-semibold text-gray-700 dark:text-gray-300 text-lg">Prof. Martin</h3>
-<span class="text-base text-gray-400">Hier</span>
+<h3 class="font-semibold text-gray-700 dark:text-gray-300 text-lg" data-translate="prof-name">Prof. Martin</h3>
+<span class="text-base text-gray-400" data-translate="yesterday">Hier</span>
 </div>
-<p class="text-base text-gray-500 dark:text-gray-500 mt-1 truncate">N'oubliez pas le devoir pour demain.</p>
+<p class="text-base text-gray-500 dark:text-gray-500 mt-1 truncate" data-translate="homework-reminder">N'oubliez pas le devoir pour demain.</p>
 </div>
 </div>
 </div>
@@ -207,10 +288,10 @@
 </div>
 <div class="ml-4 flex-1 overflow-hidden">
 <div class="flex justify-between items-baseline">
-<h3 class="font-semibold text-gray-700 dark:text-gray-300 text-lg">Groupe Science</h3>
-<span class="text-base text-gray-400">Lun</span>
+<h3 class="font-semibold text-gray-700 dark:text-gray-300 text-lg" data-translate="group-name">Groupe Science</h3>
+<span class="text-base text-gray-400" data-translate="monday">Lun</span>
 </div>
-<p class="text-base text-gray-500 dark:text-gray-500 mt-1 truncate">Qui a compris le TP ?</p>
+<p class="text-base text-gray-500 dark:text-gray-500 mt-1 truncate" data-translate="group-msg">Qui a compris le TP ?</p>
 </div>
 </div>
 </div>
@@ -232,20 +313,19 @@
 <h2 class="text-xl font-bold text-darktext dark:text-white">DeepSeek</h2>
 <p class="text-base text-primary font-medium flex items-center mt-0.5">
 <span class="w-2 h-2 rounded-full bg-primary mr-2 animate-pulse"></span>
-                                En ligne
+                                <span data-translate="status-online">En ligne</span>
                             </p>
 </div>
 </div>
 <div class="flex space-x-2">
-<button class="p-3 text-gray-400 hover:text-primary hover:bg-primary/5 rounded-full transition-colors" data-tooltip="Options">
+<button href="whiteboard.html" class="p-3 text-gray-400 hover:text-primary hover:bg-primary/5 rounded-full transition-colors">
 <span class="material-icons-outlined text-xl">more_vert</span>
-
 </button>
 </div>
 </div>
 <div class="flex-1 overflow-y-auto p-8 space-y-8" id="chatArea">
 <div class="flex justify-center">
-<span class="px-6 py-2 bg-gray-100 dark:bg-gray-800 text-base text-gray-500 rounded-full font-medium">Aujourd'hui, 10:23</span>
+<span class="px-6 py-2 bg-gray-100 dark:bg-gray-800 text-base text-gray-500 rounded-full font-medium" data-translate="today-time">Aujourd'hui, 10:23</span>
 </div>
 <div class="flex items-end space-x-3 max-w-2xl">
 <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary flex-shrink-0 flex items-center justify-center text-white text-xs mb-1">
@@ -253,7 +333,7 @@
 </div>
 <div>
 <div class="bg-surface-light dark:bg-surface-dark p-5 rounded-3xl rounded-bl-none shadow-sm text-lg text-gray-700 dark:text-gray-200 border border-gray-100 dark:border-gray-700 leading-relaxed">
-<p>Bonjour Lisha !  Comment puis-je t'aider aujourd'hui ? On continue sur les mathématiques ou tu veux voir autre chose ?</p>
+<p data-translate="greeting-msg">Bonjour Lisha !  Comment puis-je t'aider aujourd'hui ? On continue sur les mathématiques ou tu veux voir autre chose ?</p>
 </div>
 <span class="text-sm text-gray-400 ml-3 mt-1.5 block">10:23 AM</span>
 </div>
@@ -261,7 +341,7 @@
 <div class="flex items-end justify-end space-x-3">
 <div class="flex flex-col items-end max-w-2xl">
 <div class="bg-primary text-white p-5 rounded-3xl rounded-br-none shadow-md text-lg leading-relaxed">
-<p>Salut ! J'aimerais qu'on révise un peu le chapitre sur les fonctions affines. J'ai un peu de mal avec les graphiques.</p>
+<p data-translate="user-msg">Salut ! J'aimerais qu'on révise un peu le chapitre sur les fonctions affines. J'ai un peu de mal avec les graphiques.</p>
 </div>
 <span class="text-sm text-gray-400 mr-3 mt-1.5 block flex items-center">
                                 10:24 AM <span class="material-icons-outlined text-base ml-1">done_all</span>
@@ -274,8 +354,8 @@
 </div>
 <div class="space-y-1">
 <div class="bg-surface-light dark:bg-surface-dark p-5 rounded-3xl rounded-bl-none shadow-sm text-lg text-gray-700 dark:text-gray-200 border border-gray-100 dark:border-gray-700 leading-relaxed">
-<p>Pas de problème ! C'est un sujet important. Commençons par visualiser la formule de base : <code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-lg text-primary font-mono text-base">f(x) = ax + b</code>.</p>
-<p class="mt-3">J'ai trouvé ce petit rappel visuel pour toi :</p>
+<p data-translate="ai-response">Pas de problème ! C'est un sujet important. Commençons par visualiser la formule de base : <code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-lg text-primary font-mono text-base">f(x) = ax + b</code>.</p>
+<p class="mt-3" data-translate="ai-visual">J'ai trouvé ce petit rappel visuel pour toi :</p>
 <div class="mt-4 bg-secondary/5 rounded-2xl p-4 border border-secondary/10 flex items-center">
 <div class="w-12 h-12 rounded-xl bg-white dark:bg-gray-700 flex items-center justify-center text-secondary shadow-sm">
 <span class="material-icons-outlined text-2xl">functions</span>
@@ -311,7 +391,7 @@
 <span class="material-icons-outlined text-2xl">add_circle</span>
 </button>
 <div class="flex-1 py-4 px-3">
-<textarea class="w-full bg-transparent border-none focus:ring-0 text-gray-700 dark:text-gray-200 placeholder-gray-400 resize-none max-h-32 text-lg" placeholder="Écrivez votre message..." rows="1" style="min-height: 28px;"></textarea>
+<textarea class="w-full bg-transparent border-none focus:ring-0 text-gray-700 dark:text-gray-200 placeholder-gray-400 resize-none max-h-32 text-lg" data-translate-placeholder="input-placeholder" placeholder="Écrivez votre message..." rows="1" style="min-height: 28px;"></textarea>
 </div>
 <div class="flex items-center pb-1 pr-1 space-x-2">
 <button class="p-3 text-gray-400 hover:text-primary transition-colors rounded-full hover:bg-gray-50 dark:hover:bg-gray-800" data-tooltip="Emoji">
@@ -323,7 +403,7 @@
 </div>
 </div>
 <div class="text-center mt-3">
-<p class="text-sm text-gray-400 dark:text-gray-600 font-medium">Appuyez sur Entrée pour envoyer</p>
+<p class="text-sm text-gray-400 dark:text-gray-600 font-medium" data-translate="enter-hint">Appuyez sur Entrée pour envoyer</p>
 </div>
 </div>
 </section>
@@ -334,6 +414,106 @@
 <div id="tooltip" class="tooltip"></div>
 
 <script>
+    // Dictionnaire de traductions
+    const translations = {
+        fr: {
+            "nav-home": "Accueil",
+            "nav-subjects": "Matières",
+            "nav-messages": "Messages",
+            "nav-profile": "Profil",
+            "nav-settings": "Paramètres",
+            "nav-logout": "Se déconnecter",
+            "header-messages": "Messages",
+            "title-messages": "Messages",
+            "search-placeholder": "Rechercher...",
+            "time-now": "Maintenant",
+            "chat-preview": "Je peux t'aider à réviser le chapitre de Math...",
+            "tutor-name": "Tuteur Max",
+            "thanks-msg": "Merci!",
+            "prof-name": "Prof. Martin",
+            "yesterday": "Hier",
+            "homework-reminder": "N'oubliez pas le devoir pour demain.",
+            "group-name": "Groupe Science",
+            "monday": "Lun",
+            "group-msg": "Qui a compris le TP ?",
+            "status-online": "En ligne",
+            "today-time": "Aujourd'hui, 10:23",
+            "greeting-msg": "Bonjour Lisha !  Comment puis-je t'aider aujourd'hui ? On continue sur les mathématiques ou tu veux voir autre chose ?",
+            "user-msg": "Salut ! J'aimerais qu'on révise un peu le chapitre sur les fonctions affines. J'ai un peu de mal avec les graphiques.",
+            "ai-response": "Pas de problème ! C'est un sujet important. Commençons par visualiser la formule de base :",
+            "ai-visual": "J'ai trouvé ce petit rappel visuel pour toi :",
+            "input-placeholder": "Écrivez votre message...",
+            "enter-hint": "Appuyez sur Entrée pour envoyer"
+        },
+        en: {
+            "nav-home": "Home",
+            "nav-subjects": "Subjects",
+            "nav-messages": "Messages",
+            "nav-profile": "Profile",
+            "nav-settings": "Settings",
+            "nav-logout": "Log out",
+            "header-messages": "Messages",
+            "title-messages": "Messages",
+            "search-placeholder": "Search...",
+            "time-now": "Now",
+            "chat-preview": "I can help you review the Math chapter...",
+            "tutor-name": "Tutor Max",
+            "thanks-msg": "Thanks!",
+            "prof-name": "Prof. Martin",
+            "yesterday": "Yesterday",
+            "homework-reminder": "Don't forget the homework for tomorrow.",
+            "group-name": "Science Group",
+            "monday": "Mon",
+            "group-msg": "Who understood the lab work?",
+            "status-online": "Online",
+            "today-time": "Today, 10:23",
+            "greeting-msg": "Hello Lisha! How can I help you today? Should we continue with mathematics or do you want to see something else?",
+            "user-msg": "Hi! I'd like to review the chapter on linear functions. I'm having trouble with graphs.",
+            "ai-response": "No problem! It's an important topic. Let's start by visualizing the basic formula:",
+            "ai-visual": "I found this little visual reminder for you:",
+            "input-placeholder": "Write your message...",
+            "enter-hint": "Press Enter to send"
+        }
+    };
+
+    // Fonction pour changer la langue
+    function changeLanguage(lang) {
+        // Mettre à jour les boutons actifs
+        document.getElementById('btnFr').classList.toggle('active', lang === 'fr');
+        document.getElementById('btnEn').classList.toggle('active', lang === 'en');
+        
+        // Mettre à jour tous les textes avec data-translate
+        document.querySelectorAll('[data-translate]').forEach(element => {
+            const key = element.getAttribute('data-translate');
+            if (translations[lang][key]) {
+                element.textContent = translations[lang][key];
+            }
+        });
+        
+        // Mettre à jour les placeholders
+        document.querySelectorAll('[data-translate-placeholder]').forEach(element => {
+            const key = element.getAttribute('data-translate-placeholder');
+            if (translations[lang][key]) {
+                element.placeholder = translations[lang][key];
+            }
+        });
+        
+        // Mettre à jour l'attribut lang du HTML
+        document.documentElement.lang = lang;
+        
+        // Sauvegarder la préférence
+        localStorage.setItem('preferredLanguage', lang);
+    }
+
+    // Charger la langue préférée au démarrage
+    window.addEventListener('DOMContentLoaded', () => {
+        const savedLang = localStorage.getItem('preferredLanguage');
+        if (savedLang && (savedLang === 'fr' || savedLang === 'en')) {
+            changeLanguage(savedLang);
+        }
+    });
+
+    // Tooltip functionality
     const tooltip = document.getElementById('tooltip');
     const elements = document.querySelectorAll('[data-tooltip]');
     
@@ -359,5 +539,7 @@
         });
     });
 </script>
+<script src="../js/utils/dark-white.js"></script>
+<script type="module" src="../js/auth/logout.js"></script>
 
 </body></html>

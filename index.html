@@ -95,20 +95,20 @@
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-8">
-                        <a class="px-3 py-2 rounded-md text-sm font-medium hover:bg-white/10 transition" href="#">À
+                        <a class="px-3 py-2 rounded-md text-sm font-medium hover:bg-white/10 transition" href="#" data-i18n="about">À
                             propos</a>
-                        <a class="px-3 py-2 rounded-md text-sm font-medium hover:bg-white/10 transition" href="#">Les
+                        <a class="px-3 py-2 rounded-md text-sm font-medium hover:bg-white/10 transition" href="#" data-i18n="creator">Les
                             createurs</a>
 
                     </div>
                 </div>
                 <div class="hidden md:flex items-center space-x-4">
                     <a class="px-4 py-2 rounded-full text-sm font-bold text-white hover:bg-white/10 transition border border-white/30"
-                        href="public/login.html">
+                        href="public/login.html" data-i18n="login">
                         Connexion
                     </a>
                     <a class="bg-white text-primary px-5 py-2 rounded-full text-sm font-bold hover:bg-gray-100 transition shadow-lg"
-                        href="public/SingUp.html">
+                        href="public/SingUp.html" data-i18n="signup">
                         Inscription
                     </a>
                 </div>
@@ -142,8 +142,8 @@
     <header class="relative bg-primary pt-16 pb-32 lg:pt-24 lg:pb-48 overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col md:flex-row items-center">
             <div class="w-full md:w-1/2 text-center md:text-left mb-12 md:mb-0">
-                <h1 class="text-4xl md:text-6xl font-display font-bold text-white mb-6 leading-tight">
-                    L'application où apprendre est <span class="relative inline-block">
+                <h1 class="text-4xl md:text-6xl font-display font-bold text-white mb-6 leading-tight" data-i18n="titre">
+                    L'application où apprendre est <span class="relative inline-block" >
                         <span class="relative z-10">simple et fun</span>
                         <svg class="absolute bottom-1 left-0 w-full h-3 -z-0 opacity-40 text-yellow-300 fill-current"
                             preserveAspectRatio="none" viewBox="0 0 100 10">
@@ -151,13 +151,13 @@
                         </svg>
                     </span>
                 </h1>
-                <p class="mt-4 max-w-lg mx-auto md:mx-0 text-xl text-white/90 font-light">
+                <p class="mt-4 max-w-lg mx-auto md:mx-0 text-xl text-white/90 font-light" data-i18n="desc">
                     Découvrez une nouvelle façon de maîtriser vos sujets préférés avec des tuteurs passionnés et une
                     IA intelligente.
                 </p>
                 <div class="mt-8 flex justify-center md:justify-start gap-4">
                     <a class="px-8 py-4 border border-transparent text-lg font-bold rounded-full text-primary bg-white hover:bg-gray-50 md:text-xl shadow-xl hover:shadow-2xl transition transform hover:-translate-y-1"
-                        href="public/SingUp.html">
+                        href="public/SingUp.html" data-i18n="start">
                         Commencer à apprendre
                     </a>
                 </div>
@@ -190,7 +190,7 @@
     <section class="py-20 px-4 sm:px-6 lg:px-8 bg-background-light dark:bg-background-dark">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
-                <h2 class="text-base text-primary font-bold tracking-wide uppercase">Pourquoi Djangou ?</h2>
+                <h2 class="text-base text-primary font-bold tracking-wide uppercase" data-i18n="why">Pourquoi Djangou ?</h2>
                 <p
                     class="mt-2 text-3xl leading-8 font-display font-extrabold text-gray-900 dark:text-white sm:text-4xl">
                     Une expérience d'apprentissage complète
@@ -206,9 +206,9 @@
                         class="w-14 h-14 bg-pastel-green dark:bg-emerald-800 rounded-2xl flex items-center justify-center mb-6 text-emerald-800 dark:text-emerald-100">
                         <span class="material-icons-round text-3xl">school</span>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 font-display">Cours
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 font-display" data-i18n="cours">Cours
                         Personnalisés</h3>
-                    <p class="text-gray-600 dark:text-gray-400">Des parcours adaptés à votre niveau et à votre
+                    <p class="text-gray-600 dark:text-gray-400" data-i18n="parcours">Des parcours adaptés à votre niveau et à votre
                         rythme pour une progression optimale.</p>
                 </div>
                 <div
@@ -217,9 +217,9 @@
                         class="w-14 h-14 bg-pastel-peach dark:bg-orange-800 rounded-2xl flex items-center justify-center mb-6 text-orange-800 dark:text-orange-100">
                         <span class="material-icons-round text-3xl">people_alt</span>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 font-display">Tuteurs Experts
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 font-display" data-i18n="expert">Tuteurs Experts
                     </h3>
-                    <p class="text-gray-600 dark:text-gray-400">Accédez à un réseau de mentors qualifiés prêts à
+                    <p class="text-gray-600 dark:text-gray-400" data-i18n="access">Accédez à un réseau de mentors qualifiés prêts à
                         vous aider à surmonter chaque obstacle.</p>
                 </div>
                 <div
@@ -228,9 +228,9 @@
                         class="w-14 h-14 bg-pastel-blue dark:bg-blue-800 rounded-2xl flex items-center justify-center mb-6 text-blue-800 dark:text-blue-100">
                         <span class="material-icons-round text-3xl">chat_bubble</span>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 font-display">Chat en Temps Réel
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 font-display" data-i18n="temp_reel">Chat en Temps Réel
                     </h3>
-                    <p class="text-gray-600 dark:text-gray-400">Posez vos questions instantanément et collaborez
+                    <p class="text-gray-600 dark:text-gray-400" data-i18n="instant">Posez vos questions instantanément et collaborez
                         avec d'autres étudiants.</p>
                 </div>
                 <div
@@ -239,8 +239,8 @@
                         class="w-14 h-14 bg-pastel-yellow dark:bg-yellow-700 rounded-2xl flex items-center justify-center mb-6 text-yellow-800 dark:text-yellow-100">
                         <span class="material-icons-round text-3xl">smart_toy</span>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 font-display">Assistant IA</h3>
-                    <p class="text-gray-600 dark:text-gray-400">Notre IA vous suggère des exercices et vous aide à
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 font-display" >Assistant IA</h3>
+                    <p class="text-gray-600 dark:text-gray-400" data-i18n="ia">Notre IA vous suggère des exercices et vous aide à
                         réviser 24h/24 et 7j/7.</p>
                 </div>
             </div>
@@ -380,8 +380,12 @@
             </div>
             <div
                 class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-gray-500 text-sm">
-                <p>© 2026 Djangou. Tous droits réservés.</p>
-
+                <p>© 2025 Djangou. Tous droits réservés.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a class="hover:text-white transition" href="#">Confidentialité</a>
+                    <a class="hover:text-white transition" href="#">Conditions</a>
+                    <a class="hover:text-white transition" href="#">Cookies</a>
+                </div>
             </div>
         </div>
     </footer>

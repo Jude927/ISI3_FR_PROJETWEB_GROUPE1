@@ -4,9 +4,9 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Tableau de Bord Accueil Djangou</title>
+    <title>Matières - Djangou</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&amp;display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&amp;display=swap"
         rel="stylesheet" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
     <script>
@@ -15,15 +15,15 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: "#D59D80", // Orange/Terracotta from palette
-                        secondary: "#0D1D25", // Dark Teal
+                        primary: "#D59D80", // Orange/Terracotta
+                        secondary: "#2d2d2d", // Dark Teal
                         accent: "#104C64", // Medium Teal
                         cream: "#C6C6D0", // Beige/Cream
                         "dark-brown": "#C0754D", // Brownish
                         "darker-brown": "#B6410F", // Deep Brown
-                        "background-light": "#FDFBF7", // Very light warm white
-                        "background-dark": "#1a1a1a", // Dark grey
-                        "card-light": "#FFFFFF",
+                        "background-light": "#FFFFFF", // White
+                        "background-dark": "#0b0c0c", 
+                        "card-light": "#F9F9F9",
                         "card-dark": "#2d2d2d",
                         "pastel-green": "#e0f2f1",
                         "pastel-orange": "#fbe9e7",
@@ -31,13 +31,10 @@
                         "pastel-blue": "#e3f2fd",
                         "pastel-yellow": "#fffde7",
                         "pastel-red": "#ffebee",
-                        "navy-blue-start": "#0a192f", // Deep Navy Start
-                        "navy-blue-end": "#112240",   // Deep Navy End
-                        "gold-border": "#FFD700",     // Gold
                     },
                     fontFamily: {
-                        display: ["Comfortaa", "sans-serif"],
-                        body: ["Comfortaa", "sans-serif"],
+                        display: ["Nunito", "sans-serif"],
+                        body: ["Nunito", "sans-serif"],
                     },
                     borderRadius: {
                         DEFAULT: "1rem",
@@ -50,7 +47,7 @@
     </script>
     <style>
         body {
-            font-family: 'Comfortaa', sans-serif;
+            font-family: 'Nunito', sans-serif;
         }
 
         .no-scrollbar::-webkit-scrollbar {
@@ -67,7 +64,8 @@
 <body
     class="bg-background-light dark:bg-background-dark text-secondary dark:text-gray-100 transition-colors duration-300 font-body antialiased h-screen overflow-hidden flex">
     
-     <div
+    <!-- Éléments décoratifs -->
+    <div
         class="fixed -top-64 -right-64 w-[800px] h-[800px] bg-gray-50/80 dark:bg-gray-800/40 rounded-full border-2 border-gray-200/70 dark:border-gray-700/50 pointer-events-none -z-10">
     </div>
 
@@ -75,24 +73,24 @@
         class="fixed -bottom-64 -left-64 w-[800px] h-[800px] bg-gray-50/80 dark:bg-gray-800/40 rounded-full border-2 border-gray-200/70 dark:border-gray-700/50 pointer-events-none -z-10">
     </div>
     
+    <!-- Sidebar -->
     <aside
         class="hidden md:flex flex-col w-24 lg:w-64 h-full bg-card-light dark:bg-card-dark border-r border-gray-100 dark:border-gray-800 transition-all duration-300 p-4 relative">
         
         <div class="flex items-center justify-center lg:justify-start mb-10 px-2">
-            <button id="logoToggle"
-                class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xl shadow-md">
+            <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xl shadow-md">
                 D
-            </button>
+            </div>
             <span class="hidden lg:block ml-3 text-2xl font-bold text-primary tracking-wide">Djangou</span>
         </div>
        
         <nav class="flex-1 flex flex-col gap-2">
             <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
                 href="dashboard-student.html">
-                <span class="material-icons-round text-2xl">dashboard</span>
+                <span class="material-icons-round text-2xl">home</span>
                 <span class="hidden lg:block ml-4 font-semibold">Accueil</span>
             </a>
-            <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl bg-gray-100 text-primary dark:bg-primary/20 dark:text-primary transition-colors"
+            <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary transition-colors"
                 href="#">
                 <span class="material-icons-round text-2xl">school</span>
                 <span class="hidden lg:block ml-4 font-semibold">Matières</span>
@@ -101,362 +99,218 @@
                 href="chat-student.html">
                 <span class="material-icons-round text-2xl">chat_bubble</span>
                 <span class="hidden lg:block ml-4 font-semibold">Messages</span>
-                <span
-                    class="hidden lg:flex ml-auto bg-red-400 text-white text-xs font-bold px-2 py-0.5 rounded-full">3</span>
             </a>
             <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
-                href="#">
+                href="profil-student.html">
                 <span class="material-icons-round text-2xl">person</span>
                 <span class="hidden lg:block ml-4 font-semibold">Profil</span>
             </a>
         </nav>
         <div class="mt-auto flex flex-col gap-2 pb-10">
             <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
-                href="#">
+                href="settings-student.html">
                 <span class="material-icons-round text-2xl">settings</span>
                 <span class="hidden lg:block ml-4 font-semibold">Paramètres</span>
             </a>
+            <a id="logoutBtn" class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
+                href="#">
+                <span class="material-icons-round text-2xl">logout</span>
+                <span class="hidden lg:block ml-5 font-semibold">Se déconnecter</span>
+            </a>
         </div>
     </aside>
+    
+    <!-- Contenu principal -->
     <main class="flex-1 h-full overflow-y-auto overflow-x-hidden p-4 md:p-8 relative">
+        <!-- Header -->
         <header class="flex justify-between items-center mb-8">
             <div class="md:hidden flex items-center gap-3">
                 <button class="text-gray-600 dark:text-gray-300">
                     <span class="material-icons-round text-3xl">menu</span>
                 </button>
-                <div class="flex items-center justify-center lg:justify-start mb-10 px-2">
-                    <button id="logoToggle"
-                        class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xl shadow-md">
-                        D
-                    </button>
-                    <span class="hidden lg:block ml-3 text-2xl font-bold text-primary tracking-wide">Djangou</span>
+                <span class="text-xl font-bold text-primary">Djangou</span>
+            </div>
+            
+            <!-- Champ de recherche -->
+           <div class="flex-1 max-w-xl mx-4">
+                <div class="relative">
+                    <span class="material-icons-round absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400">search</span>
+                    <input id="searchInput"
+                        class="w-full pl-12 pr-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-primary focus:border-transparent dark:text-white transition-all outline-none"
+                        placeholder="Rechercher un tuteur..." type="text" />
                 </div>
             </div>
-            <div
-                class="hidden md:flex items-center bg-white dark:bg-card-dark rounded-full px-4 py-2.5 shadow-sm border border-gray-100 dark:border-gray-700 w-96 w-full">
-                <span class="material-icons-round text-gray-400">search</span>
-                <input
-                    class="bg-transparent border-none focus:ring-0 text-sm w-full text-gray-600 dark:text-gray-200 placeholder-gray-400"
-                    placeholder="Rechercher un cours, un tuteur..." type="text" />
+            
+            <!-- Profil utilisateur -->
+            <div class="flex items-center gap-4">
+                <div class="text-right hidden md:block">
+                    <p class="text-sm font-bold text-secondary dark:text-white">Lisha Nana</p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">Étudiante</p>
+                </div>
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-dark-brown flex items-center justify-center text-white font-bold">
+                    LN
+                </div>
             </div>
-           
         </header>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 pb-24">
-            <div class="lg:col-span-3 space-y-8">
-                <div class="flex justify-between items-end">
-                    <h3 class="text-xl font-bold text-secondary dark:text-white">Mes Matières en cours</h3>
-                    <a class="text-sm font-semibold text-primary hover:underline" href="#">Voir tout</a>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-                    <div
-                        class="bg-pastel-green dark:bg-gray-800 p-8 rounded-2xl relative overflow-hidden group hover:shadow-md transition-shadow cursor-pointer min-h-[280px] flex flex-col justify-between">
-                        <div
-                            class="absolute right-0 bottom-0 opacity-20 transform translate-x-2 translate-y-2 group-hover:scale-110 transition-transform duration-500">
-                            <span class="material-icons-round text-9xl text-teal-800 dark:text-teal-200">science</span>
-                        </div>
-                        <div class="relative z-10 w-full h-full flex flex-col">
-                            <div
-                                class="w-14 h-14 bg-white dark:bg-gray-700 rounded-xl flex items-center justify-center mb-6 shadow-sm text-teal-600 dark:text-teal-300">
-                                <span class="material-icons-round text-3xl">science</span>
-                            </div>
-                            <div class="flex-1">
-                                <h4 class="text-2xl font-bold text-teal-900 dark:text-teal-100 mb-1">Sciences</h4>
-                            </div>
-                            <div class="mt-auto">
-                                <div class="w-full bg-white/50 dark:bg-black/20 rounded-full h-3">
-                                    <div class="bg-teal-500 h-3 rounded-full" style="width: 75%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        class="bg-pastel-orange dark:bg-gray-800 p-8 rounded-2xl relative overflow-hidden group hover:shadow-md transition-shadow cursor-pointer min-h-[280px] flex flex-col justify-between">
-                        <div
-                            class="absolute right-0 bottom-0 opacity-20 transform translate-x-2 translate-y-2 group-hover:scale-110 transition-transform duration-500">
-                            <span
-                                class="material-icons-round text-9xl text-orange-800 dark:text-orange-200">calculate</span>
-                        </div>
-                        <div class="relative z-10 w-full h-full flex flex-col">
-                            <div
-                                class="w-14 h-14 bg-white dark:bg-gray-700 rounded-xl flex items-center justify-center mb-6 shadow-sm text-orange-600 dark:text-orange-300">
-                                <span class="material-icons-round text-3xl">functions</span>
-                            </div>
-                            <div class="flex-1">
-                                <h4 class="text-2xl font-bold text-orange-900 dark:text-orange-100 mb-1">Mathématiques
-                                </h4>
-                            </div>
-                            <div class="mt-auto">
-                                <div class="w-full bg-white/50 dark:bg-black/20 rounded-full h-3">
-                                    <div class="bg-orange-500 h-3 rounded-full" style="width: 45%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        class="bg-pastel-blue dark:bg-gray-800 p-8 rounded-2xl relative overflow-hidden group hover:shadow-md transition-shadow cursor-pointer min-h-[280px] flex flex-col justify-between">
-                        <div
-                            class="absolute right-0 bottom-0 opacity-20 transform translate-x-2 translate-y-2 group-hover:scale-110 transition-transform duration-500">
-                            <span class="material-icons-round text-9xl text-blue-800 dark:text-blue-200">computer</span>
-                        </div>
-                        <div class="relative z-10 w-full h-full flex flex-col">
-                            <div
-                                class="w-14 h-14 bg-white dark:bg-gray-700 rounded-xl flex items-center justify-center mb-6 shadow-sm text-blue-600 dark:text-blue-300">
-                                <span class="material-icons-round text-3xl">computer</span>
-                            </div>
-                            <div class="flex-1">
-                                <h4 class="text-2xl font-bold text-blue-900 dark:text-blue-100 mb-1">Informatique</h4>
-                            </div>
-                            <div class="mt-auto">
-                                <div class="w-full bg-white/50 dark:bg-black/20 rounded-full h-3">
-                                    <div class="bg-blue-500 h-3 rounded-full" style="width: 90%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        class="bg-pastel-purple dark:bg-gray-800 p-8 rounded-2xl relative overflow-hidden group hover:shadow-md transition-shadow cursor-pointer min-h-[280px] flex flex-col justify-between">
-                        <div
-                            class="absolute right-0 bottom-0 opacity-20 transform translate-x-2 translate-y-2 group-hover:scale-110 transition-transform duration-500">
-                            <span
-                                class="material-icons-round text-9xl text-purple-800 dark:text-purple-200">palette</span>
-                        </div>
-                        <div class="relative z-10 w-full h-full flex flex-col">
-                            <div
-                                class="w-14 h-14 bg-white dark:bg-gray-700 rounded-xl flex items-center justify-center mb-6 shadow-sm text-purple-600 dark:text-purple-300">
-                                <span class="material-icons-round text-3xl">brush</span>
-                            </div>
-                            <div class="flex-1">
-                                <h4 class="text-2xl font-bold text-purple-900 dark:text-purple-100 mb-1">Dessin</h4>
-                            </div>
-                            <div class="mt-auto">
-                                <div class="w-full bg-white/50 dark:bg-black/20 rounded-full h-3">
-                                    <div class="bg-purple-500 h-3 rounded-full" style="width: 20%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
+        <!-- Section des matières (visible par défaut) -->
+        <div id="subjectsSection">
+            <div class="mb-8">
+                <h1 class="text-3xl md:text-4xl font-extrabold text-secondary dark:text-white mb-2">Nos Matières </h1>
+                <p class="text-gray-500 dark:text-gray-400">Choisissez une matière pour voir les tuteurs disponibles</p>
             </div>
 
+            <!-- Matières principales -->
+            <div class="mb-10">
+                <h2 class="text-xl font-bold text-secondary dark:text-white mb-4">Matières Principales</h2>
+                <div id="subjectsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Mathématiques -->
+                    <div data-subject="Mathématiques"
+                        class="bg-pastel-blue dark:bg-gray-800 p-6 rounded-2xl border border-blue-100 dark:border-blue-800/50 hover:shadow-lg transition-all cursor-pointer group">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 bg-blue-100 dark:bg-blue-800 rounded-xl flex items-center justify-center">
+                                <span class="material-icons-round text-2xl text-blue-600 dark:text-blue-300">calculate</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-blue-800 dark:text-blue-200">Mathématiques</h3>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">Algèbre, géométrie, calcul, statistiques</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500 dark:text-gray-400">Cliquez pour voir les tuteurs</span>
+                            <span class="material-icons-round text-blue-500 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                        </div>
+                    </div>
+
+                    <!-- Physique / Chimie -->
+                    <div data-subject="Physique / Chimie"
+                        class="bg-pastel-green dark:bg-gray-800 p-6 rounded-2xl border border-green-100 dark:border-green-800/50 hover:shadow-lg transition-all cursor-pointer group">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 bg-green-100 dark:bg-green-800 rounded-xl flex items-center justify-center">
+                                <span class="material-icons-round text-2xl text-green-600 dark:text-green-300">science</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-green-800 dark:text-green-200">Physique / Chimie</h3>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">Mécanique, optique, thermodynamique, réactions chimiques</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500 dark:text-gray-400">Cliquez pour voir les tuteurs</span>
+                            <span class="material-icons-round text-green-500 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                        </div>
+                    </div>
+
+                    <!-- Informatique -->
+                    <div data-subject="Informatique"
+                        class="bg-pastel-purple dark:bg-gray-800 p-6 rounded-2xl border border-purple-100 dark:border-purple-800/50 hover:shadow-lg transition-all cursor-pointer group">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 bg-purple-100 dark:bg-purple-800 rounded-xl flex items-center justify-center">
+                                <span class="material-icons-round text-2xl text-purple-600 dark:text-purple-300">computer</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-purple-800 dark:text-purple-200">Informatique</h3>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">Programmation, algorithmes, bases de données, web</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500 dark:text-gray-400">Cliquez pour voir les tuteurs</span>
+                            <span class="material-icons-round text-purple-500 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                        </div>
+                    </div>
+
+                    <!-- Langues -->
+                    <div data-subject="Langues"
+                        class="bg-pastel-yellow dark:bg-gray-800 p-6 rounded-2xl border border-yellow-100 dark:border-yellow-800/50 hover:shadow-lg transition-all cursor-pointer group">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 bg-yellow-100 dark:bg-yellow-800 rounded-xl flex items-center justify-center">
+                                <span class="material-icons-round text-2xl text-yellow-600 dark:text-yellow-300">translate</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-yellow-800 dark:text-yellow-200">Langues</h3>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">Français, anglais, espagnol, allemand, etc.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500 dark:text-gray-400">Cliquez pour voir les tuteurs</span>
+                            <span class="material-icons-round text-yellow-500 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                        </div>
+                    </div>
+
+                    <!-- Histoire / Géo -->
+                    <div data-subject="Histoire / Géo"
+                        class="bg-pastel-orange dark:bg-gray-800 p-6 rounded-2xl border border-orange-100 dark:border-orange-800/50 hover:shadow-lg transition-all cursor-pointer group">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 bg-orange-100 dark:bg-orange-800 rounded-xl flex items-center justify-center">
+                                <span class="material-icons-round text-2xl text-orange-600 dark:text-orange-300">public</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-orange-800 dark:text-orange-200">Histoire / Géo</h3>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">Histoire mondiale, géographie, civilisations</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500 dark:text-gray-400">Cliquez pour voir les tuteurs</span>
+                            <span class="material-icons-round text-orange-500 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                        </div>
+                    </div>                   
+                </div>
+            </div>            
         </div>
 
-
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 pb-24">
-            <div class="lg:col-span-3 space-y-8">
-                <div class="flex justify-between items-end">
-                    <h3 class="text-xl font-bold text-secondary dark:text-white">Ajouter des Matières</h3>
-                    <a class="text-sm font-semibold text-primary hover:underline" href="#">Voir tout</a>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-                    <div
-                        class="bg-pastel-red dark:bg-dark-brown p-8 rounded-2xl relative overflow-hidden group hover:shadow-md transition-shadow cursor-pointer min-h-[280px] flex flex-col justify-between">
-                        <div
-                            class="absolute right-0 bottom-0 opacity-20 transform translate-x-2 translate-y-2 group-hover:scale-110 transition-transform duration-500">
-                            <span
-                                class="material-icons-round text-9xl text-purple-800 dark:text-purple-200">balance</span>
-                        </div>
-                        <div class="relative z-10 w-full h-full flex flex-col">
-                            <div
-                                class="w-14 h-14 bg-white dark:bg-gray-700 rounded-xl flex items-center justify-center mb-6 shadow-sm text-purple-600 dark:text-purple-300">
-                                <span class="material-icons-round text-3xl">balance</span>
-                            </div>
-                            <div class="flex-1">
-                                <h4 class="text-2xl font-bold text-purple-900 dark:text-purple-100 mb-1">Droit</h4>
-                            </div>
-                            <div class="mt-auto">
-                                <div class="w-full bg-white/50 dark:bg-black/20 rounded-full h-3">
-                                    <div class="bg-purple-500 h-3 rounded-full" style="width: 20%"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        
+        <!-- Section des enseignants (cachée par défaut) -->
+        <div id="teachersSection" class="hidden">
+             
+            <!-- Bouton retour -->
+            <div class="mb-6">
+                <button id="backToSubjects" 
+                    class="px-4 py-2 bg-gray-100 dark:bg-gray-800 text-secondary dark:text-gray-300 font-semibold rounded-xl hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors flex items-center gap-2">
+                    <span class="material-icons-round">arrow_back</span>
+                    Retour aux matières
+                </button>
+            </div>
+            
+            <!-- Titre de la matière sélectionnée -->
+            <div class="mb-8">
+                <h2 id="subjectTitle" class="text-2xl font-bold text-secondary dark:text-white mb-2"></h2>
+                <p id="subjectDescription" class="text-gray-600 dark:text-gray-400">Tuteurs disponibles pour cette matière</p>
+            </div>
+            
+            <!-- Liste des enseignants -->
+            <div id="teachersList" class="space-y-4">
+                <!-- Les enseignants seront chargés ici dynamiquement -->
+                <div class="text-center py-8">
+                    <div class="inline-block p-4 rounded-full bg-gray-100 dark:bg-gray-800 mb-4">
+                        <span class="material-icons-round text-4xl text-gray-400">search</span>
                     </div>
-
-
-                    <div
-                        class="bg-green-100 dark:bg-accent p-8 rounded-2xl relative overflow-hidden group hover:shadow-md transition-shadow cursor-pointer min-h-[280px] flex flex-col justify-between">
-                        <div
-                            class="absolute right-0 bottom-0 opacity-20 transform translate-x-2 translate-y-2 group-hover:scale-110 transition-transform duration-100">
-                            <span
-                                class="material-icons-round text-9xl text-green-500 dark:text-green-100">book</span>
-                        </div>
-                        <div class="relative z-10 w-full h-full flex flex-col">
-                            <div
-                                class="w-14 h-14 bg-white dark:bg-gray-700 rounded-xl flex items-center justify-center mb-6 shadow-sm text-green-300 dark:text-green-100">
-                                <span class="material-icons-round text-3xl">book</span>
-                            </div>
-                            <div class="flex-1">
-                                <h4 class="text-2xl font-bold text-green-700 dark:text-green-100 mb-1">Physiques</h4>
-                            </div>
-                            <div class="mt-auto">
-                                <div class="w-full bg-white/50 dark:bg-black/20 rounded-full h-3">
-                                    <div class="bg-green-700 h-3 rounded-full" style="width: 20%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                     <div
-                        class="bg-blue-200 dark:bg-blue-800 p-8 rounded-2xl relative overflow-hidden group hover:shadow-md transition-shadow cursor-pointer min-h-[280px] flex flex-col justify-between">
-                        <div
-                            class="absolute right-0 bottom-0 opacity-20 transform translate-x-2 translate-y-2 group-hover:scale-110 transition-transform duration-500">
-                            <span
-                                class="material-icons-round text-9xl text-blue-800 dark:text-blue-200">web</span>
-                        </div>
-                        <div class="relative z-10 w-full h-full flex flex-col">
-                            <div
-                                class="w-14 h-14 bg-white dark:bg-gray-700 rounded-xl flex items-center justify-center mb-6 shadow-sm text-blue-600 dark:text-blue-300">
-                                <span class="material-icons-round text-3xl">web</span>
-                            </div>
-                            <div class="flex-1">
-                                <h4 class="text-2xl font-bold text-blue-900 dark:text-purple-100 mb-1">Architecture Web</h4>
-                            </div>
-                            <div class="mt-auto">
-                                <div class="w-full bg-white/50 dark:bg-black/20 rounded-full h-3">
-                                    <div class="bg-blue-500 h-3 rounded-full" style="width: 20%"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        
-                    </div>
-
-
-                    
-                     <div
-                        class="bg-gray-100 dark:bg-gray-600 p-8 rounded-2xl relative overflow-hidden group hover:shadow-md transition-shadow cursor-pointer min-h-[280px] flex flex-col justify-between">
-                        <div
-                            class="absolute right-0 bottom-0 opacity-20 transform translate-x-2 translate-y-2 group-hover:scale-110 transition-transform duration-500">
-                            <span
-                                class="material-icons-round text-9xl text-gray-800 dark:text-gray-200">cable</span>
-                        </div>
-                        <div class="relative z-10 w-full h-full flex flex-col">
-                            <div
-                                class="w-14 h-14 bg-white dark:bg-gray-700 rounded-xl flex items-center justify-center mb-6 shadow-sm text-gray-600 dark:text-gray-300">
-                                <span class="material-icons-round text-3xl">cable</span>
-                            </div>
-                            <div class="flex-1">
-                                <h4 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-1">Réseaux</h4>
-                            </div>
-                            <div class="mt-auto">
-                                <div class="w-full bg-white/50 dark:bg-black/20 rounded-full h-3">
-                                    <div class="bg-gray-400 h-3 rounded-full" style="width: 80%"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        
-                    </div>
-
-
-                    <div
-                        class="bg-emerald-100 dark:bg-emerald-400 p-8 rounded-2xl relative overflow-hidden group hover:shadow-md transition-shadow cursor-pointer min-h-[280px] flex flex-col justify-between">
-                        <div
-                            class="absolute right-0 bottom-0 opacity-20 transform translate-x-2 translate-y-2 group-hover:scale-110 transition-transform duration-500">
-                            <span
-                                class="material-icons-round text-9xl text-emerald-800 dark:text-emerald-200">123</span>
-                        </div>
-                        <div class="relative z-10 w-full h-full flex flex-col">
-                            <div
-                                class="w-14 h-14 bg-white dark:bg-gray-700 rounded-xl flex items-center justify-center mb-6 shadow-sm text-emerald-600 dark:text-emerald-300">
-                                <span class="material-icons-round text-3xl">123</span>
-                            </div>
-                            <div class="flex-1">
-                                <h4 class="text-2xl font-bold text-emerald-900 dark:text-emerald-100 mb-1">Comptabilité</h4>
-                            </div>
-                            <div class="mt-auto">
-                                <div class="w-full bg-white/50 dark:bg-black/20 rounded-full h-3">
-                                    <div class="bg-emerald-500 h-3 rounded-full" style="width: 35%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                     <div
-                        class="bg-yellow-100 dark:bg-yellow-900 p-8 rounded-2xl relative overflow-hidden group hover:shadow-md transition-shadow cursor-pointer min-h-[280px] flex flex-col justify-between">
-                        <div
-                            class="absolute right-0 bottom-0 opacity-20 transform translate-x-2 translate-y-2 group-hover:scale-110 transition-transform duration-500">
-                            <span
-                                class="material-icons-round text-9xl text-yellow-800 dark:text-yellow-200">abc</span>
-                        </div>
-                        <div class="relative z-10 w-full h-full flex flex-col">
-                            <div
-                                class="w-14 h-14 bg-white dark:bg-gray-700 rounded-xl flex items-center justify-center mb-6 shadow-sm text-yellow-600 dark:text-yellow-300">
-                                <span class="material-icons-round text-3xl">abc</span>
-                            </div>
-                            <div class="flex-1">
-                                <h4 class="text-2xl font-bold text-yellow-900 dark:text-yellow-100 mb-1">Anglais</h4>
-                            </div>
-                            <div class="mt-auto">
-                                <div class="w-full bg-white/50 dark:bg-black/20 rounded-full h-3">
-                                    <div class="bg-yellow-500 h-3 rounded-full" style="width: 50%"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        
-                    </div>
-
-
-                    <div
-                        class="bg-red-100 dark:bg-red-800 p-8 rounded-2xl relative overflow-hidden group hover:shadow-md transition-shadow cursor-pointer min-h-[280px] flex flex-col justify-between">
-                        <div
-                            class="absolute right-0 bottom-0 opacity-20 transform translate-x-2 translate-y-2 group-hover:scale-110 transition-transform duration-500">
-                            <span
-                                class="material-icons-round text-9xl text-red-800 dark:text-purple-200">book</span>
-                        </div>
-                        <div class="relative z-10 w-full h-full flex flex-col">
-                            <div
-                                class="w-14 h-14 bg-white dark:bg-red-100 rounded-xl flex items-center justify-center mb-6 shadow-sm text-red-300 dark:text-red-600">
-                                <span class="material-icons-round text-3xl">book</span>
-                            </div>
-                            <div class="flex-1">
-                                <h4 class="text-2xl font-bold text-red-500 dark:text-red-100 mb-1">Français</h4>
-                            </div>
-                            <div class="mt-auto">
-                                <div class="w-full bg-white/50 dark:bg-black/20 rounded-full h-3">
-                                    <div class="bg-red-500 h-3 rounded-full" style="width: 20%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <p class="text-gray-500 dark:text-gray-400">Sélectionnez une matière pour voir les tuteurs</p>
                 </div>
             </div>
+            
+            <!-- Bouton charger plus (optionnel) -->
+            <div id="loadMoreContainer" class="mt-8 text-center hidden">
+                <button id="loadMoreBtn" 
+                    class="px-6 py-3 bg-primary text-white font-semibold rounded-xl hover:bg-opacity-90 transition-colors">
+                    Charger plus de tuteurs
+                </button>
+            </div>
         </div>
-
-
-
-
     </main>
     
-       
-      
-   
+    <!-- Barre de navigation mobile -->
     <div
         class="md:hidden fixed bottom-0 w-full bg-white dark:bg-card-dark border-t border-gray-100 dark:border-gray-800 flex justify-around p-3 z-50">
+        <a class="flex flex-col items-center text-gray-400 dark:text-gray-500" href="dashboard-student.html">
+            <span class="material-icons-round">home</span>
+            <span class="text-[10px] font-medium mt-1">Accueil</span>
+        </a>
         <a class="flex flex-col items-center text-primary" href="#">
-            <span class="material-icons-round">dashboard</span>
-            <span class="text-[10px] font-bold mt-1">Accueil</span>
-        </a>
-        <a class="flex flex-col items-center text-gray-400 dark:text-gray-500" href="#">
             <span class="material-icons-round">school</span>
-            <span class="text-[10px] font-medium mt-1">Cours</span>
+            <span class="text-[10px] font-bold mt-1">Matières</span>
         </a>
-        <a class="flex flex-col items-center text-gray-400 dark:text-gray-500 relative" href="#">
+        <a class="flex flex-col items-center text-gray-400 dark:text-gray-500" href="chat-student.html">
             <span class="material-icons-round">chat_bubble</span>
-            <span class="absolute top-0 right-3 w-2 h-2 bg-red-500 rounded-full"></span>
-            <span class="text-[10px] font-medium mt-1">Chat</span>
+            <span class="text-[10px] font-medium mt-1">Messages</span>
         </a>
-        <a class="flex flex-col items-center text-gray-400 dark:text-gray-500" href="#">
+        <a class="flex flex-col items-center text-gray-400 dark:text-gray-500" href="profil-student.html">
             <span class="material-icons-round">person</span>
             <span class="text-[10px] font-medium mt-1">Profil</span>
         </a>
     </div>
 
-</body>
+    <!-- Scripts -->
+    <script type="module" src="../js/utils/teacher-to-subjects.js"></script>
+    <script src="../js/utils/dark-white.js"></script>
+    <script type="module" src="../js/auth/logout.js"></script>
 
+</body>
 </html>

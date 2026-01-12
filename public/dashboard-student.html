@@ -8,21 +8,21 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&amp;display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
-    <script src=""></script>
+   
     <script>
         tailwind.config = {
             darkMode: "class",
             theme: {
                 extend: {
                     colors: {
-                        primary: "#D59D80", // Orange/Terracotta from palette
-                        secondary: "#2d2d2d", // Dark Teal
-                        accent: "#104C64", // Medium Teal
-                        cream: "#C6C6D0", // Beige/Cream
-                        "dark-brown": "#C0754D", // Brownish
-                        "darker-brown": "#B6410F", // Deep Brown
-                        "background-light": "#FFFFFF", // Very light warm white
-                        "background-dark": "#1F1F1F", // Dark grey
+                        primary: "#D59D80",
+                        secondary: "#2d2d2d",
+                        accent: "#104C64",
+                        cream: "#C6C6D0",
+                        "dark-brown": "#C0754D",
+                        "darker-brown": "#B6410F",
+                        "background-light": "#FFFFFF",
+                        "background-dark": "#0b0c0c", 
                         "card-light": "#F9F9F9",
                         "card-dark": "#2d2d2d",
                         "pastel-green": "#e0f2f1",
@@ -41,6 +41,10 @@
                         'xl': '1.5rem',
                         '2xl': '2rem',
                     },
+                    screens: {
+                        'xs': '475px',
+                        '3xl': '1920px',
+                    }
                 },
             },
         };
@@ -58,150 +62,275 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+        
+        /* Animation pour le menu mobile */
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+        
+        /* Amélioration des transitions */
+        .transition-smooth {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Bouton IA flottant */
+        .ai-fab {
+            position: fixed;
+            bottom: 5rem;
+            right: 1.5rem;
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #D59D80 0%, #C0754D 100%);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(213, 157, 128, 0.3);
+            z-index: 50;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .ai-fab:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 35px rgba(213, 157, 128, 0.4);
+        }
+
+        .ai-fab:active {
+            transform: scale(0.95);
+        }
+
+        .ai-fab span {
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .ai-tooltip {
+            position: absolute;
+            bottom: calc(100% + 10px);
+            right: 0;
+            background: var(--background-dark, #2d2d2d);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            border: 1px solid rgba(213, 157, 128, 0.3);
+        }
+
+        .ai-fab:hover .ai-tooltip {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (min-width: 768px) {
+            .ai-fab {
+                bottom: 2rem;
+                right: 2rem;
+            }
+        }
+
+        /* Indicateur de chargement */
+        .loading-pulse {
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
     </style>
 </head>
 
-<body
-    class="bg-background-light dark:bg-background-dark text-secondary dark:text-gray-100 transition-colors duration-300 font-body antialiased h-screen overflow-hidden flex">
-    <div id="sidebarOverlay" class="hidden md:hidden fixed inset-0 bg-black/50 z-40"></div>
+<body class="bg-background-light dark:bg-background-dark text-secondary dark:text-gray-100 transition-colors duration-300 font-body antialiased h-screen overflow-hidden flex flex-col md:flex-row">
+    <!-- Overlay pour menu mobile -->
+    <div id="sidebarOverlay" class="hidden fixed inset-0 bg-black/50 z-40 md:hidden"></div>
 
-    <div
-        class="fixed -top-64 -right-64 w-[800px] h-[800px] bg-gray-50/80 dark:bg-gray-800/40 rounded-full border-2 border-gray-200/70 dark:border-gray-700/50 pointer-events-none -z-10">
-    </div>
+    <!-- Background decoratifs -->
+    <div class="fixed -top-64 -right-64 w-[800px] h-[800px] bg-gray-50/80 dark:bg-gray-800/40 rounded-full border-2 border-gray-200/70 dark:border-gray-700/50 pointer-events-none -z-10"></div>
+    <div class="fixed -bottom-64 -left-64 w-[800px] h-[800px] bg-gray-50/80 dark:bg-gray-800/40 rounded-full border-2 border-gray-200/70 dark:border-gray-700/50 pointer-events-none -z-10"></div>
 
-    <div
-        class="fixed -bottom-64 -left-64 w-[800px] h-[800px] bg-gray-50/80 dark:bg-gray-800/40 rounded-full border-2 border-gray-200/70 dark:border-gray-700/50 pointer-events-none -z-10">
-    </div>
-
-    <aside id = "sidebar"
-        class="hidden md:flex flex-col w-24 lg:w-64 h-full bg-card-light dark:bg-card-dark border-r border-gray-100 dark:border-gray-800 transition-all duration-300 p-4 ">
+    <!-- Sidebar pour desktop et tablette -->
+    <aside id="sidebar" class="hidden md:flex flex-col w-24 lg:w-64 h-full bg-card-light dark:bg-card-dark border-r border-gray-100 font-bold dark:border-gray-800 transition-all duration-300 p-4 fixed md:relative z-50 md:z-auto">
         <div class="flex items-center justify-center lg:justify-start mb-10 px-2">
-            <button id="logoToggle"
-                class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xl shadow-md">
+            <button id="logoToggle" class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xl shadow-md hover:scale-105 transition-transform">
                 D
             </button>
             <span class="hidden lg:block ml-3 text-2xl font-bold text-primary tracking-wide">Djangou</span>
         </div>
         <nav class="flex-1 flex flex-col gap-2">
-            <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary transition-colors"
+            <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary transition-colors hover:bg-primary/20"
                 href="#">
                 <span class="material-icons-round text-2xl">home</span>
-                <span class="hidden lg:block ml-4 font-semibold">Accueil</span>
+                <span data-i18n="id_nav_home" class="hidden lg:block ml-4 font-semibold">Accueil</span>
             </a>
             <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
                 href="matiere-student.html">
                 <span class="material-icons-round text-2xl">school</span>
-                <span class="hidden lg:block ml-4 font-semibold">Matières</span>
+                <span data-i18n="id_nav_subjects" class="hidden lg:block ml-4 font-semibold">Matières</span>
             </a>
             <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
                 href="chat-student.html">
                 <span class="material-icons-round text-2xl">chat_bubble</span>
-                <span class="hidden lg:block ml-4 font-semibold">Messages</span>
-                <span
-                    class="hidden lg:flex ml-auto bg-red-400 text-white text-xs font-bold px-2 py-0.5 rounded-full">3</span>
-            </a>
+                <span data-i18n="id_nav_messages" class="hidden lg:block ml-4 font-semibold">Messages</span>
+               </a>
 
             <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
-                href="#">
+                href="profil-student.html">
                 <span class="material-icons-round text-2xl">person</span>
-                <span class="hidden lg:block ml-4 font-semibold">Profil</span>
+                <span data-i18n="id_nav_profile" class="hidden lg:block ml-4 font-semibold">Profil</span>
             </a>
         </nav>
 
         <div class="mt-auto flex flex-col gap-2">
             <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
-                href="#">
+                href="settings-student.html">
                 <span class="material-icons-round text-2xl">settings</span>
-                <span class="hidden lg:block ml-4 font-semibold">Paramètres</span>
+                <span data-i18n="id_nav_settings" class="hidden lg:block ml-4 font-semibold">Paramètres</span>
             </a>
+            <a id="logoutBtn" class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
+                href="#">
+                <span class="material-icons-round text-2xl">logout</span>
+                <span data-i18n="id_nav_logout" class="hidden lg:block ml-5 font-semibold">Se déconnecter</span>
+            </a>
+        </div>
     </aside>
-    <main class="flex-1 h-full overflow-y-auto overflow-x-hidden p-4 md:p-8 relative">
-        <header class="flex justify-between items-center mb-8">
+
+    <!-- Sidebar mobile -->
+    <aside id="mobileSidebar" class="md:hidden fixed top-0 left-0 h-full w-64 bg-card-light dark:bg-card-dark border-r border-gray-100 dark:border-gray-800 z-50 transform -translate-x-full transition-transform duration-300">
+        <div class="p-6 border-b border-gray-100 dark:border-gray-800">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xl">
+                    D
+                </div>
+                <span class="text-2xl font-bold text-primary">Djangou</span>
+            </div>
+        </div>
+        <nav class="p-4 flex flex-col gap-2">
+            <a class="flex items-center gap-4 p-3 rounded-xl bg-primary/10 text-primary dark:bg-primary/20"
+                href="#">
+                <span class="material-icons-round">home</span>
+                <span class="font-semibold">Accueil</span>
+            </a>
+            <a class="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400"
+                href="matiere-student.html">
+                <span class="material-icons-round">school</span>
+                <span class="font-semibold">Matières</span>
+            </a>
+            <a class="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400"
+                href="chat-student.html">
+                <span class="material-icons-round">chat_bubble</span>
+                <span class="font-semibold">Messages</span>
+            </a>
+            <a class="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400"
+                href="profil-student.html">
+                <span class="material-icons-round">person</span>
+                <span class="font-semibold">Profil</span>
+            </a>
+            <a class="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400"
+                href="settings-student.html">
+                <span class="material-icons-round">settings</span>
+                <span class="font-semibold">Paramètres</span>
+            </a>
+            <a class="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 mt-4"
+                href="#">
+                <span class="material-icons-round">logout</span>
+                <span class="font-semibold">Se déconnecter</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Contenu principal -->
+    <main class="flex-1 h-full overflow-y-auto overflow-x-hidden p-4 md:p-6 lg:p-8 relative w-full">
+        <header class="flex justify-between items-center mb-6 md:mb-8">
             <div class="md:hidden flex items-center gap-3">
-                <button class="text-gray-600 dark:text-gray-300">
+                <button id="mobileMenuBtn" class="text-gray-600 dark:text-gray-300 p-1">
                     <span class="material-icons-round text-3xl">menu</span>
                 </button>
                 <span class="text-xl font-bold text-primary">Djangou</span>
             </div>
-            <div
-                class="hidden md:flex items-center bg-white dark:bg-card-dark rounded-full px-4 py-2.5 shadow-sm border border-gray-100 dark:border-gray-700 w-96">
-                <span class="material-icons-round text-gray-400">search</span>
-                <input
-                    class="bg-transparent border-none focus:ring-0 text-sm w-full text-gray-600 dark:text-gray-200 placeholder-gray-400"
-                    placeholder="Rechercher un cours, un tuteur..." type="text" />
-            </div>
+            <div class="hidden md:block"></div>
             <div class="flex items-center gap-4">
-                <button
-                    class="relative p-2 rounded-full bg-white dark:bg-card-dark hover:bg-gray-50 dark:hover:bg-gray-700 shadow-sm border border-gray-100 dark:border-gray-700 transition-colors">
-                    <span class="material-icons-round text-gray-500 dark:text-gray-300">notifications</span>
-                    <span
-                        class="absolute top-2 right-2.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-card-dark"></span>
-                </button>
+               
                 <div class="flex items-center gap-3 pl-2 border-l border-gray-200 dark:border-gray-700">
                     <div class="text-right hidden md:block">
-                        <p class="text-sm font-bold text-secondary dark:text-white">Lisha Nana</p>
-                        <p class="text-xs text-gray-500 dark:text-gray-400">Étudiante</p>
+                        <p class="text-sm font-bold text-secondary dark:text-white" data-user-name>Lisha Nana</p>
+                        <p data-i18n="id_user_status" class="text-xs text-gray-500 dark:text-gray-400">Étudiante</p>
                     </div>
-                    <img alt="Avatar Utilisateur"
-                        class="w-10 h-10 rounded-full object-cover border-2 border-primary shadow-sm"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-AbkTik24Q_rCpbwewky4ZNDDaZEgHurujCH9wklsbcw_6uItxbsjn7i2dkv_ZtfNMQRXqu_fAVPcAARqSCjNRvIg2a5rQgFMrEZVKZtRT5cUqAuYAXhx1AQI4xVSHOHQWJhurnwDHpju3BxI1Dp4asewISJXQri1p0VUBK8Z9wVjN5cXUzqmrZWgPwdGZACaZNl5uQic8_b3WrIsnA9wTsmSbxdJMsTUsrnvBgAfm-dGg5uO6SBhLEjQHHrZpTo18bxALyWoZn8" />
+                    <img id="userAvatar" alt="Avatar Utilisateur"
+                        class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover border-2 border-primary shadow-sm loading-pulse"
+                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f3f4f6'/%3E%3C/svg%3E" />
                 </div>
             </div>
         </header>
         <div class="mb-8">
-            <h1 class="text-3xl md:text-4xl font-extrabold text-secondary dark:text-white mb-2">Bonjour, Lisha! 👋</h1>
-            <p class="text-gray-500 dark:text-gray-400">Prête à apprendre quelque chose de nouveau aujourd'hui?</p>
+            <h1 data-i18n="id_dash_greeting" class="text-3xl md:text-4xl font-extrabold text-secondary dark:text-white mb-2" data-user-name>Bonjour, Lisha! 👋</h1>
+            <p data-i18n="id_dash_subtitle" class="text-gray-500 dark:text-gray-400">Prête à apprendre quelque chose de nouveau aujourd'hui?</p>
         </div>
-        <div
-            class="bg-secondary dark:bg-gray-800 rounded-2xl p-6 mb-8 text-white relative overflow-hidden shadow-lg flex items-center justify-between">
+
+        <!-- Bannière AI -->
+        <div class="bg-secondary dark:bg-gray-800 rounded-xl md:rounded-2xl p-4 md:p-6 mb-6 md:mb-8 text-white relative overflow-hidden shadow-lg flex flex-col sm:flex-row items-center justify-between gap-4">
             <div class="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-3xl -mr-16 -mt-16"></div>
             <div class="relative z-10 max-w-lg">
-                <div class="flex items-center gap-2 mb-2">
-                    <span
+                <div  class="flex items-center gap-2 mb-2">
+                    <span data-i18n="id_dash_new_feature"
                         class="bg-white/20 px-2 py-0.5 rounded text-xs font-semibold uppercase tracking-wider backdrop-blur-sm">Nouveau</span>
-                    <span class="text-primary font-bold text-sm">DeepSeek AI</span>
+                    <span data-i18n="id_dash_ai_title" class="text-primary font-bold text-sm">DeepSeek AI</span>
                 </div>
-                <h2 class="text-xl md:text-2xl font-bold mb-2">Besoin d'aide sur un devoir ?</h2>
-                <p class="text-gray-300 text-sm mb-4">Notre assistant IA est disponible 24/7 pour répondre à tes
+                <h2 data-i18n="id_dash_ai_heading" class="text-xl md:text-2xl font-bold mb-2">Besoin d'aide sur un devoir ?</h2>
+                <p data-i18n="id_dash_ai_description" class="text-gray-300 text-sm mb-4">Notre assistant IA est disponible 24/7 pour répondre à tes
                     questions et t'aider à progresser.</p>
-                <button
+                <button onclick="window.location.href='chat-student.html'"
                     class="bg-primary hover:bg-dark-brown text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-colors shadow-lg flex items-center gap-2">
                     <span class="material-icons-round text-lg">smart_toy</span>
-                    Discuter maintenant
+                    <span data-i18n="id_dash_ai_button">Discuter maintenant</span>
                 </button>
             </div>
-            <div class="hidden md:block relative z-10 mr-8">
-                <svg fill="none" height="100" viewBox="0 0 120 100" width="120" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="60" cy="50" fill="#D59D80" fill-opacity="0.2" r="40"></circle>
-                    <path
-                        d="M40 50C40 38.9543 48.9543 30 60 30C71.0457 30 80 38.9543 80 50C80 61.0457 71.0457 70 60 70C48.9543 70 40 61.0457 40 50Z"
+            <div class="hidden sm:block relative z-10">
+                <svg fill="none" height="80" viewBox="0 0 100 80" width="100" xmlns="http://www.w3.org/2000/svg" class="w-20 h-20 md:w-24 md:h-24">
+                    <circle cx="50" cy="40" fill="#D59D80" fill-opacity="0.2" r="30"></circle>
+                    <path d="M30 40C30 31.7157 36.7157 25 45 25C53.2843 25 60 31.7157 60 40C60 48.2843 53.2843 55 45 55C36.7157 55 30 48.2843 30 40Z"
                         stroke="white" stroke-width="2"></path>
-                    <path d="M30 50C30 40 45 30 60 30" stroke="#D59D80" stroke-linecap="round" stroke-width="3"></path>
-                    <path d="M90 50C90 60 75 70 60 70" stroke="#D59D80" stroke-linecap="round" stroke-width="3"></path>
-                    <circle cx="95" cy="25" fill="#C6C6D0" r="5"></circle>
-                    <circle cx="20" cy="80" fill="#104C64" r="8"></circle>
+                    <path d="M20 40C20 33 35 25 45 25" stroke="#D59D80" stroke-linecap="round" stroke-width="3"></path>
+                    <path d="M70 40C70 47 55 55 45 55" stroke="#D59D80" stroke-linecap="round" stroke-width="3"></path>
+                    <circle cx="75" cy="15" fill="#C6C6D0" r="4"></circle>
+                    <circle cx="15" cy="65" fill="#104C64" r="6"></circle>
                 </svg>
             </div>
         </div>
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div class="lg:col-span-2 space-y-8">
+
+        <!-- Grille principale -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
+            <!-- Colonne gauche (2/3 sur desktop) -->
+            <div class="lg:col-span-2 space-y-6 md:space-y-8">
+                <!-- Matières en cours -->
                 <div class="flex justify-between items-end">
-                    <h3 class="text-xl font-bold text-secondary dark:text-white">Mes Matières en cours</h3>
-                    <a class="text-sm font-semibold text-primary hover:underline" href="#">Voir tout</a>
+                    <h3 data-i18n="id_section_recent_subjects" class="text-xl font-bold text-secondary dark:text-white">Mes Matières récentes</h3>
+                    <a data-i18n="id_section_see_all" class="text-sm font-semibold text-primary hover:underline" href="#">Voir tout</a>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div
-                        class="bg-pastel-green dark:bg-gray-800 p-5 rounded-2xl relative overflow-hidden group hover:shadow-md transition-shadow cursor-pointer">
-                        <div
-                            class="absolute right-0 bottom-0 opacity-20 transform translate-x-2 translate-y-2 group-hover:scale-110 transition-transform duration-500">
-                            <span class="material-icons-round text-8xl text-teal-800 dark:text-teal-200">science</span>
+                <div id="subjectsContainer" class="grid grid-cols-1 xs:grid-cols-2 gap-3 sm:gap-4">
+                    <!-- Les matières seront chargées dynamiquement ici -->
+                    <div class="col-span-2 text-center py-8">
+                        <div class="inline-block p-4 rounded-full bg-gray-100 dark:bg-gray-800 mb-4">
+                            <span class="material-icons-round text-3xl text-gray-400 animate-pulse">hourglass_empty</span>
                         </div>
                         <div class="relative z-10">
                             <div
                                 class="w-10 h-10 bg-white dark:bg-gray-700 rounded-lg flex items-center justify-center mb-3 shadow-sm text-teal-600 dark:text-teal-300">
                                 <span class="material-icons-round">science</span>
                             </div>
-                            <h4 class="text-lg font-bold text-teal-900 dark:text-teal-100">Sciences</h4>
+                            <h4 data-i18n="id_subject_science" class="text-lg font-bold text-teal-900 dark:text-teal-100">Sciences</h4>
                             
                         </div>
                     </div>
@@ -217,7 +346,7 @@
                                 class="w-10 h-10 bg-white dark:bg-gray-700 rounded-lg flex items-center justify-center mb-3 shadow-sm text-orange-600 dark:text-orange-300">
                                 <span class="material-icons-round">functions</span>
                             </div>
-                            <h4 class="text-lg font-bold text-orange-900 dark:text-orange-100">Mathématiques</h4>
+                            <h4 data-i18n="id_subject_math" class="text-lg font-bold text-orange-900 dark:text-orange-100">Mathématiques</h4>
                             
                         </div>
                     </div>
@@ -232,7 +361,7 @@
                                 class="w-10 h-10 bg-white dark:bg-gray-700 rounded-lg flex items-center justify-center mb-3 shadow-sm text-blue-600 dark:text-blue-300">
                                 <span class="material-icons-round">computer</span>
                             </div>
-                            <h4 class="text-lg font-bold text-blue-900 dark:text-blue-100">Informatique</h4>
+                            <h4 data-i18n="id_subject_computer" class="text-lg font-bold text-blue-900 dark:text-blue-100">Informatique</h4>
                             
                         </div>
                     </div>
@@ -248,13 +377,13 @@
                                 class="w-10 h-10 bg-white dark:bg-gray-700 rounded-lg flex items-center justify-center mb-3 shadow-sm text-purple-600 dark:text-purple-300">
                                 <span class="material-icons-round">brush</span>
                             </div>
-                            <h4 class="text-lg font-bold text-purple-900 dark:text-purple-100">Dessin</h4>
+                            <h4 data-i18n="id_subject_drawing" class="text-lg font-bold text-purple-900 dark:text-purple-100">Dessin</h4>
                            
                         </div>
                     </div>
                 </div>
                 <div class="mt-8">
-                    <h3 class="text-xl font-bold text-secondary dark:text-white mb-4">Favoris</h3>
+                    <h3 data-i18n="id_section_favorites" class="text-xl font-bold text-secondary dark:text-white mb-4">Favoris</h3>
                     <div
                         class="bg-white dark:bg-card-dark rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
                         
@@ -265,15 +394,15 @@
                                 <span class="material-icons-round text-teal-600 text-2xl">design_services</span>
                             </div>
                             <div class="flex-1">
-                                <h4
+                                <h4 data-i18n="id_subject_math"
                                     class="font-bold text-secondary dark:text-white group-hover:text-primary transition-colors">
                                     Mathématiques</h4>
                                 <div class="flex gap-3 text-xs text-gray-500 dark:text-gray-400 mt-1">
                                     <span class="flex items-center gap-1"><span
                                             class="material-icons-round text-sm">person</span>Onana Onana</span>
                                     <span class="flex items-center gap-1"><span
-                                            class="material-icons-round text-sm">star</span> 4.8</span>
-                                    <span class="bg-green-100 dark:bg-green-700 px-2 py-0.5 rounded">Online</span>
+                                            class="material-icons-round text-sm">star</span> <span data-i18n="id_tutor_rating">4.8</span></span>
+                                    <span data-i18n="id_common_online" class="bg-green-100 dark:bg-green-700 px-2 py-0.5 rounded">Online</span>
                                 </div>
                             </div>
                             <button class="text-gray-400 hover:text-primary">
@@ -288,14 +417,14 @@
                                 <span class="material-icons-round text-teal-600 text-2xl">design_services</span>
                             </div>
                             <div class="flex-1">
-                                <h4
+                                <h4 data-i18n="id_subject_physics"
                                     class="font-bold text-secondary dark:text-white group-hover:text-primary transition-colors">
                                     Physiques</h4>
                                 <div class="flex gap-3 text-xs text-gray-500 dark:text-gray-400 mt-1">
                                     <span class="flex items-center gap-1"><span
                                             class="material-icons-round text-sm">person</span>Ondoua</span>
                                     <span class="flex items-center gap-1"><span
-                                            class="material-icons-round text-sm">star</span> 4.2</span>
+                                            class="material-icons-round text-sm">star</span> <span data-i18n="id_tutor_rating2">4.2</span></span>
                                     <span class="bg-red-100 dark:bg-red-700 px-2 py-0.5 rounded">Offline</span>
                                 </div>
                             </div>
@@ -310,22 +439,20 @@
                 
                 <div>
                     <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-xl font-bold text-secondary dark:text-white">Instructeurs</h3>
+                        <h3 data-i18n="id_section_instructors" class="text-xl font-bold text-secondary dark:text-white">Instructeurs</h3>
                         <button
                             class="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-gray-500 hover:text-primary transition-colors">
-                            <span class="material-icons-round text-sm">add</span>
+                            <span data-i18n="id_add_button" class="material-icons-round text-sm">add</span>
                         </button>
                     </div>
-                    <div
-                        class="bg-card-light dark:bg-card-dark rounded-2xl p-4 shadow-sm border border-gray-100 dark:border-gray-700 flex flex-col gap-4">
-                        <div class="flex items-center gap-3">
-                            <span class="material-icons-round text-lg">person</span>
-                            <div class="flex-1">
-                                <h5 class="text-sm font-bold text-secondary dark:text-white">Sarah Ebang</h5>
-                                <p class="text-xs text-gray-500">Sciences</p>
+                    <div id="instructorsContainer" class="bg-card-light dark:bg-card-dark rounded-xl md:rounded-2xl p-3 sm:p-4 shadow-sm border border-gray-100 dark:border-gray-700 flex flex-col gap-3 sm:gap-4">
+                        <!-- Les instructeurs seront chargés dynamiquement ici -->
+                        <div class="text-center py-6">
+                            <div class="inline-block p-3 rounded-full bg-gray-100 dark:bg-gray-800 mb-3">
+                                <span class="material-icons-round text-2xl text-gray-400 animate-pulse">person_search</span>
                             </div>
                             <button class="p-2 text-primary hover:bg-primary/10 rounded-full transition-colors">
-                                <span class="material-icons-round text-lg">chat_bubble_outline</span>
+                                <span data-i18n="id_chat_button" class="material-icons-round text-lg">chat_bubble_outline</span>
                             </button>
                         </div>
                         <div class="flex items-center gap-3">
@@ -335,34 +462,40 @@
                                 <p class="text-xs text-gray-500">Mathématiques</p>
                             </div>
                             <button class="p-2 text-primary hover:bg-primary/10 rounded-full transition-colors">
-                                <span class="material-icons-round text-lg">chat_bubble_outline</span>
+                                <span data-i18n="id_chat_button" class="material-icons-round text-lg">chat_bubble_outline</span>
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Espace pour la navbar mobile -->
+        <div class="h-16 md:hidden"></div>
     </main>
     <div
         class="md:hidden fixed bottom-0 w-full bg-white dark:bg-card-dark border-t border-gray-100 dark:border-gray-800 flex justify-around p-3 z-50">
         <a class="flex flex-col items-center text-primary" href="#">
             <span class="material-icons-round">dashboard</span>
-            <span class="text-[10px] font-bold mt-1">Accueil</span>
+            <span data-i18n="id_nav_home" class="text-[10px] font-bold mt-1">Accueil</span>
         </a>
         <a class="flex flex-col items-center text-gray-400 dark:text-gray-500" href="#">
             <span class="material-icons-round">school</span>
-            <span class="text-[10px] font-medium mt-1">Cours</span>
+            <span data-i18n="id_nav_subjects" class="text-[10px] font-medium mt-1">Cours</span>
         </a>
         <a class="flex flex-col items-center text-gray-400 dark:text-gray-500 relative" href="#">
             <span class="material-icons-round">chat_bubble</span>
             <span class="absolute top-0 right-3 w-2 h-2 bg-red-500 rounded-full"></span>
-            <span class="text-[10px] font-medium mt-1">Chat</span>
+            <span data-i18n="id_nav_messages" class="text-[10px] font-medium mt-1">Chat</span>
         </a>
         <a class="flex flex-col items-center text-gray-400 dark:text-gray-500" href="#">
             <span class="material-icons-round">person</span>
-            <span class="text-[10px] font-medium mt-1">Profil</span>
+            <span data-i18n="id_nav_profile" class="text-[10px] font-medium mt-1">Profil</span>
         </a>
     </div>
-
+<script type="module" src="../js/auth/logout.js"></script>
+<script src="../js/utils/dark-white.js"></script>
+<script type="module" src="../js/peer/test.js"></script>
+<script type="module" src="../js/lang.js"></script>
 </body>
 </html>
