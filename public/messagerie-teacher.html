@@ -91,6 +91,14 @@
         .input-icon-btn {
             @apply p-2 rounded-xl text-slate-400 hover:bg-slate-50 transition-all flex items-center justify-center;
         }
+        .popover-menu {
+  @apply bg-white rounded-2xl shadow-xl p-2 w-56;
+}
+.popover-item {
+  @apply flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-medium text-slate-900 hover:bg-slate-50;
+}
+
+
     </style>
     <script>
         tailwind.config = {
@@ -216,7 +224,7 @@
                             <h3 class="font-bold text-slate-800 text-sm">Discussions</h3>
                         </div>
                         <div class="flex-1 overflow-y-auto custom-scrollbar space-y-2">
-                            <div class="conversation-item bg-blue-50/50 border border-blue-100"
+                            <div class="conversation-item active bg-blue-50/50 border border-blue-100"
                                 data-conversation-id="ia">
                                 <div class="relative">
                                     <div
@@ -244,7 +252,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="conversation-item active" data-conversation-id="thomas">
+                            <div class="conversation-item" data-conversation-id="thomas">
                                 <div class="relative">
                                     <img alt="Student" class="w-12 h-12 rounded-2xl object-cover"
                                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuCm_zdfySOaD2X9HKcw9u_JstuwVMUADvRG-5eRya4gZtJ9-t9DBn1Ul8cMo9DJpr3-Tn_Lq4S7k8XH2qVCIHvn9JRWQOZhz1a9dq1ArlcOSPGonVZQDKAXHW3usOf6ANLU_ql3IWHiVdwBXbAuzFSLulmH4s7EUS-Ee_PmpAJULKtyZB4bH20GhdpF0CUJ8hK7reqYGfuJOf_oW2pyRrsVjgeAqUbGm3E-ktYFKQGwbDYXAVlo-SUvirFo4u2EdWmxVpFbOMxcaFi5" />
@@ -322,9 +330,19 @@
                             <div
                                 class="flex items-center gap-2 bg-slate-50 p-2 rounded-[2rem] border border-slate-100 shadow-inner">
                                 <div class="flex items-center gap-1 pl-2">
-                                    <button class="input-icon-btn" title="Joindre un fichier">
-                                        <span class="material-symbols-outlined text-xl">attach_file</span>
-                                    </button>
+                                    <div class="group relative">
+                                        <button class="input-icon-btn" title="Joindre un fichier" id="attach-btn">
+                                            <span class="material-symbols-outlined text-xl">attach_file</span>
+                                        </button>
+                                        <div id="attach-popover"
+                                            class="popover-menu hidden absolute bottom-14 left-0 z-50">
+                                            <button class="popover-item">
+                                                <span
+                                                    class="material-symbols-outlined text-lg text-indigo-400 bg-indigo-50 p-1.5 rounded-lg">description</span>
+                                                Document
+                                            </button>
+                                        </div>
+                                    </div>
                                     <button class="input-icon-btn" title="Créer un tableau">
                                         <span class="material-symbols-outlined text-xl">table_chart</span>
                                     </button>
@@ -374,22 +392,21 @@
         protectPage(["teacher"]);
     </script>
     <script type="module" src="/js/utils/avatar-sync.js"></script>
-    <script type="module" src="/js/peer/test.js"></script>
-    <script>const backBtn = document.getElementById("back-to-conversations");
-        const conversationsList = document.querySelector(".w-full.md\\:w-80");
-        const chatPanel = document.querySelector(".hidden.md\\:flex.flex-1");
+    <script type="module" src="/js/peer/ia-chat.js"></script>
+    <script type="module" src="/js/utils/conversation-active.js"></script>
+    <script>const attachBtn = document.getElementById("attach-btn");
+        const popover = document.getElementById("attach-popover");
 
-        if (backBtn) {
-            backBtn.addEventListener("click", () => {
-                // cacher le chat
-                chatPanel?.classList.add("hidden");
-                chatPanel?.classList.remove("flex");
+        attachBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            popover.classList.toggle("hidden");
+        });
 
-                // afficher la liste
-                conversationsList?.classList.remove("hidden");
-            });
-        }
+        document.addEventListener("click", () => {
+            popover.classList.add("hidden");
+        });
     </script>
+
 </body>
 
 </html>

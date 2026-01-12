@@ -2,33 +2,198 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chat IA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --primary: #D59D80;
+      --primary-soft: #F5E6DA;
+      --accent-peach: #FFE5D9;
+      --accent-cream: #FFF9F5;
+      --bg-canvas: #FDFCFB;
+      --sidebar-bg: #FFFFFF;
+      --text-dark: #4A3F35;
+    }
+    
+    body {
+      font-family: 'Comfortaa', cursive;
+      background: linear-gradient(135deg, var(--bg-canvas) 0%, var(--accent-cream) 100%);
+      color: var(--text-dark);
+      min-height: 100vh;
+      padding: 2rem;
+    }
+    
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    
+    #chatBox {
+      background: white;
+      border-radius: 24px;
+      padding: 1.5rem;
+      min-height: 100px;
+      max-height: 150px;
+      overflow-y: auto;
+      box-shadow: 0 8px 32px rgba(213, 157, 128, 0.15);
+      border: 2px solid var(--accent-peach);
+      background-image: 
+        radial-gradient(circle at 20% 20%, var(--accent-cream) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, var(--primary-soft) 0%, transparent 50%);
+    }
+    
+    #chatBox::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    #chatBox::-webkit-scrollbar-track {
+      background: var(--accent-cream);
+      border-radius: 10px;
+    }
+    
+    #chatBox::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: 10px;
+    }
+    
+    select, textarea {
+      font-family: 'Comfortaa', cursive;
+      transition: all 0.3s ease;
+    }
+    
+    select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(213, 157, 128, 0.1);
+    }
+    
+    button {
+      transition: all 0.3s ease;
+    }
+    
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(213, 157, 128, 0.3);
+    }
+    
+    button:active {
+      transform: translateY(0);
+    }
+    
+    .decorative-circle {
+      position: fixed;
+      border-radius: 50%;
+      opacity: 0.1;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    .circle-1 {
+      width: 300px;
+      height: 300px;
+      background: var(--primary);
+      top: -100px;
+      right: -100px;
+    }
+    
+    .circle-2 {
+      width: 200px;
+      height: 200px;
+      background: var(--accent-peach);
+      bottom: -50px;
+      left: -50px;
+    }
+  </style>
 </head>
 <body>
 
-<h2>Chat IA pédagogique</h2>
+<div class="decorative-circle circle-1"></div>
+<div class="decorative-circle circle-2"></div>
 
-<div id="chatBox"></div>
+<div class="max-w-4xl mx-auto">
+ 
+  <div class="text-center mb-8">
+    <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[var(--primary)] to-[var(--primary-soft)] rounded-3xl shadow-lg mb-4">
+      <span class="material-symbols-outlined text-white text-3xl">psychology</span>
+    </div>
+    <h2 class="text-3xl font-bold text-[var(--text-dark)] mb-2">Chat IA pédagogique</h2>
+    <p class="text-sm text-[var(--primary)]">Votre assistant d'apprentissage personnalisé</p>
+  </div>
 
-<br>
+ 
+  <div id="chatBox" class="mb-6">
+    <div class="flex items-center justify-center h-full text-gray-500">
+      <div class="text-center">
+        <span class="material-symbols-outlined text-6xl mb-3 text-[var(--primary-soft)]">chat</span>
+        <p class="text-sm">Commencez une conversation dans le cadre ci-joint...</p>
+      </div>
+    </div>
+  </div>
 
-<select id="category">
-  <option value="math">Math</option>
-  <option value="physics">Physique</option>
-  <option value="svt">SVT</option>
-  <option value="literature">Littérature Camerounaise</option>
-  <option value="it">Informatique</option>
-</select>
+ 
+  <div class="bg-white rounded-3xl shadow-xl border-2 border-[var(--accent-peach)] p-6">
+    <div class="flex gap-4 mb-6">
+      
+      <div class="flex-1">
+        <label class="block text-sm font-semibold text-[var(--text-dark)] mb-2 flex items-center gap-2">
+          <span class="material-symbols-outlined text-[var(--primary)] text-lg">category</span>
+          Catégorie :
+        </label>
+        <select id="category" class="w-full px-4 py-3 bg-[var(--accent-cream)] border-2 border-[var(--primary-soft)] rounded-2xl text-[var(--text-dark)] font-medium cursor-pointer">
+          <option value="math"> Mathématiques</option>
+          <option value="physics"> Physique</option>
+          <option value="svt"> SVT</option>
+          <option value="literature"> Littérature Camerounaise</option>
+          <option value="it"> Informatique</option>
+        </select>
+      </div>
 
-<select id="language">
-  <option value="fr">Français</option>
-  <option value="en">English</option>
-</select>
+      <!-- Pour attribuer la langue au code-->
+      <div class="flex-1">
+        <label class="block text-sm font-semibold text-[var(--text-dark)] mb-2 flex items-center gap-2">
+          <span class="material-symbols-outlined text-[var(--primary)] text-lg">language</span>
+          Langue :
+        </label>
+        <select id="language" class="w-full px-4 py-3 bg-[var(--accent-cream)] border-2 border-[var(--primary-soft)] rounded-2xl text-[var(--text-dark)] font-medium cursor-pointer">
+          <option value="fr"> Français</option>
+          <option value="en"> English</option>
+        </select>
+      </div>
+    </div>
 
-<br><br>
+    
+    <div class="mb-4">
+      <label class="block text-sm font-semibold text-[var(--text-dark)] mb-2 flex items-center gap-2">
+        <span class="material-symbols-outlined text-[var(--primary)] text-lg">edit_note</span>
+        Votre question :
+      </label>
+      <textarea 
+        id="prompt" 
+        placeholder="Posez votre question ici..."
+        class="w-full px-4 py-3 bg-[var(--accent-cream)] border-2 border-[var(--primary-soft)] rounded-2xl text-[var(--text-dark)] resize-none h-28 placeholder-gray-400"
+      ></textarea>
+    </div>
 
-<textarea id="prompt"></textarea><br>
-<button id="sendBtn">Envoyer</button>
+    
+    <button 
+      id="sendBtn"
+      class="w-full bg-gradient-to-r from-[var(--primary)] to-[#C88A6E] text-white font-bold py-4 rounded-2xl shadow-lg flex items-center justify-center gap-2 hover:shadow-xl"
+    >
+      <span class="material-symbols-outlined">send</span>
+      Envoyer
+    </button>
+  </div>
+
+  
+  <div class="mt-6 text-center">
+    <p class="text-xs text-gray-400 flex items-center justify-center gap-2">
+      <span class="material-symbols-outlined text-sm">info</span>
+      Votre compagnon DeepSeek AI pour vous aider dans vos études.
+    </p>
+  </div>
+</div>
 
 <script type="module" src="../js/ai/deepseek.js"></script>
 

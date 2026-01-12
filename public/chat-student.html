@@ -57,6 +57,45 @@
         .dark ::-webkit-scrollbar-thumb {
             background: #475569;
         }
+        .tooltip {
+            position: absolute;
+            background: white;
+            padding: 6px 12px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            font-size: 12px;
+            font-weight: 500;
+            color: #0D1D25;
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 100;
+            border: 1px solid rgba(213, 157, 128, 0.2);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .dark .tooltip {
+            background: #1A2E38;
+            color: #F8F9FA;
+            border-color: rgba(213, 157, 128, 0.3);
+        }
+        .tooltip.show {
+            opacity: 1;
+        }
+        .tooltip::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-bottom: 6px solid white;
+        }
+        .dark .tooltip::before {
+            border-bottom-color: #1A2E38;
+        }
     </style>
 </head>
 <body class="bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-200 h-screen overflow-hidden flex transition-colors duration-300">
@@ -77,19 +116,19 @@
                 </div>
 </div>
 <nav class="space-y-4">
-<a class="flex items-center justify-center p-3 rounded-2xl text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-primary dark:hover:text-primary transition-colors group" href="dashboard-student.html" title="Accueil">
+<a class="flex items-center justify-center p-3 rounded-2xl text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-primary dark:hover:text-primary transition-colors group" href="dashboard-student.html" data-tooltip="Accueil">
 <span class="material-icons-outlined text-3xl group-hover:scale-110 transition-transform">home</span>
 </a>
 <a class="flex items-center justify-center p-3 rounded-2xl text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-primary dark:hover:text-primary transition-colors group" href="whiteboard.html" title="Matières">
 <span class="material-icons-outlined text-3xl group-hover:scale-110 transition-transform">school</span>
 </a>
-<a class="flex items-center justify-center p-3 rounded-2xl bg-primary/10 text-primary dark:bg-primary/20 transition-colors shadow-sm" href="#" title="Messages">
+<a class="flex items-center justify-center p-3 rounded-2xl bg-primary/10 text-primary dark:bg-primary/20 transition-colors shadow-sm" href="#" data-tooltip="Messages">
 <span class="material-icons-outlined text-3xl">chat_bubble_outline</span>
 </a>
 </nav>
 </div>
 <div>
-<div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 flex items-center justify-center cursor-pointer" title="Profil">
+<div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 flex items-center justify-center cursor-pointer" data-tooltip="Profil">
 <img alt="Profile" class="w-12 h-12 rounded-full object-cover border-2 border-white dark:border-gray-600 shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpsGOIRySOv9VTidG7PaDTfqWRSp6wekLV7V691X5Eix6i51w6zX1FKSvA3zY-m17kjlKOfMV4MgehJ06cwtT4AA36nNeCqRKchvwHy0LX9rGC1oeXSrLtfpVYDkia_6GqPDi6Qq4135yjPpynjh42-WTamJr3wQlzncAFfeFuoG-EMj75_CJwx4mJxFJnrAq-jWVp2jIsU1No73b1yntsawb9VZFl81Toh_yUaP0P3TM2GcWa5dL5z6HUvqjmojPOXAkBOp1h4xg"/>
 </div>
 </div>
@@ -97,7 +136,7 @@
 <main class="flex-1 flex flex-col h-full relative overflow-hidden">
 <header class="h-20 flex items-center justify-between px-6 bg-surface-light dark:bg-surface-dark border-b border-gray-200 dark:border-gray-700 md:hidden z-20">
 <div class="font-bold text-xl text-darktext dark:text-white">Messages</div>
-<button class="text-gray-500 hover:text-primary">
+<button class="text-gray-500 hover:text-primary" data-tooltip="Menu">
 <span class="material-icons-outlined text-2xl">menu</span>
 </button>
 </header>
@@ -180,7 +219,7 @@
 <section class="flex-1 flex flex-col bg-background-light dark:bg-background-dark relative">
 <div class="h-24 px-8 flex items-center justify-between border-b border-gray-200 dark:border-gray-800 bg-surface-light/80 dark:bg-surface-dark/80 backdrop-blur-sm z-10 sticky top-0">
 <div class="flex items-center">
-<button class="md:hidden mr-4 text-gray-500" onclick="document.getElementById('chatListPanel').classList.toggle('-translate-x-full')">
+<button class="md:hidden mr-4 text-gray-500" onclick="document.getElementById('chatListPanel').classList.toggle('-translate-x-full')" data-tooltip="Retour">
 <span class="material-icons-outlined text-2xl">arrow_back</span>
 </button>
 <div class="relative">
@@ -213,7 +252,7 @@
 </div>
 <div>
 <div class="bg-surface-light dark:bg-surface-dark p-5 rounded-3xl rounded-bl-none shadow-sm text-lg text-gray-700 dark:text-gray-200 border border-gray-100 dark:border-gray-700 leading-relaxed">
-<p>Bonjour Lisha ! 👋 Comment puis-je t'aider aujourd'hui ? On continue sur les mathématiques ou tu veux voir autre chose ?</p>
+<p>Bonjour Lisha !  Comment puis-je t'aider aujourd'hui ? On continue sur les mathématiques ou tu veux voir autre chose ?</p>
 </div>
 <span class="text-sm text-gray-400 ml-3 mt-1.5 block">10:23 AM</span>
 </div>
@@ -244,7 +283,7 @@
 <p class="text-base font-bold text-darktext dark:text-white">Fiche_Fonctions_Affines.pdf</p>
 <p class="text-sm text-gray-500 font-medium">PDF • 2.4 MB</p>
 </div>
-<button class="ml-auto w-10 h-10 rounded-full hover:bg-white dark:hover:bg-gray-600 flex items-center justify-center text-primary transition-colors">
+<button class="ml-auto w-10 h-10 rounded-full hover:bg-white dark:hover:bg-gray-600 flex items-center justify-center text-primary transition-colors" data-tooltip="Télécharger">
 <span class="material-icons-outlined text-2xl">download</span>
 </button>
 </div>
@@ -267,17 +306,17 @@
 </div>
 <div class="p-6 bg-background-light dark:bg-background-dark border-t border-gray-200 dark:border-gray-800 z-10">
 <div class="max-w-4xl mx-auto bg-surface-light dark:bg-surface-dark rounded-[2rem] shadow-lg border border-gray-200 dark:border-gray-700 flex items-end p-3 transition-colors">
-<button class="p-4 text-gray-400 hover:text-primary transition-colors rounded-full hover:bg-gray-50 dark:hover:bg-gray-800 flex-shrink-0">
+<button class="p-4 text-gray-400 hover:text-primary transition-colors rounded-full hover:bg-gray-50 dark:hover:bg-gray-800 flex-shrink-0" data-tooltip="Joindre fichier">
 <span class="material-icons-outlined text-2xl">add_circle</span>
 </button>
 <div class="flex-1 py-4 px-3">
 <textarea class="w-full bg-transparent border-none focus:ring-0 text-gray-700 dark:text-gray-200 placeholder-gray-400 resize-none max-h-32 text-lg" placeholder="Écrivez votre message..." rows="1" style="min-height: 28px;"></textarea>
 </div>
 <div class="flex items-center pb-1 pr-1 space-x-2">
-<button class="p-3 text-gray-400 hover:text-primary transition-colors rounded-full hover:bg-gray-50 dark:hover:bg-gray-800">
+<button class="p-3 text-gray-400 hover:text-primary transition-colors rounded-full hover:bg-gray-50 dark:hover:bg-gray-800" data-tooltip="Emoji">
 <span class="material-icons-outlined text-2xl">sentiment_satisfied</span>
 </button>
-<button class="p-4 bg-primary hover:bg-opacity-90 text-white rounded-2xl shadow-md shadow-primary/30 transition-all transform active:scale-95 flex items-center justify-center">
+<button class="p-4 bg-primary hover:bg-opacity-90 text-white rounded-2xl shadow-md shadow-primary/30 transition-all transform active:scale-95 flex items-center justify-center" data-tooltip="Envoyer">
 <span class="material-icons-outlined text-xl">send</span>
 </button>
 </div>
@@ -289,4 +328,35 @@
 </section>
 </div>
 </main>
+
+<!-- Pour l'élément du tooltip (afficher le nom du bouton ou de l'icône correspondante) -->
+<div id="tooltip" class="tooltip"></div>
+
+<script>
+    const tooltip = document.getElementById('tooltip');
+    const elements = document.querySelectorAll('[data-tooltip]');
+    
+    elements.forEach(element => {
+        element.addEventListener('mouseenter', function(e) {
+            const text = this.getAttribute('data-tooltip');
+            const rect = this.getBoundingClientRect();
+            
+            tooltip.textContent = text;
+            tooltip.classList.add('show');
+            
+            // Positionne le tooltip en dessous de l'élément
+            const tooltipRect = tooltip.getBoundingClientRect();
+            const left = rect.left + (rect.width / 2) - (tooltipRect.width / 2);
+            const top = rect.bottom + 8; // 8px en dessous de l'élément
+            
+            tooltip.style.left = left + 'px';
+            tooltip.style.top = top + 'px';
+        });
+        
+        element.addEventListener('mouseleave', function() {
+            tooltip.classList.remove('show');
+        });
+    });
+</script>
+
 </body></html>
