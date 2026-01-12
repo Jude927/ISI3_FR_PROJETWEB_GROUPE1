@@ -96,18 +96,18 @@
             <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
                 href="matiere-student.html">
                 <span class="material-symbols-outlined text-2xl">school</span>
-                <span class="hidden lg:block ml-4 font-semibold">Matières</span>
+                <span class="hidden lg:block ml-4 font-semibold" data-i18n="nav_subjects">Matières</span>
             </a>
             <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
                 href="chat-student.html">
                 <span class="material-symbols-outlined text-2xl">chat_bubble</span>
-                <span class="hidden lg:block ml-4 font-semibold">Messages</span>
+                <span class="hidden lg:block ml-4 font-semibold" data-i18n="nav_messages">Messages</span>
 
 
                 <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
                     href="#">
                     <span class="material-symbols-outlined text-2xl">person</span>
-                    <span class="hidden lg:block ml-4 font-semibold">Profil</span>
+                    <span class="hidden lg:block ml-4 font-semibold" data-i18n="nav_profile">Profil</span>
                 </a>
         </nav>
 
@@ -115,13 +115,13 @@
             <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary transition-colors"
                 href="#">
                 <span class="material-symbols-outlined text-2xl">settings</span>
-                <span class="hidden lg:block ml-4 font-semibold">Paramètres</span>
+                <span class="hidden lg:block ml-4 font-semibold" data-i18n="nav_settings">Paramètres</span>
             </a>
             <a id="logoutBtn"
                 class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
                 href="#">
                 <span class="material-symbols-outlined text-2xl">logout</span>
-                <span class="hidden lg:block ml-5 font-semibold">Se déconnecter</span>
+                <span class="hidden lg:block ml-5 font-semibold" data-i18n="nav_logout">Se déconnecter</span>
             </a>
         </div>
     </aside>
@@ -129,14 +129,14 @@
     <main class="flex-1 h-full overflow-y-auto p-8 lg:px-16">
         <header class="flex justify-between items-center mb-12">
             <div>
-                <h1 class="text-3xl font-bold text-text-main" data-i18n="nav_settings">Paramètres</h1>
+                <h1 class="text-3xl font-bold text-text-main" data-i18n="nav_settings" data-i18n="nav_settings">Paramètres</h1>
                 <p class="text-text-muted text-sm mt-1">Personnalisez votre expérience Djangou</p>
             </div>
 
             <div class="flex items-center gap-4 pl-4 border-l border-[var(--border)]">
                 <div class="text-right hidden sm:block">
                     <p class="text-sm font-bold text-text-main">Lisha Nana</p>
-                    <p class="text-xs text-text-muted">Étudiante</p>
+                    <p class="text-xs text-text-muted" data-i18n="span_student">Étudiante</p>
                 </div>
                 <img alt="Avatar"
                     class="w-12 h-12 rounded-2xl object-cover border-2 border-white dark:border-gray-700 shadow-sm ring-1 ring-primary/20"
@@ -153,8 +153,8 @@
                             <span class="material-symbols-outlined">language</span>
                         </div>
                         <div>
-                            <h3 class="font-bold text-lg text-text-main">Changement de langue</h3>
-                            <p class="text-sm text-text-muted">Langue préférée pour l'interface</p>
+                            <h3 class="font-bold text-lg text-text-main" data-i18n="p_langue">Changement de langue</h3>
+                            <p class="text-sm text-text-muted" data-i18n="p_lang_sub">Langue préférée pour l'interface</p>
                         </div>
                     </div>
                 </div>
@@ -162,12 +162,12 @@
                     <button data-lang-btn="fr" onclick="setLanguage('fr')"
                         class="flex items-center gap-3 p-3 rounded-xl border border-[var(--border)] text-text-muted font-medium transition-all lang-btn">
                         <span class="text-2xl">🇫🇷</span>
-                        <span>Français</span>
+                        <span data-i18n="span_french">Français</span>
                     </button>
                     <button data-lang-btn="en" onclick="setLanguage('en')"
                         class="flex items-center gap-3 p-3 rounded-xl border border-[var(--border)] text-text-muted font-medium transition-all lang-btn">
                         <span class="text-2xl">🇬🇧</span>
-                        <span>English</span>
+                        <span data-i18n="span_english">English</span>
                     </button>
                 </div>
             </div>
@@ -179,23 +179,23 @@
                             <span class="material-symbols-outlined">palette</span>
                         </div>
                         <div>
-                            <h3 class="font-bold text-lg text-text-main">Mode d'affichage</h3>
-                            <p class="text-sm text-text-muted">Alterner entre le thème clair et sombre</p>
+                            <h3 class="font-bold text-lg text-text-main" data-i18n="p_mode">Mode d'affichage</h3>
+                            <p class="text-sm text-text-muted" data-i18n="p_mode_sub">Alterner entre le thème clair et sombre</p>
                         </div>
                     </div>
                     <div
                         class="flex items-center gap-3 bg-background p-1.5 rounded-2xl border border-[var(--border)] self-start md:self-center">
-                        <button
+                        <button id="theme-toggle"
                             class="flex items-center gap-2 px-4 py-2 rounded-xl text-text-muted hover:text-primary dark:text-gray-400 dark:hover:text-primary transition-all light:bg-card light:shadow-sm light:text-primary light:font-bold [[class='light']_&amp;]:bg-white [[class='light']_&amp;]:shadow-sm [[class='light']_&amp;]:text-primary [[class='light']_&amp;]:font-bold"
                             onclick="toggleTheme('light')">
                             <span class="material-symbols-outlined text-xl">light_mode</span>
-                            <span>Clair</span>
+                            <span data-i18n="span_clear">Clair</span>
                         </button>
-                        <button
+                        <button id="theme-toggle"
                             class="flex items-center gap-2 px-4 py-2 rounded-xl text-text-muted hover:text-primary dark:text-gray-400 dark:hover:text-primary transition-all dark:bg-gray-700 dark:shadow-sm dark:text-primary dark:font-bold [[class='dark']_&amp;]:bg-gray-700 [[class='dark']_&amp;]:shadow-sm [[class='dark']_&amp;]:text-primary [[class='dark']_&amp;]:font-bold"
                             onclick="toggleTheme('dark')">
                             <span class="material-symbols-outlined text-xl">dark_mode</span>
-                            <span>Sombre</span>
+                            <span data-i18n="span_dark">Sombre</span>
                         </button>
                     </div>
                 </div>
@@ -209,14 +209,14 @@
                             <span class="material-symbols-outlined">security</span>
                         </div>
                         <div>
-                            <h3 class="font-bold text-lg text-text-main">Sécurité</h3>
-                            <p class="text-sm text-text-muted">Protégez votre compte</p>
+                            <h3 class="font-bold text-lg text-text-main" data-i18n="security">Sécurité</h3>
+                            <p class="text-sm text-text-muted" data-i18n="protected">Protégez votre compte</p>
                         </div>
                     </div>
                     <div class="space-y-3">
                         <button
                             class="w-full flex items-center justify-between p-3 rounded-xl hover:bg-red-50 dark:hover:bg-red-900/10 text-text-main transition-colors group">
-                            <span class="text-sm font-medium">Changer le mot de passe</span>
+                            <span class="text-sm font-medium" data-i18n="pwd">Changer le mot de passe</span>
                             <span
                                 class="material-symbols-outlined text-text-muted group-hover:text-red-500 transition-colors">chevron_right</span>
                         </button>
@@ -226,31 +226,16 @@
             </div>
             <div class="flex flex-col sm:flex-row justify-end gap-4 mt-8 pb-12">
                 <button
-                    class="px-8 py-3 rounded-xl font-bold text-text-muted hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">Annuler</button>
+                    class="px-8 py-3 rounded-xl font-bold text-text-muted hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" data-i18n="cancel">Annuler</button>
                 <button
-                    class="px-8 py-3 rounded-xl bg-primary text-white font-bold shadow-lg shadow-primary/20 hover:scale-[1.02] transition-all">Enregistrer
+                    class="px-8 py-3 rounded-xl bg-primary text-white font-bold shadow-lg shadow-primary/20 hover:scale-[1.02] transition-all" data-i18n="save">Enregistrer
                     les modifications</button>
             </div>
         </div>
     </main>
-    <div
-        class="md:hidden fixed bottom-0 w-full glass-card border-t border-[var(--border)] flex justify-around p-3 z-50">
-        <a class="flex flex-col items-center text-text-muted" href="#">
-            <span class="material-symbols-outlined">dashboard</span>
-            <span class="text-[10px] font-bold mt-1">Accueil</span>
-        </a>
-        <a class="flex flex-col items-center text-text-muted" href="#">
-            <span class="material-symbols-outlined">school</span>
-            <span class="text-[10px] font-medium mt-1">Cours</span>
-        </a>
-        <a class="flex flex-col items-center text-primary" href="#">
-            <span class="material-symbols-outlined active-icon">settings</span>
-            <span class="text-[10px] font-medium mt-1">Réglages</span>
-        </a>
-        <a class="flex flex-col items-center text-text-muted" href="#">
-            <span class="material-symbols-outlined">person</span>
-            <span class="text-[10px] font-medium mt-1">Profil</span>
-        </a>
+    
+
+    
     </div>
     <script src="../js/utils/dark-white.js"></script>
     <script type="module" src="../js/auth/logout.js"></script>
