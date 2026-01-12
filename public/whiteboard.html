@@ -6,7 +6,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Tableau Interactif Djangou</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-   
+
     <link href="../CSS/CssInterface.CSS" rel="stylesheet" />
 
     <script>
@@ -43,6 +43,15 @@
             },
         };
     </script>
+
+    <style type="text/tailwindcss">
+        body {
+  font-family: 'Comfortaa', cursive;
+  background-color: var(--bg-canvas);
+  color: var(--text-dark);
+}
+    </style>
+
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&amp;display=swap"
         rel="stylesheet" />
     <link
@@ -64,7 +73,7 @@
                 href="dashboard-student.html">
                 <span class="material-symbols-outlined">home</span>
             </a>
-          
+
             <a class="w-12 h-12 rounded-2xl flex items-center justify-center text-gray-400 dark:text-gray-400 hover:bg-primary/10 dark:hover:bg-gray-800 hover:text-primary dark:hover:text-primary transition-all"
                 href="chat-student.html">
                 <span class="material-symbols-outlined">chat_bubble</span>
@@ -87,7 +96,7 @@
             </div>
             <div class="flex items-center gap-4">
                 <button onclick="downloadCanvas()"
-                    class="px-4 py-2 bg-white border border-orange-100 rounded-full text-sm font-medium hover:shadow-sm transition-all flex items-center gap-2">
+                    class="px-4 py-2 bg-white border dark:text-red-600 border-orange-100 rounded-full text-sm font-medium hover:shadow-sm transition-all flex items-center gap-2">
                     <span class="material-symbols-outlined text-sm">cloud_upload</span>
                     Exporter
                 </button>
@@ -118,7 +127,7 @@
                     class="w-12 h-12 rounded-2xl text-gray-500 dark:text-gray-400 hover:bg-primary/10 dark:hover:bg-gray-800 hover:text-primary dark:hover:text-primary flex items-center justify-center transition-all">
                     <span class="material-symbols-outlined">text_fields</span>
                 </button>
-               
+
                 </button>
                 <div class="h-px bg-orange-100 dark:bg-gray-700 mx-2"></div>
                 <button onclick="changeColor('#EF4444')"
@@ -205,8 +214,8 @@
                         <span class="material-symbols-outlined text-xl">redo</span>
                     </button>
                 </div>
-               
-                
+
+
             </div>
 
             <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20">
@@ -216,12 +225,12 @@
                         class="w-8 h-8 bg-white dark:bg-gray-700 rounded-full flex items-center justify-center text-primary shadow-sm">
                         <span class="material-symbols-outlined text-lg">auto_awesome</span>
                     </div>
-                    <p  class="text-sm font-medium text-darktext dark:text-white">
+                    <p class="text-sm font-medium text-darktext dark:text-white">
                         Besoin d'aide ? <a href="chat-student.html"
-                           class="text-primary cursor-pointer hover:underline font-bold">Demander à DeepSeek AI</span>
-                    </a>
+                            class="text-primary cursor-pointer hover:underline font-bold">Demander à DeepSeek AI</span>
+                        </a>
                 </div>
-               
+
             </div>
         </div>
     </main>
@@ -467,6 +476,7 @@
             }
         });
     </script>
+    <script src="../js/utils/dark-white.js"></script>
 </body>
 
 </html>

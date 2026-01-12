@@ -22,7 +22,7 @@
                         "dark-brown": "#C0754D", // Brownish
                         "darker-brown": "#B6410F", // Deep Brown
                         "background-light": "#FFFFFF", // Very light warm white
-                        "background-dark": "#1F1F1F", // Dark grey
+                        "background-dark": "#0b0c0c", 
                         "card-light": "#F9F9F9",
                         "card-dark": "#2d2d2d",
                         "pastel-green": "#e0f2f1",
@@ -74,7 +74,7 @@
     </div>
 
     <aside id = "sidebar"
-        class="hidden md:flex flex-col w-24 lg:w-64 h-full bg-card-light dark:bg-card-dark border-r border-gray-100 dark:border-gray-800 transition-all duration-300 p-4 ">
+        class="hidden md:flex flex-col w-24 lg:w-64 h-full bg-card-light dark:bg-card-dark border-r border-gray-100 font-bold dark:border-gray-800 transition-all duration-300 p-4 ">
         <div class="flex items-center justify-center lg:justify-start mb-10 px-2">
             <button id="logoToggle"
                 class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xl shadow-md">
@@ -110,7 +110,7 @@
 
         <div class="mt-auto flex flex-col gap-2">
             <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
-                href="#">
+                href="settings-student.html">
                 <span class="material-icons-round text-2xl">settings</span>
                 <span class="hidden lg:block ml-4 font-semibold">Paramètres</span>
             </a>
@@ -129,20 +129,12 @@
                 </button>
                 <span class="text-xl font-bold text-primary">Djangou</span>
             </div>
-            <div
-                class="hidden md:flex items-center bg-white dark:bg-card-dark rounded-full px-4 py-2.5 shadow-sm border border-gray-100 dark:border-gray-700 w-96">
-                <span class="material-icons-round text-gray-400">search</span>
-                <input
-                    class="bg-transparent border-none focus:ring-0 text-sm w-full text-gray-600 dark:text-gray-200 placeholder-gray-400"
-                    placeholder="Rechercher un cours, un tuteur..." type="text" />
+            <div>
+                <span class="material-icons-round text-gray-400"></span>
+                
             </div>
             <div class="flex items-center gap-4">
-                <button
-                    class="relative p-2 rounded-full bg-white dark:bg-card-dark hover:bg-gray-50 dark:hover:bg-gray-700 shadow-sm border border-gray-100 dark:border-gray-700 transition-colors">
-                    <span class="material-icons-round text-gray-500 dark:text-gray-300">notifications</span>
-                    <span
-                        class="absolute top-2 right-2.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-card-dark"></span>
-                </button>
+               
                 <div class="flex items-center gap-3 pl-2 border-l border-gray-200 dark:border-gray-700">
                     <div class="text-right hidden md:block">
                         <p class="text-sm font-bold text-secondary dark:text-white">Lisha Nana</p>
@@ -150,8 +142,8 @@
                     </div>
                     <img alt="Avatar Utilisateur"
                         class="w-10 h-10 rounded-full object-cover border-2 border-primary shadow-sm"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-AbkTik24Q_rCpbwewky4ZNDDaZEgHurujCH9wklsbcw_6uItxbsjn7i2dkv_ZtfNMQRXqu_fAVPcAARqSCjNRvIg2a5rQgFMrEZVKZtRT5cUqAuYAXhx1AQI4xVSHOHQWJhurnwDHpju3BxI1Dp4asewISJXQri1p0VUBK8Z9wVjN5cXUzqmrZWgPwdGZACaZNl5uQic8_b3WrIsnA9wTsmSbxdJMsTUsrnvBgAfm-dGg5uO6SBhLEjQHHrZpTo18bxALyWoZn8" />
-                </div>
+                        />
+                    </div>
             </div>
         </header>
         <div class="mb-8">
@@ -170,7 +162,7 @@
                 <h2 class="text-xl md:text-2xl font-bold mb-2">Besoin d'aide sur un devoir ?</h2>
                 <p class="text-gray-300 text-sm mb-4">Notre assistant IA est disponible 24/7 pour répondre à tes
                     questions et t'aider à progresser.</p>
-                <button onclick=""
+                <button onclick="window.location.href='chat-student.html'"
                     class="bg-primary hover:bg-dark-brown text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-colors shadow-lg flex items-center gap-2">
                     <span class="material-icons-round text-lg">smart_toy</span>
                     Discuter maintenant
@@ -370,5 +362,6 @@
         </a>
     </div>
 <script type="module" src="../js/auth/logout.js"></script>
+<script src="../js/utils/dark-white.js"></script>
 </body>
 </html>
