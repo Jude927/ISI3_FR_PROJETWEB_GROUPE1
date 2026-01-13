@@ -58,6 +58,15 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+        
+        .loading-pulse {
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
     </style>
 </head>
 
@@ -112,11 +121,10 @@
                 <span class="material-icons-round text-2xl">settings</span>
                 <span class="hidden lg:block ml-4 font-semibold">Paramètres</span>
             </a>
-            <a id="logoutBtn" class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
-                href="#">
+            <button id="logoutBtn" class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors">
                 <span class="material-icons-round text-2xl">logout</span>
                 <span class="hidden lg:block ml-5 font-semibold">Se déconnecter</span>
-            </a>
+            </button>
         </div>
     </aside>
     
@@ -125,7 +133,7 @@
         <!-- Header -->
         <header class="flex justify-between items-center mb-8">
             <div class="md:hidden flex items-center gap-3">
-                <button class="text-gray-600 dark:text-gray-300">
+                <button id="mobileMenuBtn" class="text-gray-600 dark:text-gray-300">
                     <span class="material-icons-round text-3xl">menu</span>
                 </button>
                 <span class="text-xl font-bold text-primary">Djangou</span>
@@ -144,19 +152,19 @@
             <!-- Profil utilisateur -->
             <div class="flex items-center gap-4">
                 <div class="text-right hidden md:block">
-                    <p class="text-sm font-bold text-secondary dark:text-white">Lisha Nana</p>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">Étudiante</p>
+                    <p id="userName" class="text-sm font-bold text-secondary dark:text-white loading-pulse">Chargement...</p>
+                    <p id="userRole" class="text-xs text-gray-500 dark:text-gray-400">Étudiant</p>
                 </div>
-                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-dark-brown flex items-center justify-center text-white font-bold">
-                    LN
-                </div>
+                <img id="userAvatar" alt="Avatar étudiant"
+                     class="w-10 h-10 rounded-full object-cover border-2 border-primary shadow-sm loading-pulse"
+                     src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f3f4f6'/%3E%3C/svg%3E" />
             </div>
         </header>
 
         <!-- Section des matières (visible par défaut) -->
         <div id="subjectsSection">
             <div class="mb-8">
-                <h1 class="text-3xl md:text-4xl font-extrabold text-secondary dark:text-white mb-2">Nos Matières </h1>
+                <h1 class="text-3xl md:text-4xl font-extrabold text-secondary dark:text-white mb-2">Nos Matières</h1>
                 <p class="text-gray-500 dark:text-gray-400">Choisissez une matière pour voir les tuteurs disponibles</p>
             </div>
 
@@ -166,7 +174,7 @@
                 <div id="subjectsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <!-- Mathématiques -->
                     <div data-subject="Mathématiques"
-                        class="bg-pastel-blue dark:bg-gray-800 p-6 rounded-2xl border border-blue-100 dark:border-blue-800/50 hover:shadow-lg transition-all cursor-pointer group">
+                        class="bg-pastel-blue dark:bg-gray-800 p-6 rounded-2xl border border-blue-100 dark:border-blue-800/50 hover:shadow-lg transition-all cursor-pointer group subject-card">
                         <div class="flex items-center gap-4 mb-4">
                             <div class="w-12 h-12 bg-blue-100 dark:bg-blue-800 rounded-xl flex items-center justify-center">
                                 <span class="material-icons-round text-2xl text-blue-600 dark:text-blue-300">calculate</span>
@@ -182,7 +190,7 @@
 
                     <!-- Physique / Chimie -->
                     <div data-subject="Physique / Chimie"
-                        class="bg-pastel-green dark:bg-gray-800 p-6 rounded-2xl border border-green-100 dark:border-green-800/50 hover:shadow-lg transition-all cursor-pointer group">
+                        class="bg-pastel-green dark:bg-gray-800 p-6 rounded-2xl border border-green-100 dark:border-green-800/50 hover:shadow-lg transition-all cursor-pointer group subject-card">
                         <div class="flex items-center gap-4 mb-4">
                             <div class="w-12 h-12 bg-green-100 dark:bg-green-800 rounded-xl flex items-center justify-center">
                                 <span class="material-icons-round text-2xl text-green-600 dark:text-green-300">science</span>
@@ -198,7 +206,7 @@
 
                     <!-- Informatique -->
                     <div data-subject="Informatique"
-                        class="bg-pastel-purple dark:bg-gray-800 p-6 rounded-2xl border border-purple-100 dark:border-purple-800/50 hover:shadow-lg transition-all cursor-pointer group">
+                        class="bg-pastel-purple dark:bg-gray-800 p-6 rounded-2xl border border-purple-100 dark:border-purple-800/50 hover:shadow-lg transition-all cursor-pointer group subject-card">
                         <div class="flex items-center gap-4 mb-4">
                             <div class="w-12 h-12 bg-purple-100 dark:bg-purple-800 rounded-xl flex items-center justify-center">
                                 <span class="material-icons-round text-2xl text-purple-600 dark:text-purple-300">computer</span>
@@ -214,7 +222,7 @@
 
                     <!-- Langues -->
                     <div data-subject="Langues"
-                        class="bg-pastel-yellow dark:bg-gray-800 p-6 rounded-2xl border border-yellow-100 dark:border-yellow-800/50 hover:shadow-lg transition-all cursor-pointer group">
+                        class="bg-pastel-yellow dark:bg-gray-800 p-6 rounded-2xl border border-yellow-100 dark:border-yellow-800/50 hover:shadow-lg transition-all cursor-pointer group subject-card">
                         <div class="flex items-center gap-4 mb-4">
                             <div class="w-12 h-12 bg-yellow-100 dark:bg-yellow-800 rounded-xl flex items-center justify-center">
                                 <span class="material-icons-round text-2xl text-yellow-600 dark:text-yellow-300">translate</span>
@@ -230,7 +238,7 @@
 
                     <!-- Histoire / Géo -->
                     <div data-subject="Histoire / Géo"
-                        class="bg-pastel-orange dark:bg-gray-800 p-6 rounded-2xl border border-orange-100 dark:border-orange-800/50 hover:shadow-lg transition-all cursor-pointer group">
+                        class="bg-pastel-orange dark:bg-gray-800 p-6 rounded-2xl border border-orange-100 dark:border-orange-800/50 hover:shadow-lg transition-all cursor-pointer group subject-card">
                         <div class="flex items-center gap-4 mb-4">
                             <div class="w-12 h-12 bg-orange-100 dark:bg-orange-800 rounded-xl flex items-center justify-center">
                                 <span class="material-icons-round text-2xl text-orange-600 dark:text-orange-300">public</span>
@@ -272,7 +280,7 @@
                     <div class="inline-block p-4 rounded-full bg-gray-100 dark:bg-gray-800 mb-4">
                         <span class="material-icons-round text-4xl text-gray-400">search</span>
                     </div>
-                    <p class="text-gray-500 dark:text-gray-400">Sélectionnez une matière pour voir les tuteurs</p>
+                    <p class="text-gray-500 dark:text-gray-400">Chargement des tuteurs...</p>
                 </div>
             </div>
             
@@ -311,6 +319,61 @@
     <script type="module" src="../js/utils/teacher-to-subjects.js"></script>
     <script src="../js/utils/dark-white.js"></script>
     <script type="module" src="../js/auth/logout.js"></script>
+
+    <!-- Script pour charger les données utilisateur -->
+    <script type="module">
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { db } from "../js/auth/firebase-config.js";
+        import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const auth = getAuth();
+
+        onAuthStateChanged(auth, async (user) => {
+            if (!user) {
+                window.location.href = "login.html";
+                return;
+            }
+
+            const userId = user.uid;
+            localStorage.setItem("userId", userId);
+
+            await chargerInfosUtilisateur(userId);
+        });
+
+        async function chargerInfosUtilisateur(userId) {
+            try {
+                const userRef = doc(db, "users", userId);
+                const userSnap = await getDoc(userRef);
+
+                if (!userSnap.exists()) {
+                    console.log("Utilisateur introuvable");
+                    return;
+                }
+
+                const data = userSnap.data();
+
+                // Mettre à jour le nom de l'utilisateur
+                const userNameEl = document.getElementById("userName");
+                if (userNameEl) {
+                    userNameEl.textContent = data.firstName || data.username || "Étudiant";
+                    userNameEl.classList.remove("loading-pulse");
+                }
+
+                // Mettre à jour l'avatar
+                const userAvatarEl = document.getElementById("userAvatar");
+                if (userAvatarEl && data.avatar) {
+                    userAvatarEl.src = data.avatar;
+                    userAvatarEl.classList.remove("loading-pulse");
+                }
+
+            } catch (erreur) {
+                console.log("Erreur chargement utilisateur :", erreur);
+            }
+        }
+
+      
+        
+    </script>
 
 </body>
 </html>
