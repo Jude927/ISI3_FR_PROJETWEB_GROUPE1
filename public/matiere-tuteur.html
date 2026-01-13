@@ -96,7 +96,7 @@
                         class="text-[12px]">Ma Matière</span></a>
                 <a class="nav-item" href="messagerie-teacher.html"><span
                         class="material-symbols-outlined">chat_bubble</span><span
-                        class="text-[12px]">Messages</span></a>
+                        class="text-[12px]">IA Chat</span></a>
                 <a class="nav-item" href="profil-teacher.html"><span
                         class="material-symbols-outlined">person</span><span class="text-[12px]">Mon Profil</span></a>
             </nav>
@@ -173,10 +173,28 @@
            active:rotate-[360deg]" />
         </button>
 
-        <nav
-            class="lg:hidden fixed bottom-4 inset-x-4 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md h-16 rounded-2xl shadow-2xl flex items-center justify-around px-6 z-[40] border border-[var(--border-ui)]">
-             <img alt="Logo" class="w-10 h-10 rounded-2xl object-cover"
-                     src="/assets/d.png" />
+        <button id="burger-btn" class="lg:hidden fixed bottom-6 left-5
+         w-12 h-12
+         rounded-2xl
+         backdrop-blur-md
+         bg-[var(--bg-sidebar)]/80
+         border border-[var(--border-ui)]
+         shadow-2xl
+         flex items-center justify-center
+         z-[100]" aria-label="Menu">
+            <span class="material-symbols-outlined text-xl">
+                menu
+            </span>
+        </button>
+        <nav id="mobile-nav" class="lg:hidden fixed bottom-4
+         left-[4.5rem] right-4
+         hidden
+         backdrop-blur-md
+         bg-[var(--bg-sidebar)]/95
+         h-16 rounded-2xl shadow-2xl
+         flex items-center justify-around px-6
+         z-[40]
+         border border-[var(--border-ui)]">
             <a class="flex flex-col items-center gap-1 text-slate-400" href="dashboard-teacher.html">
                 <span class="material-symbols-outlined">grid_view</span>
                 <span class="text-[8px] font-bold uppercase tracking-widest">Accueil</span>
@@ -187,7 +205,7 @@
             </a>
             <a class="flex flex-col items-center gap-1 text-slate-400" href="messagerie-teacher.html">
                 <span class="material-symbols-outlined">chat_bubble</span>
-                <span class="text-[8px] font-bold uppercase tracking-widest">Chats</span>
+                <span class="text-[8px] font-bold uppercase tracking-widest">IA</span>
             </a>
             <a class="flex flex-col items-center gap-1 text-slate-400" href="profil-teacher.html">
                 <span class="material-symbols-outlined">person</span>
@@ -257,6 +275,8 @@
 <script type="module" src="/js/lang.js"></script>
 
     <script type="module" src="/js/auth/logout.js"></script>
+        <script src="/js/utils/mobile-burger.js"></script>
+
 </body>
 
 </html>
