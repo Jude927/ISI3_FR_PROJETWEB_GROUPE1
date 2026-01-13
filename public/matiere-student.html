@@ -127,6 +127,51 @@
             </button>
         </div>
     </aside>
+
+
+    <!-- Sidebar mobile -->
+    <aside id="mobileSidebar" class="md:hidden fixed top-0 left-0 h-full w-64 bg-card-light dark:bg-card-dark border-r border-gray-100 dark:border-gray-800 z-50 transform -translate-x-full transition-transform duration-300">
+        <div class="p-6 border-b border-gray-100 dark:border-gray-800">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xl">
+                    D
+                </div>
+                <span class="text-2xl font-bold text-primary">Djangou</span>
+            </div>
+        </div>
+        <nav class="p-4 flex flex-col gap-2">
+            <a class="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400"
+                href="dashboard-student.html">
+                <span class="material-icons-round">home</span>
+                <span data-i18n="id_nav_home" class="font-semibold">Accueil</span>
+            </a>
+            <a class="flex items-center gap-4 p-3 rounded-xl bg-primary/10 text-primary dark:bg-primary/20"
+                href="#">
+                <span class="material-icons-round">school</span>
+                <span data-i18n="id_nav_subjects" class="font-semibold">Matières</span>
+            </a>
+            <a class="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400"
+                href="chat-student.html">
+                <span class="material-icons-round">chat_bubble</span>
+                <span data-i18n="id_nav_messages" class="font-semibold">Messages</span>
+            </a>
+            <a class="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400"
+                href="profil-student.html">
+                <span class="material-icons-round">person</span>
+                <span data-i18n="id_nav_profile" class="font-semibold">Profil</span>
+            </a>
+            <a class="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400"
+                href="settings-student.html">
+                <span class="material-icons-round">settings</span>
+                <span data-i18n="id_nav_settings" class="font-semibold">Paramètres</span>
+            </a>
+            <a class="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 mt-4"
+                href="#">
+                <span class="material-icons-round">logout</span>
+                <span data-i18n="id_nav_logout" class="font-semibold">Se déconnecter</span>
+            </a>
+        </nav>
+    </aside>
     
     <!-- Contenu principal -->
     <main class="flex-1 h-full overflow-y-auto overflow-x-hidden p-4 md:p-8 relative">
@@ -294,25 +339,7 @@
     </main>
     
   
-    <div
-        class="md:hidden fixed bottom-0 w-full bg-white dark:bg-card-dark border-t border-gray-100 dark:border-gray-800 flex justify-around p-3 z-50">
-        <a class="flex flex-col items-center text-gray-400 dark:text-gray-500" href="dashboard-student.html">
-            <span class="material-icons-round">home</span>
-            <span data-i18n="id_nav_home" class="text-[10px] font-medium mt-1">Accueil</span>
-        </a>
-        <a class="flex flex-col items-center text-primary" href="#">
-            <span class="material-icons-round">school</span>
-            <span data-i18n="id_nav_subjects_active" class="text-[10px] font-bold mt-1">Matières</span>
-        </a>
-        <a class="flex flex-col items-center text-gray-400 dark:text-gray-500" href="chat-student.html">
-            <span class="material-icons-round">chat_bubble</span>
-            <span data-i18n="id_nav_messages" class="text-[10px] font-medium mt-1">Messages</span>
-        </a>
-        <a class="flex flex-col items-center text-gray-400 dark:text-gray-500" href="profil-student.html">
-            <span class="material-icons-round">person</span>
-            <span data-i18n="id_nav_profile" class="text-[10px] font-medium mt-1">Profil</span>
-        </a>
-    </div>
+    
 
     <!-- Scripts -->
     <script type="module" src="../js/utils/teacher-to-subjects.js"></script>
@@ -376,5 +403,6 @@
 <script type="module" src="../js/utils/dark-white.js"></script>
 <script type="module" src="../js/lang.js"></script>
 <script type="module" src="../js/auth/logout.js"></script>
+
 </body>
 </html>

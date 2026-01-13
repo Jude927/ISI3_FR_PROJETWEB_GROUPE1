@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html lang="fr"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Page Chat Djangou</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
-<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
-<script>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Page Chat Djangou</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+    <script>
         tailwind.config = {
             darkMode: "class",
             theme: {
@@ -22,7 +25,7 @@
                         "surface-dark": "#2d2d2d", // Slightly lighter than bg-dark
                         "chat-bubble-me-light": "#D59D80",
                         "chat-bubble-me-dark": "#D59D80",
-                        
+
                         "chat-bubble-other-light": "#F0F0F0",
                         "chat-bubble-other-dark": "#2C3E4C",
                     },
@@ -35,29 +38,34 @@
                         DEFAULT: "1rem",
                         "xl": "1.5rem",
                         "2xl": "2rem",
-                        "3xl": "2.5rem", 
+                        "3xl": "2.5rem",
                     },
                 },
             },
         };
     </script>
-<style>
+    <style>
         body {
             font-family: 'Comfortaa', cursive;
         }
+
         ::-webkit-scrollbar {
             width: 8px;
         }
+
         ::-webkit-scrollbar-track {
             background: transparent;
         }
+
         ::-webkit-scrollbar-thumb {
             background: #cbd5e1;
             border-radius: 4px;
         }
+
         .dark ::-webkit-scrollbar-thumb {
             background: #475569;
         }
+
         .tooltip {
             position: absolute;
             background: white;
@@ -74,14 +82,17 @@
             opacity: 0;
             transition: opacity 0.2s;
         }
+
         .dark .tooltip {
             background: #1A2E38;
             color: #F8F9FA;
             border-color: rgba(213, 157, 128, 0.3);
         }
+
         .tooltip.show {
             opacity: 1;
         }
+
         .tooltip::before {
             content: '';
             position: absolute;
@@ -94,6 +105,7 @@
             border-right: 6px solid transparent;
             border-bottom: 6px solid white;
         }
+
         .dark .tooltip::before {
             border-bottom-color: #1A2E38;
         }
@@ -143,9 +155,11 @@
         }
     </style>
 </head>
-<body class="bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-200 h-screen overflow-hidden flex transition-colors duration-300">
 
- <div
+<body
+    class="bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-200 h-screen overflow-hidden flex transition-colors duration-300">
+
+    <div
         class="fixed -top-64 -right-64 w-[800px] h-[800px] bg-yellow-50/80 dark:bg-gray-800/40 rounded-full border-2 border-gray-200/70 dark:border-gray-700/50 pointer-events-none -z-10">
     </div>
 
@@ -153,7 +167,7 @@
         class="fixed -bottom-64 -left-64 w-[800px] h-[800px] bg-yellow-50/80 dark:bg-gray-800/40 rounded-full border-2 border-gray-200/70 dark:border-gray-700/50 pointer-events-none -z-10">
     </div>
 
-    <aside id = "sidebar"
+    <aside id="sidebar"
         class="hidden md:flex flex-col w-24 lg:w-64 h-full bg-card-light dark:bg-surface-dark border-r border-gray-100 dark:border-gray-800 transition-all duration-300 p-4 ">
         <div class="flex items-center justify-center lg:justify-start mb-10 px-2">
             <button id="logoToggle"
@@ -180,7 +194,7 @@
             </a>
 
             <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
-                href="#">
+                href="profil-student.html">
                 <span class="material-icons-outlined text-2xl">person</span>
                 <span class="hidden lg:block ml-4 font-semibold" data-translate="nav-profile">Profil</span>
             </a>
@@ -192,354 +206,424 @@
                 <span class="material-icons-outlined text-2xl">settings</span>
                 <span class="hidden lg:block ml-4 font-semibold" data-translate="nav-settings">Paramètres</span>
             </a>
-            <a id="logoutBtn" class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
+            <a id="logoutBtn"
+                class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
                 href="#">
                 <span class="material-icons-outlined text-2xl">logout</span>
                 <span class="hidden lg:block ml-5 font-semibold" data-translate="nav-logout">Se déconnecter</span>
             </a>
         </div>
     </aside>
-<main class="flex-1 flex flex-col h-full relative overflow-hidden">
-<header class="h-20 flex items-center justify-between px-6 bg-surface-light dark:bg-surface-dark border-b border-gray-200 dark:border-gray-700 md:hidden z-20">
-<div class="font-bold text-xl text-darktext dark:text-white" data-translate="header-messages">Messages</div>
-<button class="text-gray-500 hover:text-primary" data-tooltip="Menu">
-<span class="material-icons-outlined text-2xl">menu</span>
-</button>
-</header>
+    <main class="flex-1 flex flex-col h-full relative overflow-hidden">
+        <header
+            class="h-20 flex items-center justify-between px-6 bg-surface-light dark:bg-surface-dark border-b border-gray-200 dark:border-gray-700 md:hidden z-20">
+            <div class="font-bold text-xl text-darktext dark:text-white" data-translate="header-messages">Messages</div>
+            <button class="text-gray-500 hover:text-primary" data-tooltip="Menu">
+                <span class="material-icons-outlined text-2xl">menu</span>
+            </button>
+        </header>
 
-<!-- Bouton de changement de langue -->
-<div class="absolute top-6 right-6 z-30">
-    <div class="lang-switcher">
-        <button class="lang-btn active" id="btnFr" onclick="changeLanguage('fr')">
-            <span>🇫🇷</span>
-            <span data-lang-label="fr">Français</span>
-        </button>
-        <button class="lang-btn" id="btnEn" onclick="changeLanguage('en')">
-            <span>🇬🇧</span>
-            <span data-lang-label="en">English</span>
-        </button>
-    </div>
-</div>
+        <!-- Bouton de changement de langue -->
+        <div class="absolute top-6 right-6 z-30">
+            <div class="lang-switcher">
+                <button class="lang-btn active" id="btnFr" onclick="changeLanguage('fr')">
+                    <span>🇫🇷</span>
+                    <span data-lang-label="fr">Français</span>
+                </button>
+                <button class="lang-btn" id="btnEn" onclick="changeLanguage('en')">
+                    <span>🇬🇧</span>
+                    <span data-lang-label="en">English</span>
+                </button>
+            </div>
+        </div>
 
-<div class="flex-1 flex overflow-hidden">
-<section class="w-full md:w-80 lg:w-96 bg-surface-light dark:bg-surface-dark border-r border-gray-200 dark:border-gray-700 flex flex-col z-10 absolute md:relative h-full transform transition-transform duration-300 md:translate-x-0" id="chatListPanel">
-<div class="p-6 pb-2">
-<h1 class="text-3xl font-bold text-darktext dark:text-white mb-6 hidden md:block" data-translate="title-messages">Messages</h1>
-<div class="relative">
-<span class="material-icons-outlined absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-2xl">search</span>
-<input class="w-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200 pl-12 pr-4 py-4 rounded-3xl border-none focus:ring-2 focus:ring-primary focus:bg-white dark:focus:bg-gray-700 transition-all placeholder-gray-400 text-lg" data-translate-placeholder="search-placeholder" placeholder="Rechercher..." type="text"/>
-</div>
-</div>
-<div class="h-4"></div>
-<div class="flex-1 overflow-y-auto p-4 space-y-3">
-<div class="p-4 rounded-3xl bg-primary/5 hover:bg-primary/10 cursor-pointer transition-colors border border-primary/20 group relative">
-<div class="flex items-start">
-<div class="relative">
-<div class="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white shadow-md">
-<span class="material-icons-outlined text-2xl">auto_awesome</span>
-</div>
-<span class="absolute bottom-0 right-0 w-4 h-4 bg-green-500 border-2 border-white dark:border-gray-800 rounded-full"></span>
-</div>
-<div class="ml-4 flex-1 overflow-hidden">
-<div class="flex justify-between items-baseline">
-<h3 class="font-bold text-darktext dark:text-white text-lg">DeepSeek</h3>
-<span class="text-base text-primary font-medium" data-translate="time-now">Maintenant</span>
-</div>
-<p class="text-base text-gray-500 dark:text-gray-400 mt-1 truncate group-hover:text-gray-700 dark:group-hover:text-gray-300 font-medium" data-translate="chat-preview">Je peux t'aider à réviser le chapitre de Math...</p>
-</div>
-</div>
-</div>
-<div class="p-4 rounded-3xl bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer transition-colors shadow-sm border border-gray-100 dark:border-gray-700">
-<div class="flex items-start">
-<div class="relative">
-<img alt="User" class="w-14 h-14 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArBTR7IsDoZ_SwhD7DXfNWSQmE8Y9nk8COwcdW5_lo41YkVx4_n_D-GVe5rYi8Lldz1J88lHtCxIxMwNMLoDhFyLS1RMQ60xct8QIEQB6k7rlyUoGpTSJS9Zmgjp0_ppRAphfv_y76K4G_V5YcrTN9ZHcfJqsVjh3BJ75btm1gyIFito656iWQyGKjPcAF4Ws742TpomlhIxlcqVNIFlnFAKr0WRqgaAQ3QZ8hWDVUfkR__GxK8eaJf7QGpSqgQJ1qclJKkElm5gU"/>
-<span class="absolute bottom-0 right-0 w-4 h-4 bg-green-500 border-2 border-white dark:border-gray-800 rounded-full"></span>
-</div>
-<div class="ml-4 flex-1 overflow-hidden">
-<div class="flex justify-between items-baseline">
-<h3 class="font-semibold text-gray-900 dark:text-gray-100 text-lg" data-translate="tutor-name">Tuteur Max</h3>
-<span class="text-base text-gray-400">10:42</span>
-</div>
-<p class="text-base text-gray-600 dark:text-gray-400 mt-1 truncate font-medium" data-translate="thanks-msg">Merci!</p>
-<span class="absolute right-4 bottom-4 w-6 h-6 bg-primary text-white text-xs flex items-center justify-center rounded-full font-bold">2</span>
-</div>
-</div>
-</div>
-<div class="p-4 rounded-3xl hover:bg-gray-50 dark:hover:bg-gray-800/50 cursor-pointer transition-colors">
-<div class="flex items-start">
-<div class="relative">
-<img alt="User" class="w-14 h-14 rounded-full object-cover grayscale opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAi61sejBJY1DT_MQX5W1p4BPDP0T2bgh23To4YRND-VHc5LnXD9WZtVIrkfwxasKQilcyyEpNwoyH9OrB_JXSQ81jjkcLo0BinigTORo8QyrHqectdhUC_kl-medDRSoCZ21dLEne0lNw365GHXFVl7f6dIaL_eI7U7tZeKIYaCJbIAOm5fRel1lWCG0jlx0PjBVruMs8AAiL-sh-r1okjBJjlsOaDSKcy1-FhsxDYyzVJo0IdWj9Dqd2W32sMjdJn0n45vC5ToCo"/>
-</div>
-<div class="ml-4 flex-1 overflow-hidden">
-<div class="flex justify-between items-baseline">
-<h3 class="font-semibold text-gray-700 dark:text-gray-300 text-lg" data-translate="prof-name">Prof. Martin</h3>
-<span class="text-base text-gray-400" data-translate="yesterday">Hier</span>
-</div>
-<p class="text-base text-gray-500 dark:text-gray-500 mt-1 truncate" data-translate="homework-reminder">N'oubliez pas le devoir pour demain.</p>
-</div>
-</div>
-</div>
-<div class="p-4 rounded-3xl hover:bg-gray-50 dark:hover:bg-gray-800/50 cursor-pointer transition-colors">
-<div class="flex items-start">
-<div class="relative">
-<div class="w-14 h-14 rounded-full bg-secondary/20 text-secondary dark:text-secondary-light flex items-center justify-center font-bold text-xl">
+        <div class="flex-1 flex overflow-hidden">
+            <section
+                class="w-full md:w-80 lg:w-96 bg-surface-light dark:bg-surface-dark border-r border-gray-200 dark:border-gray-700 flex flex-col z-10 absolute md:relative h-full transform transition-transform duration-300 md:translate-x-0"
+                id="chatListPanel">
+                <div class="p-6 pb-2">
+                    <h1 class="text-3xl font-bold text-darktext dark:text-white mb-6 hidden md:block"
+                        data-translate="title-messages">Messages</h1>
+                    <div class="relative">
+                        <span
+                            class="material-icons-outlined absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-2xl">search</span>
+                        <input
+                            class="w-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200 pl-12 pr-4 py-4 rounded-3xl border-none focus:ring-2 focus:ring-primary focus:bg-white dark:focus:bg-gray-700 transition-all placeholder-gray-400 text-lg"
+                            data-translate-placeholder="search-placeholder" placeholder="Rechercher..." type="text" />
+                    </div>
+                </div>
+                <div class="h-4"></div>
+                <div class="flex-1 overflow-y-auto p-4 space-y-3">
+                    <div
+                        class="p-4 rounded-3xl bg-primary/5 hover:bg-primary/10 cursor-pointer transition-colors border border-primary/20 group relative">
+                        <div class="flex items-start">
+                            <div class="relative">
+                                <div
+                                    class="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white shadow-md">
+                                    <span class="material-icons-outlined text-2xl">auto_awesome</span>
+                                </div>
+                                <span
+                                    class="absolute bottom-0 right-0 w-4 h-4 bg-green-500 border-2 border-white dark:border-gray-800 rounded-full"></span>
+                            </div>
+                            <div class="ml-4 flex-1 overflow-hidden">
+                                <div class="flex justify-between items-baseline">
+                                    <h3 class="font-bold text-darktext dark:text-white text-lg">DeepSeek</h3>
+                                    <span class="text-base text-primary font-medium"
+                                        data-translate="time-now">Maintenant</span>
+                                </div>
+                                <p class="text-base text-gray-500 dark:text-gray-400 mt-1 truncate group-hover:text-gray-700 dark:group-hover:text-gray-300 font-medium"
+                                    data-translate="chat-preview">Je peux t'aider à réviser le chapitre de Math...</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="p-4 rounded-3xl bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer transition-colors shadow-sm border border-gray-100 dark:border-gray-700">
+                        <div class="flex items-start">
+                            <div class="relative">
+                                <img alt="User" class="w-14 h-14 rounded-full object-cover"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuArBTR7IsDoZ_SwhD7DXfNWSQmE8Y9nk8COwcdW5_lo41YkVx4_n_D-GVe5rYi8Lldz1J88lHtCxIxMwNMLoDhFyLS1RMQ60xct8QIEQB6k7rlyUoGpTSJS9Zmgjp0_ppRAphfv_y76K4G_V5YcrTN9ZHcfJqsVjh3BJ75btm1gyIFito656iWQyGKjPcAF4Ws742TpomlhIxlcqVNIFlnFAKr0WRqgaAQ3QZ8hWDVUfkR__GxK8eaJf7QGpSqgQJ1qclJKkElm5gU" />
+                                <span
+                                    class="absolute bottom-0 right-0 w-4 h-4 bg-green-500 border-2 border-white dark:border-gray-800 rounded-full"></span>
+                            </div>
+                            <div class="ml-4 flex-1 overflow-hidden">
+                                <div class="flex justify-between items-baseline">
+                                    <h3 class="font-semibold text-gray-900 dark:text-gray-100 text-lg"
+                                        data-translate="tutor-name">Tuteur Max</h3>
+                                    <span class="text-base text-gray-400">10:42</span>
+                                </div>
+                                <p class="text-base text-gray-600 dark:text-gray-400 mt-1 truncate font-medium"
+                                    data-translate="thanks-msg">Merci!</p>
+                                <span
+                                    class="absolute right-4 bottom-4 w-6 h-6 bg-primary text-white text-xs flex items-center justify-center rounded-full font-bold">2</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="p-4 rounded-3xl hover:bg-gray-50 dark:hover:bg-gray-800/50 cursor-pointer transition-colors">
+                        <div class="flex items-start">
+                            <div class="relative">
+                                <img alt="User" class="w-14 h-14 rounded-full object-cover grayscale opacity-80"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAi61sejBJY1DT_MQX5W1p4BPDP0T2bgh23To4YRND-VHc5LnXD9WZtVIrkfwxasKQilcyyEpNwoyH9OrB_JXSQ81jjkcLo0BinigTORo8QyrHqectdhUC_kl-medDRSoCZ21dLEne0lNw365GHXFVl7f6dIaL_eI7U7tZeKIYaCJbIAOm5fRel1lWCG0jlx0PjBVruMs8AAiL-sh-r1okjBJjlsOaDSKcy1-FhsxDYyzVJo0IdWj9Dqd2W32sMjdJn0n45vC5ToCo" />
+                            </div>
+                            <div class="ml-4 flex-1 overflow-hidden">
+                                <div class="flex justify-between items-baseline">
+                                    <h3 class="font-semibold text-gray-700 dark:text-gray-300 text-lg"
+                                        data-translate="prof-name">Prof. Martin</h3>
+                                    <span class="text-base text-gray-400" data-translate="yesterday">Hier</span>
+                                </div>
+                                <p class="text-base text-gray-500 dark:text-gray-500 mt-1 truncate"
+                                    data-translate="homework-reminder">N'oubliez pas le devoir pour demain.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="p-4 rounded-3xl hover:bg-gray-50 dark:hover:bg-gray-800/50 cursor-pointer transition-colors">
+                        <div class="flex items-start">
+                            <div class="relative">
+                                <div
+                                    class="w-14 h-14 rounded-full bg-secondary/20 text-secondary dark:text-secondary-light flex items-center justify-center font-bold text-xl">
                                     G
                                 </div>
-</div>
-<div class="ml-4 flex-1 overflow-hidden">
-<div class="flex justify-between items-baseline">
-<h3 class="font-semibold text-gray-700 dark:text-gray-300 text-lg" data-translate="group-name">Groupe Science</h3>
-<span class="text-base text-gray-400" data-translate="monday">Lun</span>
-</div>
-<p class="text-base text-gray-500 dark:text-gray-500 mt-1 truncate" data-translate="group-msg">Qui a compris le TP ?</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section class="flex-1 flex flex-col bg-background-light dark:bg-background-dark relative">
-<div class="h-24 px-8 flex items-center justify-between border-b border-gray-200 dark:border-gray-800 bg-surface-light/80 dark:bg-surface-dark/80 backdrop-blur-sm z-10 sticky top-0">
-<div class="flex items-center">
-<button class="md:hidden mr-4 text-gray-500" onclick="document.getElementById('chatListPanel').classList.toggle('-translate-x-full')" data-tooltip="Retour">
-<span class="material-icons-outlined text-2xl">arrow_back</span>
-</button>
-<div class="relative">
-<div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white shadow-md">
-<span class="material-icons-outlined text-xl">auto_awesome</span>
-</div>
-<span class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white dark:border-gray-800 rounded-full"></span>
-</div>
-<div class="ml-4">
-<h2 class="text-xl font-bold text-darktext dark:text-white">DeepSeek</h2>
-<p class="text-base text-primary font-medium flex items-center mt-0.5">
-<span class="w-2 h-2 rounded-full bg-primary mr-2 animate-pulse"></span>
+                            </div>
+                            <div class="ml-4 flex-1 overflow-hidden">
+                                <div class="flex justify-between items-baseline">
+                                    <h3 class="font-semibold text-gray-700 dark:text-gray-300 text-lg"
+                                        data-translate="group-name">Groupe Science</h3>
+                                    <span class="text-base text-gray-400" data-translate="monday">Lun</span>
+                                </div>
+                                <p class="text-base text-gray-500 dark:text-gray-500 mt-1 truncate"
+                                    data-translate="group-msg">Qui a compris le TP ?</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="flex-1 flex flex-col bg-background-light dark:bg-background-dark relative">
+                <div
+                    class="h-24 px-8 flex items-center justify-between border-b border-gray-200 dark:border-gray-800 bg-surface-light/80 dark:bg-surface-dark/80 backdrop-blur-sm z-10 sticky top-0">
+                    <div class="flex items-center">
+                        <button class="md:hidden mr-4 text-gray-500"
+                            onclick="document.getElementById('chatListPanel').classList.toggle('-translate-x-full')"
+                            data-tooltip="Retour">
+                            <span class="material-icons-outlined text-2xl">arrow_back</span>
+                        </button>
+                        <div class="relative">
+                            <div
+                                class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white shadow-md">
+                                <span class="material-icons-outlined text-xl">auto_awesome</span>
+                            </div>
+                            <span
+                                class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white dark:border-gray-800 rounded-full"></span>
+                        </div>
+                        <div class="ml-4">
+                            <h2 class="text-xl font-bold text-darktext dark:text-white">DeepSeek</h2>
+                            <p class="text-base text-primary font-medium flex items-center mt-0.5">
+                                <span class="w-2 h-2 rounded-full bg-primary mr-2 animate-pulse"></span>
                                 <span data-translate="status-online">En ligne</span>
                             </p>
-</div>
-</div>
-<div class="flex space-x-2">
-<button href="whiteboard.html" class="p-3 text-gray-400 hover:text-primary hover:bg-primary/5 rounded-full transition-colors">
-<span class="material-icons-outlined text-xl">more_vert</span>
-</button>
-</div>
-</div>
-<div class="flex-1 overflow-y-auto p-8 space-y-8" id="chatArea">
-<div class="flex justify-center">
-<span class="px-6 py-2 bg-gray-100 dark:bg-gray-800 text-base text-gray-500 rounded-full font-medium" data-translate="today-time">Aujourd'hui, 10:23</span>
-</div>
-<div class="flex items-end space-x-3 max-w-2xl">
-<div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary flex-shrink-0 flex items-center justify-center text-white text-xs mb-1">
-<span class="material-icons-outlined" style="font-size: 18px;">auto_awesome</span>
-</div>
-<div>
-<div class="bg-surface-light dark:bg-surface-dark p-5 rounded-3xl rounded-bl-none shadow-sm text-lg text-gray-700 dark:text-gray-200 border border-gray-100 dark:border-gray-700 leading-relaxed">
-<p data-translate="greeting-msg">Bonjour Lisha !  Comment puis-je t'aider aujourd'hui ? On continue sur les mathématiques ou tu veux voir autre chose ?</p>
-</div>
-<span class="text-sm text-gray-400 ml-3 mt-1.5 block">10:23 AM</span>
-</div>
-</div>
-<div class="flex items-end justify-end space-x-3">
-<div class="flex flex-col items-end max-w-2xl">
-<div class="bg-primary text-white p-5 rounded-3xl rounded-br-none shadow-md text-lg leading-relaxed">
-<p data-translate="user-msg">Salut ! J'aimerais qu'on révise un peu le chapitre sur les fonctions affines. J'ai un peu de mal avec les graphiques.</p>
-</div>
-<span class="text-sm text-gray-400 mr-3 mt-1.5 block flex items-center">
+                        </div>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button href="whiteboard.html"
+                            class="p-3 text-gray-400 hover:text-primary hover:bg-primary/5 rounded-full transition-colors">
+                            <span class="material-icons-outlined text-xl">more_vert</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="flex-1 overflow-y-auto p-8 space-y-8" id="chatArea">
+                    <div class="flex justify-center">
+                        <span
+                            class="px-6 py-2 bg-gray-100 dark:bg-gray-800 text-base text-gray-500 rounded-full font-medium"
+                            data-translate="today-time">Aujourd'hui, 10:23</span>
+                    </div>
+                    <div class="flex items-end space-x-3 max-w-2xl">
+                        <div
+                            class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary flex-shrink-0 flex items-center justify-center text-white text-xs mb-1">
+                            <span class="material-icons-outlined" style="font-size: 18px;">auto_awesome</span>
+                        </div>
+                        <div>
+                            <div
+                                class="bg-surface-light dark:bg-surface-dark p-5 rounded-3xl rounded-bl-none shadow-sm text-lg text-gray-700 dark:text-gray-200 border border-gray-100 dark:border-gray-700 leading-relaxed">
+                                <p data-translate="greeting-msg">Bonjour Lisha ! Comment puis-je t'aider aujourd'hui ?
+                                    On continue sur les mathématiques ou tu veux voir autre chose ?</p>
+                            </div>
+                            <span class="text-sm text-gray-400 ml-3 mt-1.5 block">10:23 AM</span>
+                        </div>
+                    </div>
+                    <div class="flex items-end justify-end space-x-3">
+                        <div class="flex flex-col items-end max-w-2xl">
+                            <div
+                                class="bg-primary text-white p-5 rounded-3xl rounded-br-none shadow-md text-lg leading-relaxed">
+                                <p data-translate="user-msg">Salut ! J'aimerais qu'on révise un peu le chapitre sur les
+                                    fonctions affines. J'ai un peu de mal avec les graphiques.</p>
+                            </div>
+                            <span class="text-sm text-gray-400 mr-3 mt-1.5 block flex items-center">
                                 10:24 AM <span class="material-icons-outlined text-base ml-1">done_all</span>
-</span>
-</div>
-</div>
-<div class="flex items-end space-x-3 max-w-2xl">
-<div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary flex-shrink-0 flex items-center justify-center text-white text-xs mb-1">
-<span class="material-icons-outlined" style="font-size: 18px;">auto_awesome</span>
-</div>
-<div class="space-y-1">
-<div class="bg-surface-light dark:bg-surface-dark p-5 rounded-3xl rounded-bl-none shadow-sm text-lg text-gray-700 dark:text-gray-200 border border-gray-100 dark:border-gray-700 leading-relaxed">
-<p data-translate="ai-response">Pas de problème ! C'est un sujet important. Commençons par visualiser la formule de base : <code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-lg text-primary font-mono text-base">f(x) = ax + b</code>.</p>
-<p class="mt-3" data-translate="ai-visual">J'ai trouvé ce petit rappel visuel pour toi :</p>
-<div class="mt-4 bg-secondary/5 rounded-2xl p-4 border border-secondary/10 flex items-center">
-<div class="w-12 h-12 rounded-xl bg-white dark:bg-gray-700 flex items-center justify-center text-secondary shadow-sm">
-<span class="material-icons-outlined text-2xl">functions</span>
-</div>
-<div class="ml-4">
-<p class="text-base font-bold text-darktext dark:text-white">Fiche_Fonctions_Affines.pdf</p>
-<p class="text-sm text-gray-500 font-medium">PDF • 2.4 MB</p>
-</div>
-<button class="ml-auto w-10 h-10 rounded-full hover:bg-white dark:hover:bg-gray-600 flex items-center justify-center text-primary transition-colors" data-tooltip="Télécharger">
-<span class="material-icons-outlined text-2xl">download</span>
-</button>
-</div>
-</div>
-<span class="text-sm text-gray-400 ml-3 mt-1.5 block">10:25 AM</span>
-</div>
-</div>
-<div class="flex items-end space-x-3">
-<div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary flex-shrink-0 flex items-center justify-center text-white text-xs mb-1 opacity-50">
-<span class="material-icons-outlined" style="font-size: 18px;">auto_awesome</span>
-</div>
-<div class="bg-surface-light dark:bg-surface-dark px-6 py-4 rounded-3xl rounded-bl-none shadow-sm border border-gray-100 dark:border-gray-700">
-<div class="flex space-x-1.5 h-4 items-center">
-<div class="w-2.5 h-2.5 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0s;"></div>
-<div class="w-2.5 h-2.5 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s;"></div>
-<div class="w-2.5 h-2.5 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.4s;"></div>
-</div>
-</div>
-</div>
-</div>
-<div class="p-6 bg-background-light dark:bg-background-dark border-t border-gray-200 dark:border-gray-800 z-10">
-<div class="max-w-4xl mx-auto bg-surface-light dark:bg-surface-dark rounded-[2rem] shadow-lg border border-gray-200 dark:border-gray-700 flex items-end p-3 transition-colors">
-<button class="p-4 text-gray-400 hover:text-primary transition-colors rounded-full hover:bg-gray-50 dark:hover:bg-gray-800 flex-shrink-0" data-tooltip="Joindre fichier">
-<span class="material-icons-outlined text-2xl">add_circle</span>
-</button>
-<div class="flex-1 py-4 px-3">
-<textarea class="w-full bg-transparent border-none focus:ring-0 text-gray-700 dark:text-gray-200 placeholder-gray-400 resize-none max-h-32 text-lg" data-translate-placeholder="input-placeholder" placeholder="Écrivez votre message..." rows="1" style="min-height: 28px;"></textarea>
-</div>
-<div class="flex items-center pb-1 pr-1 space-x-2">
-<button class="p-3 text-gray-400 hover:text-primary transition-colors rounded-full hover:bg-gray-50 dark:hover:bg-gray-800" data-tooltip="Emoji">
-<span class="material-icons-outlined text-2xl">sentiment_satisfied</span>
-</button>
-<button class="p-4 bg-primary hover:bg-opacity-90 text-white rounded-2xl shadow-md shadow-primary/30 transition-all transform active:scale-95 flex items-center justify-center" data-tooltip="Envoyer">
-<span class="material-icons-outlined text-xl">send</span>
-</button>
-</div>
-</div>
-<div class="text-center mt-3">
-<p class="text-sm text-gray-400 dark:text-gray-600 font-medium" data-translate="enter-hint">Appuyez sur Entrée pour envoyer</p>
-</div>
-</div>
-</section>
-</div>
-</main>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="flex items-end space-x-3 max-w-2xl">
+                        <div
+                            class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary flex-shrink-0 flex items-center justify-center text-white text-xs mb-1">
+                            <span class="material-icons-outlined" style="font-size: 18px;">auto_awesome</span>
+                        </div>
+                        <div class="space-y-1">
+                            <div
+                                class="bg-surface-light dark:bg-surface-dark p-5 rounded-3xl rounded-bl-none shadow-sm text-lg text-gray-700 dark:text-gray-200 border border-gray-100 dark:border-gray-700 leading-relaxed">
+                                <p data-translate="ai-response">Pas de problème ! C'est un sujet important. Commençons
+                                    par visualiser la formule de base : <code
+                                        class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-lg text-primary font-mono text-base">f(x) = ax + b</code>.
+                                </p>
+                                <p class="mt-3" data-translate="ai-visual">J'ai trouvé ce petit rappel visuel pour toi :
+                                </p>
+                                <div
+                                    class="mt-4 bg-secondary/5 rounded-2xl p-4 border border-secondary/10 flex items-center">
+                                    <div
+                                        class="w-12 h-12 rounded-xl bg-white dark:bg-gray-700 flex items-center justify-center text-secondary shadow-sm">
+                                        <span class="material-icons-outlined text-2xl">functions</span>
+                                    </div>
+                                    <div class="ml-4">
+                                        <p class="text-base font-bold text-darktext dark:text-white">
+                                            Fiche_Fonctions_Affines.pdf</p>
+                                        <p class="text-sm text-gray-500 font-medium">PDF • 2.4 MB</p>
+                                    </div>
+                                    <button
+                                        class="ml-auto w-10 h-10 rounded-full hover:bg-white dark:hover:bg-gray-600 flex items-center justify-center text-primary transition-colors"
+                                        data-tooltip="Télécharger">
+                                        <span class="material-icons-outlined text-2xl">download</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <span class="text-sm text-gray-400 ml-3 mt-1.5 block">10:25 AM</span>
+                        </div>
+                    </div>
+                    <div class="flex items-end space-x-3">
+                        <div
+                            class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary flex-shrink-0 flex items-center justify-center text-white text-xs mb-1 opacity-50">
+                            <span class="material-icons-outlined" style="font-size: 18px;">auto_awesome</span>
+                        </div>
+                        <div
+                            class="bg-surface-light dark:bg-surface-dark px-6 py-4 rounded-3xl rounded-bl-none shadow-sm border border-gray-100 dark:border-gray-700">
+                            <div class="flex space-x-1.5 h-4 items-center">
+                                <div class="w-2.5 h-2.5 bg-gray-400 rounded-full animate-bounce"
+                                    style="animation-delay: 0s;"></div>
+                                <div class="w-2.5 h-2.5 bg-gray-400 rounded-full animate-bounce"
+                                    style="animation-delay: 0.2s;"></div>
+                                <div class="w-2.5 h-2.5 bg-gray-400 rounded-full animate-bounce"
+                                    style="animation-delay: 0.4s;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="p-6 bg-background-light dark:bg-background-dark border-t border-gray-200 dark:border-gray-800 z-10">
+                    <div
+                        class="max-w-4xl mx-auto bg-surface-light dark:bg-surface-dark rounded-[2rem] shadow-lg border border-gray-200 dark:border-gray-700 flex items-end p-3 transition-colors">
+                        <button
+                            class="p-4 text-gray-400 hover:text-primary transition-colors rounded-full hover:bg-gray-50 dark:hover:bg-gray-800 flex-shrink-0"
+                            data-tooltip="Joindre fichier">
+                            <span class="material-icons-outlined text-2xl">add_circle</span>
+                        </button>
+                        <div class="flex-1 py-4 px-3">
+                            <textarea
+                                class="w-full bg-transparent border-none focus:ring-0 text-gray-700 dark:text-gray-200 placeholder-gray-400 resize-none max-h-32 text-lg"
+                                data-translate-placeholder="input-placeholder" placeholder="Écrivez votre message..."
+                                rows="1" style="min-height: 28px;"></textarea>
+                        </div>
+                        <div class="flex items-center pb-1 pr-1 space-x-2">
+                            <button
+                                class="p-3 text-gray-400 hover:text-primary transition-colors rounded-full hover:bg-gray-50 dark:hover:bg-gray-800"
+                                data-tooltip="Emoji">
+                                <span class="material-icons-outlined text-2xl">sentiment_satisfied</span>
+                            </button>
+                            <button
+                                class="p-4 bg-primary hover:bg-opacity-90 text-white rounded-2xl shadow-md shadow-primary/30 transition-all transform active:scale-95 flex items-center justify-center"
+                                data-tooltip="Envoyer">
+                                <span class="material-icons-outlined text-xl">send</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="text-center mt-3">
+                        <p class="text-sm text-gray-400 dark:text-gray-600 font-medium" data-translate="enter-hint">
+                            Appuyez sur Entrée pour envoyer</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
 
-<!-- Pour l'élément du tooltip (afficher le nom du bouton ou de l'icône correspondante) -->
-<div id="tooltip" class="tooltip"></div>
+    <!-- Pour l'élément du tooltip (afficher le nom du bouton ou de l'icône correspondante) -->
+    <div id="tooltip" class="tooltip"></div>
 
-<script>
-    // Dictionnaire de traductions
-    const translations = {
-        fr: {
-            "nav-home": "Accueil",
-            "nav-subjects": "Matières",
-            "nav-messages": "Messages",
-            "nav-profile": "Profil",
-            "nav-settings": "Paramètres",
-            "nav-logout": "Se déconnecter",
-            "header-messages": "Messages",
-            "title-messages": "Messages",
-            "search-placeholder": "Rechercher...",
-            "time-now": "Maintenant",
-            "chat-preview": "Je peux t'aider à réviser le chapitre de Math...",
-            "tutor-name": "Tuteur Max",
-            "thanks-msg": "Merci!",
-            "prof-name": "Prof. Martin",
-            "yesterday": "Hier",
-            "homework-reminder": "N'oubliez pas le devoir pour demain.",
-            "group-name": "Groupe Science",
-            "monday": "Lun",
-            "group-msg": "Qui a compris le TP ?",
-            "status-online": "En ligne",
-            "today-time": "Aujourd'hui, 10:23",
-            "greeting-msg": "Bonjour Lisha !  Comment puis-je t'aider aujourd'hui ? On continue sur les mathématiques ou tu veux voir autre chose ?",
-            "user-msg": "Salut ! J'aimerais qu'on révise un peu le chapitre sur les fonctions affines. J'ai un peu de mal avec les graphiques.",
-            "ai-response": "Pas de problème ! C'est un sujet important. Commençons par visualiser la formule de base :",
-            "ai-visual": "J'ai trouvé ce petit rappel visuel pour toi :",
-            "input-placeholder": "Écrivez votre message...",
-            "enter-hint": "Appuyez sur Entrée pour envoyer"
-        },
-        en: {
-            "nav-home": "Home",
-            "nav-subjects": "Subjects",
-            "nav-messages": "Messages",
-            "nav-profile": "Profile",
-            "nav-settings": "Settings",
-            "nav-logout": "Log out",
-            "header-messages": "Messages",
-            "title-messages": "Messages",
-            "search-placeholder": "Search...",
-            "time-now": "Now",
-            "chat-preview": "I can help you review the Math chapter...",
-            "tutor-name": "Tutor Max",
-            "thanks-msg": "Thanks!",
-            "prof-name": "Prof. Martin",
-            "yesterday": "Yesterday",
-            "homework-reminder": "Don't forget the homework for tomorrow.",
-            "group-name": "Science Group",
-            "monday": "Mon",
-            "group-msg": "Who understood the lab work?",
-            "status-online": "Online",
-            "today-time": "Today, 10:23",
-            "greeting-msg": "Hello Lisha! How can I help you today? Should we continue with mathematics or do you want to see something else?",
-            "user-msg": "Hi! I'd like to review the chapter on linear functions. I'm having trouble with graphs.",
-            "ai-response": "No problem! It's an important topic. Let's start by visualizing the basic formula:",
-            "ai-visual": "I found this little visual reminder for you:",
-            "input-placeholder": "Write your message...",
-            "enter-hint": "Press Enter to send"
+    <script>
+        // Dictionnaire de traductions
+        const translations = {
+            fr: {
+                "nav-home": "Accueil",
+                "nav-subjects": "Matières",
+                "nav-messages": "Messages",
+                "nav-profile": "Profil",
+                "nav-settings": "Paramètres",
+                "nav-logout": "Se déconnecter",
+                "header-messages": "Messages",
+                "title-messages": "Messages",
+                "search-placeholder": "Rechercher...",
+                "time-now": "Maintenant",
+                "chat-preview": "Je peux t'aider à réviser le chapitre de Math...",
+                "tutor-name": "Tuteur Max",
+                "thanks-msg": "Merci!",
+                "prof-name": "Prof. Martin",
+                "yesterday": "Hier",
+                "homework-reminder": "N'oubliez pas le devoir pour demain.",
+                "group-name": "Groupe Science",
+                "monday": "Lun",
+                "group-msg": "Qui a compris le TP ?",
+                "status-online": "En ligne",
+                "today-time": "Aujourd'hui, 10:23",
+                "greeting-msg": "Bonjour Lisha !  Comment puis-je t'aider aujourd'hui ? On continue sur les mathématiques ou tu veux voir autre chose ?",
+                "user-msg": "Salut ! J'aimerais qu'on révise un peu le chapitre sur les fonctions affines. J'ai un peu de mal avec les graphiques.",
+                "ai-response": "Pas de problème ! C'est un sujet important. Commençons par visualiser la formule de base :",
+                "ai-visual": "J'ai trouvé ce petit rappel visuel pour toi :",
+                "input-placeholder": "Écrivez votre message...",
+                "enter-hint": "Appuyez sur Entrée pour envoyer"
+            },
+            en: {
+                "nav-home": "Home",
+                "nav-subjects": "Subjects",
+                "nav-messages": "Messages",
+                "nav-profile": "Profile",
+                "nav-settings": "Settings",
+                "nav-logout": "Log out",
+                "header-messages": "Messages",
+                "title-messages": "Messages",
+                "search-placeholder": "Search...",
+                "time-now": "Now",
+                "chat-preview": "I can help you review the Math chapter...",
+                "tutor-name": "Tutor Max",
+                "thanks-msg": "Thanks!",
+                "prof-name": "Prof. Martin",
+                "yesterday": "Yesterday",
+                "homework-reminder": "Don't forget the homework for tomorrow.",
+                "group-name": "Science Group",
+                "monday": "Mon",
+                "group-msg": "Who understood the lab work?",
+                "status-online": "Online",
+                "today-time": "Today, 10:23",
+                "greeting-msg": "Hello Lisha! How can I help you today? Should we continue with mathematics or do you want to see something else?",
+                "user-msg": "Hi! I'd like to review the chapter on linear functions. I'm having trouble with graphs.",
+                "ai-response": "No problem! It's an important topic. Let's start by visualizing the basic formula:",
+                "ai-visual": "I found this little visual reminder for you:",
+                "input-placeholder": "Write your message...",
+                "enter-hint": "Press Enter to send"
+            }
+        };
+
+        // Fonction pour changer la langue
+        function changeLanguage(lang) {
+            // Mettre à jour les boutons actifs
+            document.getElementById('btnFr').classList.toggle('active', lang === 'fr');
+            document.getElementById('btnEn').classList.toggle('active', lang === 'en');
+
+            // Mettre à jour tous les textes avec data-translate
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+
+            // Mettre à jour les placeholders
+            document.querySelectorAll('[data-translate-placeholder]').forEach(element => {
+                const key = element.getAttribute('data-translate-placeholder');
+                if (translations[lang][key]) {
+                    element.placeholder = translations[lang][key];
+                }
+            });
+
+            // Mettre à jour l'attribut lang du HTML
+            document.documentElement.lang = lang;
+
+            // Sauvegarder la préférence
+            localStorage.setItem('preferredLanguage', lang);
         }
-    };
 
-    // Fonction pour changer la langue
-    function changeLanguage(lang) {
-        // Mettre à jour les boutons actifs
-        document.getElementById('btnFr').classList.toggle('active', lang === 'fr');
-        document.getElementById('btnEn').classList.toggle('active', lang === 'en');
-        
-        // Mettre à jour tous les textes avec data-translate
-        document.querySelectorAll('[data-translate]').forEach(element => {
-            const key = element.getAttribute('data-translate');
-            if (translations[lang][key]) {
-                element.textContent = translations[lang][key];
+        // Charger la langue préférée au démarrage
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('preferredLanguage');
+            if (savedLang && (savedLang === 'fr' || savedLang === 'en')) {
+                changeLanguage(savedLang);
             }
         });
-        
-        // Mettre à jour les placeholders
-        document.querySelectorAll('[data-translate-placeholder]').forEach(element => {
-            const key = element.getAttribute('data-translate-placeholder');
-            if (translations[lang][key]) {
-                element.placeholder = translations[lang][key];
-            }
-        });
-        
-        // Mettre à jour l'attribut lang du HTML
-        document.documentElement.lang = lang;
-        
-        // Sauvegarder la préférence
-        localStorage.setItem('preferredLanguage', lang);
-    }
 
-    // Charger la langue préférée au démarrage
-    window.addEventListener('DOMContentLoaded', () => {
-        const savedLang = localStorage.getItem('preferredLanguage');
-        if (savedLang && (savedLang === 'fr' || savedLang === 'en')) {
-            changeLanguage(savedLang);
-        }
-    });
+        // Tooltip functionality
+        const tooltip = document.getElementById('tooltip');
+        const elements = document.querySelectorAll('[data-tooltip]');
 
-    // Tooltip functionality
-    const tooltip = document.getElementById('tooltip');
-    const elements = document.querySelectorAll('[data-tooltip]');
-    
-    elements.forEach(element => {
-        element.addEventListener('mouseenter', function(e) {
-            const text = this.getAttribute('data-tooltip');
-            const rect = this.getBoundingClientRect();
-            
-            tooltip.textContent = text;
-            tooltip.classList.add('show');
-            
-            // Positionne le tooltip en dessous de l'élément
-            const tooltipRect = tooltip.getBoundingClientRect();
-            const left = rect.left + (rect.width / 2) - (tooltipRect.width / 2);
-            const top = rect.bottom + 8; // 8px en dessous de l'élément
-            
-            tooltip.style.left = left + 'px';
-            tooltip.style.top = top + 'px';
-        });
-        
-        element.addEventListener('mouseleave', function() {
-            tooltip.classList.remove('show');
-        });
-    });
-</script>
-<script src="../js/utils/dark-white.js"></script>
-<script type="module" src="../js/auth/logout.js"></script>
+        elements.forEach(element => {
+            element.addEventListener('mouseenter', function (e) {
+                const text = this.getAttribute('data-tooltip');
+                const rect = this.getBoundingClientRect();
 
-</body></html>
+                tooltip.textContent = text;
+                tooltip.classList.add('show');
+
+                // Positionne le tooltip en dessous de l'élément
+                const tooltipRect = tooltip.getBoundingClientRect();
+                const left = rect.left + (rect.width / 2) - (tooltipRect.width / 2);
+                const top = rect.bottom + 8; // 8px en dessous de l'élément
+
+                tooltip.style.left = left + 'px';
+                tooltip.style.top = top + 'px';
+            });
+
+            element.addEventListener('mouseleave', function () {
+                tooltip.classList.remove('show');
+            });
+        });
+    </script>
+    <script src="../js/utils/dark-white.js"></script>
+    <script type="module" src="../js/auth/logout.js"></script>
+
+</body>
+
+</html>
