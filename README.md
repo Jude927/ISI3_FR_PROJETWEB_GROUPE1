@@ -1,240 +1,111 @@
-<script>
-        const canvas = document.getElementById('whiteboard');
-        const ctx = canvas.getContext('2d');
+→ Djangou — Plateforme Web Éducative Interactive
+Djangou est une plateforme web éducative conçue pour simuler une application pédagogique moderne mettant en relation étudiants et tuteurs via des interfaces dédiées, une messagerie interactive et un tableau blanc numérique.
 
-        // Configuration du canvas
-        function resizeCanvas() {
-            canvas.width = canvas.offsetWidth;
-            canvas.height = canvas.offsetHeight;
-        }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
+Le projet met l’accent sur la conception front-end, la structuration applicative, et l’interaction utilisateur, dans un contexte proche d’un produit réel.
 
-        // Variables
-        let isDrawing = false;
-        let currentTool = 'pen';
-        let currentColor = '#D59D80'; // Couleur primary par défaut
-        let brushSize = 3;
-        let lastX = 0;
-        let lastY = 0;
+ 
+→ Objectifs techniques
+• Concevoir une architecture front-end claire et modulaire
+• Implémenter des interfaces distinctes selon les rôles
+• Développer des fonctionnalités interactives en JavaScript pur
+• Appliquer les bonnes pratiques de UI/UX et de responsive design
+• Simuler un produit SaaS éducatif sans backend (proof of concept)
+ 
+→ Fonctionnalités implémentées
+Gestion des rôles
 
-        // Historique pour undo/redo
-        let history = [];
-        let historyStep = -1;
+• Interfaces séparées Étudiant / Tuteur
+• Tableaux de bord dédiés
+• Pages de profil et paramètres spécifiques
+Communication
 
-        // Sauvegarder l'état
-        function saveState() {
-            historyStep++;
-            if (historyStep < history.length) {
-                history.length = historyStep;
-            }
-            history.push(canvas.toDataURL());
-        }
+• Système de messagerie front-end
+• Gestion de conversations simulées
+• Navigation fluide entre les vues
+Outils pédagogiques
 
-        // Undo
-        document.getElementById('undoBtn')?.addEventListener('click', () => {
-            if (historyStep > 0) {
-                historyStep--;
-                const img = new Image();
-                img.src = history[historyStep];
-                img.onload = () => {
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    ctx.drawImage(img, 0, 0);
-                };
-            }
-        });
+• Tableau blanc interactif basé sur l’API Canvas :
+o Dessin libre
+o Effacement
+o Gestion des événements souris
+o Raccourcis clavier
+• Interfaces matières (étudiant / tuteur)
+ 
+→ Architecture du projet
+ISI3_FR_PROJETWEB_GROUPE1/
 
-        // Redo
-        document.getElementById('redoBtn')?.addEventListener('click', () => {
-            if (historyStep < history.length - 1) {
-                historyStep++;
-                const img = new Image();
-                img.src = history[historyStep];
-                img.onload = () => {
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    ctx.drawImage(img, 0, 0);
-                };
-            }
-        });
 
-        // Outils
-        document.getElementById('penTool')?.addEventListener('click', function () {
-            currentTool = 'pen';
-            updateToolButtons(this);
-            canvas.style.cursor = 'crosshair';
-        });
 
-        document.getElementById('eraserTool')?.addEventListener('click', function () {
-            currentTool = 'eraser';
-            updateToolButtons(this);
-            canvas.style.cursor = 'grab';
-        });
+ 
+→ Stack technique
+Technologie
 
-        document.getElementById('textTool')?.addEventListener('click', function () {
-            currentTool = 'text';
-            updateToolButtons(this);
-            canvas.style.cursor = 'text';
-        });
+Usage
 
-        function updateToolButtons(activeButton) {
-            document.querySelectorAll('[id$="Tool"]').forEach(btn => {
-                btn.classList.remove('active-tool');
-                btn.classList.add('text-gray-500', 'hover:bg-[var(--primary-soft)]', 'hover:text-[var(--primary)]');
-            });
-            activeButton.classList.add('active-tool');
-            activeButton.classList.remove('text-gray-500', 'hover:bg-[var(--primary-soft)]', 'hover:text-[var(--primary)]');
-        }
+HTML5
 
-        // Changement de couleur
-        function changeColor(color) {
-            currentColor = color;
-            if (currentTool === 'pen') {
-                canvas.style.cursor = 'crosshair';
-            }
-        }
+Structure sémantique des pages
 
-        // Dessin
-        canvas.addEventListener('mousedown', startDrawing);
-        canvas.addEventListener('mousemove', draw);
-        canvas.addEventListener('mouseup', stopDrawing);
-        canvas.addEventListener('mouseout', stopDrawing);
+Tailwind CSS
 
-        // Support tactile
-        canvas.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            const touch = e.touches[0];
-            const rect = canvas.getBoundingClientRect();
-            const mouseEvent = new MouseEvent('mousedown', {
-                clientX: touch.clientX,
-                clientY: touch.clientY
-            });
-            canvas.dispatchEvent(mouseEvent);
-        });
+Design responsive et cohérent
 
-        canvas.addEventListener('touchmove', (e) => {
-            e.preventDefault();
-            const touch = e.touches[0];
-            const mouseEvent = new MouseEvent('mousemove', {
-                clientX: touch.clientX,
-                clientY: touch.clientY
-            });
-            canvas.dispatchEvent(mouseEvent);
-        });
+JavaScript (Vanilla)
 
-        canvas.addEventListener('touchend', (e) => {
-            e.preventDefault();
-            stopDrawing();
-        });
+Logique applicative et interactivité
 
-        function startDrawing(e) {
-            const rect = canvas.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
+Canvas API
 
-            if (currentTool === 'text') {
-                showTextInput(x, y);
-                return;
-            }
+Tableau blanc interactif
 
-            isDrawing = true;
-            lastX = x;
-            lastY = y;
-        }
+Node.js / npm
 
-        function draw(e) {
-            if (!isDrawing) return;
+Gestion des dépendances
 
-            const rect = canvas.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
+Git / GitHub
 
-            ctx.beginPath();
-            ctx.moveTo(lastX, lastY);
-            ctx.lineTo(x, y);
+Versionnement et collaboration
 
-            if (currentTool === 'pen') {
-                ctx.strokeStyle = currentColor;
-                ctx.lineWidth = brushSize;
-            } else if (currentTool === 'eraser') {
-                const isDark = document.documentElement.classList.contains('dark');
-                ctx.strokeStyle = isDark ? '#0D1D25' : '#F8F9FA';
-                ctx.lineWidth = brushSize * 4;
-            }
+ 
+→ Installation et exécution
+Clonage du dépôt
 
-            ctx.lineCap = 'round';
-            ctx.lineJoin = 'round';
-            ctx.stroke();
+git clone https://github.com/votre-username/nom-du-repo.git
 
-            lastX = x;
-            lastY = y;
-        }
+Installation des dépendances
 
-        function stopDrawing() {
-            if (isDrawing) {
-                isDrawing = false;
-                saveState();
-            }
-        }
+npm install
 
-        // Outil texte
-        let textX = 0;
-        let textY = 0;
+Lancement
 
-        function showTextInput(x, y) {
-            textX = x;
-            textY = y;
-            const textArea = document.getElementById('textInputArea');
-            textArea.style.left = x + 'px';
-            textArea.style.top = y + 'px';
-            textArea.classList.remove('hidden');
-            document.getElementById('textInput').focus();
-        }
+Ouvrir directement les fichiers HTML depuis le dossier public/
+(ex : login.html) dans un navigateur moderne.
 
-        function addText() {
-            const text = document.getElementById('textInput').value;
-            if (text.trim()) {
-                ctx.font = '18px Comfortaa, cursive';
-                ctx.fillStyle = currentColor;
-                ctx.fillText(text, textX, textY);
-                saveState();
-            }
-            cancelText();
-        }
+ 
+→ Compétences techniques démontrées
+• Architecture front-end multi-pages
+• Séparation des responsabilités UI / logique
+• Manipulation du DOM et gestion des événements
+• Conception d’interfaces utilisateur complexes
+• Utilisation avancée de Tailwind CSS
+• Implémentation d’outils graphiques avec Canvas
+• Organisation de projet et lisibilité du code
+ 
+→ Contexte académique
+• Projet académique en développement web
+• Travail en équipe
+• Orientation produit et qualité logicielle
+• Approche proche des standards industriels front-end
+ 
+→ Évolutions possibles
+• Intégration d’un backend (Node.js / Firebase / REST API)
+• Authentification réelle et gestion des sessions
+• Persistance des données (messages, whiteboard)
+• Architecture SPA (React / Vue)
+• Déploiement cloud (Vercel, Netlify)
+ 
+→ Licence
+Projet à but pédagogique et démonstratif
 
-        function cancelText() {
-            document.getElementById('textInputArea').classList.add('hidden');
-            document.getElementById('textInput').value = '';
-        }
-
-        // Effacer le tableau
-        function clearCanvas() {
-            if (confirm('Êtes-vous sûr de vouloir effacer tout le tableau ?')) {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                saveState();
-            }
-        }
-
-        // Télécharger le tableau
-        function downloadCanvas() {
-            const link = document.createElement('a');
-            link.download = 'tableau-djangou-' + new Date().getTime() + '.png';
-            link.href = canvas.toDataURL();
-            link.click();
-        }
-
-        // Initialiser l'historique
-        saveState();
-
-        // Raccourcis clavier
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                cancelText();
-            }
-            if (e.ctrlKey || e.metaKey) {
-                if (e.key === 'z') {
-                    e.preventDefault();
-                    document.getElementById('undoBtn').click();
-                }
-            }
-        });
-    </script>
+Ce projet démontre une maîtrise solide des fondamentaux du développement front-end, une capacité à structurer une application complexe et à concevoir des fonctionnalités interactives proches de cas d’usage réels.
+ 

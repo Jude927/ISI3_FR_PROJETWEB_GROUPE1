@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "vite build"
+     "build": "vite build"
   },
   "keywords": [],
   "author": "",
@@ -26,5 +26,6 @@
   "bugs": {
     "url": "https://github.com/Jude927/IS13_FR_PROJETWEB_GROUPE1/issues"
   },
-  "homepage": "https://github.com/Jude927/IS13_FR_PROJETWEB_Groupe1#readme"
+  "homepage": "https://github.com/Jude927/ISI3_FR_PROJETWEB_GROUPE1#readme"
 }
+

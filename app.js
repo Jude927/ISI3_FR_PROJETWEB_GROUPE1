@@ -1,0 +1,1 @@
+app.use("/lang", express.static("lang"));
