@@ -7,7 +7,8 @@
     <title>Djangou - Mon Profil Étudiant</title>
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
     <style>
@@ -23,12 +24,17 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
-        
+
         @keyframes slideIn {
-            from { transform: translateX(-100%); }
-            to { transform: translateX(0); }
+            from {
+                transform: translateX(-100%);
+            }
+
+            to {
+                transform: translateX(0);
+            }
         }
-        
+
         .transition-smooth {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -104,8 +110,15 @@
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
         }
 
         /* Overlay pour menu mobile */
@@ -156,12 +169,16 @@
     </script>
 </head>
 
-<body class="bg-background-light dark:bg-background-dark text-secondary dark:text-gray-100 transition-colors duration-300 font-body antialiased h-screen overflow-hidden flex flex-col md:flex-row">
-    <!-- Modal pour changer l'avatar -->
+<body
+    class="bg-background-light dark:bg-background-dark text-secondary dark:text-gray-100 transition-colors duration-300 font-body antialiased h-screen overflow-hidden flex flex-col md:flex-row">
+    
+     <div class="fixed -top-64 -right-64 w-[800px] h-[800px] bg-gray-50/80 dark:bg-gray-800/40 rounded-full border-2 border-gray-200/70 dark:border-gray-700/50 pointer-events-none -z-10"></div>
+    <div class="fixed -bottom-64 -left-64 w-[800px] h-[800px] bg-gray-50/80 dark:bg-gray-800/40 rounded-full border-2 border-gray-200/70 dark:border-gray-700/50 pointer-events-none -z-10"></div>
+
     <div id="avatarModal"
         class="fixed inset-0 bg-black/40 backdrop-blur-sm hidden z-[100] flex items-center justify-center">
         <div class="bg-white dark:bg-card-dark rounded-2xl p-8 max-w-xl w-full mx-4 shadow-2xl">
-            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-6 text-center">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-6 text-center" data-i18n="profile_choose_avatar">
                 Choisissez votre photo de profil
             </h3>
 
@@ -185,10 +202,12 @@
     <div id="sidebarOverlay" class="hidden fixed inset-0 bg-black/50 z-40 md:hidden"></div>
 
     <!-- Sidebar mobile -->
-    <aside id="mobileSidebar" class="md:hidden fixed top-0 left-0 h-full w-64 bg-card-light dark:bg-card-dark border-r border-gray-100 dark:border-gray-800 z-50 transform -translate-x-full transition-transform duration-300">
+    <aside id="mobileSidebar"
+        class="md:hidden fixed top-0 left-0 h-full w-64 bg-card-light dark:bg-card-dark border-r border-gray-100 dark:border-gray-800 z-50 transform -translate-x-full transition-transform duration-300">
         <div class="p-6 border-b border-gray-100 dark:border-gray-800">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xl">
+                <div
+                    class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xl">
                     D
                 </div>
                 <span class="text-2xl font-bold text-primary">Djangou</span>
@@ -198,41 +217,43 @@
             <a class="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400"
                 href="dashboard-student.html">
                 <span class="material-icons-round">home</span>
-                <span class="font-semibold">Accueil</span>
+                <span class="font-semibold" data-i18n="nav_home">Accueil</span>
             </a>
             <a class="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400"
                 href="matiere-student.html">
                 <span class="material-icons-round">school</span>
-                <span class="font-semibold">Matières</span>
+                <span class="font-semibold" data-i18n="nav_subjects">Matières</span>
             </a>
-                
+
             <a class="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400"
                 href="chat-student.html">
                 <span class="material-icons-round">chat_bubble</span>
-                <span class="font-semibold">Messages</span>
+                <span class="font-semibold" data-i18n="nav_messages">Messages</span>
             </a>
-           
-            <a class="flex items-center gap-4 p-3 rounded-xl bg-primary/10 text-primary dark:bg-primary/20"
-                href="#">
+
+            <a class="flex items-center gap-4 p-3 rounded-xl bg-primary/10 text-primary dark:bg-primary/20" href="#">
                 <span class="material-icons-round">person</span>
-                <span class="font-semibold">Profil</span>
+                <span class="font-semibold" data-i18n="nav_profile">Profil</span>
             </a>
             <a class="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400"
                 href="settings-student.html">
                 <span class="material-icons-round">settings</span>
-                <span class="font-semibold">Paramètres</span>
+                <span class="font-semibold" data-i18n="nav_settings">Paramètres</span>
             </a>
-            <button id="logoutBtnMobile" class="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 mt-4">
+            <button id="logoutBtnMobile"
+                class="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 mt-4">
                 <span class="material-icons-round">logout</span>
-                <span class="font-semibold">Se déconnecter</span>
+                <span class="font-semibold" data-i18n="nav_logout">Se déconnecter</span>
             </button>
         </nav>
     </aside>
 
     <!-- Sidebar pour desktop -->
-    <aside class="hidden md:flex flex-col w-24 lg:w-64 h-full bg-card-light dark:bg-card-dark border-r border-gray-100 font-bold dark:border-gray-800 transition-all duration-300 p-4 fixed md:relative z-50">
+    <aside
+        class="hidden md:flex flex-col w-24 lg:w-64 h-full bg-card-light dark:bg-card-dark border-r border-gray-100 font-bold dark:border-gray-800 transition-all duration-300 p-4 fixed md:relative z-50">
         <div class="flex items-center justify-center lg:justify-start mb-10 px-2">
-            <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xl shadow-md">
+            <div
+                class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xl shadow-md">
                 D
             </div>
             <span class="hidden lg:block ml-3 text-2xl font-bold text-primary tracking-wide">Djangou</span>
@@ -241,23 +262,23 @@
             <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
                 href="dashboard-student.html">
                 <span class="material-icons-round text-2xl">home</span>
-                <span class="hidden lg:block ml-4 font-semibold">Accueil</span>
+                <span class="hidden lg:block ml-4 font-semibold" data-i18n="nav_home">Accueil</span>
             </a>
             <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
                 href="matiere-student.html">
                 <span class="material-icons-round text-2xl">school</span>
-                <span class="hidden lg:block ml-4 font-semibold">Matières</span>
+                <span class="hidden lg:block ml-4 font-semibold" data-i18n="nav_subjects">Matières</span>
             </a>
             <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
                 href="chat-student.html">
                 <span class="material-icons-round text-2xl">chat_bubble</span>
-                <span class="hidden lg:block ml-4 font-semibold">Messages</span>
+                <span class="hidden lg:block ml-4 font-semibold" data-i18n="nav_messages">Messages</span>
             </a>
-           
+
             <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary transition-colors hover:bg-primary/20"
                 href="#">
                 <span class="material-icons-round text-2xl">person</span>
-                <span class="hidden lg:block ml-4 font-semibold">Profil</span>
+                <span class="hidden lg:block ml-4 font-semibold" data-i18n="nav_profile">Profil</span>
             </a>
         </nav>
 
@@ -265,11 +286,12 @@
             <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
                 href="settings-student.html">
                 <span class="material-icons-round text-2xl">settings</span>
-                <span class="hidden lg:block ml-4 font-semibold">Paramètres</span>
+                <span class="hidden lg:block ml-4 font-semibold" data-i18n="nav_settings">Paramètres</span>
             </a>
-            <button id="logoutBtn" class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors text-rose-500 font-bold">
+            <button id="logoutBtn"
+                class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors text-rose-500 font-bold">
                 <span class="material-icons-round text-2xl">logout</span>
-                <span class="hidden lg:block ml-4 font-semibold">Se déconnecter</span>
+                <span class="hidden lg:block ml-4 font-semibold" data-i18n="nav_logout">Se déconnecter</span>
             </button>
         </div>
     </aside>
@@ -284,23 +306,26 @@
                 <span class="text-xl font-bold text-primary">Djangou</span>
             </div>
             <div class="hidden md:block">
-                <h1 class="text-2xl font-bold text-secondary dark:text-white">Mon Profil Étudiant</h1>
-                <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Consultez vos informations publiques</p>
+                <h1 class="text-2xl font-bold text-secondary dark:text-white" data-i18n="profile_title">Mon Profil
+                    Étudiant</h1>
+                <p class="text-gray-500 dark:text-gray-400 text-sm mt-1" data-i18n="profile_view_info">Consultez vos
+                    informations publiques</p>
             </div>
             <div class="flex items-center gap-4">
-               
-                
+
+
                 <div class="flex items-center gap-3 pl-2 md:pl-4 border-l border-gray-200 dark:border-gray-700">
                     <div class="text-right hidden sm:block">
-                        <p id="userName" class="text-sm font-bold text-secondary dark:text-white loading-pulse">Chargement...</p>
-                        <p class="text-xs text-gray-500 dark:text-gray-400">Étudiant</p>
+                        <p id="userName" class="text-sm font-bold text-secondary dark:text-white loading-pulse"
+                            data-i18n="profile_loading">Chargement...</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400" data-i18n="profile_student">Étudiant</p>
                     </div>
                     <a href="#">
-                    <img alt="Avatar étudiant"
-                         class="profile-avatar w-10 h-10 rounded-full object-cover border-2 border-primary shadow-sm loading-pulse"
-                         src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f3f4f6'/%3E%3C/svg%3E" />
+                        <img alt="Avatar étudiant"
+                            class="profile-avatar w-10 h-10 rounded-full object-cover border-2 border-primary shadow-sm loading-pulse"
+                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f3f4f6'/%3E%3C/svg%3E" />
                     </a>
-                        </div>
+                </div>
             </div>
         </header>
 
@@ -314,14 +339,15 @@
                                 class="profile-avatar w-32 h-32 md:w-36 md:h-36 lg:w-44 lg:h-44 rounded-2xl md:rounded-[2.5rem] object-cover shadow-xl ring-4 md:ring-8 ring-pastel-cream dark:ring-gray-800 cursor-pointer hover:opacity-90 transition-opacity"
                                 src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f3f4f6'/%3E%3C/svg%3E" />
 
-                            <div id="onlineStatus" class="absolute -bottom-2 -right-2 w-8 h-8 md:w-10 md:h-10 bg-emerald-400 border-4 border-white dark:border-card-dark rounded-full flex items-center justify-center hidden">
+                            <div id="onlineStatus"
+                                class="absolute -bottom-2 -right-2 w-8 h-8 md:w-10 md:h-10 bg-emerald-400 border-4 border-white dark:border-card-dark rounded-full flex items-center justify-center hidden">
                                 <span class="material-icons-round text-white text-sm md:text-lg">check</span>
                             </div>
                         </div>
                         <div class="flex-1 text-center md:text-left">
                             <div class="flex flex-col gap-3 mb-4">
                                 <h2 class="text-2xl md:text-3xl font-bold tracking-tight">
-                                    <span class="text-primary">Étudiant</span>
+                                    <span class="text-primary" data-i18n="profile_student">Étudiant</span>
                                     <span id="profileName" class="text-secondary dark:text-white">
                                         —
                                     </span>
@@ -339,25 +365,29 @@
          dark:text-primary
          dark:border-white/10 loading-pulse">
                                         <span class="material-icons-round text-base mr-1">school</span>
-                                        <span id="subjectText">Chargement...</span>
+                                        <span id="subjectText" data-i18n="profile_loading">Chargement...</span>
                                     </span>
                                 </div>
                             </div>
-                            
-                            <p id="profileBio" class="text-gray-500 dark:text-gray-400 leading-relaxed max-w-2xl text-sm md:text-base mb-6">
-                                Passionné(e) par l'apprentissage, je cherche à progresser dans mes études avec l'aide de tuteurs expérimentés. Ma motivation repose sur la curiosité et la volonté de comprendre en profondeur les concepts pour réussir mes examens.
+
+                            <p id="profileBio"
+                                class="text-gray-500 dark:text-gray-400 leading-relaxed max-w-2xl text-sm md:text-base mb-6"
+                                data-i18n="profile_bio_default">
+                                Passionné(e) par l'apprentissage, je cherche à progresser dans mes études avec l'aide de
+                                tuteurs expérimentés. Ma motivation repose sur la curiosité et la volonté de comprendre
+                                en profondeur les concepts pour réussir mes examens.
                             </p>
-                            
+
                             <div class="flex flex-wrap gap-4 md:gap-6 justify-center md:justify-start">
                                 <div class="flex items-center gap-2 text-gray-500 dark:text-gray-400">
                                     <span class="material-icons-round text-lg">calendar_today</span>
-                                    <span id="joinDate" class="text-sm font-medium">
+                                    <span id="joinDate" class="text-sm font-medium" data-i18n="profile_loading">
                                         Chargement…
                                     </span>
                                 </div>
                                 <div class="flex items-center gap-2 text-gray-500 dark:text-gray-400">
                                     <span class="material-icons-round text-lg">language</span>
-                                    <span id="languagesText" class="text-sm font-medium">
+                                    <span id="languagesText" class="text-sm font-medium" data-i18n="profile_loading">
                                         Chargement…
                                     </span>
                                 </div>
@@ -377,7 +407,7 @@
 
     <!-- Scripts -->
     <script type="module">
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
             const mobileSidebar = document.getElementById('mobileSidebar');
             const sidebarOverlay = document.getElementById('sidebarOverlay');
@@ -385,35 +415,35 @@
             const logoutBtnMobileSidebar = document.getElementById('logoutBtnMobileSidebar');
             const aiFab = document.getElementById('aiFab');
             const themeToggle = document.getElementById('theme-toggle');
-            
+
             function openMobileMenu() {
                 mobileSidebar.classList.remove('-translate-x-full');
                 sidebarOverlay.classList.remove('hidden');
                 document.body.style.overflow = 'hidden';
             }
-            
+
             function closeMobileMenu() {
                 mobileSidebar.classList.add('-translate-x-full');
                 sidebarOverlay.classList.add('hidden');
                 document.body.style.overflow = '';
             }
-            
+
             if (mobileMenuBtn) {
                 mobileMenuBtn.addEventListener('click', openMobileMenu);
             }
-            
+
             if (sidebarOverlay) {
                 sidebarOverlay.addEventListener('click', closeMobileMenu);
             }
-            
+
             // Fermer le menu en cliquant sur un lien
             mobileSidebar.querySelectorAll('a, button').forEach(element => {
                 element.addEventListener('click', closeMobileMenu);
             });
-            
+
             // Gestion du thème
             if (themeToggle) {
-                themeToggle.addEventListener('click', function() {
+                themeToggle.addEventListener('click', function () {
                     if (document.documentElement.classList.contains('dark')) {
                         document.documentElement.classList.remove('dark');
                         localStorage.setItem('theme', 'light');
@@ -422,39 +452,39 @@
                         localStorage.setItem('theme', 'dark');
                     }
                 });
-                
+
                 // Vérifier le thème sauvegardé
                 const savedTheme = localStorage.getItem('theme');
                 if (savedTheme === 'dark') {
                     document.documentElement.classList.add('dark');
                 }
             }
-            
+
             // Gestion du bouton IA
             if (aiFab) {
-                aiFab.addEventListener('click', function() {
+                aiFab.addEventListener('click', function () {
                     localStorage.setItem("openIA", "true");
                     window.location.href = "chat-student.html";
                 });
             }
-            
+
             // Gestion de la déconnexion
-            
-            
+
+
             // Gestion du redimensionnement
-            window.addEventListener('resize', function() {
+            window.addEventListener('resize', function () {
                 if (window.innerWidth >= 768) {
                     closeMobileMenu();
                 }
             });
         });
     </script>
-    
+
     <!-- Import des scripts -->
     <script type="module" src="/js/auth/logout.js"></script>
     <script type="module" src="/js/utils/IconeIA.js"></script>
     <script type="module" src="/js/utils/avatar.js"></script>
-    
+
     <!-- Script pour charger les données du profil étudiant -->
     <script type="module">
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
@@ -505,24 +535,24 @@
                 if (subjectText) subjectText.textContent = data.class || "Non spécifié";
                 if (profileBio && data.bio) profileBio.textContent = data.bio;
                 if (languagesText) languagesText.textContent = data.languages || "Français";
-                
+
                 if (joinDate) {
                     let joinDateText = "Date d'inscription non disponible";
                     if (data.createdAt) {
                         if (data.createdAt.toDate) {
                             // Si c'est un Timestamp Firebase
-                            joinDateText = `Inscrit le ${data.createdAt.toDate().toLocaleDateString('fr-FR', {day: '2-digit', month: '2-digit', year: 'numeric'})}`;
+                            joinDateText = `Inscrit le ${data.createdAt.toDate().toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' })}`;
                         } else if (data.createdAt.seconds) {
                             // Si c'est un objet avec seconds
-                            joinDateText = `Inscrit le ${new Date(data.createdAt.seconds * 1000).toLocaleDateString('fr-FR', {day: '2-digit', month: '2-digit', year: 'numeric'})}`;
+                            joinDateText = `Inscrit le ${new Date(data.createdAt.seconds * 1000).toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' })}`;
                         } else if (typeof data.createdAt === 'string') {
                             // Si c'est une string
-                            joinDateText = `Inscrit le ${new Date(data.createdAt).toLocaleDateString('fr-FR', {day: '2-digit', month: '2-digit', year: 'numeric'})}`;
+                            joinDateText = `Inscrit le ${new Date(data.createdAt).toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' })}`;
                         }
                     }
                     joinDate.textContent = joinDateText;
                 }
-                
+
                 if (onlineStatus && data.isOnline) {
                     onlineStatus.classList.remove("hidden");
                 }
@@ -539,7 +569,8 @@
     </script>
 
     <script type="module" src="../js/utils/dark-white.js"></script>
-<script type="module" src="../js/lang.js"></script>
-<script type="module" src="../js/auth/logout.js"></script>
+    <script type="module" src="../js/lang.js"></script>
+    <script type="module" src="../js/auth/logout.js"></script>
 </body>
+
 </html>

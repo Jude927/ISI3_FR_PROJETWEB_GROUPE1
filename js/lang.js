@@ -39,6 +39,28 @@ const translations = {
 
 
 
+        profile_title: "Mon Profil Étudiant",
+        profile_view_info: "Consultez vos informations publiques",
+        profile_student: "Étudiant",
+        profile_choose_avatar: "Choisissez votre photo de profil",
+        profile_cancel: "Annuler",
+        profile_loading: "Chargement...",
+        profile_online: "En ligne",
+        profile_subject: "Matière",
+        profile_bio_default: "Passionné(e) par l'apprentissage, je cherche à progresser dans mes études avec l'aide de tuteurs expérimentés. Ma motivation repose sur la curiosité et la volonté de comprendre en profondeur les concepts pour réussir mes examens.",
+        profile_joined: "Inscrit le",
+        profile_languages: "Langues",
+        profile_registration_date_unavailable: "Date d'inscription non disponible",
+        profile_subject_not_specified: "Non spécifié",
+        profile_student_not_found: "Étudiant introuvable",
+        profile_error_loading: "Erreur chargement étudiant",
+        
+        // MODAL AVATAR
+        avatar_modal_title: "Choisissez votre photo de profil",
+        
+
+
+
         //span
         span_french: "Français",
         span_english: "Anglais",
@@ -238,6 +260,25 @@ const translations = {
         all_right: "© 2025 Djangou. All rights reserved.",
         confidentialité: "Privacy",
         explorer: "Explore what other students are learning right now.",
+
+
+        profile_title: "My Student Profile",
+        profile_view_info: "View your public information",
+        profile_student: "Student",
+        profile_choose_avatar: "Choose your profile picture",
+        profile_cancel: "Cancel",
+        profile_loading: "Loading...",
+        profile_online: "Online",
+        profile_subject: "Subject",
+        profile_bio_default: "Passionate about learning, I seek to progress in my studies with the help of experienced tutors. My motivation is based on curiosity and the desire to deeply understand concepts to succeed in my exams.",
+        profile_joined: "Joined on",
+        profile_languages: "Languages",
+        profile_registration_date_unavailable: "Registration date unavailable",
+        profile_subject_not_specified: "Not specified",
+        profile_student_not_found: "Student not found",
+        profile_error_loading: "Error loading student",
+        // MODAL AVATAR
+        avatar_modal_title: "Choose your profile picture",
 
         security: "Security",
         pwd: "Change Password",
