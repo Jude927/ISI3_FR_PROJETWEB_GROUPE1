@@ -108,4 +108,4 @@ Ouvrir directement les fichiers HTML depuis le dossier public/
 Projet à but pédagogique et démonstratif
 
 Ce projet démontre une maîtrise solide des fondamentaux du développement front-end, une capacité à structurer une application complexe et à concevoir des fonctionnalités interactives proches de cas d’usage réels.
- 
+ URL: tuto-archiweb.web.app
