@@ -522,3 +522,4 @@ document.addEventListener('DOMContentLoaded', initLanguage);
 // Exposer les fonctions globalement
 window.setLanguage = setLanguage;
 window.t = t;
+
