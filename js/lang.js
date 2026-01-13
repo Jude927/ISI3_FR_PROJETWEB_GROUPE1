@@ -494,3 +494,24 @@ document.addEventListener('DOMContentLoaded', initLanguage);
 // Exposer les fonctions globalement
 window.setLanguage = setLanguage;
 window.t = t;
+
+document.addEventListener("DOMContentLoaded", () => {
+  const langToggle = document.getElementById("lang-toggle");
+  if (!langToggle) return;
+
+  // état initial
+  langToggle.checked = currentLanguage === "en";
+  langToggle.textContent = currentLanguage === "en" ? "🇺🇸" : "🇫🇷";
+
+  // clic bouton 
+  langToggle.addEventListener("click", () => {
+    const newLang = currentLanguage === "fr" ? "en" : "fr";
+    setLanguage(newLang);
+  });
+
+  document.addEventListener("languageChanged", (e) => {
+    langToggle.checked = e.detail.language === "en";
+    langToggle.textContent = e.detail.language === "en" ? "🇺🇸" : "🇫🇷";
+  });
+});
+

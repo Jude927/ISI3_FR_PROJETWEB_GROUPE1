@@ -87,8 +87,9 @@
                 <a class="nav-item" href="dashboard-teacher.html"><span
                         class="material-symbols-outlined">grid_view</span><span class="text-[12px]">Tableau de
                         Bord</span></a>
-                <a class="nav-item" href="matiere-tuteur.html"><span class="material-symbols-outlined">auto_stories</span><span
-                        class="text-[12px]">Ma Matière</span></a>
+                <a class="nav-item" href="matiere-tuteur.html"><span
+                        class="material-symbols-outlined">auto_stories</span><span class="text-[12px]">Ma
+                        Matière</span></a>
                 <a class="nav-item" href="messagerie-teacher.html"><span
                         class="material-symbols-outlined">chat_bubble</span><span
                         class="text-[12px]">Messages</span></a>
@@ -104,15 +105,13 @@
             </div>
         </aside>
 
-<main
-  class="
+        <main class="
     flex-1 flex flex-col min-w-0 h-full
     overflow-y-auto
     px-4 py-6 md:px-8
     md:pl-[18rem]
     lg:pl-[18rem] lg:pr-10
-  "
->
+  ">
             <header class="flex items-center justify-between gap-4 mb-8">
 
                 <div class="flex items-center gap-5">
@@ -130,12 +129,7 @@
                 </div>
 
                 <div class="flex items-center gap-4">
-                    <button id="lang-toggle" class="w-11 h-11 flex items-center justify-center
-         rounded-xl border border-[var(--border-ui)]
-         bg-[var(--bg-sidebar)]
-         text-lg">
-                        🇫🇷
-                    </button>
+
                     <a href="profil-teacher.html"><img alt="Profile"
                             class="profile-avatar w-10 h-10 rounded-xl object-cover cursor-pointer"
                             src="/assets/avatars/avatardef.png" /></a>
@@ -218,6 +212,47 @@
                         </div>
                     </div>
                 </section>
+
+                <section>
+                    <div class="flex items-center gap-3 mb-6 px-2">
+                        <span
+                            class="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-500">
+                            <span class="material-symbols-outlined">translate</span>
+                        </span>
+                        <h2 class="text-lg font-bold">Langue</h2>
+                    </div>
+                    <div class="premium-card p-8">
+                        <div class="flex items-center justify-between p-4 bg-black/5 dark:bg-white/5 rounded-2xl">
+                            <div class="flex items-center gap-4">
+                                <span class="material-symbols-outlined text-slate-400">language</span>
+                                <div>
+                                    <p class="text-sm font-bold">Langue du site</p>
+                                    <p class="text-xs text-slate-500">
+                                        Français / English
+                                    </p>
+                                </div>
+                            </div>
+                            <label class="relative">
+                                <input type="checkbox" id="lang-toggle" class="sr-only peer" />
+
+                                <div class="w-11 h-11 flex items-center justify-center
+           rounded-xl border border-[var(--border-ui)]
+           bg-[var(--bg-sidebar)]
+           text-lg cursor-pointer
+           transition
+           peer-checked:bg-emerald-500/10">
+
+                                    <span class="peer-checked:hidden">🇫🇷</span>
+
+                                    <span class="hidden peer-checked:block">🇺🇸</span>
+                                </div>
+                            </label>
+
+
+                        </div>
+                    </div>
+                </section>
+
             </div>
         </main>
 
@@ -268,6 +303,7 @@
         import { protectPage } from "/js/utils/guards.js";
         protectPage(["teacher"]);
     </script>
+    <script type="module" src="/js/lang.js"></script>
 </body>
 
 </html>
