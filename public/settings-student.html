@@ -221,7 +221,7 @@
                 <span class="material-symbols-outlined">settings</span>
                 <span class="font-semibold" data-i18n="nav_settings">Paramètres</span>
             </a>
-            <button id="mobileLogoutBtn"
+            <button id="logoutBtnMobile"
                 class="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 mt-4">
                 <span class="material-symbols-outlined">logout</span>
                 <span class="font-semibold" data-i18n="nav_logout">Se déconnecter</span>
@@ -482,16 +482,7 @@
                 });
             }
 
-            // Gestion de la déconnexion
-            if (logoutBtn) {
-                logoutBtn.addEventListener('click', function () {
-                    if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
-                        localStorage.removeItem('userToken');
-                        window.location.href = '../index.html';
-                    }
-                });
-            }
-
+           
             // Bouton sauvegarder
             if (saveBtn) {
                 saveBtn.addEventListener('click', function () {

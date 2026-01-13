@@ -182,7 +182,7 @@
                 <span class="material-icons-round">settings</span>
                 <span data-i18n="id_nav_settings" class="font-semibold">Paramètres</span>
             </a>
-            <button id="mobileLogoutBtn" class="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400">
+            <button id="logoutBtnMobile" class="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400">
                 <span class="material-icons-round">logout</span>
                 <span data-i18n="id_nav_logout" class="font-semibold">Se déconnecter</span>
             </button>
@@ -451,25 +451,7 @@
                 link.addEventListener('click', closeMobileMenu);
             });
             
-            // Gestion de la déconnexion
-            if (logoutBtn) {
-                logoutBtn.addEventListener('click', function() {
-                    if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
-                        localStorage.removeItem('userToken');
-                        window.location.href = '../index.html';
-                    }
-                });
-            }
-            
-            // Gestion de la déconnexion mobile
-            if (mobileLogoutBtn) {
-                mobileLogoutBtn.addEventListener('click', function() {
-                    if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
-                        localStorage.removeItem('userToken');
-                        window.location.href = '../index.html';
-                    }
-                });
-            }
+           
             
             // Gestion du redimensionnement
             window.addEventListener('resize', function() {
