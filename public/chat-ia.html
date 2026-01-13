@@ -133,6 +133,7 @@
 
     .lang-btn:hover {
       background: var(--accent-cream);
+      transform: translateY(0);
     }
 
     .lang-btn.active {
@@ -153,12 +154,12 @@
   <div class="flex justify-end mb-6">
     <div class="lang-switcher">
       <button class="lang-btn active" id="btnFr" onclick="changeLanguage('fr')">
-        <span></span>
-        <span data-lang-label="fr">Français</span>
+        <span>🇫🇷</span>
+        <span>Français</span>
       </button>
       <button class="lang-btn" id="btnEn" onclick="changeLanguage('en')">
-        <span></span>
-        <span data-lang-label="en">English</span>
+        <span>🇬🇧</span>
+        <span>English</span>
       </button>
     </div>
   </div>
@@ -171,7 +172,6 @@
     <p class="text-sm text-[var(--primary)]" data-translate="subtitle">Votre assistant d'apprentissage personnalisé</p>
   </div>
 
- 
   <div id="chatBox" class="mb-6">
     <div class="flex items-center justify-center h-full text-gray-500">
       <div class="text-center">
@@ -181,7 +181,6 @@
     </div>
   </div>
 
- 
   <div class="bg-white rounded-3xl shadow-xl border-2 border-[var(--accent-peach)] p-6">
     <div class="flex gap-4 mb-6">
       
@@ -191,11 +190,11 @@
           <span data-translate="categoryLabel">Catégorie :</span>
         </label>
         <select id="category" class="w-full px-4 py-3 bg-[var(--accent-cream)] border-2 border-[var(--primary-soft)] rounded-2xl text-[var(--text-dark)] font-medium cursor-pointer">
-          <option value="math"><span data-translate="math"> Mathématiques</span></option>
-          <option value="physics"><span data-translate="physics"> Physique</span></option>
-          <option value="svt"><span data-translate="svt"> SVT</span></option>
-          <option value="literature"><span data-translate="literature"> Littérature Camerounaise</span></option>
-          <option value="it"><span data-translate="it"> Informatique</span></option>
+          <option value="math" data-translate-option="math">Mathématiques</option>
+          <option value="physics" data-translate-option="physics">Physique</option>
+          <option value="svt" data-translate-option="svt">SVT</option>
+          <option value="literature" data-translate-option="literature">Littérature Camerounaise</option>
+          <option value="it" data-translate-option="it">Informatique</option>
         </select>
       </div>
 
@@ -206,13 +205,12 @@
           <span data-translate="languageLabel">Langue :</span>
         </label>
         <select id="language" class="w-full px-4 py-3 bg-[var(--accent-cream)] border-2 border-[var(--primary-soft)] rounded-2xl text-[var(--text-dark)] font-medium cursor-pointer">
-          <option value="fr"><span data-translate="french">Français</span></option>
-          <option value="en"><span data-translate="english">English</span></option>
+          <option value="fr" data-translate-option="french">🇫🇷 Français</option>
+          <option value="en" data-translate-option="english">🇬🇧 English</option>
         </select>
       </div>
     </div>
 
-    
     <div class="mb-4">
       <label class="block text-sm font-semibold text-[var(--text-dark)] mb-2 flex items-center gap-2">
         <span class="material-symbols-outlined text-[var(--primary)] text-lg">edit_note</span>
@@ -226,7 +224,6 @@
       ></textarea>
     </div>
 
-    
     <button 
       id="sendBtn"
       class="w-full bg-gradient-to-r from-[var(--primary)] to-[#C88A6E] text-white font-bold py-4 rounded-2xl shadow-lg flex items-center justify-center gap-2 hover:shadow-xl"
@@ -236,7 +233,6 @@
     </button>
   </div>
 
-  
   <div class="mt-6 text-center">
     <p class="text-xs text-gray-400 flex items-center justify-center gap-2">
       <span class="material-symbols-outlined text-sm">info</span>
@@ -254,17 +250,17 @@
       welcomeMsg: "Commencez une conversation dans le cadre ci-joint...",
       categoryLabel: "Catégorie :",
       languageLabel: "Langue :",
-      math: " Mathématiques",
-      physics: " Physique",
-      svt: " SVT",
-      literature: " Littérature Camerounaise",
-      it: " Informatique",
-      french: "Français",
-      english: "English",
+      math: "Mathématiques",
+      physics: "Physique",
+      svt: "SVT",
+      literature: "Littérature Camerounaise",
+      it: "Informatique",
+      french: "🇫🇷 Français",
+      english: "🇬🇧 English",
       questionLabel: "Votre question :",
       questionPlaceholder: "Posez votre question ici...",
       sendBtn: "Envoyer",
-      footer: "Votre compagnon DeepSeek IA pour vous aider dans vos études."
+      footer: "Votre compagnon DeepSeek AI pour vous aider dans vos études."
     },
     en: {
       title: "Educational AI Chat",
@@ -272,13 +268,13 @@
       welcomeMsg: "Start a conversation in the frame below...",
       categoryLabel: "Category:",
       languageLabel: "Language:",
-      math: " Mathematics",
-      physics: " Physics",
-      svt: " Life Sciences",
-      literature: " Cameroonian Literature",
-      it: " Computer Science",
-      french: "French",
-      english: "English",
+      math: "Mathematics",
+      physics: "Physics",
+      svt: "Life Sciences",
+      literature: "Cameroonian Literature",
+      it: "Computer Science",
+      french: "🇫🇷 French",
+      english: "🇬🇧 English",
       questionLabel: "Your question:",
       questionPlaceholder: "Ask your question here...",
       sendBtn: "Send",
@@ -300,17 +296,13 @@
       }
     });
 
-    // Mettre à jour les options du select
-    const categorySelect = document.getElementById('category');
-    categorySelect.options[0].text = translations[lang].math;
-    categorySelect.options[1].text = translations[lang].physics;
-    categorySelect.options[2].text = translations[lang].svt;
-    categorySelect.options[3].text = translations[lang].literature;
-    categorySelect.options[4].text = translations[lang].it;
-
-    const languageSelect = document.getElementById('language');
-    languageSelect.options[0].text = translations[lang].french;
-    languageSelect.options[1].text = translations[lang].english;
+    // Mettre à jour les options des selects
+    document.querySelectorAll('[data-translate-option]').forEach(option => {
+      const key = option.getAttribute('data-translate-option');
+      if (translations[lang][key]) {
+        option.textContent = translations[lang][key];
+      }
+    });
     
     // Mettre à jour le placeholder
     const promptInput = document.getElementById('prompt');
