@@ -157,8 +157,15 @@
                                 class="text-3xl md:text-5xl font-bold leading-tight text-slate-900 dark:text-white">
                             </h3>
                             <div class="w-20 h-1.5 bg-[var(--p-accent-orange)] rounded-full my-6"></div>
-                            <p class="text-slate-600 dark:text-slate-400 max-w-md text-sm font-medium">Spécialisation en
-                                Algèbre linéaire et Analyse complexe.</p>
+                            <a href="matiere-tuteur.html" class="inline-flex items-center gap-1.5
+          text-slate-600 dark:text-slate-400
+          text-sm font-medium">
+                                <span>Voir Description</span>
+                                <span class="material-symbols-outlined text-base leading-none">
+                                    arrow_forward
+                                </span>
+                            </a>
+
                         </div>
                         <div class="z-10 mt-12">
                             <div
@@ -245,22 +252,8 @@
             }
         });
     </script>
-
-    <script type="module">
-        import { auth, db } from "/js/auth/firebase-config.js";
-        import { doc, getDoc } from
-            "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-        auth.onAuthStateChanged(async (user) => {
-            if (!user) return;
-
-            const snap = await getDoc(doc(db, "teachers", user.uid));
-            if (!snap.exists()) return;
-
-            document.querySelectorAll("#teacher-name")
-                .forEach(el => el.textContent = snap.data().fullName);
-        });
-    </script>
+<script type="module" src="/js/lang.js"></script>
+   <script type="module" src="/js/utils/nom-tuteur.js"></script>
     <script type="module" src="/js/auth/logout.js"></script>
 </body>
 
