@@ -267,7 +267,7 @@
                 </div>
             </div>
         </main>
-        <nav class="lg:hidden fixed bottom-4 inset-x-4
+        <nav id="mobile-nav" class="lg:hidden fixed bottom-4 inset-x-4
          bg-[var(--bg-sidebar)]/95
          backdrop-blur-md
          h-16 rounded-2xl shadow-2xl
@@ -305,38 +305,50 @@
     <script type="module" src="/js/peer/ia-chat.js"></script>
     <script type="module" src="/js/utils/conversation-active.js"></script>
     <script>document.querySelectorAll("[data-conversation-id]").forEach(item => {
-            item.addEventListener("click", () => {
+  item.addEventListener("click", () => {
 
-                if (window.innerWidth < 768) {
-                    document.getElementById("conversation-list")?.classList.add("hidden");
-                    document.getElementById("chat-panel")?.classList.remove("hidden");
-                    document.getElementById("chat-panel")?.classList.add("flex");
-                }
+    if (window.innerWidth < 768) {
+      document.getElementById("conversation-list")?.classList.add("hidden");
+      document.getElementById("chat-panel")?.classList.remove("hidden");
+      document.getElementById("chat-panel")?.classList.add("flex");
 
-                document.querySelectorAll("[data-conversation-id]")
-                    .forEach(i => i.classList.remove("active"));
+      // cacher le menu mobile
+      document.getElementById("mobile-nav")?.classList.add("hidden");
+    }
 
-                item.classList.add("active");
-            });
-        });
-        document.getElementById("back-to-list")?.addEventListener("click", () => {
-            document.getElementById("chat-panel")?.classList.add("hidden");
-            document.getElementById("conversation-list")?.classList.remove("hidden");
-        });
-        function resetLayoutOnDesktop() {
-            if (window.innerWidth >= 768) {
-                const list = document.getElementById("conversation-list");
-                const chat = document.getElementById("chat-panel");
+    document.querySelectorAll("[data-conversation-id]")
+      .forEach(i => i.classList.remove("active"));
 
-                if (list) list.classList.remove("hidden");
-                if (chat) {
-                    chat.classList.remove("hidden");
-                    chat.classList.add("flex");
-                }
-            }
-        }
-        window.addEventListener("resize", resetLayoutOnDesktop);
-        resetLayoutOnDesktop();
+    item.classList.add("active");
+  });
+});
+
+document.getElementById("back-to-list")?.addEventListener("click", () => {
+  document.getElementById("chat-panel")?.classList.add("hidden");
+  document.getElementById("conversation-list")?.classList.remove("hidden");
+
+  // réafficher le menu mobile
+  document.getElementById("mobile-nav")?.classList.remove("hidden");
+});
+
+function resetLayoutOnDesktop() {
+  if (window.innerWidth >= 768) {
+    document.getElementById("conversation-list")?.classList.remove("hidden");
+
+    const chat = document.getElementById("chat-panel");
+    if (chat) {
+      chat.classList.remove("hidden");
+      chat.classList.add("flex");
+    }
+
+    
+    document.getElementById("mobile-nav")?.classList.remove("hidden");
+  }
+}
+
+window.addEventListener("resize", resetLayoutOnDesktop);
+resetLayoutOnDesktop();
+
 
     </script>
     <script type="module" src="/js/utils/nom-tuteur.js"></script>
