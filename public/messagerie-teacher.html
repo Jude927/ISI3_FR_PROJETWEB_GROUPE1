@@ -21,6 +21,7 @@
             --card-bg: #FFFFFF;
             --chat-received: #F1F5F9;
             --chat-sent: #FFE5D9;
+            --discussions-bg: #FAF7F4;
         }
 
         .dark {
@@ -30,6 +31,7 @@
             --card-bg: #0F172A;
             --chat-received: #1E293B;
             --chat-sent: #2D271B;
+            --discussions-bg: #0B1224;
         }
         /* BULLES */
 .chat-bubble-sent {
@@ -86,7 +88,7 @@
         }
 
         /* Suppression des bordures sur les cartes si besoin, mais conservation du style premium */
-        .premium-card { @apply rounded-[2.5rem] transition-all duration-300 bg-[var(--card-bg)]; border: none !important; }
+        .premium-card { @apply rounded-[2.5rem] transition-all duration-300 bg-[var(--card-bg)]; border: none !important; background: var(--discussions-bg); }
 
         .nav-item { @apply flex items-center gap-3 px-5 py-3 rounded-[1.5rem] transition-all duration-300 w-full text-slate-500; }
         .nav-item.active { @apply bg-[var(--p-accent-orange)] text-white font-bold shadow-lg shadow-orange-900/10; }
@@ -162,7 +164,8 @@
             <div class="flex-1 flex gap-6 min-h-0 mb-6">
                 <div id="conversation-list" class="w-full md:w-80 flex flex-col gap-4">
 
-                    <div class="premium-card flex-1 flex flex-col p-4 overflow-hidden shadow-sm">
+                  <div class="premium-card discussions-card flex-1 flex flex-col p-4 overflow-hidden shadow-sm">
+
                         <h3 class="font-bold text-sm mb-4 px-2">Discussions</h3>
                         <div class="flex-1 overflow-y-auto space-y-2 pr-2">
                             <div class="flex items-center gap-4 p-4 rounded-3xl cursor-pointer transition-all bg-[var(--chat-sent)] dark:bg-[var(--chat-sent)] active"
@@ -208,10 +211,11 @@
                     <div class="premium-card flex-1 flex flex-col overflow-hidden shadow-sm">
                         <div class="p-5 border-b border-[var(--border-ui)] flex items-center justify-between">
                             <div class="flex items-center gap-4">
-                                <img class="w-10 h-10 rounded-xl object-cover"
-                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCm_zdfySOaD2X9HKcw9u_JstuwVMUADvRG-5eRya4gZtJ9-t9DBn1Ul8cMo9DJpr3-Tn_Lq4S7k8XH2qVCIHvn9JRWQOZhz1a9dq1ArlcOSPGonVZQDKAXHW3usOf6ANLU_ql3IWHiVdwBXbAuzFSLulmH4s7EUS-Ee_PmpAJULKtyZB4bH20GhdpF0CUJ8hK7reqYGfuJOf_oW2pyRrsVjgeAqUbGm3E-ktYFKQGwbDYXAVlo-SUvirFo4u2EdWmxVpFbOMxcaFi5" />
+                                <img alt="Profile"
+                            class="profile-avatar w-10 h-10 rounded-xl object-cover cursor-pointer"
+                            src="/assets/avatars/avatardef.png" />
                                 <div>
-                                    <h4 class="font-bold text-sm">Thomas M.</h4>
+                                    <h4 class="font-bold text-sm" id="teacher-name"></h4>
                                     <p
                                         class="text-[10px] text-emerald-500 font-bold uppercase tracking-widest flex items-center gap-1">
                                         <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> En
@@ -240,8 +244,12 @@
                                 <div class="flex items-center gap-1 pl-1">
                                     <button class="p-2 text-slate-400" id="attach-btn"><span
                                             class="material-symbols-outlined">attach_file</span></button>
-                                    <button class="p-2 text-slate-400"><span
-                                            class="material-symbols-outlined">table_chart</span></button>
+                                   <button
+  class="p-2 text-slate-400"
+  onclick="window.location.href='whiteboard-teacher.html'">
+  <span class="material-symbols-outlined">table_chart</span>
+</button>
+
                                 </div>
                                 <input id="messageInput"
                                     class="flex-1 bg-transparent border-none text-xs outline-none focus:ring-0 placeholder:text-slate-400"
@@ -329,6 +337,9 @@
         resetLayoutOnDesktop();
 
     </script>
+    <script type="module" src="/js/utils/nom-tuteur.js"></script>
+    <script type="module" src="/js/lang.js"></script>
+
 </body>
 
 </html>
