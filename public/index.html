@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
 
     <script type="module">
-        import { auth } from "./js/auth/firebase-config.js";
+        import { auth } from "/js/auth/firebase-config.js";
         console.log("Firebase Auth OK", auth);
     </script>
 
@@ -106,11 +106,11 @@
                 </div>
                 <div class="hidden md:flex items-center space-x-4">
                     <a class="px-4 py-2 rounded-full text-sm font-bold text-white hover:bg-white/10 transition border border-white/30"
-                        href="public/login.html" data-i18n="login">
+                        href="login.html" data-i18n="login">
                         Connexion
                     </a>
                     <a class="bg-white text-primary px-5 py-2 rounded-full text-sm font-bold hover:bg-gray-100 transition shadow-lg"
-                        href="public/SingUp.html" data-i18n="signup">
+                        href="SingUp.html" data-i18n="signup">
                         Inscription
                     </a>
                 </div>
@@ -132,11 +132,11 @@
         <a href="#" class="block text-sm font-medium">À propos</a>
         <a href="#" class="block text-sm font-medium">Les créateurs</a>
 
-        <a href="public/login.html" class="block text-center border border-white/30 rounded-full py-2">
+        <a href="login.html" class="block text-center border border-white/30 rounded-full py-2">
             Connexion
         </a>
 
-        <a href="public/SingUp.html" class="block text-center bg-white text-primary rounded-full py-2 font-bold">
+        <a href="SingUp.html" class="block text-center bg-white text-primary rounded-full py-2 font-bold">
             Inscription
         </a>
     </div>
@@ -159,7 +159,7 @@
                 </p>
                 <div class="mt-8 flex justify-center md:justify-start gap-4">
                     <a class="px-8 py-4 border border-transparent text-lg font-bold rounded-full text-primary bg-white hover:bg-gray-50 md:text-xl shadow-xl hover:shadow-2xl transition transform hover:-translate-y-1"
-                        href="public/SingUp.html" data-i18n="start">
+                        href="SingUp.html" data-i18n="start">
                         Commencer à apprendre
                     </a>
                 </div>
@@ -349,7 +349,7 @@
             </p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
                 <a class="px-8 py-4 bg-primary text-white rounded-full font-bold text-lg shadow-lg hover:bg-orange-700 transition transform hover:-translate-y-1"
-                    href="public/SingUp.html" data-i18n="create_account">
+                    href="SingUp.html" data-i18n="create_account">
                     Créer un compte gratuit
                 </a>
 
@@ -388,7 +388,7 @@
             </div>
             <div
                 class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-gray-500 text-sm">
-                <p data-i18n="all_right">© 2025 Djangou. Tous droits réservés.</p>
+                <p data-i18n="all_right">© 2026 Djangou. Tous droits réservés.</p>
                 <div class="flex space-x-6 mt-4 md:mt-0">
                     <a class="hover:text-white transition" href="#" data-i18n="confidentialité">Confidentialité</a>
                     <a class="hover:text-white transition" href="#">Conditions</a>
@@ -422,9 +422,9 @@
             <span class="ml-1 font-bold">FR</span>
         </button>
     </div>
-    <script src="./js/utils/dark-white.js"></script>
-    <script type="module" src="./js/auth/logout.js"></script>
-    <script type="module" src="js/lang.js"></script>
+    <script src="/js/utils/dark-white.js"></script>
+    <script type="module" src="/js/auth/logout.js"></script>
+    <script type="module" src="/js/lang.js"></script>
     <script>
         const burgerBtn = document.getElementById("burger-btn");
         const mobileMenu = document.getElementById("mobile-menu");
