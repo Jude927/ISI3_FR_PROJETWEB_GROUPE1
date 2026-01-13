@@ -25,6 +25,18 @@ const translations = {
         id_teachers_title: "Tuteurs disponibles pour cette matière",
         id_no_selection_text: "Sélectionnez une matière pour voir les tuteurs",
         id_load_more: "Charger plus de tuteurs",
+        transform: "Prêt à transformer votre apprentissage ?",
+        join: "Rejoignez des milliers d'étudiants sur Djangou et commencez à atteindre vos objectifs dès aujourd'hui.",
+        create_account: "Créer un compte gratuit",
+        educative_plat: "La plateforme éducative qui s'adapte à vous. Apprenez mieux, plus vite, et avec le sourire.",
+        resources: "Ressources",
+        help: "Aide &amp; Support",
+        community: "Communauté",
+        all_right: "© 2025 Djangou. Tous droits réservés.",
+        confidentialité: "Confidentialité",
+        explorer: "Explorer ce que les autres étudiants apprennent en ce moment.",
+        
+
 
 
         //span
@@ -55,6 +67,9 @@ const translations = {
         instant: "Posez vos questions instantanément et collaborez avec d'autres étudiants.",
         temp_reel: "Chat en temps réel",
         ia: "Notre IA vous suggère des exercices et vous aide à réviser 24h/24 et 7j/7.",
+        experience: "Une expérience d'apprentissage complète",
+        every: "Tout ce dont vous avez besoin pour réussir vos études réuni en un seul endroit agréable.",
+        popular: "Cours populaires",
 
         //p
         p_langue: "Changement de langue",
@@ -213,6 +228,16 @@ const translations = {
         id_teachers_title: "Available tutors for this subject",
         id_no_selection_text: "Select a subject to see tutors",
         id_load_more: "Load more tutors",
+        transform: "Ready to transform your learning?",
+        join: "Join thousands of students on Djangou and start achieving your goals today.",
+        create_account: "Create a free account",
+        educative_plat: "The educational platform that adapts to you. Learn better, faster, and with a smile.",
+        resources: "Resources",
+        help: "Help & Support",
+        community: "Community",
+        all_right: "© 2025 Djangou. All rights reserved.",
+        confidentialité: "Privacy",
+        explorer: "Explore what other students are learning right now.",
 
         security: "Security",
         pwd: "Change Password",
@@ -234,6 +259,9 @@ const translations = {
         temp_reel: "Real-Time Chat",
         instant: "Ask your questions instantly and collaborate with other students.",
         ia: "Our AI suggests exercises and helps you review 24/7.",
+        experience: "A Comprehensive Learning Experience",
+        every: "Everything you need to succeed in your studies gathered in one pleasant place.",
+        popular: "Popular Subjects",
 
 
         //p
