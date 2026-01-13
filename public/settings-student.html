@@ -60,7 +60,30 @@
             border-radius: 1.25rem;
         }
 
-        
+        /* Animation pour le menu mobile */
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        /* Animation du bouton de langue */
+        @keyframes langPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .lang-btn:hover {
+            animation: langPulse 0.3s ease-in-out;
+        }
+
+        /* Transition smooth */
+        .transition-smooth {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
     </style>
     <script>
         tailwind.config = {
@@ -106,6 +129,8 @@
 
 <body class="antialiased h-screen duration-300 overflow-hidden font-body flex">
 
+    <div id="sidebarOverlay" class="hidden fixed inset-0 bg-black/50 z-40 md:hidden"></div>
+
     <div
         class="fixed -top-64 -right-64 w-[800px] h-[800px] bg-gray-50/80 dark:bg-gray-800/40 rounded-full border-2 border-gray-200/70 dark:border-gray-700/50 pointer-events-none -z-10">
     </div>
@@ -115,7 +140,7 @@
     </div>
 
     <aside id="sidebar"
-        class="hidden md:flex flex-col w-24 lg:w-64 h-full bg-card-light dark:bg-card-dark border-r border-gray-100 dark:border-gray-800 transition-all duration-300 p-4 ">
+        class="hidden md:flex flex-col w-24 lg:w-64 h-full bg-card-light dark:bg-card-dark border-r border-gray-100 dark:border-gray-800 transition-all duration-300 p-4 fixed md:relative z-50 md:z-auto">
         <div class="flex items-center justify-center lg:justify-start mb-10 px-2">
             <button id="logoToggle"
                 class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xl shadow-md">
@@ -144,11 +169,6 @@
                     <span class="material-symbols-outlined text-2xl">person</span>
                     <span class="hidden lg:block ml-4 font-semibold" data-i18n="nav_profile">Profil</span>
 
-                    <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
-                        href="profil-student.html">
-                        <span class="material-symbols-outlined text-2xl">person</span>
-                        <span class="hidden lg:block ml-4 font-semibold" data-i18n="nav_profile">Profil</span>
-                    </a>
         </nav>
 
         <div class="mt-auto flex flex-col gap-2">
@@ -165,9 +185,59 @@
         </div>
     </aside>
 
+    <!-- Sidebar mobile -->
+    <aside id="mobileSidebar" class="md:hidden fixed top-0 left-0 h-full w-64 bg-card-light dark:bg-card-dark border-r border-gray-100 dark:border-gray-800 z-50 transform -translate-x-full transition-transform duration-300">
+        <div class="p-6 border-b border-gray-100 dark:border-gray-800">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xl">
+                    D
+                </div>
+                <span class="text-2xl font-bold text-primary">Djangou</span>
+            </div>
+        </div>
+        <nav class="p-4 flex flex-col gap-2">
+            <a class="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400"
+                href="dashboard-student.html">
+                <span class="material-symbols-outlined">home</span>
+                <span class="font-semibold" data-i18n="nav_home">Accueil</span>
+            </a>
+            <a class="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400"
+                href="matiere-student.html">
+                <span class="material-symbols-outlined">school</span>
+                <span class="font-semibold" data-i18n="nav_subjects">Matières</span>
+            </a>
+            <a class="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400"
+                href="chat-student.html">
+                <span class="material-symbols-outlined">chat_bubble</span>
+                <span class="font-semibold" data-i18n="nav_messages">Messages</span>
+            </a>
+            <a class="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400"
+                href="profil-student.html">
+                <span class="material-symbols-outlined">person</span>
+                <span class="font-semibold" data-i18n="nav_profile">Profil</span>
+            </a>
+            <a class="flex items-center gap-4 p-3 rounded-xl bg-primary/10 text-primary dark:bg-primary/20 transition-colors mt-4"
+                href="#">
+                <span class="material-symbols-outlined">settings</span>
+                <span class="font-semibold" data-i18n="nav_settings">Paramètres</span>
+            </a>
+            <button id="mobileLogoutBtn"
+                class="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 mt-4">
+                <span class="material-symbols-outlined">logout</span>
+                <span class="font-semibold" data-i18n="nav_logout">Se déconnecter</span>
+            </button>
+        </nav>
+    </aside>
+
     <main class="flex-1 h-full overflow-y-auto p-8 lg:px-16">
         <header class="flex justify-between items-center mb-12">
-            <div>
+            <div class="md:hidden flex items-center gap-3">
+                <button id="mobileMenuBtn" class="text-gray-600 dark:text-gray-300 p-1">
+                    <span class="material-symbols-outlined text-3xl">menu</span>
+                </button>
+                <span class="text-xl font-bold text-primary">Djangou</span>
+            </div>
+            <div class="hidden md:block">
                 <h1 class="text-3xl font-bold text-text-main" data-i18n="nav_settings">Paramètres</h1>
                 <p class="text-text-muted text-sm mt-1">Personnalisez votre expérience Djangou</p>
             </div>
@@ -177,9 +247,11 @@
                     <p id="userName" class="text-sm font-bold text-text-main loading-pulse">Chargement...</p>
                     <p class="text-xs text-text-muted" data-i18n="span_student">Étudiant</p>
                 </div>
-                <img id="userAvatar" alt="Avatar"
-                    class="w-12 h-12 rounded-2xl object-cover border-2 border-white dark:border-gray-700 shadow-sm ring-1 ring-primary/20 loading-pulse"
-                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f3f4f6'/%3E%3C/svg%3E" />
+                <a href="profil-student.html">
+                    <img id="userAvatar" alt="Avatar"
+                        class="w-12 h-12 rounded-2xl object-cover border-2 border-white dark:border-gray-700 shadow-sm ring-1 ring-primary/20 loading-pulse"
+                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f3f4f6'/%3E%3C/svg%3E" />
+                </a>
             </div>
         </header>
 
@@ -328,7 +400,6 @@
         </div>
     </main>
 
-
     <script src="../js/utils/dark-white.js"></script>
     <script type="module" src="../js/auth/logout.js"></script>
     <script type="module" src="../js/lang.js"></script>
@@ -447,7 +518,7 @@
 
         import { db } from "../js/auth/firebase-config.js";
 
-        
+        const auth = getAuth();
         let currentUser = null;
 
         function showToast(message, type = "success") {
@@ -570,6 +641,71 @@
             }
         };
     </script>
+    
+    <script>
+        // Gestion du menu burger mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileSidebar = document.getElementById('mobileSidebar');
+            const sidebarOverlay = document.getElementById('sidebarOverlay');
+            const mobileLogoutBtn = document.getElementById('mobileLogoutBtn');
+            
+            function openMobileMenu() {
+                mobileSidebar.classList.remove('-translate-x-full');
+                sidebarOverlay.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            function closeMobileMenu() {
+                mobileSidebar.classList.add('-translate-x-full');
+                sidebarOverlay.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+            
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', openMobileMenu);
+            }
+            
+            if (sidebarOverlay) {
+                sidebarOverlay.addEventListener('click', closeMobileMenu);
+            }
+            
+            // Fermer le menu en cliquant sur un lien
+            mobileSidebar.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', closeMobileMenu);
+            });
+            
+            // Gestion de la déconnexion mobile
+            if (mobileLogoutBtn) {
+                mobileLogoutBtn.addEventListener('click', function() {
+                    if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
+                        localStorage.removeItem('userToken');
+                        window.location.href = '../index.html';
+                    }
+                });
+            }
+            
+            // Gestion du redimensionnement
+            window.addEventListener('resize', function() {
+                if (window.innerWidth >= 768) {
+                    closeMobileMenu();
+                }
+            });
+            
+            // Ajouter l'animation sur les boutons de langue
+            const langButtons = document.querySelectorAll('.lang-btn');
+            langButtons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.animation = 'langPulse 0.3s ease-in-out';
+                });
+                
+                button.addEventListener('animationend', function() {
+                    this.style.animation = '';
+                });
+            });
+        });
+    </script>
+    
     <script type="module" src="../js/utils/dark-white.js"></script>
     <script type="module" src="../js/lang.js"></script>
     <script type="module" src="../js/auth/logout.js"></script>

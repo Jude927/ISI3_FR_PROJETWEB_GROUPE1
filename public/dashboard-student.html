@@ -266,9 +266,11 @@
                         <p id="userName" class="text-sm font-bold text-secondary dark:text-white loading-pulse">Chargement...</p>
                         <p id="userRole" data-i18n="id_user_status" class="text-xs text-gray-500 dark:text-gray-400 loading-pulse">Chargement...</p>
                     </div>
+                    <a href="profil-student.html">
                     <img id="userAvatar" alt="Avatar Utilisateur"
                         class="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover border-2 border-primary shadow-sm loading-pulse"
                         src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f3f4f6'/%3E%3C/svg%3E" />
+                    </a>
                 </div>
             </div>
         </header>
@@ -330,31 +332,14 @@
                 </div>
 
                 
-                <div class="mt-6 md:mt-8">
-                    <div class="flex justify-between items-center mb-3 sm:mb-4">
-                        <h3 data-i18n="id_section_favorites" class="text-lg sm:text-xl font-bold text-secondary dark:text-white">Favoris</h3>
-                        <a id="viewAllFavorites" class="text-xs sm:text-sm font-semibold text-primary hover:underline cursor-pointer" href="favorites.html" data-i18n="id_section_see_all">Voir tout</a>
-                    </div>
-                    <div id="favoritesContainer" class="bg-white dark:bg-card-dark rounded-xl md:rounded-2xl p-4 sm:p-6 shadow-sm border border-gray-100 dark:border-gray-700">
-                        <!-- Les favoris seront chargés dynamiquement ici -->
-                        <div class="text-center py-8">
-                            <div class="inline-block p-4 rounded-full bg-gray-100 dark:bg-gray-800 mb-4">
-                                <span class="material-icons-round text-3xl text-gray-400 animate-pulse">star_outline</span>
-                            </div>
-                            <p class="text-gray-500 dark:text-gray-400">Chargement des favoris...</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
 
             <div class="space-y-6 md:space-y-8">
                
                 <div>
                     <div class="flex justify-between items-center mb-3 sm:mb-4">
-                        <h3 data-i18n="id_section_instructors" class="text-lg sm:text-xl font-bold text-secondary dark:text-white">Instructeurs</h3>
-                        <button id="addInstructorBtn" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-gray-500 hover:text-primary transition-colors">
-                            <span data-i18n="id_add_button" class="material-icons-round text-sm">add</span>
-                        </button>
+                        <h3 data-i18n="id_section_instructors" class="text-lg sm:text-xl font-bold text-secondary dark:text-white">Conversation récente</h3>
+                                            <a id="viewAllSubjects" class="text-xs sm:text-sm font-semibold text-primary hover:underline cursor-pointer" href="chat-student.html" data-i18n="id_section_see_all">Voir tout</a>
                     </div>
                     <div id="instructorsContainer" class="bg-card-light dark:bg-card-dark rounded-xl md:rounded-2xl p-3 sm:p-4 shadow-sm border border-gray-100 dark:border-gray-700 flex flex-col gap-3 sm:gap-4">
                         <!-- Les instructeurs seront chargés dynamiquement ici -->

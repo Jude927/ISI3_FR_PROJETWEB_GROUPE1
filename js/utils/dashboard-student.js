@@ -15,7 +15,6 @@ const userRole = document.getElementById("userRole");
 const userAvatar = document.getElementById("userAvatar");
 const welcomeText = document.getElementById("welcomeText");
 const subjectsContainer = document.getElementById("subjectsContainer");
-const favoritesContainer = document.getElementById("favoritesContainer");
 const instructorsContainer = document.getElementById("instructorsContainer");
 
 /*************************************
@@ -38,9 +37,8 @@ onAuthStateChanged(auth, async (user) => {
     // Charger les informations de l'étudiant
     await chargerInfosEtudiant(userId);
     
-    // Charger les matières, favoris et instructeurs
+    // Charger les matières et instructeurs
     await chargerMatieres(userId);
-    await chargerFavoris(userId);
     await chargerInstructeurs(userId);
     
     // Mettre à jour les notifications
@@ -101,10 +99,10 @@ async function chargerMatieres(userId) {
         const matieresExemple = [
             {
                 id: "1",
-                name: "Sciences",
-                icon: "science",
+                name: "langues",
+                icon: "translate",
                 color: "pastel-green",
-                description: "Physique, chimie, biologie",
+                description: "Apprentissage des langues",
                 progress: 75
             },
             {
@@ -125,10 +123,10 @@ async function chargerMatieres(userId) {
             },
             {
                 id: "4",
-                name: "Dessin",
-                icon: "brush",
+                name: "Physique/Chimie",
+                icon: "science",
                 color: "pastel-purple",
-                description: "Art, design, créativité",
+                description: "Physique, chimie, biologie",
                 progress: 45
             }
         ];
@@ -155,69 +153,7 @@ async function chargerMatieres(userId) {
     }
 }
 
-/*************************************
- * CHARGER LES FAVORIS
- *************************************/
-async function chargerFavoris(userId) {
-    if (!favoritesContainer) return;
 
-    try {
-        // Ici, vous feriez un appel Firestore pour récupérer les vraies données
-        const favorisExemple = [
-            {
-                id: "1",
-                name: "Mathématiques",
-                tutor: "Onana Onana",
-                rating: 4.8,
-                status: "Online",
-                subject: "Mathématiques"
-            },
-            {
-                id: "2",
-                name: "Physiques",
-                tutor: "Ondoua",
-                rating: 4.2,
-                status: "Offline",
-                subject: "Sciences"
-            }
-        ];
-
-        // Vider le container de loading
-        favoritesContainer.innerHTML = '';
-        
-        if (favorisExemple.length === 0) {
-            favoritesContainer.innerHTML = `
-                <div class="text-center py-8">
-                    <div class="inline-block p-4 rounded-full bg-gray-100 dark:bg-gray-800 mb-4">
-                        <span class="material-icons-round text-3xl text-gray-400">star_outline</span>
-                    </div>
-                    <p class="text-gray-500 dark:text-gray-400">Aucun favori pour le moment</p>
-                </div>
-            `;
-            return;
-        }
-        
-        // Créer les cartes de favoris
-        favorisExemple.forEach((favori, index) => {
-            const favoriteCard = createFavoriteCard(favori);
-            if (index > 0) {
-                favoriteCard.classList.add('mt-3');
-            }
-            favoritesContainer.appendChild(favoriteCard);
-        });
-        
-    } catch (erreur) {
-        console.log("Erreur chargement favoris :", erreur);
-        favoritesContainer.innerHTML = `
-            <div class="text-center py-8">
-                <div class="inline-block p-4 rounded-full bg-red-100 dark:bg-red-900/20 mb-4">
-                    <span class="material-icons-round text-3xl text-red-500">error</span>
-                </div>
-                <p class="text-red-500 dark:text-red-400">Erreur lors du chargement des favoris</p>
-            </div>
-        `;
-    }
-}
 
 /*************************************
  * CHARGER LES INSTRUCTEURS
@@ -291,7 +227,7 @@ function createSubjectCard(matiere) {
     
     // Ajouter l'événement de clic
     card.addEventListener('click', function() {
-        window.location.href = `matiere-details.html?subject=${matiere.id}&name=${encodeURIComponent(matiere.name)}`;
+        window.location.href = `matiere-student.html?subject=${matiere.id}&name=${encodeURIComponent(matiere.name)}`;
     });
     
     return card;
@@ -400,16 +336,7 @@ function getColorClass(color) {
 /*************************************
  * BASCOULER UN FAVORI
  *************************************/
-async function toggleFavorite(favoriteId) {
-    try {
-        // Ici, vous feriez un appel Firestore pour ajouter/supprimer un favori
-        console.log(`Toggle favorite ${favoriteId}`);
-        // Mettre à jour l'interface
-        // await chargerFavoris(localStorage.getItem("userId"));
-    } catch (erreur) {
-        console.log("Erreur lors de la modification du favori:", erreur);
-    }
-}
+
 
 /*************************************
  * DÉMARRER UN CHAT AVEC UN INSTRUCTEUR
@@ -452,7 +379,6 @@ async function updateNotifications(userId) {
  *************************************/
 export { 
     chargerMatieres, 
-    chargerFavoris, 
     chargerInstructeurs,
     updateNotifications
 };

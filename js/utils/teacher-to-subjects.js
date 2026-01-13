@@ -196,10 +196,7 @@ function createTeacherCard(teacher) {
             Contacter
           </button>
           
-          <button class="profile-btn px-4 py-2 bg-gray-100 dark:bg-gray-800 text-secondary dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors flex items-center gap-2">
-            <span class="material-icons-round">visibility</span>
-            Profil
-          </button>
+        
         </div>
       </div>
     </div>
@@ -207,10 +204,8 @@ function createTeacherCard(teacher) {
   
   // Ajouter les écouteurs d'événements
   const contactBtn = card.querySelector('.contact-btn');
-  const profileBtn = card.querySelector('.profile-btn');
   
   contactBtn.addEventListener('click', () => contactTeacher(teacher));
-  profileBtn.addEventListener('click', () => viewTeacherProfile(teacher));
   
   return card;
 }
@@ -304,14 +299,6 @@ function contactTeacher(teacher) {
   window.location.href = `chat-student.html?teacher=${teacher.fullName}&email=${teacher.email}`;
 }
 
-/* ===============================
-   🔹 VOIR LE PROFIL D'UN ENSEIGNANT
-   =============================== */
-
-function viewTeacherProfile(teacher) {
-  // Ici vous pouvez ouvrir un modal ou rediriger vers une page de profil
-  alert(`Profil de ${teacher.fullName}\n\nEmail: ${teacher.email}\nExpérience: ${teacher.experience || 0} ans\nNote: ${teacher.rating ? teacher.rating.toFixed(1) : 'N/A'}\nDisponible: ${teacher.available ? 'Oui' : 'Non'}`);
-}
 
 /* ===============================
    🔹 EXPORT DES FONCTIONS
