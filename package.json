@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+     "build": "vite build"
   },
   "keywords": [],
   "author": "",
@@ -27,3 +28,4 @@
   },
   "homepage": "https://github.com/Jude927/ISI3_FR_PROJETWEB_GROUPE1#readme"
 }
+
