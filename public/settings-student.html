@@ -15,20 +15,52 @@
     <link href="../CSS/CssInterface.CSS" rel="stylesheet" />
 
     <style type="text/tailwindcss">
-
-
         body {
             font-family: 'Comfortaa', sans-serif;
             background-color: var(--background);
             color: var(--text-main);
-            
         }
 
         .active-language {
-    background-color: #D59D80;
-    color: white;
-}
-       
+            background-color: #D59D80;
+            color: white;
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .loading-pulse {
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .form-input {
+            @apply w-full border-none rounded-2xl px-5 py-3 text-sm transition-all outline-none;
+            background-color: var(--card-bg);
+            color: var(--text-main);
+        }
+
+        .dark .form-input {
+            background-color: rgba(255,255,255,0.05);
+        }
+
+        .glass-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-ui);
+            border-radius: 1.25rem;
+        }
+
+        
     </style>
     <script>
         tailwind.config = {
@@ -55,16 +87,20 @@
                 },
             },
         };
-        function toggleTheme(mode) {
-            const html = document.querySelector('html');
-            if (mode === 'dark') {
-                html.classList.add('dark');
-                html.classList.remove('light');
-            } else {
-                html.classList.add('light');
-                html.classList.remove('dark');
-            }
+
+         function toggleTheme(mode) {
+        const html = document.querySelector('html');
+        if (mode === 'dark') {
+            html.classList.add('dark');
+            html.classList.remove('light');
+            localStorage.setItem('color-theme', 'dark');
+        } else {
+            html.classList.add('light');
+            html.classList.remove('dark');
+            localStorage.setItem('color-theme', 'light');
         }
+    }
+
     </script>
 </head>
 
@@ -96,33 +132,31 @@
             <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
                 href="matiere-student.html">
                 <span class="material-symbols-outlined text-2xl">school</span>
-                <span class="hidden lg:block ml-4 font-semibold">Matières</span>
+                <span class="hidden lg:block ml-4 font-semibold" data-i18n="nav_subjects">Matières</span>
             </a>
             <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
                 href="chat-student.html">
                 <span class="material-symbols-outlined text-2xl">chat_bubble</span>
-                <span class="hidden lg:block ml-4 font-semibold">Messages</span>
-
-
-                <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
-                    href="profil-student.html">
-                    <span class="material-symbols-outlined text-2xl">person</span>
-                    <span class="hidden lg:block ml-4 font-semibold">Profil</span>
-                </a>
+                <span class="hidden lg:block ml-4 font-semibold" data-i18n="nav_messages">Messages</span>
+            </a>
+            <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
+                href="profil-student.html">
+                <span class="material-symbols-outlined text-2xl">person</span>
+                <span class="hidden lg:block ml-4 font-semibold" data-i18n="nav_profile">Profil</span>
+            </a>
         </nav>
 
         <div class="mt-auto flex flex-col gap-2">
             <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary transition-colors"
                 href="#">
                 <span class="material-symbols-outlined text-2xl">settings</span>
-                <span class="hidden lg:block ml-4 font-semibold">Paramètres</span>
+                <span class="hidden lg:block ml-4 font-semibold" data-i18n="nav_settings">Paramètres</span>
             </a>
-            <a id="logoutBtn"
-                class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
-                href="#">
+            <button id="logoutBtn"
+                class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors">
                 <span class="material-symbols-outlined text-2xl">logout</span>
-                <span class="hidden lg:block ml-5 font-semibold">Se déconnecter</span>
-            </a>
+                <span class="hidden lg:block ml-5 font-semibold" data-i18n="nav_logout">Se déconnecter</span>
+            </button>
         </div>
     </aside>
 
@@ -135,16 +169,17 @@
 
             <div class="flex items-center gap-4 pl-4 border-l border-[var(--border)]">
                 <div class="text-right hidden sm:block">
-                    <p class="text-sm font-bold text-text-main">Lisha Nana</p>
-                    <p class="text-xs text-text-muted">Étudiante</p>
+                    <p id="userName" class="text-sm font-bold text-text-main loading-pulse">Chargement...</p>
+                    <p class="text-xs text-text-muted" data-i18n="span_student">Étudiant</p>
                 </div>
-                <img alt="Avatar"
-                    class="w-12 h-12 rounded-2xl object-cover border-2 border-white dark:border-gray-700 shadow-sm ring-1 ring-primary/20"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-AbkTik24Q_rCpbwewky4ZNDDaZEgHurujCH9wklsbcw_6uItxbsjn7i2dkv_ZtfNMQRXqu_fAVPcAARqSCjNRvIg2a5rQgFMrEZVKZtRT5cUqAuYAXhx1AQI4xVSHOHQWJhurnwDHpju3BxI1Dp4asewISJXQri1p0VUBK8Z9wVjN5cXUzqmrZWgPwdGZACaZNl5uQic8_b3WrIsnA9wTsmSbxdJMsTUsrnvBgAfm-dGg5uO6SBhLEjQHHrZpTo18bxALyWoZn8" />
-            </div>
+                <img id="userAvatar" alt="Avatar"
+                    class="w-12 h-12 rounded-2xl object-cover border-2 border-white dark:border-gray-700 shadow-sm ring-1 ring-primary/20 loading-pulse"
+                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f3f4f6'/%3E%3C/svg%3E" />
             </div>
         </header>
+
         <div class="max-w-4xl space-y-6">
+
             <div class="glass-card p-6 rounded-2xl shadow-sm">
                 <div class="flex items-center justify-between mb-6">
                     <div class="flex items-center gap-4">
@@ -153,24 +188,27 @@
                             <span class="material-symbols-outlined">language</span>
                         </div>
                         <div>
-                            <h3 class="font-bold text-lg text-text-main">Changement de langue</h3>
-                            <p class="text-sm text-text-muted">Langue préférée pour l'interface</p>
+                            <h3 class="font-bold text-lg text-text-main" data-i18n="p_langue">Changement de langue</h3>
+                            <p class="text-sm text-text-muted" data-i18n="p_lang_sub">Langue préférée pour l'interface
+                            </p>
                         </div>
                     </div>
                 </div>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <button data-lang-btn="fr" onclick="setLanguage('fr')"
                         class="flex items-center gap-3 p-3 rounded-xl border border-[var(--border)] text-text-muted font-medium transition-all lang-btn">
-                        <span class="text-2xl">🇫🇷</span>
-                        <span>Français</span>
+                        <span class="text-2xl">Fr</span>
+                        <span data-i18n="span_french">Français</span>
                     </button>
                     <button data-lang-btn="en" onclick="setLanguage('en')"
                         class="flex items-center gap-3 p-3 rounded-xl border border-[var(--border)] text-text-muted font-medium transition-all lang-btn">
-                        <span class="text-2xl">🇬🇧</span>
-                        <span>English</span>
+                        <span class="text-2xl">En</span>
+                        <span data-i18n="span_english">English</span>
                     </button>
                 </div>
             </div>
+
+
             <div class="glass-card p-6 rounded-2xl shadow-sm">
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div class="flex items-center gap-4">
@@ -179,82 +217,356 @@
                             <span class="material-symbols-outlined">palette</span>
                         </div>
                         <div>
-                            <h3 class="font-bold text-lg text-text-main">Mode d'affichage</h3>
-                            <p class="text-sm text-text-muted">Alterner entre le thème clair et sombre</p>
+                            <h3 class="font-bold text-lg text-text-main" data-i18n="p_mode">Mode d'affichage</h3>
+                            <p class="text-sm text-text-muted" data-i18n="p_mode_sub">Alterner entre le thème clair et
+                                sombre</p>
                         </div>
                     </div>
                     <div
                         class="flex items-center gap-3 bg-background p-1.5 rounded-2xl border border-[var(--border)] self-start md:self-center">
-                        <button
-                            class="flex items-center gap-2 px-4 py-2 rounded-xl text-text-muted hover:text-primary dark:text-gray-400 dark:hover:text-primary transition-all light:bg-card light:shadow-sm light:text-primary light:font-bold [[class='light']_&amp;]:bg-white [[class='light']_&amp;]:shadow-sm [[class='light']_&amp;]:text-primary [[class='light']_&amp;]:font-bold"
-                            onclick="toggleTheme('light')">
+                        <button onclick="toggleTheme('light')"
+                            class="flex items-center gap-2 px-4 py-2 rounded-xl text-text-muted hover:text-primary dark:text-gray-400 dark:hover:text-primary transition-all theme-btn active">
                             <span class="material-symbols-outlined text-xl">light_mode</span>
-                            <span>Clair</span>
+                            <span data-i18n="span_clear">Clair</span>
                         </button>
-                        <button
-                            class="flex items-center gap-2 px-4 py-2 rounded-xl text-text-muted hover:text-primary dark:text-gray-400 dark:hover:text-primary transition-all dark:bg-gray-700 dark:shadow-sm dark:text-primary dark:font-bold [[class='dark']_&amp;]:bg-gray-700 [[class='dark']_&amp;]:shadow-sm [[class='dark']_&amp;]:text-primary [[class='dark']_&amp;]:font-bold"
-                            onclick="toggleTheme('dark')">
+                        <button onclick="toggleTheme('dark')"
+                            class="flex items-center gap-2 px-4 py-2 rounded-xl text-text-muted hover:text-gray-400 dark:text-gray-400 dark:hover:text-primary transition-all theme-btn">
                             <span class="material-symbols-outlined text-xl">dark_mode</span>
-                            <span>Sombre</span>
+                            <span data-i18n="span_dark">Sombre</span>
                         </button>
                     </div>
                 </div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-                <div class="glass-card p-6 rounded-2xl shadow-sm">
-                    <div class="flex items-center gap-4 mb-6">
+
+            <div class="glass-card p-6 rounded-2xl shadow-sm">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center gap-4">
                         <div
                             class="w-12 h-12 bg-red-50 dark:bg-red-900/20 rounded-2xl flex items-center justify-center text-red-500">
                             <span class="material-symbols-outlined">security</span>
                         </div>
                         <div>
-                            <h3 class="font-bold text-lg text-text-main">Sécurité</h3>
-                            <p class="text-sm text-text-muted">Protégez votre compte</p>
+                            <h3 class="font-bold text-lg text-text-main" data-i18n="security">Confidentialité</h3>
+                            <p class="text-sm text-text-muted" data-i18n="protected">Protégez votre compte</p>
                         </div>
                     </div>
-                    <div class="space-y-3">
-                        <button
-                            class="w-full flex items-center justify-between p-3 rounded-xl hover:bg-red-50 dark:hover:bg-red-900/10 text-text-main transition-colors group">
-                            <span class="text-sm font-medium">Changer le mot de passe</span>
-                            <span
-                                class="material-symbols-outlined text-text-muted group-hover:text-red-500 transition-colors">chevron_right</span>
-                        </button>
+                </div>
+                <div class="space-y-3">
+                    <button id="togglePrivacyBtn"
+                        class="w-full flex items-center justify-between p-3 rounded-xl hover:bg-red-50 dark:hover:bg-red-900/10 text-text-main transition-colors group">
+                        <span class="text-sm font-medium" data-i18n="pwd">Modifier mes informations de connexion</span>
+                        <span
+                            class="material-symbols-outlined text-text-muted group-hover:text-red-500 transition-colors">
+                            expand_more
+                        </span>
+                    </button>
 
+
+                    <div id="privacySection" class="hidden pt-4 border-t border-[var(--border)] animate-fade-in">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Email -->
+                            <div class="space-y-3">
+                                <label class="block text-xs font-medium text-text-muted">
+                                    Adresse Email
+                                </label>
+                                <input id="emailDisplay" class="form-input" type="email" readonly />
+                                <button onclick="toggleEmailEdit()"
+                                    class="text-xs font-medium text-primary hover:underline">
+                                    Modifier l'email
+                                </button>
+                                <div id="emailEdit" class="hidden space-y-2 pt-2 animate-fade-in">
+                                    <input id="email" class="form-input" type="email" placeholder="Nouvel email" />
+                                    <input id="oldPasswordEmail" class="form-input" type="password"
+                                        placeholder="Mot de passe actuel" />
+                                    <button onclick="modifierEmail()"
+                                        class="text-xs font-medium text-emerald-500 hover:underline">
+                                        Valider
+                                    </button>
+                                </div>
+                            </div>
+
+
+                            <div class="space-y-3">
+                                <label class="block text-xs font-medium text-text-muted">
+                                    Mot de passe
+                                </label>
+                                <input class="form-input" type="password" value="••••••••••" readonly />
+                                <button onclick="togglePasswordEdit()"
+                                    class="text-xs font-medium text-primary hover:underline">
+                                    Changer le mot de passe
+                                </button>
+                                <div id="passwordEdit" class="hidden pt-2 animate-fade-in space-y-2">
+                                    <input id="newPassword" class="form-input" type="password"
+                                        placeholder="Nouveau mot de passe" />
+                                    <button onclick="modifierMotDePasse()"
+                                        class="text-xs font-medium text-emerald-500 hover:underline">
+                                        Valider
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
+
             <div class="flex flex-col sm:flex-row justify-end gap-4 mt-8 pb-12">
                 <button
-                    class="px-8 py-3 rounded-xl font-bold text-text-muted hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">Annuler</button>
-                <button
-                    class="px-8 py-3 rounded-xl bg-primary text-white font-bold shadow-lg shadow-primary/20 hover:scale-[1.02] transition-all">Enregistrer
+                    class="px-8 py-3 rounded-xl font-bold text-text-muted hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                    data-i18n="cancel">Annuler</button>
+                <button id="saveBtn"
+                    class="px-8 py-3 rounded-xl bg-primary text-white font-bold shadow-lg shadow-primary/20 hover:scale-[1.02] transition-all"
+                    data-i18n="save">Enregistrer
                     les modifications</button>
             </div>
         </div>
     </main>
-    <div
-        class="md:hidden fixed bottom-0 w-full glass-card border-t border-[var(--border)] flex justify-around p-3 z-50">
-        <a class="flex flex-col items-center text-text-muted" href="#">
-            <span class="material-symbols-outlined">dashboard</span>
-            <span class="text-[10px] font-bold mt-1">Accueil</span>
-        </a>
-        <a class="flex flex-col items-center text-text-muted" href="#">
-            <span class="material-symbols-outlined">school</span>
-            <span class="text-[10px] font-medium mt-1">Cours</span>
-        </a>
-        <a class="flex flex-col items-center text-primary" href="#">
-            <span class="material-symbols-outlined active-icon">settings</span>
-            <span class="text-[10px] font-medium mt-1">Réglages</span>
-        </a>
-        <a class="flex flex-col items-center text-text-muted" href="#">
-            <span class="material-symbols-outlined">person</span>
-            <span class="text-[10px] font-medium mt-1">Profil</span>
-        </a>
-    </div>
+
     <script src="../js/utils/dark-white.js"></script>
     <script type="module" src="../js/auth/logout.js"></script>
     <script type="module" src="../js/lang.js"></script>
+
+    <!-- Script pour charger les données utilisateur -->
+    <script type="module">
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { db } from "../js/auth/firebase-config.js";
+        import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const auth = getAuth();
+
+        onAuthStateChanged(auth, async (user) => {
+            if (!user) {
+                window.location.href = "login.html";
+                return;
+            }
+
+            const userId = user.uid;
+            localStorage.setItem("userId", userId);
+
+            await chargerInfosUtilisateur(userId);
+        });
+
+        async function chargerInfosUtilisateur(userId) {
+            try {
+                const userRef = doc(db, "users", userId);
+                const userSnap = await getDoc(userRef);
+
+                if (!userSnap.exists()) {
+                    console.log("Utilisateur introuvable");
+                    return;
+                }
+
+                const data = userSnap.data();
+
+                // Mettre à jour le nom
+                const userNameEl = document.getElementById("userName");
+                if (userNameEl) {
+                    userNameEl.textContent = data.firstName || data.username || "Étudiant";
+                    userNameEl.classList.remove("loading-pulse");
+                }
+
+                // Mettre à jour l'avatar
+                const userAvatarEl = document.getElementById("userAvatar");
+                if (userAvatarEl && data.avatar) {
+                    userAvatarEl.src = data.avatar;
+                    userAvatarEl.classList.remove("loading-pulse");
+                }
+
+            } catch (erreur) {
+                console.log("Erreur chargement utilisateur :", erreur);
+            }
+        }
+
+        
+    </script>
+
+    <!-- Script pour gérer la section confidentialité -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const togglePrivacyBtn = document.getElementById('togglePrivacyBtn');
+            const privacySection = document.getElementById('privacySection');
+            const logoutBtn = document.getElementById('logoutBtn');
+            const saveBtn = document.getElementById('saveBtn');
+
+            // Toggle de la section confidentialité
+            if (togglePrivacyBtn) {
+                togglePrivacyBtn.addEventListener('click', function () {
+                    const isHidden = privacySection.classList.contains('hidden');
+                    const icon = this.querySelector('.material-symbols-outlined');
+
+                    if (isHidden) {
+                        privacySection.classList.remove('hidden');
+                        icon.textContent = 'expand_less';
+                    } else {
+                        privacySection.classList.add('hidden');
+                        icon.textContent = 'expand_more';
+                    }
+                });
+            }
+
+            // Gestion de la déconnexion
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function () {
+                    if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
+                        localStorage.removeItem('userToken');
+                        window.location.href = '../index.html';
+                    }
+                });
+            }
+
+            // Bouton sauvegarder
+            if (saveBtn) {
+                saveBtn.addEventListener('click', function () {
+                    alert('Paramètres enregistrés avec succès !');
+                });
+            }
+        });
+    </script>
+
+    <!-- Script pour modifier les informations (email et mot de passe) -->
+    <script type="module">
+        import { getAuth, onAuthStateChanged, updateEmail, updatePassword }
+            from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        import {
+            EmailAuthProvider,
+            reauthenticateWithCredential
+        } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        import {
+            doc,
+            updateDoc
+        } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        import { db } from "../js/auth/firebase-config.js";
+
+        const auth = getAuth();
+        let currentUser = null;
+
+        function showToast(message, type = "success") {
+            const toast = document.createElement("div");
+
+            toast.className = `
+            fixed top-6 right-6 z-[9999]
+            px-6 py-4 rounded-2xl shadow-xl
+            text-sm font-bold
+            ${type === "error"
+                    ? "bg-rose-500 text-white"
+                    : "bg-emerald-500 text-white"}
+            animate-fade-in
+          `;
+
+            toast.textContent = message;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.add("opacity-0");
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        onAuthStateChanged(auth, (user) => {
+            if (!user) return;
+
+            currentUser = user;
+
+            const emailDisplay = document.getElementById("emailDisplay");
+            const emailInput = document.getElementById("email");
+
+            if (emailDisplay) emailDisplay.value = user.email;
+            if (emailInput) emailInput.value = user.email;
+        });
+
+        window.toggleEmailEdit = () => {
+            const emailEdit = document.getElementById("emailEdit");
+            if (emailEdit) {
+                emailEdit.classList.toggle("hidden");
+            }
+        };
+
+        window.togglePasswordEdit = () => {
+            const passwordEdit = document.getElementById("passwordEdit");
+            if (passwordEdit) {
+                passwordEdit.classList.toggle("hidden");
+            }
+        };
+
+        async function reauthentifierUtilisateur(password) {
+            const credential = EmailAuthProvider.credential(
+                currentUser.email,
+                password
+            );
+            await reauthenticateWithCredential(currentUser, credential);
+        }
+
+        // Modifier email
+        window.modifierEmail = async () => {
+            const emailInput = document.getElementById("email");
+            const passwordInput = document.getElementById("oldPasswordEmail");
+
+            if (!emailInput || !passwordInput) return;
+
+            const newEmail = emailInput.value.trim();
+            const password = passwordInput.value;
+
+            if (!newEmail || !password) {
+                showToast("Veuillez saisir votre mot de passe actuel", "error");
+                return;
+            }
+
+            try {
+                await reauthentifierUtilisateur(password);
+                await updateEmail(currentUser, newEmail);
+
+                // Mettre à jour dans Firestore pour les étudiants
+                await updateDoc(doc(db, "users", currentUser.uid), {
+                    email: newEmail
+                });
+
+                const emailDisplay = document.getElementById("emailDisplay");
+                if (emailDisplay) emailDisplay.value = newEmail;
+
+                const emailEdit = document.getElementById("emailEdit");
+                if (emailEdit) emailEdit.classList.add("hidden");
+
+                showToast("Email modifié avec succès");
+            } catch (err) {
+                console.error(err);
+                showToast("Mot de passe incorrect ou session expirée", "error");
+            }
+        };
+
+        // Modifier mot de passe
+        window.modifierMotDePasse = async () => {
+            const newPasswordInput = document.getElementById("newPassword");
+            if (!newPasswordInput) return;
+
+            const newPassword = newPasswordInput.value;
+
+            if (newPassword.length < 6) {
+                showToast("Mot de passe trop court (min 6 caractères)", "error");
+                return;
+            }
+
+            try {
+                await updatePassword(currentUser, newPassword);
+
+                const passwordEdit = document.getElementById("passwordEdit");
+                if (passwordEdit) passwordEdit.classList.add("hidden");
+
+                if (newPasswordInput) newPasswordInput.value = "";
+
+                showToast("Mot de passe modifié avec succès");
+            } catch (err) {
+                console.error(err);
+                showToast("Veuillez vous reconnecter pour changer le mot de passe", "error");
+            }
+        };
+    </script>
+    <script type="module" src="../js/utils/dark-white.js"></script>
+    <script type="module" src="../js/lang.js"></script>
+    <script type="module" src="../js/auth/logout.js"></script>
 </body>
 
 </html>

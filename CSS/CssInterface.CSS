@@ -145,3 +145,17 @@
   background-color: rgba(213, 157, 128, 0.1) !important;
   color: var(--text-main) !important;
 }
+
+.theme-btn.active {
+    background-color: white;
+    color: #D59D80;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.dark .theme-btn.active {
+    background-color: #374151;
+    color: #D59D80;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}

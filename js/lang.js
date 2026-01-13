@@ -9,6 +9,24 @@ const translations = {
         nav_settings: "Paramètres",
         nav_logout: "Se déconnecter",
 
+        id_nav_subjects_active: "Matières",
+        id_page_title: "Matières - Djangou",
+        id_search_placeholder: "Rechercher un tuteur...",
+        id_section_title: "Nos Matières",
+        id_section_subtitle: "Choisissez une matière pour voir les tuteurs disponibles",
+        id_subjects_main: "Matières Principales",
+        id_math_description: "Algèbre, géométrie, calcul, statistiques",
+        id_card_cta: "Cliquez pour voir les tuteurs",
+        id_physics_chemistry_description: "Mécanique, optique, thermodynamique, réactions chimiques",
+        id_computer_science_description: "Programmation, algorithmes, bases de données, web",
+        id_languages_description: "Français, anglais, espagnol, allemand, etc.",
+        id_history_geo_description: "Histoire mondiale, géographie, civilisations",
+        id_back_button: "Retour aux matières",
+        id_teachers_title: "Tuteurs disponibles pour cette matière",
+        id_no_selection_text: "Sélectionnez une matière pour voir les tuteurs",
+        id_load_more: "Charger plus de tuteurs",
+
+
         //span
         span_french: "Français",
         span_english: "Anglais",
@@ -31,21 +49,21 @@ const translations = {
         start: "Commencer à apprendre",
         why: "Pourquoi Djangou ?",
         cours: "Cours personnalisés",
-        parcours: "Des parcours adaptés à votre niveau et à votre rythme pour une progression optimale.",  
+        parcours: "Des parcours adaptés à votre niveau et à votre rythme pour une progression optimale.",
         expert: "Tuteurs experts",
         access: "Accédez à un réseau de mentors qualifiés prêts à vous aider à surmonter chaque obstacle.",
         instant: "Posez vos questions instantanément et collaborez avec d'autres étudiants.",
-        temp_reel: "Chat en temps réel", 
+        temp_reel: "Chat en temps réel",
         ia: "Notre IA vous suggère des exercices et vous aide à réviser 24h/24 et 7j/7.",
 
         //p
         p_langue: "Changement de langue",
         p_langue_sub: "Langue préférée pour l'interface ",
-        p_mode:"Mode d'affichage",
-        p_mode_sub:"Choisissez entre le mode clair ou sombre",
+        p_mode: "Mode d'affichage",
+        p_mode_sub: "Choisissez entre le mode clair ou sombre",
 
 
-        
+
         // Dashboard
         dashboard_welcome: "Bonjour, {name}! 👋",
         dashboard_subtitle: "Prête à apprendre quelque chose de nouveau aujourd'hui?",
@@ -56,7 +74,7 @@ const translations = {
         dashboard_trending: "Tendances",
         dashboard_today_schedule: "Planning du jour",
         dashboard_instructors: "Instructeurs",
-        
+
         // Whiteboard
         whiteboard_title: "Mathématiques : Fonctions Affines",
         whiteboard_export: "Exporter",
@@ -70,7 +88,7 @@ const translations = {
         whiteboard_help: "Besoin d'aide sur cette fonction ?",
         whiteboard_ask_ai: "Demander à Djangou AI",
         whiteboard_confirm_clear: "Êtes-vous sûr de vouloir effacer tout le tableau ?",
-        
+
         // Login
         login_title: "Bienvenue !",
         login_subtitle: "Entrez vos coordonnées pour accéder à votre espace.",
@@ -83,13 +101,13 @@ const translations = {
         login_no_account: "Pas encore de compte ?",
         login_signup: "S'inscrire",
         login_or: "Ou continuer avec",
-        
+
         // Subjects
         subjects_sciences: "Sciences",
         subjects_math: "Mathématiques",
         subjects_computer: "Informatique",
         subjects_drawing: "Dessin",
-        
+
         // Common
         common_online: "En ligne",
         common_completed: "Complété",
@@ -103,7 +121,7 @@ const translations = {
         common_edit: "Modifier",
         common_close: "Fermer",
 
-         // Common
+        // Common
         id_common_online: "En ligne",
         id_common_completed: "Complété",
         id_common_in_progress: "En cours",
@@ -115,7 +133,7 @@ const translations = {
         id_common_delete: "Supprimer",
         id_common_edit: "Modifier",
         id_common_close: "Fermer",
-        
+
         // Navigation
         id_nav_home: "Accueil",
         id_nav_subjects: "Matières",
@@ -124,14 +142,14 @@ const translations = {
         id_nav_profile: "Profil",
         id_nav_settings: "Paramètres",
         id_nav_logout: "Se déconnecter",
-        
+
         // Spans
         id_span_french: "Français",
         id_span_english: "Anglais",
         id_span_student: "Étudiant",
         id_span_tutor: "Tuteur",
         id_span_clear: "Clair",
-        
+
         // Dashboard
         id_dash_greeting: "Bonjour, Lisha! 👋",
         id_dash_subtitle: "Prête à apprendre quelque chose de nouveau aujourd'hui?",
@@ -140,7 +158,7 @@ const translations = {
         id_dash_ai_heading: "Besoin d'aide sur un devoir ?",
         id_dash_ai_description: "Notre assistant IA est disponible 24/7 pour répondre à tes questions et t'aider à progresser.",
         id_dash_ai_button: "Discuter maintenant",
-        
+
         // Sections
         id_section_recent_subjects: "Mes Matières récentes",
         id_section_see_all: "Voir tout",
@@ -152,15 +170,15 @@ const translations = {
         id_subject_computer: "Informatique",
         id_subject_drawing: "Dessin",
         id_subject_physics: "Physiques",
-        
+
         // Other
         id_user_status: "Étudiante",
     },
 
-    
 
-    
-    
+
+
+
     en: {
         // Navigation
         nav_home: "Home",
@@ -178,6 +196,23 @@ const translations = {
         span_tutor: "Tutor",
         span_clear: "Light",
         span_dark: "Dark",
+
+        id_nav_subjects_active: "Subjects",
+        id_page_title: "Subjects - Djangou",
+        id_search_placeholder: "Search for a tutor...",
+        id_section_title: "Our Subjects",
+        id_section_subtitle: "Choose a subject to see available tutors",
+        id_subjects_main: "Main Subjects",
+        id_math_description: "Algebra, geometry, calculus, statistics",
+        id_card_cta: "Click to see tutors",
+        id_physics_chemistry_description: "Mechanics, optics, thermodynamics, chemical reactions",
+        id_computer_science_description: "Programming, algorithms, databases, web",
+        id_languages_description: "French, English, Spanish, German, etc.",
+        id_history_geo_description: "World history, geography, civilizations",
+        id_back_button: "Back to subjects",
+        id_teachers_title: "Available tutors for this subject",
+        id_no_selection_text: "Select a subject to see tutors",
+        id_load_more: "Load more tutors",
 
         security: "Security",
         pwd: "Change Password",
@@ -199,16 +234,17 @@ const translations = {
         temp_reel: "Real-Time Chat",
         instant: "Ask your questions instantly and collaborate with other students.",
         ia: "Our AI suggests exercises and helps you review 24/7.",
-        
+
 
         //p
         p_langue: "Language switch",
         p_langue_sub: "Select your preferred language ",
-        p_mode:"Display mode",
-        p_mode_sub:"Choose between light or dark mode",
-        
+        p_mode: "Display mode",
+        p_mode_sub: "Choose between light or dark mode",
+
         // Dashboard
-        dashboard_welcome: "Hello, {name}! 👋",
+        id_dash_greeting: "Bonjour 👋",
+        id_user_status: "Étudiant",
         dashboard_subtitle: "Ready to learn something new today?",
         dashboard_search: "Search for a course, a tutor...",
         dashboard_my_subjects: "My Ongoing Subjects",
@@ -217,7 +253,7 @@ const translations = {
         dashboard_trending: "Trending",
         dashboard_today_schedule: "Today's Schedule",
         dashboard_instructors: "Instructors",
-        
+
         // Whiteboard
         whiteboard_title: "Mathematics: Linear Functions",
         whiteboard_export: "Export",
@@ -231,7 +267,7 @@ const translations = {
         whiteboard_help: "Need help with this function?",
         whiteboard_ask_ai: "Ask Djangou AI",
         whiteboard_confirm_clear: "Are you sure you want to clear the entire board?",
-        
+
         // Login
         login_title: "Welcome!",
         login_subtitle: "Enter your credentials to access your space.",
@@ -244,13 +280,13 @@ const translations = {
         login_no_account: "Don't have an account yet?",
         login_signup: "Sign up",
         login_or: "Or continue with",
-        
+
         // Subjects
         subjects_sciences: "Sciences",
         subjects_math: "Mathematics",
         subjects_computer: "Computer Science",
         subjects_drawing: "Drawing",
-        
+
         // Common
         common_online: "Online",
         common_completed: "Completed",
@@ -275,7 +311,7 @@ const translations = {
         id_common_delete: "Delete",
         id_common_edit: "Edit",
         id_common_close: "Close",
-        
+
         // Navigation
         id_nav_home: "Home",
         id_nav_subjects: "Subjects",
@@ -284,14 +320,14 @@ const translations = {
         id_nav_profile: "Profile",
         id_nav_settings: "Settings",
         id_nav_logout: "Log out",
-        
+
         // Spans
         id_span_french: "French",
         id_span_english: "English",
         id_span_student: "Student",
         id_span_tutor: "Tutor",
         id_span_clear: "Light",
-        
+
         // Dashboard
         id_dash_greeting: "Hello, Lisha! 👋",
         id_dash_subtitle: "Ready to learn something new today?",
@@ -300,20 +336,20 @@ const translations = {
         id_dash_ai_heading: "Need help with homework?",
         id_dash_ai_description: "Our AI assistant is available 24/7 to answer your questions and help you progress.",
         id_dash_ai_button: "Chat now",
-        
+
         // Sections
         id_section_recent_subjects: "My Recent Subjects",
         id_section_see_all: "See all",
         id_section_favorites: "Favorites",
         id_section_instructors: "Instructors",
-        
+
         // Subjects
         id_subject_science: "Science",
         id_subject_math: "Mathematics",
         id_subject_computer: "Computer Science",
         id_subject_drawing: "Drawing",
         id_subject_physics: "Physics",
-        
+
         // Other
         id_user_status: "Student",
     }
@@ -329,57 +365,57 @@ let currentLanguage = localStorage.getItem('djangou_language') || 'fr';
 // Fonction pour obtenir une traduction
 function t(key, replacements = {}) {
     let text = translations[currentLanguage][key] || key;
-    
+
     Object.keys(replacements).forEach(placeholder => {
         text = text.replace(`{${placeholder}}`, replacements[placeholder]);
     });
-    
+
     return text;
 }
 
 // FONCTION PRINCIPALE POUR CHANGER LA LANGUE
 function setLanguage(lang) {
     console.log('Changement de langue vers:', lang);
-    
+
     if (!translations[lang]) {
         console.error(`Language ${lang} not found`);
         return;
     }
-    
+
     currentLanguage = lang;
     localStorage.setItem('djangou_language', lang);
-    
+
     // Mettre à jour l'attribut lang du HTML
     document.documentElement.lang = lang;
-    
+
     // Traduire tous les éléments
     translatePage();
-    
+
     // Mettre à jour l'apparence des boutons
     updateLanguageButtons();
-    
+
     // Déclencher un événement personnalisé
-    document.dispatchEvent(new CustomEvent('languageChanged', { 
-        detail: { language: lang } 
+    document.dispatchEvent(new CustomEvent('languageChanged', {
+        detail: { language: lang }
     }));
 }
 
 // Fonction pour mettre à jour les boutons de langue
 function updateLanguageButtons() {
     console.log('Mise à jour des boutons, langue actuelle:', currentLanguage);
-    
+
     const buttons = document.querySelectorAll('[data-lang-btn]');
-    
+
     buttons.forEach(button => {
         const btnLang = button.getAttribute('data-lang-btn');
-        
+
         // Retirer toutes les classes actives/inactives
         button.classList.remove(
             'border-2', 'border-primary', 'bg-primary/10', 'text-text-main',
             'border', 'text-text-muted', 'hover:border-primary/50',
             'active-language'
         );
-        
+
         if (btnLang === currentLanguage) {
             // Style pour le bouton ACTIF
             button.classList.add('border-2', 'border-primary', 'bg-primary/10', 'text-text-main');
@@ -394,7 +430,7 @@ function updateLanguageButtons() {
 // Fonction pour traduire toute la page
 function translatePage() {
     console.log('Traduction de la page en', currentLanguage);
-    
+
     // Traduire tous les éléments avec data-i18n
     document.querySelectorAll('[data-i18n]').forEach(element => {
         const key = element.getAttribute('data-i18n');
@@ -403,7 +439,7 @@ function translatePage() {
             element.textContent = translation;
         }
     });
-    
+
     // Traduire les placeholders
     document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
         const key = element.getAttribute('data-i18n-placeholder');
@@ -412,7 +448,7 @@ function translatePage() {
             element.placeholder = translation;
         }
     });
-    
+
     // Traduire les attributs alt
     document.querySelectorAll('[data-i18n-alt]').forEach(element => {
         const key = element.getAttribute('data-i18n-alt');
@@ -421,7 +457,7 @@ function translatePage() {
             element.alt = translation;
         }
     });
-    
+
     // Traduire les attributs title
     document.querySelectorAll('[data-i18n-title]').forEach(element => {
         const key = element.getAttribute('data-i18n-title');
@@ -435,16 +471,16 @@ function translatePage() {
 // Fonction d'initialisation
 function initLanguage() {
     console.log('Initialisation de la langue:', currentLanguage);
-    
+
     // Traduire la page
     translatePage();
-    
+
     // Mettre à jour les boutons
     updateLanguageButtons();
-    
+
     // Ajouter les écouteurs d'événements pour les boutons
     document.querySelectorAll('[data-lang-btn]').forEach(button => {
-        button.addEventListener('click', function(e) {
+        button.addEventListener('click', function (e) {
             e.preventDefault();
             const lang = this.getAttribute('data-lang-btn');
             setLanguage(lang);
