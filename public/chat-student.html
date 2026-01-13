@@ -12,6 +12,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+
+
+    
     <style type="text/tailwindcss">
         :root {
             --p-accent-orange: #D59D80;
@@ -189,7 +193,7 @@
     </style>
 </head>
 
-<body class="overflow-hidden min-h-screen md:h-screen bg-[var(--bg-main)] dark:bg-[#050A18]">
+<body class="overflow-hidden min-h-screen md:h-screen bg-[var(--bg-main)] dark:bg-[#0b0c0c]" >
 
     <div
         class="fixed -top-64 -right-64 w-[800px] h-[800px] bg-gray-50/80 dark:bg-gray-800/40 rounded-full border-2 border-gray-200/70 dark:border-gray-700/50 pointer-events-none -z-10">
@@ -201,17 +205,17 @@
     <div class="flex h-full w-full relative">
 
         <aside id="sidebar"
-            class="hidden md:flex flex-col w-24 lg:w-64 h-full bg-card-light dark:bg-card-dark border-r border-gray-100 font-bold dark:border-gray-800 transition-all duration-300 p-4 fixed md:relative z-50 md:z-auto">
+            class="hidden md:flex flex-col w-24 lg:w-64 h-full bg-card-light dark:bg-[#2d2d2d] border-r border-gray-100 font-bold dark:border-gray-800 transition-all duration-300 p-4 fixed md:relative z-50 md:z-auto">
             <div class="flex items-center justify-center lg:justify-start mb-10 px-2">
                 <button id="logoToggle"
-                    class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xl shadow-md hover:scale-105 transition-transform">
+                    class="w-10 h-10 rounded-full bg-[#D59D80] flex items-center justify-center text-white font-bold text-xl shadow-md hover:scale-105 transition-transform">
                     D
                 </button>
-                <span class="hidden lg:block ml-3 text-2xl font-bold text-primary tracking-wide">Djangou</span>
+                <span class="hidden lg:block ml-3 text-2xl font-bold text-[#D59D80] tracking-wide">Djangou</span>
             </div>
             <nav class="flex-1 flex flex-col gap-2">
-                <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary transition-colors hover:bg-primary/20"
-                    href="#">
+                <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl bg-[#D59D80]/10 text-primary dark:bg-[#D59D80]20 dark:text-[#D59D80] transition-colors hover:bg-[#D59D80]/20"
+                    href="dashboard-student.html">
                     <span class="material-symbols-outlined text-2xl">home</span>
                     <span data-i18n="id_nav_home" class="hidden lg:block ml-4 font-semibold">Accueil</span>
                 </a>
@@ -221,7 +225,7 @@
                     <span data-i18n="id_nav_subjects" class="hidden lg:block ml-4 font-semibold">Matières</span>
                 </a>
                 <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
-                    href="chat-student.html">
+                    href="#">
                     <span class="material-symbols-outlined text-2xl">chat_bubble</span>
                     <span data-i18n="id_nav_messages" class="hidden lg:block ml-4 font-semibold">Messages</span>
                 </a>
@@ -260,8 +264,8 @@
                 </div>
             </div>
             <nav class="p-4 flex flex-col gap-2">
-                <a class="flex items-center gap-4 p-3 rounded-xl bg-primary/10 text-primary dark:bg-primary/20"
-                    href="#">
+                <a class="flex items-center gap-4 p-3 rounded-xl bg-[#D59D80]/10 text-[#D59D80] dark:bg-[#D59D80]/20"
+                    href="dashboard-student.html">
                     <span class="material-symbols-outlined">home</span>
                     <span data-i18n="id_nav_home" class="font-semibold">Accueil</span>
                 </a>
@@ -271,7 +275,7 @@
                     <span data-i18n="id_nav_subjects" class="font-semibold">Matières</span>
                 </a>
                 <a class="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400"
-                    href="chat-student.html">
+                    href="#">
                     <span class="material-symbols-outlined">chat_bubble</span>
                     <span data-i18n="id_nav_messages" class="font-semibold">Messages</span>
                 </a>
@@ -328,9 +332,9 @@
                 </div>
             </header>
 
-            <!-- Contenu des messages -->
+           
             <div class="flex-1 flex flex-col lg:flex-row gap-6 min-h-0 mb-6">
-                <!-- Liste des conversations -->
+                
                 <div id="conversation-list" class="w-full lg:w-80 flex flex-col gap-4">
                     <div class="premium-card dark:bg-[#0F172A] dark:border-gray-800 flex-1 flex flex-col p-4">
                         <div class="flex justify-between items-center mb-4 px-2">
@@ -537,6 +541,9 @@ if (messageInput) {
     });
 }
     </script>
+    <script type="module" src="../js/utils/dark-white.js"></script>
+    <script type="module" src="../js/lang.js"></script>
+    <script type="module" src="../js/auth/logout.js"></script>
 </body>
 
 </html>
