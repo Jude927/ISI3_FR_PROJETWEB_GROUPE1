@@ -188,7 +188,7 @@ const translations = {
         id_span_clear: "Clair",
 
         // Dashboard
-        id_dash_greeting: "Bonjour, Lisha! 👋",
+        id_dash_greeting: "Bonjour 👋",
         id_dash_subtitle: "Prête à apprendre quelque chose de nouveau aujourd'hui?",
         id_dash_new_feature: "Nouveau",
         id_dash_ai_title: "DeepSeek AI",
@@ -197,10 +197,10 @@ const translations = {
         id_dash_ai_button: "Discuter maintenant",
 
         // Sections
-        id_section_recent_subjects: "Mes Matières récentes",
+        id_section_recent_subjects: " Matières ",
         id_section_see_all: "Voir tout",
         id_section_favorites: "Favoris",
-        id_section_instructors: "Instructeurs",
+        id_section_instructors: "recent",
         // Subjects
         id_subject_science: "Sciences",
         id_subject_math: "Mathématiques",
