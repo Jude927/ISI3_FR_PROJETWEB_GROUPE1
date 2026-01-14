@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const history = await loadHistoryFirestore(user.uid);
 
     history.forEach(h => {
-      if (!store.ia.general.some(m => m.text === h.answer)) {
+if (!store.ia.general.some(m => m.from === "me" && m.text === h.question)) {
         store.ia.general.push(
           { from: "me", text: h.question, time: h.time || "" },
           { from: "them", text: formatAI(h.answer), time: h.time || "" }
