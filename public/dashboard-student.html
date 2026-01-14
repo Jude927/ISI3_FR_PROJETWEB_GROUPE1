@@ -6,7 +6,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Tableau de Bord Accueil Djangou</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
    
     <script>
@@ -15,13 +15,13 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: "#D59D80", // Orange/Terracotta from palette
-                        secondary: "#2d2d2d", // Dark Teal
-                        accent: "#104C64", // Medium Teal
-                        cream: "#C6C6D0", // Beige/Cream
-                        "dark-brown": "#C0754D", // Brownish
-                        "darker-brown": "#B6410F", // Deep Brown
-                        "background-light": "#FFFFFF", // Very light warm white
+                        primary: "#D59D80",
+                        secondary: "#2d2d2d",
+                        accent: "#104C64",
+                        cream: "#C6C6D0",
+                        "dark-brown": "#C0754D",
+                        "darker-brown": "#B6410F",
+                        "background-light": "#FFFFFF",
                         "background-dark": "#0b0c0c", 
                         "card-light": "#F9F9F9",
                         "card-dark": "#2d2d2d",
@@ -63,18 +63,15 @@
 
 <body
     class="bg-background-light dark:bg-background-dark text-secondary dark:text-gray-100 transition-colors duration-300 font-body antialiased h-screen overflow-hidden flex">
+    
     <div id="sidebarOverlay" class="hidden md:hidden fixed inset-0 bg-black/50 z-40"></div>
 
-    <div
-        class="fixed -top-64 -right-64 w-[800px] h-[800px] bg-gray-50/80 dark:bg-gray-800/40 rounded-full border-2 border-gray-200/70 dark:border-gray-700/50 pointer-events-none -z-10">
-    </div>
+    <div class="fixed -top-64 -right-64 w-[800px] h-[800px] bg-gray-50/80 dark:bg-gray-800/40 rounded-full border-2 border-gray-200/70 dark:border-gray-700/50 pointer-events-none -z-10"></div>
+    <div class="fixed -bottom-64 -left-64 w-[800px] h-[800px] bg-gray-50/80 dark:bg-gray-800/40 rounded-full border-2 border-gray-200/70 dark:border-gray-700/50 pointer-events-none -z-10"></div>
 
-    <div
-        class="fixed -bottom-64 -left-64 w-[800px] h-[800px] bg-gray-50/80 dark:bg-gray-800/40 rounded-full border-2 border-gray-200/70 dark:border-gray-700/50 pointer-events-none -z-10">
-    </div>
-
-    <aside id = "sidebar"
-        class="hidden md:flex flex-col w-24 lg:w-64 h-full bg-card-light dark:bg-card-dark border-r border-gray-100 font-bold dark:border-gray-800 transition-all duration-300 p-4 ">
+    <!-- SIDEBAR -->
+    <aside id="sidebar"
+        class="hidden md:flex flex-col w-24 lg:w-64 h-full bg-card-light dark:bg-card-dark border-r border-gray-100 font-bold dark:border-gray-800 transition-all duration-300 p-4">
         <div class="flex items-center justify-center lg:justify-start mb-10 px-2">
             <button id="logoToggle"
                 class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xl shadow-md">
@@ -83,283 +80,150 @@
             <span class="hidden lg:block ml-3 text-2xl font-bold text-primary tracking-wide">Djangou</span>
         </div>
         <nav class="flex-1 flex flex-col gap-2">
-            <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary transition-colors"
-                href="#">
+            <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary transition-colors" href="#">
                 <span class="material-icons-round text-2xl">home</span>
                 <span class="hidden lg:block ml-4 font-semibold">Accueil</span>
             </a>
-            <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
-                href="matiere-student.html">
+            <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors" href="matiere-student.html">
                 <span class="material-icons-round text-2xl">school</span>
                 <span class="hidden lg:block ml-4 font-semibold">Matières</span>
             </a>
-            <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
-                href="chat-student.html">
+            <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors" href="chat-student.html">
                 <span class="material-icons-round text-2xl">chat_bubble</span>
                 <span class="hidden lg:block ml-4 font-semibold">Messages</span>
-               </a>
-
-            <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
-                href="#">
-                <span class="material-icons-round text-2xl">person</span>
-                <span class="hidden lg:block ml-4 font-semibold">Profil</span>
             </a>
-        </nav>
-
-        <div class="mt-auto flex flex-col gap-2">
-            <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
-                href="settings-student.html">
+            <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors" href="settings-student.html">
                 <span class="material-icons-round text-2xl">settings</span>
                 <span class="hidden lg:block ml-4 font-semibold">Paramètres</span>
             </a>
-            <a id="logoutBtn" class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
-                href="#">
-                <span class="material-icons-round text-2xl">logout</span>
-                <span class="hidden lg:block ml-5 font-semibold">Se déconnecter</span>
-            </a>
-        </div>
+        </nav>
+        <button id="logoutBtn" class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-red-50 dark:hover:bg-red-900/20 text-red-600 dark:text-red-400 transition-colors mt-auto">
+            <span class="material-icons-round text-2xl">logout</span>
+            <span class="hidden lg:block ml-4 font-semibold">Déconnexion</span>
+        </button>
     </aside>
-    <main class="flex-1 h-full overflow-y-auto overflow-x-hidden p-4 md:p-8 relative">
-        <header class="flex justify-between items-center mb-8">
-            <div class="md:hidden flex items-center gap-3">
-                <button class="text-gray-600 dark:text-gray-300">
-                    <span class="material-icons-round text-3xl">menu</span>
-                </button>
-                <span class="text-xl font-bold text-primary">Djangou</span>
-            </div>
-            <div>
-                <span class="material-icons-round text-gray-400"></span>
-                
-            </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 overflow-auto no-scrollbar p-4 md:p-6">
+        <!-- HEADER -->
+        <header class="flex justify-between items-center mb-8 flex-wrap gap-4">
+            <button id="menuToggle" class="md:hidden text-2xl text-secondary dark:text-white">
+                <span class="material-icons-round">menu</span>
+            </button>
+            <div></div>
             <div class="flex items-center gap-4">
-               
                 <div class="flex items-center gap-3 pl-2 border-l border-gray-200 dark:border-gray-700">
                     <div class="text-right hidden md:block">
-                        <p class="text-sm font-bold text-secondary dark:text-white">Lisha Nana</p>
-                        <p class="text-xs text-gray-500 dark:text-gray-400">Étudiante</p>
+                        <p id="user-name" class="text-sm font-bold text-secondary dark:text-white">Chargement...</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">Étudiant(e)</p>
                     </div>
-                    <img alt="Avatar Utilisateur"
+                    <img id="user-photo" alt="Avatar Utilisateur"
                         class="w-10 h-10 rounded-full object-cover border-2 border-primary shadow-sm"
-                        />
-                    </div>
+                        src="/assets/avatars/avatardef.png" />
+                </div>
             </div>
         </header>
+
+        <!-- GREETING -->
         <div class="mb-8">
-            <h1 class="text-3xl md:text-4xl font-extrabold text-secondary dark:text-white mb-2">Bonjour, Lisha! 👋</h1>
-            <p class="text-gray-500 dark:text-gray-400">Prête à apprendre quelque chose de nouveau aujourd'hui?</p>
+            <h1 id="greeting" class="text-3xl md:text-4xl font-extrabold text-secondary dark:text-white mb-2">Bonjour! 👋</h1>
+            <p class="text-gray-500 dark:text-gray-400">Prêt(e) à apprendre quelque chose de nouveau aujourd'hui?</p>
         </div>
-        <div
-            class="bg-secondary dark:bg-gray-800 rounded-2xl p-6 mb-8 text-white relative overflow-hidden shadow-lg flex items-center justify-between">
+
+        <!-- BANNER IA -->
+        <div class="bg-secondary dark:bg-gray-800 rounded-2xl p-6 mb-8 text-white relative overflow-hidden shadow-lg flex items-center justify-between">
             <div class="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-3xl -mr-16 -mt-16"></div>
             <div class="relative z-10 max-w-lg">
-                <div  class="flex items-center gap-2 mb-2">
-                    <span
-                        class="bg-white/20 px-2 py-0.5 rounded text-xs font-semibold uppercase tracking-wider backdrop-blur-sm">Nouveau</span>
+                <div class="flex items-center gap-2 mb-2">
+                    <span class="bg-white/20 px-2 py-0.5 rounded text-xs font-semibold uppercase tracking-wider backdrop-blur-sm">Nouveau</span>
                     <span class="text-primary font-bold text-sm">DeepSeek AI</span>
                 </div>
                 <h2 class="text-xl md:text-2xl font-bold mb-2">Besoin d'aide sur un devoir ?</h2>
-                <p class="text-gray-300 text-sm mb-4">Notre assistant IA est disponible 24/7 pour répondre à tes
-                    questions et t'aider à progresser.</p>
+                <p class="text-gray-300 text-sm mb-4">Notre assistant IA est disponible 24/7 pour répondre à tes questions et t'aider à progresser.</p>
                 <button onclick="window.location.href='chat-student.html'"
                     class="bg-primary hover:bg-dark-brown text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-colors shadow-lg flex items-center gap-2">
                     <span class="material-icons-round text-lg">smart_toy</span>
                     Discuter maintenant
                 </button>
             </div>
-            <div class="hidden md:block relative z-10 mr-8">
-                <svg fill="none" height="100" viewBox="0 0 120 100" width="120" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="60" cy="50" fill="#D59D80" fill-opacity="0.2" r="40"></circle>
-                    <path
-                        d="M40 50C40 38.9543 48.9543 30 60 30C71.0457 30 80 38.9543 80 50C80 61.0457 71.0457 70 60 70C48.9543 70 40 61.0457 40 50Z"
-                        stroke="white" stroke-width="2"></path>
-                    <path d="M30 50C30 40 45 30 60 30" stroke="#D59D80" stroke-linecap="round" stroke-width="3"></path>
-                    <path d="M90 50C90 60 75 70 60 70" stroke="#D59D80" stroke-linecap="round" stroke-width="3"></path>
-                    <circle cx="95" cy="25" fill="#C6C6D0" r="5"></circle>
-                    <circle cx="20" cy="80" fill="#104C64" r="8"></circle>
-                </svg>
-            </div>
         </div>
+
+        <!-- CONTENT -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div class="lg:col-span-2 space-y-8">
                 <div class="flex justify-between items-end">
-                    <h3 class="text-xl font-bold text-secondary dark:text-white">Mes Matières en cours</h3>
-                    <a class="text-sm font-semibold text-primary hover:underline" href="#">Voir tout</a>
+                    <h3 class="text-xl font-bold text-secondary dark:text-white">Matières disponibles</h3>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div
-                        class="bg-pastel-green dark:bg-gray-800 p-5 rounded-2xl relative overflow-hidden group hover:shadow-md transition-shadow cursor-pointer">
-                        <div
-                            class="absolute right-0 bottom-0 opacity-20 transform translate-x-2 translate-y-2 group-hover:scale-110 transition-transform duration-500">
-                            <span class="material-icons-round text-8xl text-teal-800 dark:text-teal-200">science</span>
-                        </div>
-                        <div class="relative z-10">
-                            <div
-                                class="w-10 h-10 bg-white dark:bg-gray-700 rounded-lg flex items-center justify-center mb-3 shadow-sm text-teal-600 dark:text-teal-300">
-                                <span class="material-icons-round">science</span>
-                            </div>
-                            <h4 class="text-lg font-bold text-teal-900 dark:text-teal-100">Sciences</h4>
-                            
-                        </div>
-                    </div>
-                    <div
-                        class="bg-pastel-orange dark:bg-gray-800 p-5 rounded-2xl relative overflow-hidden group hover:shadow-md transition-shadow cursor-pointer">
-                        <div
-                            class="absolute right-0 bottom-0 opacity-20 transform translate-x-2 translate-y-2 group-hover:scale-110 transition-transform duration-500">
-                            <span
-                                class="material-icons-round text-8xl text-orange-800 dark:text-orange-200">calculate</span>
-                        </div>
-                        <div class="relative z-10">
-                            <div
-                                class="w-10 h-10 bg-white dark:bg-gray-700 rounded-lg flex items-center justify-center mb-3 shadow-sm text-orange-600 dark:text-orange-300">
-                                <span class="material-icons-round">functions</span>
-                            </div>
-                            <h4 class="text-lg font-bold text-orange-900 dark:text-orange-100">Mathématiques</h4>
-                            
-                        </div>
-                    </div>
-                    <div
-                        class="bg-pastel-blue dark:bg-gray-800 p-5 rounded-2xl relative overflow-hidden group hover:shadow-md transition-shadow cursor-pointer">
-                        <div
-                            class="absolute right-0 bottom-0 opacity-20 transform translate-x-2 translate-y-2 group-hover:scale-110 transition-transform duration-500">
-                            <span class="material-icons-round text-8xl text-blue-800 dark:text-blue-200">computer</span>
-                        </div>
-                        <div class="relative z-10">
-                            <div
-                                class="w-10 h-10 bg-white dark:bg-gray-700 rounded-lg flex items-center justify-center mb-3 shadow-sm text-blue-600 dark:text-blue-300">
-                                <span class="material-icons-round">computer</span>
-                            </div>
-                            <h4 class="text-lg font-bold text-blue-900 dark:text-blue-100">Informatique</h4>
-                            
-                        </div>
-                    </div>
-                    <div
-                        class="bg-pastel-purple dark:bg-gray-800 p-5 rounded-2xl relative overflow-hidden group hover:shadow-md transition-shadow cursor-pointer">
-                        <div
-                            class="absolute right-0 bottom-0 opacity-20 transform translate-x-2 translate-y-2 group-hover:scale-110 transition-transform duration-500">
-                            <span
-                                class="material-icons-round text-8xl text-purple-800 dark:text-purple-200">palette</span>
-                        </div>
-                        <div class="relative z-10">
-                            <div
-                                class="w-10 h-10 bg-white dark:bg-gray-700 rounded-lg flex items-center justify-center mb-3 shadow-sm text-purple-600 dark:text-purple-300">
-                                <span class="material-icons-round">brush</span>
-                            </div>
-                            <h4 class="text-lg font-bold text-purple-900 dark:text-purple-100">Dessin</h4>
-                           
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-8">
-                    <h3 class="text-xl font-bold text-secondary dark:text-white mb-4">Favoris</h3>
-                    <div
-                        class="bg-white dark:bg-card-dark rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
-                        
-                        <div
-                            class="flex items-center gap-4 p-4 border border-gray-100 dark:border-gray-700 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors cursor-pointer group">
-                            <div
-                                class="w-14 h-14 bg-pastel-green rounded-xl flex items-center justify-center flex-shrink-0">
-                                <span class="material-icons-round text-teal-600 text-2xl">design_services</span>
-                            </div>
-                            <div class="flex-1">
-                                <h4
-                                    class="font-bold text-secondary dark:text-white group-hover:text-primary transition-colors">
-                                    Mathématiques</h4>
-                                <div class="flex gap-3 text-xs text-gray-500 dark:text-gray-400 mt-1">
-                                    <span class="flex items-center gap-1"><span
-                                            class="material-icons-round text-sm">person</span>Onana Onana</span>
-                                    <span class="flex items-center gap-1"><span
-                                            class="material-icons-round text-sm">star</span> 4.8</span>
-                                    <span class="bg-green-100 dark:bg-green-700 px-2 py-0.5 rounded">Online</span>
-                                </div>
-                            </div>
-                            <button class="text-gray-400 hover:text-primary">
-                                <span class="material-icons-round">bookmark_border</span>
-                            </button>
-                        </div>
-
-                         <div
-                            class="flex items-center gap-4 p-4 border border-gray-100 dark:border-gray-700 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors cursor-pointer group">
-                            <div
-                                class="w-14 h-14 bg-pastel-green rounded-xl flex items-center justify-center flex-shrink-0">
-                                <span class="material-icons-round text-teal-600 text-2xl">design_services</span>
-                            </div>
-                            <div class="flex-1">
-                                <h4
-                                    class="font-bold text-secondary dark:text-white group-hover:text-primary transition-colors">
-                                    Physiques</h4>
-                                <div class="flex gap-3 text-xs text-gray-500 dark:text-gray-400 mt-1">
-                                    <span class="flex items-center gap-1"><span
-                                            class="material-icons-round text-sm">person</span>Ondoua</span>
-                                    <span class="flex items-center gap-1"><span
-                                            class="material-icons-round text-sm">star</span> 4.2</span>
-                                    <span class="bg-red-100 dark:bg-red-700 px-2 py-0.5 rounded">Offline</span>
-                                </div>
-                            </div>
-                            <button class="text-gray-400 hover:text-primary">
-                                <span class="material-icons-round">bookmark_border</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="space-y-8">
                 
-                <div>
-                    <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-xl font-bold text-secondary dark:text-white">Instructeurs</h3>
-                        <button
-                            class="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-gray-500 hover:text-primary transition-colors">
-                            <span class="material-icons-round text-sm">add</span>
-                        </button>
+                <!-- CONTAINER MATIÈRES -->
+                <div id="subjects-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="col-span-full text-center py-12">
+                        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+                        <p class="text-gray-600 dark:text-gray-400 font-medium">Chargement des matières...</p>
                     </div>
-                    <div
-                        class="bg-card-light dark:bg-card-dark rounded-2xl p-4 shadow-sm border border-gray-100 dark:border-gray-700 flex flex-col gap-4">
-                        <div class="flex items-center gap-3">
-                            <span class="material-icons-round text-lg">person</span>
-                            <div class="flex-1">
-                                <h5 class="text-sm font-bold text-secondary dark:text-white">Sarah Ebang</h5>
-                                <p class="text-xs text-gray-500">Sciences</p>
-                            </div>
-                            <button class="p-2 text-primary hover:bg-primary/10 rounded-full transition-colors">
-                                <span class="material-icons-round text-lg">chat_bubble_outline</span>
-                            </button>
+                </div>
+
+                <!-- SECTION TUTEURS -->
+                <section id="tutors-section" class="hidden mt-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-2xl font-bold text-gray-800 dark:text-white flex items-center gap-2">
+                            <span class="material-icons-round text-3xl">person</span>
+                            <span id="selected-subject-name">Tuteurs disponibles</span>
+                        </h2>
+                    </div>
+                    <div id="tutors-list" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+                </section>
+            </div>
+
+            <!-- STATS -->
+            <div class="space-y-6">
+                <div class="bg-card-light dark:bg-card-dark p-6 rounded-2xl shadow-sm">
+                    <h4 class="font-bold text-lg mb-4 text-secondary dark:text-white">Mes statistiques</h4>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600 dark:text-gray-400">Heures d'étude</span>
+                            <span id="study-hours" class="font-bold text-primary">0h</span>
                         </div>
-                        <div class="flex items-center gap-3">
-                            <span class="material-icons-round text-lg">person</span>
-                            <div class="flex-1">
-                                <h5 class="text-sm font-bold text-secondary dark:text-white">John Ndongo</h5>
-                                <p class="text-xs text-gray-500">Mathématiques</p>
-                            </div>
-                            <button class="p-2 text-primary hover:bg-primary/10 rounded-full transition-colors">
-                                <span class="material-icons-round text-lg">chat_bubble_outline</span>
-                            </button>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600 dark:text-gray-400">Sessions</span>
+                            <span id="total-sessions" class="font-bold text-primary">0</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </main>
-    <div
-        class="md:hidden fixed bottom-0 w-full bg-white dark:bg-card-dark border-t border-gray-100 dark:border-gray-800 flex justify-around p-3 z-50">
+
+    <!-- FOOTER MOBILE -->
+    <div class="fixed bottom-0 left-0 right-0 md:hidden bg-card-light dark:bg-card-dark border-t border-gray-200 dark:border-gray-700 py-3 px-6 flex justify-around items-center z-50">
         <a class="flex flex-col items-center text-primary" href="#">
-            <span class="material-icons-round">dashboard</span>
-            <span class="text-[10px] font-bold mt-1">Accueil</span>
+            <span class="material-icons-round">home</span>
+            <span class="text-[10px] font-medium mt-1">Accueil</span>
         </a>
-        <a class="flex flex-col items-center text-gray-400 dark:text-gray-500" href="#">
+        <a class="flex flex-col items-center text-gray-400 dark:text-gray-500" href="matiere-student.html">
             <span class="material-icons-round">school</span>
             <span class="text-[10px] font-medium mt-1">Cours</span>
         </a>
-        <a class="flex flex-col items-center text-gray-400 dark:text-gray-500 relative" href="#">
+        <a class="flex flex-col items-center text-gray-400 dark:text-gray-500 relative" href="chat-student.html">
             <span class="material-icons-round">chat_bubble</span>
             <span class="absolute top-0 right-3 w-2 h-2 bg-red-500 rounded-full"></span>
             <span class="text-[10px] font-medium mt-1">Chat</span>
         </a>
-        <a class="flex flex-col items-center text-gray-400 dark:text-gray-500" href="#">
+        <a class="flex flex-col items-center text-gray-400 dark:text-gray-500" href="settings-student.html">
             <span class="material-icons-round">person</span>
             <span class="text-[10px] font-medium mt-1">Profil</span>
         </a>
     </div>
-<script type="module" src="../js/auth/logout.js"></script>
-<script src="../js/utils/dark-white.js"></script>
+
+    <!-- ✅ SCRIPTS - SEULEMENT CEUX QUI MARCHENT -->
+    <script type="module" src="../js/auth/logout.js"></script>
+    <!-- ❌ DÉSACTIVÉS TEMPORAIREMENT (causent des erreurs) :
+    <script src="../js/utils/dark-white.js"></script>
+    <script src="../js/utils/avatar-sync.js"></script>
+    -->
+    <script type="module" src="../js/utils/guards.js"></script>
+
+    <!-- ⭐ LOGIQUE DASHBOARD FINALE -->
+    <script type="module" src="/js/dashboard-student-logic-FINAL.js"></script>
 </body>
 </html>

@@ -1,14 +1,11 @@
 /*************************************************
  * peer.js
+ * ✅ VERSION CORRIGÉE
  * Gestion des connexions Peer-to-Peer
  * Élève ↔ Tuteur
  *************************************************/
 
-/*
-  On récupère le Peer déjà initialisé
-  depuis peer-init.js
-*/
-import { peer } from "./peer-init.js";
+import { getPeer } from "./peer-init.js";  // ✅ CORRIGÉ
 
 /* 
    ÉTAT INTERNE DU MODULE
@@ -36,6 +33,8 @@ let errorCallback = null;
  * (élève → tuteur)
  */
 export function connectToPeer(targetPeerId) {
+  const peer = getPeer();  // ✅ Récupérer l'instance
+  
   if (!peer) {
     console.error("Peer non initialisé");
     return;
@@ -106,40 +105,51 @@ export function onPeerError(callback) {
   errorCallback = callback;
 }
 
-/* ============================
-   GESTION INTERNE
-   ============================ */
-
-// Lorsqu'un autre utilisateur se connecte à moi
-peer.on("connection", (connection) => {
-  console.log("Connexion entrante reçue");
-
-  if (connectionState !== "disconnected") {
-    console.warn("Connexion refusée : déjà en session");
-    connection.close();
+/**
+ * Setup des listeners pour connexions entrantes
+ */
+export function setupPeerListeners() {
+  const peer = getPeer();  // ✅ Récupérer l'instance
+  if (!peer) {
+    console.error('[Peer] Peer non initialisé');
     return;
   }
 
-  currentConnection = connection;
-  connectionState = "connected";
+  // Lorsqu'un autre utilisateur se connecte à moi
+  peer.on("connection", (connection) => {
+    console.log("Connexion entrante reçue");
 
-  if (incomingConnectionCallback) {
-    incomingConnectionCallback(connection);
-  }
+    if (connectionState !== "disconnected") {
+      console.warn("Connexion refusée : déjà en session");
+      connection.close();
+      return;
+    }
 
-  connection.on("data", (data) => {
-    console.log("Message reçu :", data);
+    currentConnection = connection;
+    connectionState = "connected";
+
+    if (incomingConnectionCallback) {
+      incomingConnectionCallback(connection);
+    }
+
+    connection.on("data", (data) => {
+      console.log("Message reçu :", data);
+    });
+
+    connection.on("close", () => {
+      console.log("Connexion fermée par l'autre pair");
+      cleanupConnection();
+    });
+
+    connection.on("error", (err) => {
+      handleError(err);
+    });
   });
+}
 
-  connection.on("close", () => {
-    console.log("Connexion fermée par l'autre pair");
-    cleanupConnection();
-  });
-
-  connection.on("error", (err) => {
-    handleError(err);
-  });
-});
+/* ============================
+   GESTION INTERNE
+   ============================ */
 
 // Nettoyage interne
 function cleanupConnection() {

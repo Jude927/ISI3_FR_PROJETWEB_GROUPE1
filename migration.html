@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Migration Firestore - Djangou</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        .warning-box {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .warning-box h3 {
+            color: #856404;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .warning-box ul {
+            color: #856404;
+            margin-left: 20px;
+        }
+        
+        .warning-box li {
+            margin-bottom: 8px;
+        }
+        
+        .info-box {
+            background: #d1ecf1;
+            border: 2px solid #17a2b8;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .info-box h3 {
+            color: #0c5460;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .info-box p {
+            color: #0c5460;
+            line-height: 1.6;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s;
+            width: 100%;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        
+        .btn-run {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s;
+        }
+        
+        .btn-run:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .btn-run {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s;
+        }
+        
+        .btn-run:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .btn-run {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .btn-run:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .btn-run {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .btn-run:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .btn-run {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 20px;
+            transition: transform 0.2s;
+        }
+        
+        .btn-run:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-run:active {
+            transform: translateY(0);
+        }
+        
+        .console-output {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 400px;
+            overflow-y: auto;
+            display: none;
+        }
+        
+        .console-output.active {
+            display: block;
+        }
+        
+        .console-output pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .spinner {
+            display: none;
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        
+        .spinner.active {
+            display: block;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔄 Migration Firestore</h1>
+        <p class="subtitle">Mise à jour de la structure de la base de données pour le système de tutorat P2P</p>
+        
+        <div class="warning-box">
+            <h3>⚠️ Attention</h3>
+            <ul>
+                <li>Ce script va modifier ta base de données Firestore</li>
+                <li>Il ajoute des champs aux collections existantes</li>
+                <li>Il ne supprime AUCUNE donnée existante</li>
+                <li>À exécuter <strong>UNE SEULE FOIS</strong></li>
+                <li>Assure-toi d'avoir une sauvegarde (optionnel mais recommandé)</li>
+            </ul>
+        </div>
+        
+        <div class="info-box">
+            <h3>📋 Ce que fait ce script</h3>
+            <p><strong>Étape 1 :</strong> Ajoute peerId, isOnline, lastSeen à la collection "users"</p>
+            <p><strong>Étape 2 :</strong> Ajoute peerId, isOnline, isAvailable, rating, totalSessions à "teachers"</p>
+            <p><strong>Étape 3 :</strong> Crée la collection "students" pour tous les utilisateurs avec role="student"</p>
+            <p><strong>Étape 4 :</strong> (Optionnel) Ajoute des matières de test aux tuteurs</p>
+            <p><strong>Étape 5 :</strong> Affiche un résumé de la base de données</p>
+        </div>
+        
+        <button class="btn-run" onclick="runMigration()">
+            🚀 Lancer la migration
+        </button>
+        
+        <div class="spinner" id="spinner"></div>
+        
+        <div class="console-output" id="console">
+            <pre id="output"></pre>
+        </div>
+    </div>
+    
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, getDocs, doc, updateDoc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+          apiKey: "AIzaSyCcXL02RyS42MKELtMZ6ZrEYgFVFaAbBXo",
+          authDomain: "tuto-archiweb.firebaseapp.com",
+          projectId: "tuto-archiweb",
+          storageBucket: "tuto-archiweb.firebasestorage.app",
+          messagingSenderId: "527674016230",
+          appId: "1:527674016230:web:fff8f34d3c70fccdbc1627"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        
+        let outputDiv = null;
+        
+        function log(message, type = 'info') {
+            if (!outputDiv) {
+                outputDiv = document.getElementById('output');
+            }
+            
+            const timestamp = new Date().toLocaleTimeString();
+            const colors = {
+                info: '#d4d4d4',
+                success: '#4ec9b0',
+                error: '#f48771',
+                warning: '#dcdcaa'
+            };
+            
+            const color = colors[type] || colors.info;
+            outputDiv.innerHTML += `<span style="color: ${color}">[${timestamp}] ${message}</span>\n`;
+            
+            const consoleDiv = document.getElementById('console');
+            consoleDiv.scrollTop = consoleDiv.scrollHeight;
+        }
+        
+        async function updateUsersCollection() {
+            log("🔄 Mise à jour de la collection 'users'...", 'info');
+            
+            try {
+                const usersSnapshot = await getDocs(collection(db, "users"));
+                let count = 0;
+                
+                for (const userDoc of usersSnapshot.docs) {
+                    const userId = userDoc.id;
+                    
+                    await updateDoc(doc(db, "users", userId), {
+                        peerId: null,
+                        isOnline: false,
+                        lastSeen: serverTimestamp()
+                    });
+                    
+                    count++;
+                    log(`  ✅ User ${userId} mis à jour`, 'success');
+                }
+                
+                log(`✅ ${count} utilisateurs mis à jour dans 'users'`, 'success');
+                
+            } catch (error) {
+                log(`❌ Erreur mise à jour 'users': ${error.message}`, 'error');
+            }
+        }
+        
+        async function updateTeachersCollection() {
+            log("🔄 Mise à jour de la collection 'teachers'...", 'info');
+            
+            try {
+                const teachersSnapshot = await getDocs(collection(db, "teachers"));
+                let count = 0;
+                
+                for (const teacherDoc of teachersSnapshot.docs) {
+                    const teacherId = teacherDoc.id;
+                    const data = teacherDoc.data();
+                    
+                    await updateDoc(doc(db, "teachers", teacherId), {
+                        peerId: null,
+                        isOnline: false,
+                        isAvailable: false,
+                        lastSeen: serverTimestamp(),
+                        rating: data.rating || 4.5,
+                        totalSessions: data.totalSessions || 0
+                    });
+                    
+                    count++;
+                    log(`  ✅ Teacher ${teacherId} mis à jour`, 'success');
+                }
+                
+                log(`✅ ${count} tuteurs mis à jour dans 'teachers'`, 'success');
+                
+            } catch (error) {
+                log(`❌ Erreur mise à jour 'teachers': ${error.message}`, 'error');
+            }
+        }
+        
+        async function createStudentsCollection() {
+            log("🔄 Création de la collection 'students'...", 'info');
+            
+            try {
+                const usersSnapshot = await getDocs(collection(db, "users"));
+                let count = 0;
+                
+                for (const userDoc of usersSnapshot.docs) {
+                    const userId = userDoc.id;
+                    const userData = userDoc.data();
+                    
+                    if (userData.role === "student") {
+                        await setDoc(doc(db, "students", userId), {
+                            peerId: null,
+                            isOnline: false,
+                            lastSeen: serverTimestamp(),
+                            favoriteSubjects: [],
+                            createdAt: userData.createdAt || serverTimestamp()
+                        }, { merge: true });
+                        
+                        count++;
+                        log(`  ✅ Student ${userId} créé`, 'success');
+                    }
+                }
+                
+                log(`✅ ${count} étudiants créés dans 'students'`, 'success');
+                
+            } catch (error) {
+                log(`❌ Erreur création 'students': ${error.message}`, 'error');
+            }
+        }
+        
+        async function addTestTutorsData() {
+            log("🔄 Ajout de données de test pour les tuteurs...", 'info');
+            
+            try {
+                const teachersSnapshot = await getDocs(collection(db, "teachers"));
+                
+                const subjects = [
+                    "Mathématiques", "Physique", "Chimie", "Informatique",
+                    "Français", "Anglais", "Histoire", "Géographie", "SVT", "Philosophie"
+                ];
+                
+                let count = 0;
+                
+                for (const teacherDoc of teachersSnapshot.docs) {
+                    const teacherId = teacherDoc.id;
+                    const data = teacherDoc.data();
+                    
+                    if (!data.subjects || data.subjects.length === 0) {
+                        const numSubjects = 2 + Math.floor(Math.random() * 2);
+                        const tutorSubjects = [];
+                        
+                        for (let i = 0; i < numSubjects; i++) {
+                            const randomSubject = subjects[Math.floor(Math.random() * subjects.length)];
+                            if (!tutorSubjects.includes(randomSubject)) {
+                                tutorSubjects.push(randomSubject);
+                            }
+                        }
+                        
+                        await updateDoc(doc(db, "teachers", teacherId), {
+                            subjects: tutorSubjects,
+                            bio: `Tuteur spécialisé en ${tutorSubjects.join(", ")}`,
+                            rating: 3 + Math.random() * 2,
+                            totalSessions: Math.floor(Math.random() * 50)
+                        });
+                        
+                        count++;
+                        log(`  ✅ Matières ajoutées pour ${teacherId}: ${tutorSubjects.join(", ")}`, 'success');
+                    }
+                }
+                
+                log(`✅ ${count} tuteurs ont reçu des matières de test`, 'success');
+                
+            } catch (error) {
+                log(`❌ Erreur ajout données test: ${error.message}`, 'error');
+            }
+        }
+        
+        async function showSummary() {
+            log("\n📊 RÉSUMÉ DE LA BASE DE DONNÉES", 'warning');
+            log("================================\n", 'warning');
+            
+            try {
+                const usersCount = (await getDocs(collection(db, "users"))).size;
+                const teachersCount = (await getDocs(collection(db, "teachers"))).size;
+                const studentsCount = (await getDocs(collection(db, "students"))).size;
+                
+                log(`👥 Utilisateurs (users)   : ${usersCount}`, 'info');
+                log(`👨‍🏫 Tuteurs (teachers)      : ${teachersCount}`, 'info');
+                log(`👨‍🎓 Étudiants (students)    : ${studentsCount}`, 'info');
+                
+                const teachersSnapshot = await getDocs(collection(db, "teachers"));
+                const subjectsCount = {};
+                
+                teachersSnapshot.forEach(doc => {
+                    const subjects = doc.data().subjects || [];
+                    subjects.forEach(subject => {
+                        subjectsCount[subject] = (subjectsCount[subject] || 0) + 1;
+                    });
+                });
+                
+                log("\n📚 Tuteurs par matière :", 'warning');
+                Object.entries(subjectsCount)
+                    .sort((a, b) => b[1] - a[1])
+                    .forEach(([subject, count]) => {
+                        log(`  ${subject}: ${count} tuteur(s)`, 'info');
+                    });
+                
+            } catch (error) {
+                log(`❌ Erreur résumé: ${error.message}`, 'error');
+            }
+        }
+        
+        window.runMigration = async function() {
+            const consoleDiv = document.getElementById('console');
+            const spinner = document.getElementById('spinner');
+            const btn = document.querySelector('.btn-run');
+            
+            outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = '';
+            
+            consoleDiv.classList.add('active');
+            spinner.classList.add('active');
+            btn.disabled = true;
+            btn.textContent = '⏳ Migration en cours...';
+            
+            log("🚀 DÉMARRAGE DE LA MISE À JOUR FIRESTORE", 'warning');
+            log("=========================================\n", 'warning');
+            
+            const startTime = Date.now();
+            
+            try {
+                await updateUsersCollection();
+                log("");
+                
+                await updateTeachersCollection();
+                log("");
+                
+                await createStudentsCollection();
+                log("");
+                
+                const addTestData = confirm("Voulez-vous ajouter des matières de test aux tuteurs ?\n(Recommandé si vos tuteurs n'ont pas encore de matières)");
+                if (addTestData) {
+                    await addTestTutorsData();
+                    log("");
+                }
+                
+                await showSummary();
+                
+                const duration = ((Date.now() - startTime) / 1000).toFixed(2);
+                
+                log("\n✅ MIGRATION TERMINÉE AVEC SUCCÈS !", 'success');
+                log(`⏱️  Durée: ${duration}s`, 'success');
+                
+                btn.textContent = '✅ Migration terminée !';
+                btn.style.background = '#4ec9b0';
+                
+            } catch (error) {
+                log(`\n❌ ERREUR LORS DE LA MIGRATION: ${error.message}`, 'error');
+                btn.disabled = false;
+                btn.textContent = '🔄 Réessayer la migration';
+            } finally {
+                spinner.classList.remove('active');
+            }
+        };
+    </script>
+</body>
+</html>
