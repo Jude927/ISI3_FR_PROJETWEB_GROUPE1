@@ -484,11 +484,7 @@
 
            
             // Bouton sauvegarder
-            if (saveBtn) {
-                saveBtn.addEventListener('click', function () {
-                    alert('Paramètres enregistrés avec succès !');
-                });
-            }
+            
         });
     </script>
 
@@ -507,7 +503,7 @@
             updateDoc
         } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        import { db } from "../js/auth/firebase-config.js";
+        import {auth, db} from "../js/auth/firebase-config.js";
 
         
         let currentUser = null;
@@ -533,7 +529,12 @@
                 setTimeout(() => toast.remove(), 300);
             }, 3000);
         }
-
+        if (saveBtn) {
+                saveBtn.addEventListener('click', function () {
+                  //  alert('');
+                    showToast("Paramètres enregistrés avec succès !");
+                });
+            }
         onAuthStateChanged(auth, (user) => {
             if (!user) return;
 
@@ -667,14 +668,7 @@
             });
             
             // Gestion de la déconnexion mobile
-            if (mobileLogoutBtn) {
-                mobileLogoutBtn.addEventListener('click', function() {
-                    if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
-                        localStorage.removeItem('userToken');
-                        window.location.href = '../index.html';
-                    }
-                });
-            }
+           
             
             // Gestion du redimensionnement
             window.addEventListener('resize', function() {

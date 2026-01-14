@@ -7,15 +7,9 @@
     <title>Djangou - Messagerie Étudiant</title>
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-
-
-
-    
     <style type="text/tailwindcss">
         :root {
             --p-accent-orange: #D59D80;
@@ -39,37 +33,40 @@
         }
         
         /* Bulles de chat améliorées */
-        .chat-bubble-sent {
-            align-self: flex-end;
-            background: var(--p-accent-orange);
-            color: white;
-            border-radius: 1.2rem 1.2rem 0.2rem 1.2rem;
-            padding: 12px 14px;
-            max-width: 75%;
-            box-shadow: 0 4px 12px rgba(213, 157, 128, 0.2);
-            animation: fadeUp .25s ease-out;
-        }
-
-        .dark .chat-bubble-sent {
-            background: #D59D80;
-            box-shadow: 0 4px 12px rgba(213, 157, 128, 0.3);
-        }
-
+        .chat-bubble-sent,
         .chat-bubble-received {
-            align-self: flex-start;
-            background: linear-gradient(145deg, var(--chat-received), #eef2f7);
-            color: var(--text-main);
-            border-radius: 1.2rem 1.2rem 1.2rem 0.2rem;
-            padding: 14px 16px;
-            max-width: 80%;
-            box-shadow: 0 6px 20px rgba(0,0,0,.08);
-            animation: fadeUp .25s ease-out;
+            width: fit-content;
+            max-width: 92%;
+            font-size: 13px;
         }
 
-        .dark .chat-bubble-received {
-            background: linear-gradient(145deg, #1E293B, #1a202c);
-            box-shadow: 0 6px 20px rgba(0,0,0,.2);
+        @media (min-width: 768px) {
+            .chat-bubble-sent,
+            .chat-bubble-received {
+                max-width: 75%;
+                font-size: 14px;
+            }
         }
+
+       .dark .chat-bubble-sent {
+    background: linear-gradient(135deg, #D59D80 0%, #B76B43 100%);
+    color: white;
+    border-radius: 1.2rem 1.2rem 0.2rem 1.2rem;
+    padding: 10px 12px;
+    box-shadow: 0 4px 12px rgba(213, 157, 128, 0.3);
+    animation: fadeUp .25s ease-out;
+    border: 1px solid rgba(183, 107, 67, 0.3);
+}
+
+.dark .chat-bubble-received {
+    background: linear-gradient(135deg, #2A3342 0%, #1A202C 100%);
+    color: #E2E8F0;
+    border-radius: 1.2rem 1.2rem 1.2rem 0.2rem;
+    padding: 10px 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    animation: fadeUp .25s ease-out;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
 
         @keyframes fadeUp {
             from {
@@ -107,32 +104,16 @@
             @apply rounded-[2rem] transition-all duration-300 bg-[var(--card-bg)] shadow-lg border border-[var(--border-ui)]; 
         }
 
-        .dark .premium-card {
-            @apply bg-[#0F172A] border-gray-800 shadow-xl;
-        }
-
         .nav-item { 
             @apply flex items-center gap-3 px-5 py-3 rounded-[1.5rem] transition-all duration-300 w-full text-slate-500 hover:bg-white/10 dark:hover:bg-white/5; 
         }
         
-        .dark .nav-item {
-            @apply text-gray-400 hover:bg-gray-800/50;
-        }
-
         .nav-item.active { 
             @apply bg-[var(--p-accent-orange)] text-white font-bold shadow-lg shadow-orange-900/10; 
         }
 
-        .dark .nav-item.active {
-            @apply bg-[#D59D80] shadow-orange-900/20;
-        }
-
         .conversation-item {
             @apply transition-all duration-200 hover:scale-[1.02] active:scale-[0.98];
-        }
-
-        .dark .conversation-item {
-            @apply hover:bg-gray-800/30;
         }
 
         /* Animation pour les nouveaux messages */
@@ -145,7 +126,7 @@
             animation: newMessage 0.3s ease-out;
         }
         
-        /* Indicateur de saisie - MODIFIÉ */
+        /* Indicateur de saisie */
         .typing-indicator {
             display: flex;
             align-items: center;
@@ -157,10 +138,6 @@
             margin-bottom: 8px;
             animation: fadeUp 0.3s ease-out;
         }
-
-        .dark .typing-indicator {
-            background: #1E293B;
-        }
         
         .typing-dot {
             width: 8px;
@@ -168,10 +145,6 @@
             background: var(--p-accent-orange);
             border-radius: 50%;
             animation: typing 1.4s infinite ease-in-out;
-        }
-
-        .dark .typing-dot {
-            background: #D59D80;
         }
         
         .typing-dot:nth-child(1) { animation-delay: -0.32s; }
@@ -186,115 +159,53 @@
         .chat-empty-state {
             @apply flex flex-col items-center justify-center h-full text-center p-8;
         }
-
-        .dark .chat-empty-state {
-            @apply text-gray-400;
-        }
     </style>
 </head>
 
-<body class="overflow-hidden min-h-screen md:h-screen bg-[var(--bg-main)] dark:bg-[#0b0c0c]" >
-
-    <div
-        class="fixed -top-64 -right-64 w-[800px] h-[800px] bg-gray-50/80 dark:bg-gray-800/40 rounded-full border-2 border-gray-200/70 dark:border-gray-700/50 pointer-events-none -z-10">
-    </div>
-    <div
-        class="fixed -bottom-64 -left-64 w-[800px] h-[800px] bg-gray-50/80 dark:bg-gray-800/40 rounded-full border-2 border-gray-200/70 dark:border-gray-700/50 pointer-events-none -z-10">
-    </div>
-
+<body class="overflow-hidden h-screen">
     <div class="flex h-full w-full relative">
-
+        <!-- Barre latérale -->
         <aside id="sidebar"
-            class="hidden md:flex flex-col w-24 lg:w-64 h-full bg-card-light dark:bg-[#2d2d2d] border-r border-gray-100 font-bold dark:border-gray-800 transition-all duration-300 p-4 fixed md:relative z-50 md:z-auto">
-            <div class="flex items-center justify-center lg:justify-start mb-10 px-2">
-                <button id="logoToggle"
-                    class="w-10 h-10 rounded-full bg-[#D59D80] flex items-center justify-center text-white font-bold text-xl shadow-md hover:scale-105 transition-transform">
+            class="fixed inset-y-0 left-0 w-64 flex flex-col py-8 px-5 bg-[var(--bg-sidebar)] lg:m-4 rounded-none lg:rounded-[2.5rem] z-50 transition-transform duration-300 -translate-x-full lg:translate-x-0 h-full lg:h-[calc(100vh-2rem)] border-r border-[var(--border-ui)] lg:border shadow-xl">
+            <div class="mb-10 flex items-center gap-4 px-2">
+                <div class="w-10 h-10 rounded-2xl bg-[var(--p-accent-orange)] flex items-center justify-center text-white font-bold text-lg">
                     D
-                </button>
-                <span class="hidden lg:block ml-3 text-2xl font-bold text-[#D59D80] tracking-wide">Djangou</span>
-            </div>
-            <nav class="flex-1 flex flex-col gap-2">
-                <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl bg-[#D59D80]/10 text-primary dark:bg-[#D59D80]20 dark:text-[#D59D80] transition-colors hover:bg-[#D59D80]/20"
-                    href="dashboard-student.html">
-                    <span class="material-symbols-outlined text-2xl">home</span>
-                    <span data-i18n="id_nav_home" class="hidden lg:block ml-4 font-semibold">Accueil</span>
-                </a>
-                <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
-                    href="matiere-student.html">
-                    <span class="material-symbols-outlined text-2xl">school</span>
-                    <span data-i18n="id_nav_subjects" class="hidden lg:block ml-4 font-semibold">Matières</span>
-                </a>
-                <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
-                    href="#">
-                    <span class="material-symbols-outlined text-2xl">chat_bubble</span>
-                    <span data-i18n="id_nav_messages" class="hidden lg:block ml-4 font-semibold">Messages</span>
-                </a>
-                <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
-                    href="profil-student.html">
-                    <span class="material-symbols-outlined text-2xl">person</span>
-                    <span data-i18n="id_nav_profile" class="hidden lg:block ml-4 font-semibold">Profil</span>
-                </a>
-            </nav>
-
-            <div class="mt-auto flex flex-col gap-2">
-                <a class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
-                    href="settings-student.html">
-                    <span class="material-symbols-outlined text-2xl">settings</span>
-                    <span data-i18n="id_nav_settings" class="hidden lg:block ml-4 font-semibold">Paramètres</span>
-                </a>
-                <a id="logoutBtn"
-                    class="flex items-center justify-center lg:justify-start p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors"
-                    href="#">
-                    <span class="material-symbols-outlined text-2xl">logout</span>
-                    <span data-i18n="id_nav_logout" class="hidden lg:block ml-4 font-semibold">Se déconnecter</span>
-                </a>
-            </div>
-        </aside>
-
-        <!-- Sidebar mobile -->
-        <aside id="mobileSidebar"
-            class="md:hidden fixed top-0 left-0 h-full w-64 bg-card-light dark:bg-card-dark border-r border-gray-100 dark:border-gray-800 z-50 transform -translate-x-full transition-transform duration-300">
-            <div class="p-6 border-b border-gray-100 dark:border-gray-800">
-                <div class="flex items-center gap-3">
-                    <div
-                        class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xl">
-                        D
-                    </div>
-                    <span class="text-2xl font-bold text-primary">Djangou</span>
                 </div>
+                <span class="text-xl font-bold tracking-tight">Djangou</span>
+                <button id="close-sidebar" class="lg:hidden ml-auto p-2 text-slate-400 hover:text-[var(--p-accent-orange)]">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
             </div>
-            <nav class="p-4 flex flex-col gap-2">
-                <a class="flex items-center gap-4 p-3 rounded-xl bg-[#D59D80]/10 text-[#D59D80] dark:bg-[#D59D80]/20"
-                    href="dashboard-student.html">
-                    <span class="material-symbols-outlined">home</span>
-                    <span data-i18n="id_nav_home" class="font-semibold">Accueil</span>
+            
+            <nav class="flex flex-col gap-2 flex-1 overflow-y-auto">
+                <a class="nav-item" href="dashboard-student.html">
+                    <span class="material-symbols-outlined">grid_view</span>
+                    <span class="text-[13px]">Tableau de Bord</span>
                 </a>
-                <a class="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400"
-                    href="matiere-student.html">
-                    <span class="material-symbols-outlined">school</span>
-                    <span data-i18n="id_nav_subjects" class="font-semibold">Matières</span>
+                <a class="nav-item" href="matiere-student.html">
+                    <span class="material-symbols-outlined">auto_stories</span>
+                    <span class="text-[13px]">Mes Matières</span>
                 </a>
-                <a class="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400"
-                    href="#">
+                <a class="nav-item active" href="#">
                     <span class="material-symbols-outlined">chat_bubble</span>
-                    <span data-i18n="id_nav_messages" class="font-semibold">Messages</span>
+                    <span class="text-[13px]">Messages</span>
                 </a>
-                <a class="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400"
-                    href="profil-student.html">
+                <a class="nav-item" href="profil-student.html">
                     <span class="material-symbols-outlined">person</span>
-                    <span data-i18n="id_nav_profile" class="font-semibold">Profil</span>
-                </a>
-                <a class="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400"
-                    href="settings-student.html">
-                    <span class="material-symbols-outlined">settings</span>
-                    <span data-i18n="id_nav_settings" class="font-semibold">Paramètres</span>
-                </a>
-                <a class="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 mt-4"
-                    href="index.html">
-                    <span class="material-symbols-outlined">logout</span>
-                    <span data-i18n="id_nav_logout" class="font-semibold">Se déconnecter</span>
+                    <span class="text-[13px]">Mon Profil</span>
                 </a>
             </nav>
+            
+            <div class="mt-auto pt-6 border-t border-[var(--border-ui)] space-y-2">
+                <a class="nav-item" href="settings-student.html">
+                    <span class="material-symbols-outlined">settings</span>
+                    <span class="text-[13px]">Paramètres</span>
+                </a>
+                <button id="logoutBtn" class="nav-item text-rose-500 font-bold hover:bg-rose-50 dark:hover:bg-rose-950/20">
+                    <span class="material-symbols-outlined">logout</span>
+                    <span class="text-[13px]">Déconnexion</span>
+                </button>
+            </div>
         </aside>
 
         <!-- Contenu principal -->
@@ -302,85 +213,77 @@
             <!-- Header -->
             <header class="flex items-center justify-between gap-4 mb-8">
                 <div class="flex items-center gap-5">
-                    <button id="mobile-menu-toggle"
-                        class="lg:hidden w-11 h-11 flex items-center justify-center rounded-2xl border border-[var(--border-ui)] dark:border-gray-800 text-[var(--p-accent-orange)] dark:text-[#D59D80] bg-[var(--bg-sidebar)] dark:bg-gray-900">
+                    <button id="mobile-menu-toggle" class="lg:hidden w-11 h-11 flex items-center justify-center rounded-2xl border border-[var(--border-ui)] text-[var(--p-accent-orange)] bg-[var(--bg-sidebar)]">
                         <span class="material-symbols-outlined">menu</span>
                     </button>
                     <div>
-                        <h1 class="text-xl md:text-2xl font-bold dark:text-white">Messagerie</h1>
-                        <p class="text-slate-400 dark:text-gray-400 text-xs">Discute avec tes professeurs et l'assistant
-                            IA</p>
+                        <h1 class="text-xl md:text-2xl font-bold">Messagerie</h1>
+                        <p class="hidden md:block text-slate-400 text-xs">Discute avec tes professeurs et l'assistant IA</p>
                     </div>
                 </div>
-
+                
                 <div class="flex items-center gap-4">
-                    <!-- Avatar utilisateur - MODIFIÉ -->
-                    <div
-                        class="flex items-center gap-3 pl-2 md:pl-4 border-l border-[var(--border-ui)] dark:border-gray-800">
+                    <!-- Avatar utilisateur -->
+                    <div class="flex items-center gap-3 pl-2 md:pl-4 border-l border-[var(--border-ui)]">
                         <div class="text-right hidden sm:block">
-                            <p id="userName" class="text-sm font-bold text-[var(--text-main)] dark:text-white">Étudiant
-                            </p>
-                            <p id="userRole" class="text-xs text-slate-400 dark:text-gray-400">En ligne</p>
+                            <p id="userName" class="text-sm font-bold text-[var(--text-main)]">Étudiant</p>
+                            <p id="userRole" class="text-xs text-slate-400">En ligne</p>
                         </div>
-                        <a href="profil-student.html">
-                            <img id="userAvatar" alt="Photo de profil"
-                                class="w-10 h-10 rounded-xl object-cover border-2 border-[var(--p-accent-orange)] dark:border-[#D59D80] profile-avatar"
-                                src="/assets/avatars/avatardef.png" />
-                        </a>
-
+                        <img id="userAvatar" alt="Photo de profil" 
+                             class="w-10 h-10 rounded-xl object-cover border-2 border-[var(--p-accent-orange)] profile-avatar" 
+                             src="/assets/avatars/avatardef.png" />
                     </div>
                 </div>
             </header>
 
-           
+            <!-- Contenu des messages -->
             <div class="flex-1 flex flex-col lg:flex-row gap-6 min-h-0 mb-6">
-                
+                <!-- Liste des conversations -->
                 <div id="conversation-list" class="w-full lg:w-80 flex flex-col gap-4">
-                    <div class="premium-card dark:bg-[#0F172A] dark:border-gray-800 flex-1 flex flex-col p-4">
+                    <div class="premium-card flex-1 flex flex-col p-4">
                         <div class="flex justify-between items-center mb-4 px-2">
-                            <h3 class="font-bold text-sm dark:text-white">Conversations</h3>
+                            <h3 class="font-bold text-sm">Conversations</h3>
                             <div class="flex items-center gap-2">
-                                <select id="ai-category"
-                                    class="text-xs bg-transparent dark:bg-gray-900 border border-[var(--border-ui)] dark:border-gray-700 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-[var(--p-accent-orange)] dark:focus:ring-[#D59D80] dark:text-white">
-                                    <option value="general" class="dark:bg-gray-800">Général</option>
-                                    <option value="mathematiques" class="dark:bg-gray-800">Mathématiques</option>
-                                    <option value="francais" class="dark:bg-gray-800">Français</option>
-                                    <option value="physique" class="dark:bg-gray-800">Physique</option>
-                                    <option value="histoire" class="dark:bg-gray-800">Histoire</option>
+<select id="ai-category" 
+        class="text-xs font-medium bg-white dark:bg-slate-800
+               border border-slate-200 dark:border-slate-700
+               rounded-lg px-3 py-1.5
+               focus:outline-none focus:ring-1 focus:ring-[var(--p-accent-orange)] focus:border-[var(--p-accent-orange)]
+               transition-colors duration-150
+               cursor-pointer appearance-none
+               bg-[right_0.5rem_center] bg-no-repeat bg-[length:1em_1em]
+               pr-8
+               dark:text-slate-100"><option value="general">Général</option>
+                                    <option value="mathematiques">Mathématiques</option>
+                                    <option value="francais">langue</option>
+                                    <option value="physique">Physique</option>
+                                    <option value="histoire">Histoire</option>
                                 </select>
                             </div>
                         </div>
-
+                        
                         <div class="flex-1 overflow-y-auto space-y-2 pr-2">
                             <!-- Assistant IA -->
-                            <div class="conversation-item flex items-center gap-4 p-4 rounded-3xl cursor-pointer transition-all hover:bg-[var(--chat-received)] dark:hover:bg-gray-800/50 border border-transparent hover:border-[var(--border-ui)] dark:hover:border-gray-700"
-                                data-conversation-id="ia">
+                            <div class="conversation-item flex items-center gap-4 p-4 rounded-3xl cursor-pointer transition-all hover:bg-[var(--chat-received)] border border-transparent hover:border-[var(--border-ui)]" 
+                                  data-conversation-id="ia">
                                 <div class="relative">
-                                    <div
-                                        class="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#0A1128] to-[#1a237e] dark:from-gray-900 dark:to-gray-800 overflow-hidden flex items-center justify-center shadow-lg">
+                                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#0A1128] to-[#1a237e] overflow-hidden flex items-center justify-center shadow-lg">
                                         <img src="https://m.thewire.in/sortd-service/imaginary/v22-01/jpg/large/high?url=dGhld2lyZS1pbi1wcm9kLXNvcnRkL21lZGlhZjBmODY5MDAtNGM3ZC0xMWYwLWJmMjMtZjFjNDdiZWUxMTRjLmpwZw=="
                                             alt="Assistant IA" class="w-full h-full object-cover" />
                                     </div>
                                     <span class="absolute -top-1 -right-1 flex h-3 w-3">
-                                        <span
-                                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--p-accent-orange)] dark:bg-[#D59D80] opacity-75"></span>
-                                        <span
-                                            class="relative inline-flex rounded-full h-3 w-3 bg-[var(--p-accent-orange)] dark:bg-[#D59D80] border-2 border-white dark:border-slate-900"></span>
+                                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--p-accent-orange)] opacity-75"></span>
+                                        <span class="relative inline-flex rounded-full h-3 w-3 bg-[var(--p-accent-orange)] border-2 border-white dark:border-slate-900"></span>
                                     </span>
                                 </div>
                                 <div class="flex-1 min-w-0">
                                     <div class="flex justify-between items-center mb-0.5">
-                                        <h4 class="font-bold text-sm truncate dark:text-white">Assistant IA</h4>
-                                        <span
-                                            class="text-[10px] text-[var(--p-accent-orange)] dark:text-[#D59D80] font-bold">DEEPSEEK</span>
+                                        <h4 class="font-bold text-sm truncate">Assistant IA</h4>
+                                        <span class="text-[10px] text-[var(--p-accent-orange)] font-bold">DEEPSEEK</span>
                                     </div>
                                     <div class="flex items-center gap-1.5">
-                                        <span
-                                            class="text-[9px] px-1.5 py-0.5 bg-white/80 dark:bg-gray-800 text-[var(--p-accent-orange)] dark:text-[#D59D80] rounded-md font-bold uppercase">Disponible
-                                            24/7</span>
-                                        <p
-                                            class="conversation-preview text-[11px] text-slate-500 dark:text-gray-400 truncate">
-                                            Clique pour commencer une conversation</p>
+                                        <span class="text-[9px] px-1.5 py-0.5 bg-white/80 dark:bg-black/40 text-[var(--p-accent-orange)] rounded-md font-bold uppercase">Disponible 24/7</span>
+                                        <p class="conversation-preview text-[11px] text-slate-500 truncate">Clique pour commencer une conversation</p>
                                     </div>
                                 </div>
                             </div>
@@ -388,74 +291,85 @@
                     </div>
                 </div>
 
-                <!-- Panneau de chat - MODIFIÉ: caché par défaut -->
-                <div id="chat-panel" class="hidden flex-1 flex-col gap-4">
-                    <div
-                        class="premium-card dark:bg-[#0F172A] dark:border-gray-800 flex-1 flex flex-col overflow-hidden">
+                <!-- Panneau de chat - CORRIGÉ (plein écran mobile) -->
+                <div id="chat-panel" 
+                     class="hidden lg:flex
+                            fixed lg:static inset-0
+                            z-50 lg:z-auto
+                            flex-1 flex-col
+                            bg-[var(--bg-main)]">
+                    <div class="premium-card flex-1 flex flex-col overflow-hidden h-full">
                         <!-- En-tête du chat -->
-                        <div id="chat-header"
-                            class="p-5 border-b border-[var(--border-ui)] dark:border-gray-800 flex items-center justify-between bg-gradient-to-r from-[var(--card-bg)] dark:from-gray-900 to-transparent">
+                        <div id="chat-header" class="p-5 border-b border-[var(--border-ui)] flex items-center justify-between bg-gradient-to-r from-[var(--card-bg)] to-transparent">
                             <div class="flex items-center gap-4">
-                                <img id="chat-avatar"
-                                    class="w-10 h-10 rounded-xl object-cover border-2 border-[var(--p-accent-orange)] dark:border-[#D59D80]"
-                                    src="https://m.thewire.in/sortd-service/imaginary/v22-01/jpg/large/high?url=dGhld2lyZS1pbi1wcm9kLXNvcnRkL21lZGlhZjBmODY5MDAtNGM3ZC0xMWYwLWJmMjMtZjFjNDdiZWUxMTRjLmpwZw=="
-                                    alt="Assistant IA" />
+                                <img id="chat-avatar" class="w-10 h-10 rounded-xl object-cover border-2 border-[var(--p-accent-orange)]" 
+                                     src="https://m.thewire.in/sortd-service/imaginary/v22-01/jpg/large/high?url=dGhld2lyZS1pbi1wcm9kLXNvcnRkL21lZGlhZjBmODY5MDAtNGM3ZC0xMWYwLWJmMjMtZjFjNDdiZWUxMTRjLmpwZw==" 
+                                     alt="Assistant IA" />
                                 <div>
-                                    <h4 id="chat-name" class="font-bold text-sm dark:text-white">Assistant IA</h4>
-                                    <p id="chat-status"
-                                        class="text-[10px] text-emerald-500 dark:text-emerald-400 font-bold uppercase tracking-widest flex items-center gap-1">
-                                        <span
-                                            class="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse"></span>
-                                        En ligne
+                                    <h4 id="chat-name" class="font-bold text-sm">Assistant IA</h4>
+                                    <p id="chat-status" class="text-[10px] text-emerald-500 font-bold uppercase tracking-widest flex items-center gap-1">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> En ligne
                                     </p>
                                 </div>
                             </div>
-
+                            
                             <div class="flex items-center gap-2">
-                                <button id="back-to-list"
-                                    class="lg:hidden p-2 text-slate-400 dark:text-gray-400 hover:text-[var(--p-accent-orange)] dark:hover:text-[#D59D80]">
+                                <button id="back-to-list" class="lg:hidden p-2 text-slate-400 hover:text-[var(--p-accent-orange)]">
                                     <span class="material-symbols-outlined">arrow_back</span>
                                 </button>
                             </div>
                         </div>
 
-                        <!-- Zone des messages - MODIFIÉ: vide par défaut -->
+                        <!-- Zone des messages - CORRIGÉ (scroll fluide) -->
                         <div id="chat-messages"
-                            class="flex-1 overflow-y-auto no-scrollbar p-6 pb-20 md:pb-6 flex flex-col gap-4 chat-empty-state dark:bg-gray-900/20">
-                            <div class="text-center">
-                                <span
-                                    class="material-symbols-outlined text-5xl text-[var(--p-accent-orange)]/30 dark:text-[#D59D80]/30 mb-4">
-                                    forum
-                                </span>
-                                <p class="text-slate-400 dark:text-gray-500 text-sm">Sélectionne une conversation pour
-                                    commencer à discuter</p>
+                             class="flex-1 overflow-y-auto no-scrollbar
+                                    px-4 py-3 md:p-6
+                                    flex flex-col gap-3
+                                    overscroll-contain
+                                    touch-pan-y">
+                            <div class="chat-empty-state">
+                                <div class="text-center">
+                                    <span class="material-symbols-outlined text-5xl text-[var(--p-accent-orange)]/30 mb-4">
+                                        forum
+                                    </span>
+                                    <p class="text-slate-400 text-sm">Sélectionne une conversation pour commencer à discuter</p>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Zone de saisie - MODIFIÉ: désactivée par défaut -->
-                        <div class="sticky bottom-0 p-5 border-t border-[var(--border-ui)] dark:border-gray-800 bg-[var(--card-bg)] dark:bg-[#0F172A] to-transparent z-40"
-                            id="message-input-container">
-                            <div
-                                class="flex items-center gap-3 bg-black/5 dark:bg-white/5 p-2 rounded-[2rem] border border-[var(--border-ui)] dark:border-gray-700">
+                        <!-- Zone de saisie - CORRIGÉ (input toujours visible) -->
+                        <div id="message-input-container"
+                             class="sticky bottom-0
+                                    p-3 md:p-5
+                                    bg-[var(--card-bg)]
+                                    border-t border-[var(--border-ui)]
+                                    z-50
+                                    opacity-50 pointer-events-none">
+                            <div class="flex items-center gap-3 bg-black/5 dark:bg-white/5 p-2 rounded-[2rem] border border-[var(--border-ui)]">
                                 <div class="flex items-center gap-1 pl-1">
-                                    <button class="p-2 text-slate-400 dark:text-gray-500">
+                                    <button class="p-2 text-slate-400">
                                         <span class="material-symbols-outlined">attach_file</span>
                                     </button>
-                                    <button class="p-2 text-slate-400 dark:text-gray-500">
+                                    <button class="p-2 text-slate-400">
                                         <span class="material-symbols-outlined">image</span>
                                     </button>
                                 </div>
-
+                                
                                 <input id="messageInput"
-                                    class="flex-1 bg-transparent border-none text-sm outline-none focus:ring-0 placeholder:text-slate-400 dark:placeholder:text-gray-500 px-2 py-1 dark:text-white"
-                                    placeholder="Écris ton message..." type="text" autocomplete="off" />
-
+                                    class="flex-1 bg-transparent border-none text-sm outline-none focus:ring-0 placeholder:text-slate-400 px-2 py-1"
+                                    placeholder="Sélectionne d'abord une conversation..." 
+                                    type="text" 
+                                    autocomplete="off" 
+                                    disabled />
+                                
                                 <div class="flex items-center gap-1 pr-1">
-                                    <button class="p-2 text-slate-400 dark:text-gray-500">
+                                    <button class="p-2 text-slate-400">
                                         <span class="material-symbols-outlined">mood</span>
                                     </button>
                                     <button id="sendBtn"
-                                        class="w-10 h-10 bg-[var(--p-accent-orange)] dark:bg-[#D59D80] text-white rounded-full flex items-center justify-center hover:opacity-90 active:scale-95 transition-all cursor-pointer">
+                                        class="w-10 h-10 bg-gray-300 dark:bg-gray-700 text-white rounded-full flex items-center justify-center cursor-not-allowed">
+                                        <span class="material-symbols-outlined text-lg">send</span>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -466,35 +380,35 @@
     </div>
 
     <!-- Scripts externes -->
-    <script src="/js/utils/dark-white.js"></script>
-    <script type="module" src="/js/auth/logout.js"></script>
-    <script type="module" src="/js/utils/avatar-sync.js"></script>
-    <script type="module" src="/js/peer/ia-chat-student.js"></script>
-
-
+    <script src="../js/utils/dark-white.js"></script>
+    <script type="module" src="../js/auth/logout.js"></script>
+    <script type="module" src="../js/utils/avatar-sync.js"></script>
+    <script type="module" src="../js/peer/ia-chat-student .js"></script>
+    
+    <!-- Script minimal pour la gestion UI -->
     <script>
         // Gestion basique de la sidebar mobile
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
             const closeSidebar = document.getElementById('close-sidebar');
             const sidebar = document.getElementById('sidebar');
-
+            
             if (mobileMenuToggle) {
-                mobileMenuToggle.addEventListener('click', function () {
+                mobileMenuToggle.addEventListener('click', function() {
                     sidebar.classList.remove('-translate-x-full');
                 });
             }
-
+            
             if (closeSidebar) {
-                closeSidebar.addEventListener('click', function () {
+                closeSidebar.addEventListener('click', function() {
                     sidebar.classList.add('-translate-x-full');
                 });
             }
-
+            
             // Gestion du thème
             const themeToggle = document.getElementById('theme-toggle');
             if (themeToggle) {
-                themeToggle.addEventListener('click', function () {
+                themeToggle.addEventListener('click', function() {
                     const html = document.documentElement;
                     const isDark = html.classList.contains('dark');
                     html.classList.toggle('dark', !isDark);
@@ -502,48 +416,7 @@
                     localStorage.setItem('theme', isDark ? 'light' : 'dark');
                 });
             }
-
-            // Gestion responsive
-            function handleResponsive() {
-                if (window.innerWidth >= 1024) {
-                    const conversationList = document.getElementById('conversation-list');
-                    const chatPanel = document.getElementById('chat-panel');
-
-                    if (conversationList && chatPanel) {
-                        conversationList.classList.remove('hidden');
-                        // Le chat panel reste caché jusqu'au clic
-                    }
-                }
-            }
-
-            window.addEventListener('resize', handleResponsive);
-            handleResponsive();
         });
-
-        const messageInput = document.getElementById('messageInput');
-if (messageInput) {
-    // Focus automatique et scroll sur mobile
-    messageInput.addEventListener('focus', function() {
-        if (window.innerWidth < 768) {
-            setTimeout(() => {
-                this.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }, 300);
-        }
-    });
-    
-    // Envoyer avec Enter
-    messageInput.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter' && !e.shiftKey) {
-            e.preventDefault();
-            const sendBtn = document.getElementById('sendBtn');
-            if (sendBtn) sendBtn.click();
-        }
-    });
-}
     </script>
-    <script type="module" src="../js/utils/dark-white.js"></script>
-    <script type="module" src="../js/lang.js"></script>
-    <script type="module" src="../js/auth/logout.js"></script>
 </body>
-
 </html>

@@ -543,7 +543,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // Charge l'historique Firestore
             const aiHistory = await loadHistoryFirestore(user.uid);
             const firestoreIA = groupAIHistoryByCategory(aiHistory);
-            store.ia = mergeAIStore(store.ia, firestoreIA);
+           store.ia = firestoreIA || {};
             saveStorage(store);
             
         } catch (error) {
