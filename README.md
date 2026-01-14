@@ -66,7 +66,10 @@ Git / GitHub
 
 Versionnement et collaboration
 
- 
+→ URL de la plate-forme hébergé
+
+   https://tuto-archiweb.web.app
+   
 → Installation et exécution
 Clonage du dépôt
 
