@@ -6,6 +6,55 @@
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { db } from "../auth/firebase-config.js";
 import { doc, getDoc, collection, query, where, getDocs, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { currentLanguage } from "../lang.js";
+
+/*************************************
+ * TRADUCTIONS
+ *************************************/
+const translations = {
+    fr: {
+        student: "Étudiant",
+        studentRole: "Étudiant",
+        welcome: "Bonjour",
+        loadingError: "Erreur lors du chargement",
+        subjects: "Matières",
+        instructors: "Instructeurs",
+        languages: "Langues",
+        languagesDesc: "Apprentissage des langues",
+        mathematics: "Mathématiques",
+        mathematicsDesc: "Algèbre, géométrie, calcul",
+        computerScience: "Informatique",
+        computerScienceDesc: "Programmation, algorithmes",
+        physicsChemistry: "Physique/Chimie",
+        physicsChemistryDesc: "Physique, chimie, biologie",
+        sciences: "Sciences",
+        errorLoadingSubjects: "Erreur lors du chargement des matières",
+        errorLoadingInstructors: "Erreur lors du chargement des instructeurs",
+        online: "En ligne",
+        offline: "Hors ligne"
+    },
+    en: {
+        student: "Student",
+        studentRole: "Student",
+        welcome: "Hello",
+        loadingError: "Error loading",
+        subjects: "Subjects",
+        instructors: "Instructors",
+        languages: "Languages",
+        languagesDesc: "Language learning",
+        mathematics: "Mathematics",
+        mathematicsDesc: "Algebra, geometry, calculus",
+        computerScience: "Computer Science",
+        computerScienceDesc: "Programming, algorithms",
+        physicsChemistry: "Physics/Chemistry",
+        physicsChemistryDesc: "Physics, chemistry, biology",
+        sciences: "Sciences",
+        errorLoadingSubjects: "Error loading subjects",
+        errorLoadingInstructors: "Error loading instructors",
+        online: "Online",
+        offline: "Offline"
+    }
+};
 
 /*************************************
  * RÉFÉRENCES HTML
@@ -59,25 +108,27 @@ async function chargerInfosEtudiant(userId) {
         }
 
         const data = userSnap.data();
+        const t = translations[currentLanguage];
 
         // 🔹 Nom complet
-        userName.textContent = data.firstName || data.username || "Étudiant";
+        userName.textContent = data.firstName || data.username || t.student;
         userName.classList.remove("loading-pulse");
 
         // 🔹 Rôle + classe
-        userRole.textContent = "Étudiant" + (data.classe ? ` • ${data.classe}` : "");
+        const roleText = t.studentRole + (data.classe ? ` • ${data.classe}` : "");
+        userRole.textContent = roleText;
         userRole.classList.remove("loading-pulse");
 
         // 🔹 Message de bienvenue (on prend le premier prénom)
-        const prenom = (data.firstName || data.username || "Étudiant").split(" ")[0];
-        welcomeText.textContent = `Bonjour, ${prenom} 👋`;
+        const prenom = (data.firstName || data.username || t.student).split(" ")[0];
+        welcomeText.textContent = `${t.welcome}, ${prenom} 👋`;
 
         // 🔹 Avatar dynamique
         if (data.avatar) {
             userAvatar.src = data.avatar;
         } else {
             userAvatar.src = "https://ui-avatars.com/api/?name=" +
-                encodeURIComponent(data.firstName || data.username || "Étudiant") +
+                encodeURIComponent(data.firstName || data.username || t.student) +
                 "&background=D59D80&color=fff&size=128";
         }
         userAvatar.classList.remove("loading-pulse");
@@ -94,39 +145,40 @@ async function chargerMatieres(userId) {
     if (!subjectsContainer) return;
 
     try {
-        // Ici, vous feriez un appel Firestore pour récupérer les vraies données
-        // Pour l'exemple, on utilise des données d'exemple
+        const t = translations[currentLanguage];
+        
+        // Données de matières avec traductions
         const matieresExemple = [
             {
                 id: "1",
-                name: "langues",
+                name: t.languages,
                 icon: "translate",
                 color: "pastel-green",
-                description: "Apprentissage des langues",
+                description: t.languagesDesc,
                 progress: 75
             },
             {
                 id: "2",
-                name: "Mathématiques",
+                name: t.mathematics,
                 icon: "functions",
                 color: "pastel-orange",
-                description: "Algèbre, géométrie, calcul",
+                description: t.mathematicsDesc,
                 progress: 60
             },
             {
                 id: "3",
-                name: "Informatique",
+                name: t.computerScience,
                 icon: "computer",
                 color: "pastel-blue",
-                description: "Programmation, algorithmes",
+                description: t.computerScienceDesc,
                 progress: 85
             },
             {
                 id: "4",
-                name: "Physique/Chimie",
+                name: t.physicsChemistry,
                 icon: "science",
                 color: "pastel-purple",
-                description: "Physique, chimie, biologie",
+                description: t.physicsChemistryDesc,
                 progress: 45
             }
         ];
@@ -142,18 +194,17 @@ async function chargerMatieres(userId) {
         
     } catch (erreur) {
         console.log("Erreur chargement matières :", erreur);
+        const t = translations[currentLanguage];
         subjectsContainer.innerHTML = `
             <div class="col-span-2 text-center py-8">
                 <div class="inline-block p-4 rounded-full bg-red-100 dark:bg-red-900/20 mb-4">
                     <span class="material-icons-round text-3xl text-red-500">error</span>
                 </div>
-                <p class="text-red-500 dark:text-red-400">Erreur lors du chargement des matières</p>
+                <p class="text-red-500 dark:text-red-400">${t.errorLoadingSubjects}</p>
             </div>
         `;
     }
 }
-
-
 
 /*************************************
  * CHARGER LES INSTRUCTEURS
@@ -162,21 +213,25 @@ async function chargerInstructeurs(userId) {
     if (!instructorsContainer) return;
 
     try {
-        // Ici, vous feriez un appel Firestore pour récupérer les vraies données
+        const t = translations[currentLanguage];
+        
+        // Données d'instructeurs avec traductions
         const instructeursExemple = [
             {
                 id: "1",
                 name: "Sarah Ebang",
-                subject: "Sciences",
+                subject: t.sciences,
                 status: "online",
-                avatar: ""
+                avatar: "",
+                statusText: t.online
             },
             {
                 id: "2",
                 name: "John Ndongo",
-                subject: "Mathématiques",
+                subject: t.mathematics,
                 status: "online",
-                avatar: ""
+                avatar: "",
+                statusText: t.online
             }
         ];
 
@@ -191,12 +246,13 @@ async function chargerInstructeurs(userId) {
         
     } catch (erreur) {
         console.log("Erreur chargement instructeurs :", erreur);
+        const t = translations[currentLanguage];
         instructorsContainer.innerHTML = `
             <div class="text-center py-6">
                 <div class="inline-block p-3 rounded-full bg-red-100 dark:bg-red-900/20 mb-3">
                     <span class="material-icons-round text-2xl text-red-500">error</span>
                 </div>
-                <p class="text-red-500 dark:text-red-400">Erreur lors du chargement des instructeurs</p>
+                <p class="text-red-500 dark:text-red-400">${t.errorLoadingInstructors}</p>
             </div>
         `;
     }
@@ -229,56 +285,6 @@ function createSubjectCard(matiere) {
     card.addEventListener('click', function() {
         window.location.href = `matiere-student.html?subject=${matiere.id}&name=${encodeURIComponent(matiere.name)}`;
     });
-    
-    return card;
-}
-
-/*************************************
- * CRÉER UNE CARTE DE FAVORI
- *************************************/
-function createFavoriteCard(favori) {
-    const card = document.createElement('div');
-    card.className = 'flex items-center gap-3 sm:gap-4 p-3 sm:p-4 border border-gray-100 dark:border-gray-700 rounded-lg sm:rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors cursor-pointer group';
-    
-    card.innerHTML = `
-        <div class="w-10 h-10 sm:w-14 sm:h-14 bg-pastel-green rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0">
-            <span class="material-icons-round text-teal-600 text-xl sm:text-2xl">design_services</span>
-        </div>
-        <div class="flex-1 min-w-0">
-            <h4 class="font-bold text-secondary dark:text-white group-hover:text-primary transition-colors text-sm sm:text-base truncate">
-                ${favori.name}
-            </h4>
-            <div class="flex flex-wrap gap-1 sm:gap-3 text-xs text-gray-500 dark:text-gray-400 mt-1">
-                <span class="flex items-center gap-1">
-                    <span class="material-icons-round text-xs sm:text-sm">person</span>
-                    ${favori.tutor}
-                </span>
-                <span class="flex items-center gap-1">
-                    <span class="material-icons-round text-xs sm:text-sm">star</span> ${favori.rating}
-                </span>
-                <span class="bg-${favori.status === 'Online' ? 'green' : 'red'}-100 dark:bg-${favori.status === 'Online' ? 'green' : 'red'}-700 px-2 py-0.5 rounded text-xs">${favori.status}</span>
-            </div>
-        </div>
-        <button class="text-primary hover:text-dark-brown p-1 sm:p-2 favorite-btn" data-favorite-id="${favori.id}">
-            <span class="material-icons-round text-lg sm:text-xl">bookmark</span>
-        </button>
-    `;
-    
-    // Ajouter l'événement de clic
-    card.addEventListener('click', function(e) {
-        if (!e.target.closest('.favorite-btn')) {
-            window.location.href = `tutor-details.html?id=${favori.id}`;
-        }
-    });
-    
-    // Gérer le bouton favori
-    const favoriteBtn = card.querySelector('.favorite-btn');
-    if (favoriteBtn) {
-        favoriteBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            toggleFavorite(favori.id);
-        });
-    }
     
     return card;
 }
@@ -334,11 +340,6 @@ function getColorClass(color) {
 }
 
 /*************************************
- * BASCOULER UN FAVORI
- *************************************/
-
-
-/*************************************
  * DÉMARRER UN CHAT AVEC UN INSTRUCTEUR
  *************************************/
 async function startChatWithInstructor(instructorId, instructorName) {
@@ -375,10 +376,24 @@ async function updateNotifications(userId) {
 }
 
 /*************************************
+ * FONCTION POUR RAFRAÎCHIR LES TRADUCTIONS
+ *************************************/
+export function refreshTranslations() {
+    // Cette fonction peut être appelée quand la langue change
+    const userId = localStorage.getItem("userId");
+    if (userId) {
+        chargerInfosEtudiant(userId);
+        chargerMatieres(userId);
+        chargerInstructeurs(userId);
+    }
+}
+
+/*************************************
  * EXPORTS POUR D'AUTRES FICHIERS
  *************************************/
 export { 
     chargerMatieres, 
     chargerInstructeurs,
-    updateNotifications
+    updateNotifications,
+ //   refreshTranslations
 };

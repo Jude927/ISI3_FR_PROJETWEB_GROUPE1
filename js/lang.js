@@ -4,7 +4,7 @@ const translations = {
         // Navigation
         nav_home: "Accueil",
         nav_subjects: "Matières",
-        nav_messages: "Messages",
+        nav_messages: "Chat IA",
         nav_profile: "Profil",
         nav_settings: "Paramètres",
         nav_logout: "Se déconnecter",
@@ -174,7 +174,7 @@ const translations = {
         // Navigation
         id_nav_home: "Accueil",
         id_nav_subjects: "Matières",
-        id_nav_messages: "Messages",
+        id_nav_messages: "Chat IA",
         id_nav_planning: "Planning",
         id_nav_profile: "Profil",
         id_nav_settings: "Paramètres",
@@ -220,7 +220,7 @@ const translations = {
         // Navigation
         nav_home: "Home",
         nav_subjects: "Subjects",
-        nav_messages: "Messages",
+        nav_messages: "Chat IA",
         nav_planning: "Schedule",
         nav_profile: "Profile",
         nav_settings: "Settings",
@@ -384,7 +384,7 @@ const translations = {
         // Navigation
         id_nav_home: "Home",
         id_nav_subjects: "Subjects",
-        id_nav_messages: "Messages",
+        id_nav_messages: "Chat IA",
         id_nav_planning: "Schedule",
         id_nav_profile: "Profile",
         id_nav_settings: "Settings",
@@ -429,7 +429,7 @@ const translations = {
 
 
 
-let currentLanguage = localStorage.getItem('djangou_language') || 'fr';
+export let currentLanguage = localStorage.getItem('djangou_language') || 'fr';
 
 // Fonction pour obtenir une traduction
 function t(key, replacements = {}) {

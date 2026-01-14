@@ -2,6 +2,112 @@ import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/fi
 import { auth } from "/js/auth/firebase-config.js";
 import { loadHistoryFirestore, saveToFirestore } from "/js/ai/history.js";
 import { serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { currentLanguage } from "../lang.js";
+
+/* ===============================
+   🔹 TRADUCTIONS
+   =============================== */
+const translations = {
+  fr: {
+    // Interface chat
+    selectConversation: "Sélectionne d'abord une conversation...",
+    writeMessage: "Écris ton message ici...",
+    online: "En ligne",
+    offline: "Hors ligne",
+    
+    // États vides
+    newConversation: "Nouvelle conversation avec l'assistant IA",
+    firstQuestion: "Commence par poser ta première question !",
+    noMessages: "Aucun message",
+    
+    // Indicateur de saisie
+    thinking: "L'IA réfléchit...",
+    
+    // Catégories IA
+    categoryGeneral: "Général",
+    categoryMathematics: "Mathématiques",
+    categoryPhysics: "Physique",
+    categoryChemistry: "Chimie",
+    categoryLanguages: "Langues",
+    categoryComputer: "Informatique",
+    categoryHistory: "Histoire",
+    categoryGeography: "Géographie",
+    
+    // Noms de conversations
+    aiAssistant: "Assistant IA",
+    
+    // Messages d'erreur
+    errorOccurred: "Désolé, une erreur est survenue.",
+    tryAgain: "Veuillez réessayer dans quelques instants.",
+    checkConnection: "Si le problème persiste, vérifiez votre connexion internet.",
+    
+    // Réponses simulées du professeur
+    professorResponses: [
+      "Je vais regarder ça et je te réponds rapidement.",
+      "C'est une bonne question, laisse-moi réfléchir.",
+      "Merci pour ton message, je te réponds dès que possible.",
+      "Je suis en cours pour le moment, je te réponds plus tard.",
+      "Pouvez-vous m'envoyer une photo de l'exercice pour que je puisse mieux vous aider ?"
+    ],
+    
+    // Boutons et actions
+    send: "Envoyer",
+    back: "Retour",
+    
+    // Format de temps
+    timeLocale: "fr-FR"
+  },
+  en: {
+    // Chat interface
+    selectConversation: "Select a conversation first...",
+    writeMessage: "Write your message here...",
+    online: "Online",
+    offline: "Offline",
+    
+    // Empty states
+    newConversation: "New conversation with AI assistant",
+    firstQuestion: "Start by asking your first question!",
+    noMessages: "No messages",
+    
+    // Typing indicator
+    thinking: "AI is thinking...",
+    
+    // AI Categories
+    categoryGeneral: "General",
+    categoryMathematics: "Mathematics",
+    categoryPhysics: "Physics",
+    categoryChemistry: "Chemistry",
+    categoryLanguages: "Languages",
+    categoryComputer: "Computer Science",
+    categoryHistory: "History",
+    categoryGeography: "Geography",
+    
+    
+    // Conversation names
+    aiAssistant: "AI Assistant",
+    
+    // Error messages
+    errorOccurred: "Sorry, an error occurred.",
+    tryAgain: "Please try again in a few moments.",
+    checkConnection: "If the problem persists, check your internet connection.",
+    
+    // Simulated professor responses
+    professorResponses: [
+      "I'll look at that and get back to you quickly.",
+      "That's a good question, let me think about it.",
+      "Thanks for your message, I'll reply as soon as possible.",
+      "I'm in class right now, I'll reply later.",
+      "Can you send me a photo of the exercise so I can help you better?"
+    ],
+    
+    // Buttons and actions
+    send: "Send",
+    back: "Back",
+    
+    // Time format
+    timeLocale: "en-US"
+  }
+};
 
 document.addEventListener("DOMContentLoaded", () => {
     // Éléments DOM
@@ -16,6 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const chatStatus = document.getElementById("chat-status");
     const backToList = document.getElementById("back-to-list");
     const messageInputContainer = document.getElementById("message-input-container");
+    const backToListText = backToList?.querySelector('span:not(.material-symbols-outlined)');
     
     // Variables d'état
     let currentUser = null;
@@ -31,27 +138,104 @@ document.addEventListener("DOMContentLoaded", () => {
     // Configuration des conversations
     const conversations = {
         "ia": {
-            name: "Assistant IA",
+            name: translations[currentLanguage].aiAssistant,
             avatar: "https://m.thewire.in/sortd-service/imaginary/v22-01/jpg/large/high?url=dGhld2lyZS1pbi1wcm9kLXNvcnRkL21lZGlhZjBmODY5MDAtNGM3ZC0xMWYwLWJmMjMtZjFjNDdiZWUxMTRjLmpwZw==",
-            status: "En ligne",
+            status: translations[currentLanguage].online,
             statusColor: "text-emerald-500"
         }
     };
+    
+    // Fonction pour obtenir les traductions actuelles
+    function getTranslations() {
+        return translations[currentLanguage];
+    }
+    
+    // Mettre à jour les catégories du select
+    function updateCategorySelect() {
+        if (!categorySelect) return;
+        
+        const t = getTranslations();
+        
+        // Vider les options existantes
+        categorySelect.innerHTML = '';
+        
+        // Ajouter les options traduites
+        const categories = [
+            { value: "general", text: t.categoryGeneral },
+            { value: "mathematics", text: t.categoryMathematics },
+            { value: "physics", text: t.categoryPhysics },
+            { value: "chemistry", text: t.categoryChemistry },
+            { value: "languages", text: t.categoryLanguages },
+            { value: "computer", text: t.categoryComputer },
+            { value: "history", text: t.categoryHistory },
+            { value: "geography", text: t.categoryGeography },
+           
+        ];
+        
+        categories.forEach(category => {
+            const option = document.createElement("option");
+            option.value = category.value;
+            option.textContent = category.text;
+            categorySelect.appendChild(option);
+        });
+    }
+    
+    // Mettre à jour les textes de l'interface
+    function updateUITexts() {
+        const t = getTranslations();
+        
+        // Mettre à jour le bouton d'envoi
+        if (sendBtn) {
+            const sendText = sendBtn.querySelector('span:not(.material-symbols-outlined)');
+            if (sendText) {
+                sendText.textContent = t.send;
+            }
+        }
+        
+        // Mettre à jour le bouton retour
+        if (backToListText) {
+            backToListText.textContent = t.back;
+        }
+        
+        // Mettre à jour le nom de l'assistant IA
+        if (conversations["ia"]) {
+            conversations["ia"].name = t.aiAssistant;
+            conversations["ia"].status = t.online;
+        }
+        
+        // Mettre à jour les conversations existantes dans la liste
+        document.querySelectorAll('.conversation-item').forEach(item => {
+            const nameElement = item.querySelector('.conversation-name');
+            if (nameElement && item.dataset.conversationId === "ia") {
+                nameElement.textContent = t.aiAssistant;
+            }
+        });
+        
+        // Mettre à jour le placeholder du champ de saisie
+        if (messageInput && !currentConversation) {
+            messageInput.placeholder = t.selectConversation;
+        }
+        
+        // Mettre à jour les catégories
+        updateCategorySelect();
+    }
     
     // Active/désactive la zone de saisie
     function toggleMessageInput(enabled) {
         if (!messageInputContainer) return;
         
+        const t = getTranslations();
+        
         if (enabled) {
             messageInputContainer.classList.remove("opacity-50", "pointer-events-none");
             messageInput.disabled = false;
-            messageInput.placeholder = "Écris ton message ici...";
+            messageInput.placeholder = t.writeMessage;
             sendBtn.classList.remove("bg-gray-300", "dark:bg-gray-700", "cursor-not-allowed");
             sendBtn.classList.add("bg-gradient-to-r", "from-[var(--p-accent-orange)]", "to-[#C0754D]", "hover:shadow-xl", "hover:scale-105");
         } else {
             messageInputContainer.classList.add("opacity-50", "pointer-events-none");
             messageInput.disabled = true;
-            messageInput.placeholder = "Sélectionne d'abord une conversation...";
+            messageInput.placeholder = t.selectConversation;
             sendBtn.classList.add("bg-gray-300", "dark:bg-gray-700", "cursor-not-allowed");
             sendBtn.classList.remove("bg-gradient-to-r", "from-[var(--p-accent-orange)]", "to-[#C0754D]", "hover:shadow-xl", "hover:scale-105");
         }
@@ -87,7 +271,8 @@ document.addEventListener("DOMContentLoaded", () => {
     
     // Fonctions utilitaires
     function nowTime() {
-        return new Date().toLocaleTimeString("fr-FR", {
+        const t = getTranslations();
+        return new Date().toLocaleTimeString(t.timeLocale, {
             hour: "2-digit",
             minute: "2-digit"
         });
@@ -95,8 +280,9 @@ document.addEventListener("DOMContentLoaded", () => {
     
     function formatTime(timestamp) {
         if (!timestamp) return "";
+        const t = getTranslations();
         const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
-        return date.toLocaleTimeString("fr-FR", {
+        return date.toLocaleTimeString(t.timeLocale, {
             hour: "2-digit",
             minute: "2-digit"
         });
@@ -150,6 +336,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function createTypingIndicator() {
         if (isTypingIndicatorActive) return null;
         
+        const t = getTranslations();
         const div = document.createElement("div");
         div.className = "typing-indicator";
         div.id = "typing-indicator";
@@ -158,7 +345,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="typing-dot"></div>
             <div class="typing-dot"></div>
             <div class="typing-dot"></div>
-            <span class="text-[10px] text-slate-500 ml-2">L'IA réfléchit...</span>
+            <span class="text-[10px] text-slate-500 ml-2">${t.thinking}</span>
         `;
         
         isTypingIndicatorActive = true;
@@ -215,13 +402,14 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!messages || messages.length === 0) {
             // État vide stylisé
             chatMessages.classList.add("chat-empty-state");
+            const t = getTranslations();
             chatMessages.innerHTML = `
                 <div class="text-center">
                     <span class="material-symbols-outlined text-5xl text-[var(--p-accent-orange)]/30 mb-4">
                         forum
                     </span>
-                    <p class="text-slate-400 text-sm mb-2">Nouvelle conversation avec l'assistant IA</p>
-                    <p class="text-slate-500 text-xs">Commence par poser ta première question !</p>
+                    <p class="text-slate-400 text-sm mb-2">${t.newConversation}</p>
+                    <p class="text-slate-500 text-xs">${t.firstQuestion}</p>
                 </div>
             `;
             return;
@@ -250,11 +438,12 @@ document.addEventListener("DOMContentLoaded", () => {
         
         // Met à jour l'en-tête
         const conv = conversations[id];
+        const t = getTranslations();
         if (conv) {
             chatAvatar.src = conv.avatar;
             chatName.textContent = conv.name;
             chatStatus.innerHTML = `
-                <span class="w-1.5 h-1.5 rounded-full ${conv.status === "En ligne" ? "bg-emerald-500 animate-pulse" : "bg-slate-400"}"></span>
+                <span class="w-1.5 h-1.5 rounded-full ${conv.status === t.online ? "bg-emerald-500 animate-pulse" : "bg-slate-400"}"></span>
                 ${conv.status}
             `;
         }
@@ -265,9 +454,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const category = categorySelect?.value || "general";
             store.ia[category] ||= [];
             messages = store.ia[category];
-            
-            // Pas de message de bienvenue automatique
-            // L'utilisateur doit écrire en premier
         } else {
             store.conversations[id] ||= [];
             messages = store.conversations[id];
@@ -340,17 +526,35 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             
             // Prépare les messages pour l'API
-            const apiMessages = [
+            const t = getTranslations();
+            const categoryName = t[`category${category.charAt(0).toUpperCase() + category.slice(1)}`] || category;
+            
+            let apiMessages = [
                 { 
                     role: "system", 
-                    content: `Tu es un assistant pédagogique spécialisé pour les étudiants en ${category}. 
+
+                    content: `Tu es un assistant pédagogique spécialisé pour les étudiants en ${categoryName}. 
                             Tu parles à un étudiant qui a besoin d'aide dans ses études. 
                             Sois patient, pédagogique et encourageant. 
                             Utilise un langage simple et clair. 
                             Si tu ne connais pas la réponse, dis-le honnêtement.`
                 }
             ];
-            
+
+            if (currentLanguage === "fr") {
+                apiMessages[0].content = `Tu es un assistant pédagogique spécialisé pour les étudiants en ${categoryName}. 
+                        Tu parles à un étudiant qui a besoin d'aide dans ses études. 
+                        Sois patient, pédagogique et encourageant. 
+                        Utilise un langage simple et clair en français. 
+                        Si tu ne connais pas la réponse, dis-le honnêtement.`;
+            }
+            else {
+                apiMessages[0].content = `You are an educational assistant specialized for students in ${categoryName}. 
+                        You are talking to a student who needs help with their studies.` +
+                        ` Be patient, educational, and encouraging. 
+                        Use simple and clear language in English. 
+                        If you don't know the answer, honestly say so.`;
+            }
             // Ajoute l'historique récent
             const recentHistory = store.ia[category].slice(-10);
             recentHistory.forEach(msg => {
@@ -375,9 +579,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 })
             });
             
-            // NE PAS SUPPRIMER L'INDICATEUR ICI
-            // Il sera supprimé après avoir reçu la réponse
-            
             if (!response.ok) {
                 throw new Error(`HTTP ${response.status}: ${response.statusText}`);
             }
@@ -387,7 +588,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (data.choices && data.choices[0]) {
                 const answer = data.choices[0].message.content;
                 
-                // MAINTENANT supprime l'indicateur de saisie
+                // Supprime l'indicateur de saisie
                 removeTypingIndicator();
                 
                 const iaMessage = {
@@ -426,9 +627,10 @@ document.addEventListener("DOMContentLoaded", () => {
             // Supprime l'indicateur de saisie en cas d'erreur
             removeTypingIndicator();
             
+            const t = getTranslations();
             const errorMessage = {
                 from: "them",
-                text: "Désolé, une erreur est survenue. Veuillez réessayer dans quelques instants. Si le problème persiste, vérifiez votre connexion internet.",
+                text: `${t.errorOccurred} ${t.tryAgain} ${t.checkConnection}`,
                 time: nowTime()
             };
             
@@ -446,13 +648,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (currentConversation === "ia") return;
         
         setTimeout(() => {
-            const responses = [
-                "Je vais regarder ça et je te réponds rapidement.",
-                "C'est une bonne question, laisse-moi réfléchir.",
-                "Merci pour ton message, je te réponds dès que possible.",
-                "Je suis en cours pour le moment, je te réponds plus tard.",
-                "Pouvez-vous m'envoyer une photo de l'exercice pour que je puisse mieux vous aider ?"
-            ];
+            const t = getTranslations();
+            const responses = t.professorResponses;
             
             const randomResponse = responses[Math.floor(Math.random() * responses.length)];
             
@@ -539,11 +736,14 @@ document.addEventListener("DOMContentLoaded", () => {
         setUserStorage(user.uid);
         store = loadStorage();
         
+        // Mettre à jour les textes de l'interface
+        updateUITexts();
+        
         try {
             // Charge l'historique Firestore
             const aiHistory = await loadHistoryFirestore(user.uid);
             const firestoreIA = groupAIHistoryByCategory(aiHistory);
-           store.ia = firestoreIA || {};
+            store.ia = firestoreIA || {};
             saveStorage(store);
             
         } catch (error) {
@@ -553,9 +753,6 @@ document.addEventListener("DOMContentLoaded", () => {
         // Met à jour les aperçus
         updateAllConversations();
         
-        // NE PAS OUVRIRE AUTOMATIQUEMENT L'IA
-        // Laisser l'utilisateur cliquer
-        
         // Configure les écouteurs
         setupEventListeners();
         
@@ -563,6 +760,19 @@ document.addEventListener("DOMContentLoaded", () => {
         toggleMessageInput(false);
     });
 });
+
+// Fonction pour rafraîchir les traductions
+export function refreshTranslations() {
+    // Cette fonction peut être appelée quand la langue change
+    if (typeof updateUITexts === 'function') {
+        updateUITexts();
+        
+        // Si une conversation est ouverte, la recharger
+        if (typeof openConversation === 'function' && currentConversation) {
+            openConversation(currentConversation);
+        }
+    }
+}
 
 // Gestion de l'ouverture automatique de l'IA - DÉSACTIVÉ
 document.addEventListener("DOMContentLoaded", () => {

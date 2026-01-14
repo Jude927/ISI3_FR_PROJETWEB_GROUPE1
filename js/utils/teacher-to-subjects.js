@@ -6,6 +6,89 @@ import {
   getDocs,
   orderBy
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { currentLanguage } from "../lang.js";
+
+/* ===============================
+   🔹 TRADUCTIONS
+   =============================== */
+const translations = {
+  fr: {
+    // Interface principale
+    subjectTitle: "Tuteurs en",
+    selectSubject: "Sélectionnez une matière pour voir les tuteurs",
+    loadingTutors: "Chargement des tuteurs...",
+    noTutorsAvailable: "Aucun tuteur disponible",
+    noTutorsMessage: "Aucun tuteur n'est disponible pour cette matière pour le moment.",
+    loadingError: "Erreur de chargement",
+    loadingErrorMessage: "Impossible de charger la liste des tuteurs.",
+    
+    // Carte enseignant
+    tutor: "Tuteur",
+    available: "Disponible",
+    unavailable: "Indisponible",
+    emailNotAvailable: "Email non disponible",
+    yearsExperience: "ans d'expérience",
+    contact: "Contacter",
+    
+    // Recherche
+    searchPlaceholder: "Rechercher un tuteur...",
+    noResults: "Aucun résultat",
+    noResultsMessage: "Aucun tuteur ne correspond à",
+    resetSearch: "Réinitialiser la recherche",
+    
+    // Matières
+    otherSubjects: "Autres matières",
+    otherSubjectsFunctionality: "Fonctionnalité à venir : proposer une nouvelle matière",
+    
+    // Matières spécifiques (si nécessaire)
+    mathematics: "Mathématiques",
+    physics: "Physique",
+    chemistry: "Chimie",
+    biology: "Biologie",
+    languages: "Langues",
+    computerScience: "Informatique",
+    history: "Histoire",
+    geography: "Géographie"
+  },
+  en: {
+    // Main interface
+    subjectTitle: "Tutors in",
+    selectSubject: "Select a subject to see tutors",
+    loadingTutors: "Loading tutors...",
+    noTutorsAvailable: "No tutors available",
+    noTutorsMessage: "No tutors are available for this subject at the moment.",
+    loadingError: "Loading error",
+    loadingErrorMessage: "Unable to load the list of tutors.",
+    
+    // Teacher card
+    tutor: "Tutor",
+    available: "Available",
+    unavailable: "Unavailable",
+    emailNotAvailable: "Email not available",
+    yearsExperience: "years of experience",
+    contact: "Contact",
+    
+    // Search
+    searchPlaceholder: "Search for a tutor...",
+    noResults: "No results",
+    noResultsMessage: "No tutor matches",
+    resetSearch: "Reset search",
+    
+    // Subjects
+    otherSubjects: "Other subjects",
+    otherSubjectsFunctionality: "Coming soon: propose a new subject",
+    
+    // Specific subjects
+    mathematics: "Mathematics",
+    physics: "Physics",
+    chemistry: "Chemistry",
+    biology: "Biology",
+    languages: "Languages",
+    computerScience: "Computer Science",
+    history: "History",
+    geography: "Geography"
+  }
+};
 
 /* ===============================
    🔹 ÉLÉMENTS DOM
@@ -30,11 +113,46 @@ let currentSubject = "";
    =============================== */
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Mettre à jour les textes selon la langue
+  updateUITexts();
+  
   // Ajouter l'écouteur de recherche si l'input existe
   if (searchInput) {
     setupSearch();
   }
 });
+
+/* ===============================
+   🔹 METTRE À JOUR LES TEXTE DE L'INTERFACE
+   =============================== */
+
+function updateUITexts() {
+  const t = translations[currentLanguage];
+  
+  // Mettre à jour le placeholder de recherche
+  if (searchInput) {
+    searchInput.placeholder = t.searchPlaceholder;
+  }
+  
+  // Mettre à jour le texte des cartes de matière
+  subjectCards.forEach(card => {
+    const subject = card.dataset.subject;
+    if (subject === "Autres") {
+      const titleElement = card.querySelector('h3');
+      if (titleElement) {
+        titleElement.textContent = t.otherSubjects;
+      }
+    }
+  });
+  
+  // Mettre à jour le texte du bouton retour
+  if (backBtn) {
+    const backText = backBtn.querySelector('span:not(.material-icons-round)');
+    if (backText) {
+      backText.textContent = currentLanguage === 'fr' ? 'Retour aux matières' : 'Back to subjects';
+    }
+  }
+}
 
 /* ===============================
    🔹 CLIC SUR UNE MATIÈRE
@@ -43,20 +161,24 @@ document.addEventListener('DOMContentLoaded', () => {
 subjectCards.forEach(card => {
   card.addEventListener("click", async () => {
     const subject = card.dataset.subject;
+    const t = translations[currentLanguage];
     
     if (subject === "Autres") {
       // Gérer le cas "Autres matières"
-      alert("Fonctionnalité à venir : proposer une nouvelle matière");
+      alert(t.otherSubjectsFunctionality);
       return;
     }
+    
+    // Traduire le nom de la matière si nécessaire
+    const translatedSubject = translateSubject(subject);
     
     // Cacher les matières et afficher les enseignants
     subjectsSection.classList.add("hidden");
     teachersSection.classList.remove("hidden");
     
     // Mettre à jour le titre
-    subjectTitle.textContent = `Tuteurs en ${subject}`;
-    currentSubject = subject;
+    subjectTitle.textContent = `${t.subjectTitle} ${translatedSubject}`;
+    currentSubject = translatedSubject;
     
     // Réinitialiser la recherche si active
     if (searchInput) {
@@ -64,21 +186,49 @@ subjectCards.forEach(card => {
     }
     
     // Charger les enseignants
-    await loadTeachersBySubject(subject);
+    await loadTeachersBySubject(translatedSubject);
   });
 });
+
+/* ===============================
+   🔹 TRADUIRE LE NOM DE LA MATIÈRE
+   =============================== */
+
+function translateSubject(subject) {
+  const t = translations[currentLanguage];
+  
+  // Vérifier si la matière a une traduction spécifique
+  const subjectKey = subject.toLowerCase().replace(/[^a-z]/g, '');
+  for (const [key, value] of Object.entries(t)) {
+    if (key.toLowerCase() === subjectKey) {
+      return value;
+    }
+  }
+  
+  // Si aucune traduction spécifique, retourner le sujet original
+  return subject;
+}
 
 /* ===============================
    🔹 BOUTON RETOUR
    =============================== */
 
 backBtn.addEventListener("click", () => {
+  const t = translations[currentLanguage];
+  
   // Cacher les enseignants et réafficher les matières
   teachersSection.classList.add("hidden");
   subjectsSection.classList.remove("hidden");
   
   // Vider la liste des enseignants
-  teachersList.innerHTML = '<div class="text-center py-8"><div class="inline-block p-4 rounded-full bg-gray-100 dark:bg-gray-800 mb-4"><span class="material-icons-round text-4xl text-gray-400">search</span></div><p class="text-gray-500 dark:text-gray-400">Sélectionnez une matière pour voir les tuteurs</p></div>';
+  teachersList.innerHTML = `
+    <div class="text-center py-8">
+      <div class="inline-block p-4 rounded-full bg-gray-100 dark:bg-gray-800 mb-4">
+        <span class="material-icons-round text-4xl text-gray-400">search</span>
+      </div>
+      <p class="text-gray-500 dark:text-gray-400">${t.selectSubject}</p>
+    </div>
+  `;
   
   // Réinitialiser l'état
   currentSubject = "";
@@ -94,6 +244,8 @@ backBtn.addEventListener("click", () => {
    =============================== */
 
 async function loadTeachersBySubject(subject) {
+  const t = translations[currentLanguage];
+  
   try {
     // Afficher un indicateur de chargement
     teachersList.innerHTML = `
@@ -101,7 +253,7 @@ async function loadTeachersBySubject(subject) {
         <div class="inline-block p-4 rounded-full bg-gray-100 dark:bg-gray-800 mb-4 animate-pulse">
           <span class="material-icons-round text-4xl text-primary">school</span>
         </div>
-        <p class="text-gray-500 dark:text-gray-400">Chargement des tuteurs...</p>
+        <p class="text-gray-500 dark:text-gray-400">${t.loadingTutors}</p>
       </div>
     `;
 
@@ -121,8 +273,8 @@ async function loadTeachersBySubject(subject) {
           <div class="inline-block p-4 rounded-full bg-gray-100 dark:bg-gray-800 mb-4">
             <span class="material-icons-round text-4xl text-gray-400">person_off</span>
           </div>
-          <h3 class="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-2">Aucun tuteur disponible</h3>
-          <p class="text-gray-500 dark:text-gray-400">Aucun tuteur n'est disponible pour cette matière pour le moment.</p>
+          <h3 class="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-2">${t.noTutorsAvailable}</h3>
+          <p class="text-gray-500 dark:text-gray-400">${t.noTutorsMessage}</p>
         </div>
       `;
       return;
@@ -142,8 +294,8 @@ async function loadTeachersBySubject(subject) {
         <div class="inline-block p-4 rounded-full bg-red-100 dark:bg-red-900/30 mb-4">
           <span class="material-icons-round text-4xl text-red-500">error</span>
         </div>
-        <h3 class="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-2">Erreur de chargement</h3>
-        <p class="text-gray-500 dark:text-gray-400">Impossible de charger la liste des tuteurs.</p>
+        <h3 class="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-2">${t.loadingError}</h3>
+        <p class="text-gray-500 dark:text-gray-400">${t.loadingErrorMessage}</p>
       </div>
     `;
   }
@@ -154,6 +306,8 @@ async function loadTeachersBySubject(subject) {
    =============================== */
 
 function createTeacherCard(teacher) {
+  const t = translations[currentLanguage];
+  
   const card = document.createElement("div");
   card.className = "bg-white dark:bg-card-dark rounded-2xl p-6 border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-shadow";
   
@@ -166,16 +320,16 @@ function createTeacherCard(teacher) {
       </div>
       <div class="flex-1">
         <div class="flex justify-between items-start mb-2">
-          <h3 class="font-bold text-lg text-secondary dark:text-white">${teacher.fullName || "Tuteur"}</h3>
+          <h3 class="font-bold text-lg text-secondary dark:text-white">${teacher.fullName || t.tutor}</h3>
           <span class="inline-flex items-center gap-1 text-sm ${teacher.available ? 'text-green-600 dark:text-green-400' : 'text-gray-500'}">
             <span class="material-icons-round text-sm">circle</span>
-            ${teacher.available ? "Disponible" : "Indisponible"}
+            ${teacher.available ? t.available : t.unavailable}
           </span>
         </div>
         
         <p class="text-gray-600 dark:text-gray-400 mb-3">
           <span class="material-icons-round text-sm align-text-bottom mr-1">mail</span>
-          ${teacher.email || "Email non disponible"}
+          ${teacher.email || t.emailNotAvailable}
         </p>
         
         <div class="flex flex-wrap gap-2 mb-4">
@@ -186,17 +340,15 @@ function createTeacherCard(teacher) {
           
           <span class="inline-flex items-center gap-1 px-3 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300 rounded-full text-sm">
             <span class="material-icons-round text-sm">school</span>
-            ${teacher.experience || 0} ans d'expérience
+            ${teacher.experience || 0} ${t.yearsExperience}
           </span>
         </div>
         
         <div class="flex gap-2">
           <button class="contact-btn flex-1 px-4 py-2 bg-primary text-white rounded-lg hover:bg-opacity-90 transition-colors flex items-center justify-center gap-2">
             <span class="material-icons-round">message</span>
-            Contacter
+            ${t.contact}
           </button>
-          
-        
         </div>
       </div>
     </div>
@@ -242,6 +394,7 @@ function setupSearch() {
    =============================== */
 
 function filterTeachersInList(searchTerm) {
+  const t = translations[currentLanguage];
   const teacherCards = teachersList.querySelectorAll('.bg-white, .bg-card-dark');
   let visibleCount = 0;
   
@@ -266,11 +419,11 @@ function filterTeachersInList(searchTerm) {
       <div class="inline-block p-4 rounded-full bg-gray-100 dark:bg-gray-800 mb-4">
         <span class="material-icons-round text-4xl text-gray-400">search_off</span>
       </div>
-      <h3 class="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-2">Aucun résultat</h3>
-      <p class="text-gray-500 dark:text-gray-400">Aucun tuteur ne correspond à "${searchTerm}"</p>
+      <h3 class="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-2">${t.noResults}</h3>
+      <p class="text-gray-500 dark:text-gray-400">${t.noResultsMessage} "${searchTerm}"</p>
       <button onclick="window.location.reload()" 
               class="mt-4 px-4 py-2 bg-primary text-white rounded-lg hover:bg-opacity-90 transition-colors">
-        Réinitialiser la recherche
+        ${t.resetSearch}
       </button>
     `;
     
@@ -296,9 +449,21 @@ function filterTeachersInList(searchTerm) {
 
 function contactTeacher(teacher) {
   // Rediriger vers la page de chat
-  window.location.href = `chat-student.html?teacher=${teacher.fullName}&email=${teacher.email}`;
+  window.location.href = `chat-student.html?teacher=${encodeURIComponent(teacher.fullName || '')}&email=${encodeURIComponent(teacher.email || '')}`;
 }
 
+/* ===============================
+   🔹 FONCTION POUR RAFRAÎCHIR LES TRADUCTIONS
+   =============================== */
+
+export function refreshTranslations() {
+  updateUITexts();
+  
+  // Si on est dans la vue enseignants, recharger avec les nouvelles traductions
+  if (!teachersSection.classList.contains('hidden') && currentSubject) {
+    loadTeachersBySubject(currentSubject);
+  }
+}
 
 /* ===============================
    🔹 EXPORT DES FONCTIONS
@@ -306,3 +471,4 @@ function contactTeacher(teacher) {
 
 window.loadTeachersBySubject = loadTeachersBySubject;
 window.filterTeachersInList = filterTeachersInList;
+window.refreshTranslations = refreshTranslations;
